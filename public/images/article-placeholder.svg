@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f6f8fc"/>
+      <stop offset="1" stop-color="#eaf0fb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect x="96" y="104" width="1008" height="467" rx="20" fill="#ffffff" stroke="#d7e1f2"/>
+  <rect x="150" y="185" width="340" height="22" rx="11" fill="#c7d6ef"/>
+  <rect x="150" y="232" width="620" height="20" rx="10" fill="#d7e3f5"/>
+  <rect x="150" y="268" width="560" height="20" rx="10" fill="#d7e3f5"/>
+  <rect x="150" y="304" width="500" height="20" rx="10" fill="#d7e3f5"/>
+  <rect x="150" y="370" width="190" height="34" rx="17" fill="#2f5aa6"/>
+  <text x="245" y="393" text-anchor="middle" font-size="14" font-family="Arial, sans-serif" fill="#ffffff">ARTICLE</text>
+  <circle cx="910" cy="292" r="92" fill="#d2def2"/>
+  <path d="M870 292h80M910 252v80" stroke="#2f5aa6" stroke-width="10" stroke-linecap="round"/>
+</svg>

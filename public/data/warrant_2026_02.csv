@@ -1,0 +1,2485 @@
+Country/Region,Location,Opening Stock,Delivered In,Delivered Out,Closing Stock,Open Tonnage,Cancelled Tonnage,Metal,Date
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-02
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-02
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-02
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-02
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-02
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-02
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-02
+,,,,,,,,Aluminium Alloy,2026-02-02
+,,,,,,,,Aluminium Alloy,2026-02-02
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-02
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-02
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-02
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-02
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-02
+,,,,,,,,Cobalt,2026-02-02
+,,,,,,,,Cobalt,2026-02-02
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Germany,Hamburg,3075.0,0.0,0.0,3075.0,3075.0,0.0,Copper,2026-02-02
+Hong Kong SAR,Hong Kong SAR,11250.0,0.0,0.0,11250.0,11250.0,0.0,Copper,2026-02-02
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-02
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Korea (South),Busan,20125.0,500.0,125.0,20500.0,18075.0,2425.0,Copper,2026-02-02
+Korea (South),Gwangyang,25000.0,1750.0,0.0,26750.0,13200.0,13550.0,Copper,2026-02-02
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-02
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Netherlands,Rotterdam,10525.0,0.0,0.0,10525.0,10275.0,250.0,Copper,2026-02-02
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Singapore,Singapore,6575.0,0.0,300.0,6275.0,5900.0,375.0,Copper,2026-02-02
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+Taiwan,Kaohsiung,81875.0,0.0,375.0,81500.0,61050.0,20450.0,Copper,2026-02-02
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+USA,Baltimore,3450.0,0.0,0.0,3450.0,3450.0,0.0,Copper,2026-02-02
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-02
+USA,New Orleans,11900.0,0.0,0.0,11900.0,11900.0,0.0,Copper,2026-02-02
+,,,,,,,,Copper,2026-02-02
+,,,,,,,,Copper,2026-02-02
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-02
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-02
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Singapore,Singapore,203425.0,30450.0,1675.0,232200.0,216800.0,15400.0,Lead,2026-02-02
+Spain,Barcelona,25.0,0.0,0.0,25.0,0.0,25.0,Lead,2026-02-02
+Spain,Bilbao,50.0,0.0,0.0,50.0,0.0,50.0,Lead,2026-02-02
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-02
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-02
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-02
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-02
+,,,,,,,,Lead,2026-02-02
+,,,,,,,,Lead,2026-02-02
+,,,,,,,,Lead,2026-02-02
+,,,,,,,,Lead,2026-02-02
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,264.0,636.0,Nickel,2026-02-02
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Hong Kong SAR,Hong Kong SAR,8575.0,0.0,0.0,8575.0,8575.0,0.0,Nickel,2026-02-02
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-02
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Korea (South),Busan,73188.0,0.0,0.0,73188.0,72402.0,786.0,Nickel,2026-02-02
+Korea (South),Gwangyang,15588.0,0.0,0.0,15588.0,14286.0,1302.0,Nickel,2026-02-02
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Korea (South),Gwangyang,138400.0,0.0,0.0,138400.0,138000.0,400.0,Nickel,2026-02-02
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-02
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-02
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-02
+Malaysia,Port Klang,307500.0,0.0,2000.0,305500.0,252425.0,53075.0,Nickel,2026-02-02
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Malaysia,Port Klang,1925.0,0.0,0.0,1925.0,1450.0,475.0,Nickel,2026-02-02
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Netherlands,Rotterdam,35022.0,0.0,0.0,35022.0,34656.0,366.0,Nickel,2026-02-02
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-02
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-02
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Singapore,Singapore,79896.0,0.0,0.0,79896.0,78642.0,1254.0,Nickel,2026-02-02
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-02
+Singapore,Singapore,73325.0,525.0,600.0,73250.0,68050.0,5200.0,Nickel,2026-02-02
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+Taiwan,Kaohsiung,68370.0,0.0,0.0,68370.0,61710.0,6660.0,Nickel,2026-02-02
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-02
+Taiwan,Kaohsiung,25250.0,0.0,50.0,25200.0,18350.0,6850.0,Nickel,2026-02-02
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-02
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-02
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-02
+,,,,,,,,Nickel,2026-02-02
+,,,,,,,,Nickel,2026-02-02
+,,,,,,,,Nickel,2026-02-02
+,,,,,,,,Nickel,2026-02-02
+,,,,,,,,Nickel,2026-02-02
+,,,,,,,,Nickel,2026-02-02
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Hong Kong SAR,Hong Kong SAR,2430.0,0.0,10.0,2420.0,2265.0,155.0,Tin,2026-02-02
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-02
+Malaysia,Port Klang,2900.0,0.0,0.0,2900.0,2800.0,100.0,Tin,2026-02-02
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Netherlands,Rotterdam,575.0,0.0,0.0,575.0,520.0,55.0,Tin,2026-02-02
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Singapore,Singapore,900.0,0.0,0.0,900.0,855.0,45.0,Tin,2026-02-02
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-02
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-02
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+USA,Baltimore,185.0,0.0,0.0,185.0,185.0,0.0,Tin,2026-02-02
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-02
+,,,,,,,,Tin,2026-02-02
+,,,,,,,,Tin,2026-02-02
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-03
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-03
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-03
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-03
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-03
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-03
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-03
+,,,,,,,,Aluminium Alloy,2026-02-03
+,,,,,,,,Aluminium Alloy,2026-02-03
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-03
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-03
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-03
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-03
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-03
+,,,,,,,,Cobalt,2026-02-03
+,,,,,,,,Cobalt,2026-02-03
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Germany,Hamburg,3075.0,0.0,0.0,3075.0,3075.0,0.0,Copper,2026-02-03
+Hong Kong SAR,Hong Kong SAR,11250.0,0.0,0.0,11250.0,11250.0,0.0,Copper,2026-02-03
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-03
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Korea (South),Busan,20500.0,250.0,0.0,20750.0,18750.0,2000.0,Copper,2026-02-03
+Korea (South),Gwangyang,26750.0,500.0,875.0,26375.0,19875.0,6500.0,Copper,2026-02-03
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-03
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Netherlands,Rotterdam,10525.0,0.0,75.0,10450.0,10275.0,175.0,Copper,2026-02-03
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Singapore,Singapore,6275.0,425.0,0.0,6700.0,6325.0,375.0,Copper,2026-02-03
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+Taiwan,Kaohsiung,81500.0,0.0,450.0,81050.0,67200.0,13850.0,Copper,2026-02-03
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+USA,Baltimore,3450.0,1175.0,0.0,4625.0,4625.0,0.0,Copper,2026-02-03
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-03
+USA,New Orleans,11900.0,1575.0,0.0,13475.0,13475.0,0.0,Copper,2026-02-03
+,,,,,,,,Copper,2026-02-03
+,,,,,,,,Copper,2026-02-03
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-03
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-03
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Singapore,Singapore,232200.0,0.0,0.0,232200.0,216450.0,15750.0,Lead,2026-02-03
+Spain,Barcelona,25.0,0.0,0.0,25.0,0.0,25.0,Lead,2026-02-03
+Spain,Bilbao,50.0,0.0,0.0,50.0,0.0,50.0,Lead,2026-02-03
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-03
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-03
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-03
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-03
+,,,,,,,,Lead,2026-02-03
+,,,,,,,,Lead,2026-02-03
+,,,,,,,,Lead,2026-02-03
+,,,,,,,,Lead,2026-02-03
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,264.0,636.0,Nickel,2026-02-03
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Hong Kong SAR,Hong Kong SAR,8575.0,0.0,0.0,8575.0,8575.0,0.0,Nickel,2026-02-03
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-03
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Korea (South),Busan,73188.0,786.0,0.0,73974.0,73188.0,786.0,Nickel,2026-02-03
+Korea (South),Gwangyang,15588.0,0.0,0.0,15588.0,14286.0,1302.0,Nickel,2026-02-03
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Korea (South),Gwangyang,138400.0,0.0,0.0,138400.0,138000.0,400.0,Nickel,2026-02-03
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-03
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-03
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-03
+Malaysia,Port Klang,305500.0,0.0,0.0,305500.0,252425.0,53075.0,Nickel,2026-02-03
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Malaysia,Port Klang,1925.0,0.0,50.0,1875.0,1450.0,425.0,Nickel,2026-02-03
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Netherlands,Rotterdam,35022.0,0.0,0.0,35022.0,34656.0,366.0,Nickel,2026-02-03
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-03
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-03
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Singapore,Singapore,79896.0,0.0,0.0,79896.0,78642.0,1254.0,Nickel,2026-02-03
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-03
+Singapore,Singapore,73250.0,0.0,50.0,73200.0,68025.0,5175.0,Nickel,2026-02-03
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+Taiwan,Kaohsiung,68370.0,0.0,0.0,68370.0,61710.0,6660.0,Nickel,2026-02-03
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-03
+Taiwan,Kaohsiung,25200.0,0.0,675.0,24525.0,18350.0,6175.0,Nickel,2026-02-03
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-03
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-03
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-03
+,,,,,,,,Nickel,2026-02-03
+,,,,,,,,Nickel,2026-02-03
+,,,,,,,,Nickel,2026-02-03
+,,,,,,,,Nickel,2026-02-03
+,,,,,,,,Nickel,2026-02-03
+,,,,,,,,Nickel,2026-02-03
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Hong Kong SAR,Hong Kong SAR,2420.0,0.0,0.0,2420.0,2265.0,155.0,Tin,2026-02-03
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-03
+Malaysia,Port Klang,2900.0,20.0,5.0,2915.0,2820.0,95.0,Tin,2026-02-03
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Netherlands,Rotterdam,575.0,0.0,0.0,575.0,520.0,55.0,Tin,2026-02-03
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Singapore,Singapore,900.0,0.0,0.0,900.0,855.0,45.0,Tin,2026-02-03
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-03
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-03
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+USA,Baltimore,185.0,0.0,0.0,185.0,185.0,0.0,Tin,2026-02-03
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-03
+,,,,,,,,Tin,2026-02-03
+,,,,,,,,Tin,2026-02-03
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-04
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-04
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-04
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-04
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-04
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-04
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-04
+,,,,,,,,Aluminium Alloy,2026-02-04
+,,,,,,,,Aluminium Alloy,2026-02-04
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-04
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-04
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-04
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-04
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-04
+,,,,,,,,Cobalt,2026-02-04
+,,,,,,,,Cobalt,2026-02-04
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Germany,Hamburg,3075.0,0.0,0.0,3075.0,3075.0,0.0,Copper,2026-02-04
+Hong Kong SAR,Hong Kong SAR,11250.0,0.0,0.0,11250.0,11250.0,0.0,Copper,2026-02-04
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-04
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Korea (South),Busan,20750.0,1000.0,0.0,21750.0,19750.0,2000.0,Copper,2026-02-04
+Korea (South),Gwangyang,26375.0,1200.0,2500.0,25075.0,21075.0,4000.0,Copper,2026-02-04
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-04
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Netherlands,Rotterdam,10450.0,0.0,100.0,10350.0,9475.0,875.0,Copper,2026-02-04
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Singapore,Singapore,6700.0,0.0,0.0,6700.0,6325.0,375.0,Copper,2026-02-04
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+Taiwan,Kaohsiung,81050.0,0.0,1175.0,79875.0,67200.0,12675.0,Copper,2026-02-04
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+USA,Baltimore,4625.0,0.0,0.0,4625.0,4625.0,0.0,Copper,2026-02-04
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-04
+USA,New Orleans,13475.0,3500.0,0.0,16975.0,16975.0,0.0,Copper,2026-02-04
+,,,,,,,,Copper,2026-02-04
+,,,,,,,,Copper,2026-02-04
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-04
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-04
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Singapore,Singapore,232200.0,0.0,0.0,232200.0,216450.0,15750.0,Lead,2026-02-04
+Spain,Barcelona,25.0,0.0,0.0,25.0,0.0,25.0,Lead,2026-02-04
+Spain,Bilbao,50.0,0.0,0.0,50.0,0.0,50.0,Lead,2026-02-04
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-04
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-04
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-04
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-04
+,,,,,,,,Lead,2026-02-04
+,,,,,,,,Lead,2026-02-04
+,,,,,,,,Lead,2026-02-04
+,,,,,,,,Lead,2026-02-04
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,264.0,636.0,Nickel,2026-02-04
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Hong Kong SAR,Hong Kong SAR,8575.0,0.0,0.0,8575.0,8575.0,0.0,Nickel,2026-02-04
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-04
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Korea (South),Busan,73974.0,186.0,0.0,74160.0,73374.0,786.0,Nickel,2026-02-04
+Korea (South),Gwangyang,15588.0,0.0,0.0,15588.0,14286.0,1302.0,Nickel,2026-02-04
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Korea (South),Gwangyang,138400.0,0.0,200.0,138200.0,138000.0,200.0,Nickel,2026-02-04
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-04
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-04
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-04
+Malaysia,Port Klang,305500.0,0.0,2000.0,303500.0,252425.0,51075.0,Nickel,2026-02-04
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Malaysia,Port Klang,1875.0,0.0,50.0,1825.0,1350.0,475.0,Nickel,2026-02-04
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Netherlands,Rotterdam,35022.0,0.0,0.0,35022.0,34656.0,366.0,Nickel,2026-02-04
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-04
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-04
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Singapore,Singapore,79896.0,0.0,0.0,79896.0,78642.0,1254.0,Nickel,2026-02-04
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-04
+Singapore,Singapore,73200.0,0.0,200.0,73000.0,66225.0,6775.0,Nickel,2026-02-04
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+Taiwan,Kaohsiung,68370.0,0.0,426.0,67944.0,61710.0,6234.0,Nickel,2026-02-04
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-04
+Taiwan,Kaohsiung,24525.0,0.0,150.0,24375.0,18350.0,6025.0,Nickel,2026-02-04
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-04
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-04
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-04
+,,,,,,,,Nickel,2026-02-04
+,,,,,,,,Nickel,2026-02-04
+,,,,,,,,Nickel,2026-02-04
+,,,,,,,,Nickel,2026-02-04
+,,,,,,,,Nickel,2026-02-04
+,,,,,,,,Nickel,2026-02-04
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Hong Kong SAR,Hong Kong SAR,2420.0,0.0,0.0,2420.0,2265.0,155.0,Tin,2026-02-04
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-04
+Malaysia,Port Klang,2915.0,0.0,25.0,2890.0,2820.0,70.0,Tin,2026-02-04
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Netherlands,Rotterdam,575.0,0.0,0.0,575.0,520.0,55.0,Tin,2026-02-04
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Singapore,Singapore,900.0,0.0,5.0,895.0,850.0,45.0,Tin,2026-02-04
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-04
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-04
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+USA,Baltimore,185.0,50.0,0.0,235.0,235.0,0.0,Tin,2026-02-04
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-04
+,,,,,,,,Tin,2026-02-04
+,,,,,,,,Tin,2026-02-04
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-05
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-05
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-05
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-05
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-05
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-05
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-05
+,,,,,,,,Aluminium Alloy,2026-02-05
+,,,,,,,,Aluminium Alloy,2026-02-05
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-05
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-05
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-05
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-05
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-05
+,,,,,,,,Cobalt,2026-02-05
+,,,,,,,,Cobalt,2026-02-05
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Germany,Hamburg,3075.0,0.0,0.0,3075.0,3075.0,0.0,Copper,2026-02-05
+Hong Kong SAR,Hong Kong SAR,11250.0,0.0,0.0,11250.0,11200.0,50.0,Copper,2026-02-05
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-05
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Korea (South),Busan,21750.0,1000.0,0.0,22750.0,20750.0,2000.0,Copper,2026-02-05
+Korea (South),Gwangyang,25075.0,1900.0,0.0,26975.0,22975.0,4000.0,Copper,2026-02-05
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-05
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Netherlands,Rotterdam,10350.0,0.0,75.0,10275.0,9475.0,800.0,Copper,2026-02-05
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Singapore,Singapore,6700.0,0.0,0.0,6700.0,6325.0,375.0,Copper,2026-02-05
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+Taiwan,Kaohsiung,79875.0,0.0,625.0,79250.0,67200.0,12050.0,Copper,2026-02-05
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+USA,Baltimore,4625.0,0.0,0.0,4625.0,4625.0,0.0,Copper,2026-02-05
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-05
+USA,New Orleans,16975.0,500.0,0.0,17475.0,17475.0,0.0,Copper,2026-02-05
+,,,,,,,,Copper,2026-02-05
+,,,,,,,,Copper,2026-02-05
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-05
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-05
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Singapore,Singapore,232200.0,0.0,0.0,232200.0,216450.0,15750.0,Lead,2026-02-05
+Spain,Barcelona,25.0,0.0,0.0,25.0,0.0,25.0,Lead,2026-02-05
+Spain,Bilbao,50.0,0.0,0.0,50.0,0.0,50.0,Lead,2026-02-05
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-05
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-05
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-05
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-05
+,,,,,,,,Lead,2026-02-05
+,,,,,,,,Lead,2026-02-05
+,,,,,,,,Lead,2026-02-05
+,,,,,,,,Lead,2026-02-05
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,264.0,636.0,Nickel,2026-02-05
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Hong Kong SAR,Hong Kong SAR,8575.0,0.0,0.0,8575.0,8575.0,0.0,Nickel,2026-02-05
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-05
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Korea (South),Busan,74160.0,0.0,0.0,74160.0,73374.0,786.0,Nickel,2026-02-05
+Korea (South),Gwangyang,15588.0,0.0,0.0,15588.0,14286.0,1302.0,Nickel,2026-02-05
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Korea (South),Gwangyang,138200.0,0.0,0.0,138200.0,138000.0,200.0,Nickel,2026-02-05
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-05
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-05
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-05
+Malaysia,Port Klang,303500.0,0.0,2000.0,301500.0,252425.0,49075.0,Nickel,2026-02-05
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Malaysia,Port Klang,1825.0,0.0,50.0,1775.0,1350.0,425.0,Nickel,2026-02-05
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Netherlands,Rotterdam,35022.0,0.0,0.0,35022.0,34656.0,366.0,Nickel,2026-02-05
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-05
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-05
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Singapore,Singapore,79896.0,102.0,0.0,79998.0,78744.0,1254.0,Nickel,2026-02-05
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-05
+Singapore,Singapore,73000.0,0.0,150.0,72850.0,65825.0,7025.0,Nickel,2026-02-05
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+Taiwan,Kaohsiung,67944.0,198.0,1092.0,67050.0,61908.0,5142.0,Nickel,2026-02-05
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-05
+Taiwan,Kaohsiung,24375.0,0.0,0.0,24375.0,18350.0,6025.0,Nickel,2026-02-05
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-05
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-05
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-05
+,,,,,,,,Nickel,2026-02-05
+,,,,,,,,Nickel,2026-02-05
+,,,,,,,,Nickel,2026-02-05
+,,,,,,,,Nickel,2026-02-05
+,,,,,,,,Nickel,2026-02-05
+,,,,,,,,Nickel,2026-02-05
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Hong Kong SAR,Hong Kong SAR,2420.0,0.0,45.0,2375.0,2265.0,110.0,Tin,2026-02-05
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-05
+Malaysia,Port Klang,2890.0,0.0,0.0,2890.0,2820.0,70.0,Tin,2026-02-05
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Netherlands,Rotterdam,575.0,0.0,0.0,575.0,495.0,80.0,Tin,2026-02-05
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Singapore,Singapore,895.0,0.0,0.0,895.0,850.0,45.0,Tin,2026-02-05
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-05
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-05
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+USA,Baltimore,235.0,0.0,0.0,235.0,235.0,0.0,Tin,2026-02-05
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-05
+,,,,,,,,Tin,2026-02-05
+,,,,,,,,Tin,2026-02-05
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-06
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-06
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-06
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-06
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-06
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-06
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-06
+,,,,,,,,Aluminium Alloy,2026-02-06
+,,,,,,,,Aluminium Alloy,2026-02-06
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-06
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-06
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-06
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-06
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-06
+,,,,,,,,Cobalt,2026-02-06
+,,,,,,,,Cobalt,2026-02-06
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Germany,Hamburg,3075.0,0.0,0.0,3075.0,3075.0,0.0,Copper,2026-02-06
+Hong Kong SAR,Hong Kong SAR,11250.0,0.0,0.0,11250.0,11200.0,50.0,Copper,2026-02-06
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-06
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Korea (South),Busan,22750.0,0.0,0.0,22750.0,20750.0,2000.0,Copper,2026-02-06
+Korea (South),Gwangyang,26975.0,1350.0,0.0,28325.0,23925.0,4400.0,Copper,2026-02-06
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-06
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Netherlands,Rotterdam,10275.0,0.0,0.0,10275.0,9475.0,800.0,Copper,2026-02-06
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Singapore,Singapore,6700.0,0.0,0.0,6700.0,6225.0,475.0,Copper,2026-02-06
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+Taiwan,Kaohsiung,79250.0,0.0,325.0,78925.0,67200.0,11725.0,Copper,2026-02-06
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+USA,Baltimore,4625.0,0.0,0.0,4625.0,4625.0,0.0,Copper,2026-02-06
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-06
+USA,New Orleans,17475.0,0.0,0.0,17475.0,17475.0,0.0,Copper,2026-02-06
+,,,,,,,,Copper,2026-02-06
+,,,,,,,,Copper,2026-02-06
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-06
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-06
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Singapore,Singapore,232200.0,0.0,100.0,232100.0,216450.0,15650.0,Lead,2026-02-06
+Spain,Barcelona,25.0,0.0,0.0,25.0,0.0,25.0,Lead,2026-02-06
+Spain,Bilbao,50.0,0.0,0.0,50.0,0.0,50.0,Lead,2026-02-06
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-06
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-06
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-06
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-06
+,,,,,,,,Lead,2026-02-06
+,,,,,,,,Lead,2026-02-06
+,,,,,,,,Lead,2026-02-06
+,,,,,,,,Lead,2026-02-06
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,264.0,636.0,Nickel,2026-02-06
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Hong Kong SAR,Hong Kong SAR,8575.0,0.0,0.0,8575.0,8575.0,0.0,Nickel,2026-02-06
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-06
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Korea (South),Busan,74160.0,0.0,0.0,74160.0,73374.0,786.0,Nickel,2026-02-06
+Korea (South),Gwangyang,15588.0,0.0,0.0,15588.0,14286.0,1302.0,Nickel,2026-02-06
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Korea (South),Gwangyang,138200.0,0.0,0.0,138200.0,138000.0,200.0,Nickel,2026-02-06
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-06
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-06
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-06
+Malaysia,Port Klang,301500.0,0.0,2000.0,299500.0,252425.0,47075.0,Nickel,2026-02-06
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Malaysia,Port Klang,1775.0,0.0,25.0,1750.0,1350.0,400.0,Nickel,2026-02-06
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Netherlands,Rotterdam,35022.0,0.0,0.0,35022.0,34656.0,366.0,Nickel,2026-02-06
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-06
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-06
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Singapore,Singapore,79998.0,108.0,0.0,80106.0,78852.0,1254.0,Nickel,2026-02-06
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-06
+Singapore,Singapore,72850.0,375.0,125.0,73100.0,66150.0,6950.0,Nickel,2026-02-06
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+Taiwan,Kaohsiung,67050.0,0.0,318.0,66732.0,61908.0,4824.0,Nickel,2026-02-06
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-06
+Taiwan,Kaohsiung,24375.0,0.0,900.0,23475.0,18350.0,5125.0,Nickel,2026-02-06
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-06
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-06
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-06
+,,,,,,,,Nickel,2026-02-06
+,,,,,,,,Nickel,2026-02-06
+,,,,,,,,Nickel,2026-02-06
+,,,,,,,,Nickel,2026-02-06
+,,,,,,,,Nickel,2026-02-06
+,,,,,,,,Nickel,2026-02-06
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Hong Kong SAR,Hong Kong SAR,2375.0,0.0,0.0,2375.0,2265.0,110.0,Tin,2026-02-06
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-06
+Malaysia,Port Klang,2890.0,0.0,15.0,2875.0,2820.0,55.0,Tin,2026-02-06
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Netherlands,Rotterdam,575.0,0.0,0.0,575.0,495.0,80.0,Tin,2026-02-06
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Singapore,Singapore,895.0,0.0,40.0,855.0,845.0,10.0,Tin,2026-02-06
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-06
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-06
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+USA,Baltimore,235.0,0.0,0.0,235.0,235.0,0.0,Tin,2026-02-06
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-06
+,,,,,,,,Tin,2026-02-06
+,,,,,,,,Tin,2026-02-06
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-09
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-09
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-09
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-09
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-09
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-09
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-09
+,,,,,,,,Aluminium Alloy,2026-02-09
+,,,,,,,,Aluminium Alloy,2026-02-09
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-09
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-09
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-09
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-09
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-09
+,,,,,,,,Cobalt,2026-02-09
+,,,,,,,,Cobalt,2026-02-09
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Germany,Hamburg,3075.0,0.0,0.0,3075.0,3075.0,0.0,Copper,2026-02-09
+Hong Kong SAR,Hong Kong SAR,11250.0,0.0,0.0,11250.0,11200.0,50.0,Copper,2026-02-09
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-09
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Korea (South),Busan,22750.0,0.0,0.0,22750.0,20750.0,2000.0,Copper,2026-02-09
+Korea (South),Gwangyang,28325.0,250.0,0.0,28575.0,24175.0,4400.0,Copper,2026-02-09
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-09
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Netherlands,Rotterdam,10275.0,0.0,0.0,10275.0,9475.0,800.0,Copper,2026-02-09
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Singapore,Singapore,6700.0,50.0,0.0,6750.0,6275.0,475.0,Copper,2026-02-09
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+Taiwan,Kaohsiung,78925.0,3500.0,0.0,82425.0,70700.0,11725.0,Copper,2026-02-09
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+USA,Baltimore,4625.0,0.0,0.0,4625.0,4625.0,0.0,Copper,2026-02-09
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-09
+USA,New Orleans,17475.0,1000.0,0.0,18475.0,18475.0,0.0,Copper,2026-02-09
+,,,,,,,,Copper,2026-02-09
+,,,,,,,,Copper,2026-02-09
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-09
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-09
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Singapore,Singapore,232100.0,0.0,0.0,232100.0,216250.0,15850.0,Lead,2026-02-09
+Spain,Barcelona,25.0,0.0,0.0,25.0,0.0,25.0,Lead,2026-02-09
+Spain,Bilbao,50.0,0.0,0.0,50.0,0.0,50.0,Lead,2026-02-09
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-09
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-09
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-09
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-09
+,,,,,,,,Lead,2026-02-09
+,,,,,,,,Lead,2026-02-09
+,,,,,,,,Lead,2026-02-09
+,,,,,,,,Lead,2026-02-09
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,264.0,636.0,Nickel,2026-02-09
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Hong Kong SAR,Hong Kong SAR,8575.0,0.0,0.0,8575.0,8575.0,0.0,Nickel,2026-02-09
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-09
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Korea (South),Busan,74160.0,0.0,0.0,74160.0,72894.0,1266.0,Nickel,2026-02-09
+Korea (South),Gwangyang,15588.0,678.0,0.0,16266.0,14964.0,1302.0,Nickel,2026-02-09
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Korea (South),Gwangyang,138200.0,0.0,0.0,138200.0,138000.0,200.0,Nickel,2026-02-09
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-09
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-09
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-09
+Malaysia,Port Klang,299500.0,0.0,2000.0,297500.0,252425.0,45075.0,Nickel,2026-02-09
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Malaysia,Port Klang,1750.0,0.0,75.0,1675.0,1350.0,325.0,Nickel,2026-02-09
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Netherlands,Rotterdam,35022.0,0.0,0.0,35022.0,34656.0,366.0,Nickel,2026-02-09
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-09
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-09
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Singapore,Singapore,80106.0,0.0,0.0,80106.0,78852.0,1254.0,Nickel,2026-02-09
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-09
+Singapore,Singapore,73100.0,500.0,600.0,73000.0,66625.0,6375.0,Nickel,2026-02-09
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+Taiwan,Kaohsiung,66732.0,0.0,0.0,66732.0,61908.0,4824.0,Nickel,2026-02-09
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-09
+Taiwan,Kaohsiung,23475.0,0.0,0.0,23475.0,18350.0,5125.0,Nickel,2026-02-09
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-09
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-09
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-09
+,,,,,,,,Nickel,2026-02-09
+,,,,,,,,Nickel,2026-02-09
+,,,,,,,,Nickel,2026-02-09
+,,,,,,,,Nickel,2026-02-09
+,,,,,,,,Nickel,2026-02-09
+,,,,,,,,Nickel,2026-02-09
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Hong Kong SAR,Hong Kong SAR,2375.0,400.0,0.0,2775.0,2590.0,185.0,Tin,2026-02-09
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-09
+Malaysia,Port Klang,2875.0,0.0,0.0,2875.0,2785.0,90.0,Tin,2026-02-09
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Netherlands,Rotterdam,575.0,0.0,0.0,575.0,495.0,80.0,Tin,2026-02-09
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Singapore,Singapore,855.0,0.0,0.0,855.0,820.0,35.0,Tin,2026-02-09
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-09
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-09
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+USA,Baltimore,235.0,0.0,0.0,235.0,235.0,0.0,Tin,2026-02-09
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-09
+,,,,,,,,Tin,2026-02-09
+,,,,,,,,Tin,2026-02-09
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-10
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-10
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-10
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-10
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-10
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-10
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-10
+,,,,,,,,Aluminium Alloy,2026-02-10
+,,,,,,,,Aluminium Alloy,2026-02-10
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-10
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-10
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-10
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-10
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-10
+,,,,,,,,Cobalt,2026-02-10
+,,,,,,,,Cobalt,2026-02-10
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Germany,Hamburg,3075.0,0.0,0.0,3075.0,3075.0,0.0,Copper,2026-02-10
+Hong Kong SAR,Hong Kong SAR,11250.0,0.0,0.0,11250.0,11200.0,50.0,Copper,2026-02-10
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-10
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Korea (South),Busan,22750.0,0.0,0.0,22750.0,19375.0,3375.0,Copper,2026-02-10
+Korea (South),Gwangyang,28575.0,0.0,0.0,28575.0,23175.0,5400.0,Copper,2026-02-10
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-10
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Netherlands,Rotterdam,10275.0,0.0,0.0,10275.0,9475.0,800.0,Copper,2026-02-10
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Singapore,Singapore,6750.0,0.0,0.0,6750.0,5950.0,800.0,Copper,2026-02-10
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+Taiwan,Kaohsiung,82425.0,3000.0,0.0,85425.0,73425.0,12000.0,Copper,2026-02-10
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+USA,Baltimore,4625.0,0.0,0.0,4625.0,4625.0,0.0,Copper,2026-02-10
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-10
+USA,New Orleans,18475.0,0.0,0.0,18475.0,18475.0,0.0,Copper,2026-02-10
+,,,,,,,,Copper,2026-02-10
+,,,,,,,,Copper,2026-02-10
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-10
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-10
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Singapore,Singapore,232100.0,0.0,50.0,232050.0,216050.0,16000.0,Lead,2026-02-10
+Spain,Barcelona,25.0,250.0,0.0,275.0,250.0,25.0,Lead,2026-02-10
+Spain,Bilbao,50.0,0.0,0.0,50.0,0.0,50.0,Lead,2026-02-10
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-10
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-10
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-10
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-10
+,,,,,,,,Lead,2026-02-10
+,,,,,,,,Lead,2026-02-10
+,,,,,,,,Lead,2026-02-10
+,,,,,,,,Lead,2026-02-10
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,378.0,522.0,Nickel,2026-02-10
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Hong Kong SAR,Hong Kong SAR,8575.0,0.0,0.0,8575.0,8575.0,0.0,Nickel,2026-02-10
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-10
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Korea (South),Busan,74160.0,0.0,0.0,74160.0,72894.0,1266.0,Nickel,2026-02-10
+Korea (South),Gwangyang,16266.0,0.0,0.0,16266.0,14964.0,1302.0,Nickel,2026-02-10
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Korea (South),Gwangyang,138200.0,0.0,0.0,138200.0,138000.0,200.0,Nickel,2026-02-10
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-10
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-10
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-10
+Malaysia,Port Klang,297500.0,775.0,2000.0,296275.0,253200.0,43075.0,Nickel,2026-02-10
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Malaysia,Port Klang,1675.0,0.0,25.0,1650.0,1350.0,300.0,Nickel,2026-02-10
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Netherlands,Rotterdam,35022.0,0.0,0.0,35022.0,34656.0,366.0,Nickel,2026-02-10
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-10
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-10
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Singapore,Singapore,80106.0,0.0,0.0,80106.0,78354.0,1752.0,Nickel,2026-02-10
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-10
+Singapore,Singapore,73000.0,0.0,275.0,72725.0,66600.0,6125.0,Nickel,2026-02-10
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+Taiwan,Kaohsiung,66732.0,0.0,0.0,66732.0,61908.0,4824.0,Nickel,2026-02-10
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-10
+Taiwan,Kaohsiung,23475.0,0.0,1200.0,22275.0,18350.0,3925.0,Nickel,2026-02-10
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-10
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-10
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-10
+,,,,,,,,Nickel,2026-02-10
+,,,,,,,,Nickel,2026-02-10
+,,,,,,,,Nickel,2026-02-10
+,,,,,,,,Nickel,2026-02-10
+,,,,,,,,Nickel,2026-02-10
+,,,,,,,,Nickel,2026-02-10
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Hong Kong SAR,Hong Kong SAR,2775.0,0.0,0.0,2775.0,2590.0,185.0,Tin,2026-02-10
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-10
+Malaysia,Port Klang,2875.0,50.0,55.0,2870.0,2805.0,65.0,Tin,2026-02-10
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Netherlands,Rotterdam,575.0,125.0,0.0,700.0,620.0,80.0,Tin,2026-02-10
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Singapore,Singapore,855.0,0.0,0.0,855.0,820.0,35.0,Tin,2026-02-10
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-10
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-10
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+USA,Baltimore,235.0,0.0,0.0,235.0,235.0,0.0,Tin,2026-02-10
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-10
+,,,,,,,,Tin,2026-02-10
+,,,,,,,,Tin,2026-02-10
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-11
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-11
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-11
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-11
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-11
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-11
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-11
+,,,,,,,,Aluminium Alloy,2026-02-11
+,,,,,,,,Aluminium Alloy,2026-02-11
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-11
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-11
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-11
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-11
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-11
+,,,,,,,,Cobalt,2026-02-11
+,,,,,,,,Cobalt,2026-02-11
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Germany,Hamburg,3075.0,0.0,0.0,3075.0,3075.0,0.0,Copper,2026-02-11
+Hong Kong SAR,Hong Kong SAR,11250.0,0.0,0.0,11250.0,11200.0,50.0,Copper,2026-02-11
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-11
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Korea (South),Busan,22750.0,0.0,600.0,22150.0,19375.0,2775.0,Copper,2026-02-11
+Korea (South),Gwangyang,28575.0,500.0,0.0,29075.0,23675.0,5400.0,Copper,2026-02-11
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-11
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Netherlands,Rotterdam,10275.0,0.0,0.0,10275.0,9475.0,800.0,Copper,2026-02-11
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Singapore,Singapore,6750.0,0.0,200.0,6550.0,5950.0,600.0,Copper,2026-02-11
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+Taiwan,Kaohsiung,85425.0,4100.0,0.0,89525.0,77525.0,12000.0,Copper,2026-02-11
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+USA,Baltimore,4625.0,0.0,0.0,4625.0,4625.0,0.0,Copper,2026-02-11
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-11
+USA,New Orleans,18475.0,750.0,0.0,19225.0,19225.0,0.0,Copper,2026-02-11
+,,,,,,,,Copper,2026-02-11
+,,,,,,,,Copper,2026-02-11
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-11
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-11
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Singapore,Singapore,232050.0,0.0,0.0,232050.0,215850.0,16200.0,Lead,2026-02-11
+Spain,Barcelona,275.0,0.0,0.0,275.0,250.0,25.0,Lead,2026-02-11
+Spain,Bilbao,50.0,0.0,50.0,0.0,0.0,0.0,Lead,2026-02-11
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-11
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-11
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-11
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-11
+,,,,,,,,Lead,2026-02-11
+,,,,,,,,Lead,2026-02-11
+,,,,,,,,Lead,2026-02-11
+,,,,,,,,Lead,2026-02-11
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,528.0,372.0,Nickel,2026-02-11
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Hong Kong SAR,Hong Kong SAR,8575.0,0.0,0.0,8575.0,8475.0,100.0,Nickel,2026-02-11
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-11
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Korea (South),Busan,74160.0,0.0,0.0,74160.0,72894.0,1266.0,Nickel,2026-02-11
+Korea (South),Gwangyang,16266.0,636.0,0.0,16902.0,15600.0,1302.0,Nickel,2026-02-11
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Korea (South),Gwangyang,138200.0,0.0,200.0,138000.0,138000.0,0.0,Nickel,2026-02-11
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-11
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-11
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-11
+Malaysia,Port Klang,296275.0,0.0,2000.0,294275.0,253200.0,41075.0,Nickel,2026-02-11
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Malaysia,Port Klang,1650.0,0.0,0.0,1650.0,1250.0,400.0,Nickel,2026-02-11
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Netherlands,Rotterdam,35022.0,0.0,0.0,35022.0,34656.0,366.0,Nickel,2026-02-11
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-11
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-11
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Singapore,Singapore,80106.0,0.0,0.0,80106.0,78354.0,1752.0,Nickel,2026-02-11
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-11
+Singapore,Singapore,72725.0,500.0,975.0,72250.0,65125.0,7125.0,Nickel,2026-02-11
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+Taiwan,Kaohsiung,66732.0,0.0,0.0,66732.0,61908.0,4824.0,Nickel,2026-02-11
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-11
+Taiwan,Kaohsiung,22275.0,0.0,1275.0,21000.0,18350.0,2650.0,Nickel,2026-02-11
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-11
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-11
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-11
+,,,,,,,,Nickel,2026-02-11
+,,,,,,,,Nickel,2026-02-11
+,,,,,,,,Nickel,2026-02-11
+,,,,,,,,Nickel,2026-02-11
+,,,,,,,,Nickel,2026-02-11
+,,,,,,,,Nickel,2026-02-11
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Hong Kong SAR,Hong Kong SAR,2775.0,0.0,55.0,2720.0,2590.0,130.0,Tin,2026-02-11
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-11
+Malaysia,Port Klang,2870.0,0.0,0.0,2870.0,2805.0,65.0,Tin,2026-02-11
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Netherlands,Rotterdam,700.0,0.0,0.0,700.0,620.0,80.0,Tin,2026-02-11
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Singapore,Singapore,855.0,0.0,5.0,850.0,820.0,30.0,Tin,2026-02-11
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-11
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-11
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+USA,Baltimore,235.0,0.0,0.0,235.0,235.0,0.0,Tin,2026-02-11
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-11
+,,,,,,,,Tin,2026-02-11
+,,,,,,,,Tin,2026-02-11
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-12
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-12
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-12
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-12
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-12
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-12
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-12
+,,,,,,,,Aluminium Alloy,2026-02-12
+,,,,,,,,Aluminium Alloy,2026-02-12
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-12
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-12
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-12
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-12
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-12
+,,,,,,,,Cobalt,2026-02-12
+,,,,,,,,Cobalt,2026-02-12
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Germany,Hamburg,3075.0,0.0,0.0,3075.0,3075.0,0.0,Copper,2026-02-12
+Hong Kong SAR,Hong Kong SAR,11250.0,0.0,50.0,11200.0,11200.0,0.0,Copper,2026-02-12
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-12
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Korea (South),Busan,22150.0,500.0,0.0,22650.0,19875.0,2775.0,Copper,2026-02-12
+Korea (South),Gwangyang,29075.0,4300.0,0.0,33375.0,27975.0,5400.0,Copper,2026-02-12
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-12
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Netherlands,Rotterdam,10275.0,0.0,100.0,10175.0,9475.0,700.0,Copper,2026-02-12
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Singapore,Singapore,6550.0,0.0,0.0,6550.0,5950.0,600.0,Copper,2026-02-12
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+Taiwan,Kaohsiung,89525.0,500.0,100.0,89925.0,89600.0,325.0,Copper,2026-02-12
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+USA,Baltimore,4625.0,325.0,0.0,4950.0,4950.0,0.0,Copper,2026-02-12
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-12
+USA,New Orleans,19225.0,1850.0,0.0,21075.0,21075.0,0.0,Copper,2026-02-12
+,,,,,,,,Copper,2026-02-12
+,,,,,,,,Copper,2026-02-12
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-12
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-12
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Singapore,Singapore,232050.0,0.0,250.0,231800.0,215850.0,15950.0,Lead,2026-02-12
+Spain,Barcelona,275.0,0.0,0.0,275.0,250.0,25.0,Lead,2026-02-12
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-12
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-12
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-12
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-12
+,,,,,,,,Lead,2026-02-12
+,,,,,,,,Lead,2026-02-12
+,,,,,,,,Lead,2026-02-12
+,,,,,,,,Lead,2026-02-12
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,528.0,372.0,Nickel,2026-02-12
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Hong Kong SAR,Hong Kong SAR,8575.0,0.0,0.0,8575.0,8475.0,100.0,Nickel,2026-02-12
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-12
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Korea (South),Busan,74160.0,0.0,18.0,74142.0,72456.0,1686.0,Nickel,2026-02-12
+Korea (South),Gwangyang,16902.0,0.0,0.0,16902.0,15600.0,1302.0,Nickel,2026-02-12
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Korea (South),Gwangyang,138000.0,0.0,0.0,138000.0,138000.0,0.0,Nickel,2026-02-12
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-12
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-12
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-12
+Malaysia,Port Klang,294275.0,0.0,2000.0,292275.0,248200.0,44075.0,Nickel,2026-02-12
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Malaysia,Port Klang,1650.0,0.0,0.0,1650.0,1250.0,400.0,Nickel,2026-02-12
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Netherlands,Rotterdam,35022.0,420.0,0.0,35442.0,35076.0,366.0,Nickel,2026-02-12
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-12
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-12
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Singapore,Singapore,80106.0,300.0,0.0,80406.0,78654.0,1752.0,Nickel,2026-02-12
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-12
+Singapore,Singapore,72250.0,0.0,275.0,71975.0,64875.0,7100.0,Nickel,2026-02-12
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+Taiwan,Kaohsiung,66732.0,0.0,0.0,66732.0,61908.0,4824.0,Nickel,2026-02-12
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-12
+Taiwan,Kaohsiung,21000.0,0.0,1000.0,20000.0,18350.0,1650.0,Nickel,2026-02-12
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-12
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-12
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-12
+,,,,,,,,Nickel,2026-02-12
+,,,,,,,,Nickel,2026-02-12
+,,,,,,,,Nickel,2026-02-12
+,,,,,,,,Nickel,2026-02-12
+,,,,,,,,Nickel,2026-02-12
+,,,,,,,,Nickel,2026-02-12
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Hong Kong SAR,Hong Kong SAR,2720.0,0.0,20.0,2700.0,2590.0,110.0,Tin,2026-02-12
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-12
+Malaysia,Port Klang,2870.0,20.0,25.0,2865.0,2775.0,90.0,Tin,2026-02-12
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Netherlands,Rotterdam,700.0,0.0,25.0,675.0,620.0,55.0,Tin,2026-02-12
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Singapore,Singapore,850.0,0.0,0.0,850.0,745.0,105.0,Tin,2026-02-12
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-12
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-12
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+USA,Baltimore,235.0,0.0,0.0,235.0,235.0,0.0,Tin,2026-02-12
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-12
+,,,,,,,,Tin,2026-02-12
+,,,,,,,,Tin,2026-02-12
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-13
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-13
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-13
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-13
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-13
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-13
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-13
+,,,,,,,,Aluminium Alloy,2026-02-13
+,,,,,,,,Aluminium Alloy,2026-02-13
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-13
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-13
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-13
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-13
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-13
+,,,,,,,,Cobalt,2026-02-13
+,,,,,,,,Cobalt,2026-02-13
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Germany,Hamburg,3075.0,200.0,0.0,3275.0,3275.0,0.0,Copper,2026-02-13
+Hong Kong SAR,Hong Kong SAR,11200.0,0.0,0.0,11200.0,11200.0,0.0,Copper,2026-02-13
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-13
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Korea (South),Busan,22650.0,900.0,0.0,23550.0,20775.0,2775.0,Copper,2026-02-13
+Korea (South),Gwangyang,33375.0,0.0,0.0,33375.0,27975.0,5400.0,Copper,2026-02-13
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-13
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Netherlands,Rotterdam,10175.0,0.0,100.0,10075.0,9475.0,600.0,Copper,2026-02-13
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Singapore,Singapore,6550.0,0.0,0.0,6550.0,5950.0,600.0,Copper,2026-02-13
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+Taiwan,Kaohsiung,89925.0,1550.0,0.0,91475.0,91150.0,325.0,Copper,2026-02-13
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+USA,Baltimore,4950.0,2950.0,0.0,7900.0,7900.0,0.0,Copper,2026-02-13
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-13
+USA,New Orleans,21075.0,2475.0,0.0,23550.0,22550.0,1000.0,Copper,2026-02-13
+,,,,,,,,Copper,2026-02-13
+,,,,,,,,Copper,2026-02-13
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-13
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-13
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Singapore,Singapore,231800.0,0.0,0.0,231800.0,215850.0,15950.0,Lead,2026-02-13
+Spain,Barcelona,275.0,0.0,0.0,275.0,250.0,25.0,Lead,2026-02-13
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-13
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-13
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-13
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-13
+,,,,,,,,Lead,2026-02-13
+,,,,,,,,Lead,2026-02-13
+,,,,,,,,Lead,2026-02-13
+,,,,,,,,Lead,2026-02-13
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,528.0,372.0,Nickel,2026-02-13
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Hong Kong SAR,Hong Kong SAR,8575.0,250.0,0.0,8825.0,8725.0,100.0,Nickel,2026-02-13
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-13
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Korea (South),Busan,74142.0,0.0,0.0,74142.0,72456.0,1686.0,Nickel,2026-02-13
+Korea (South),Gwangyang,16902.0,0.0,0.0,16902.0,15600.0,1302.0,Nickel,2026-02-13
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Korea (South),Gwangyang,138000.0,0.0,0.0,138000.0,138000.0,0.0,Nickel,2026-02-13
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-13
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-13
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-13
+Malaysia,Port Klang,292275.0,0.0,2000.0,290275.0,248200.0,42075.0,Nickel,2026-02-13
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Malaysia,Port Klang,1650.0,0.0,50.0,1600.0,1250.0,350.0,Nickel,2026-02-13
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Netherlands,Rotterdam,35442.0,0.0,0.0,35442.0,35076.0,366.0,Nickel,2026-02-13
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-13
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-13
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Singapore,Singapore,80406.0,0.0,168.0,80238.0,78654.0,1584.0,Nickel,2026-02-13
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-13
+Singapore,Singapore,71975.0,0.0,175.0,71800.0,64875.0,6925.0,Nickel,2026-02-13
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+Taiwan,Kaohsiung,66732.0,0.0,0.0,66732.0,61908.0,4824.0,Nickel,2026-02-13
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-13
+Taiwan,Kaohsiung,20000.0,0.0,75.0,19925.0,18350.0,1575.0,Nickel,2026-02-13
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-13
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-13
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-13
+,,,,,,,,Nickel,2026-02-13
+,,,,,,,,Nickel,2026-02-13
+,,,,,,,,Nickel,2026-02-13
+,,,,,,,,Nickel,2026-02-13
+,,,,,,,,Nickel,2026-02-13
+,,,,,,,,Nickel,2026-02-13
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Hong Kong SAR,Hong Kong SAR,2700.0,0.0,0.0,2700.0,2590.0,110.0,Tin,2026-02-13
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-13
+Malaysia,Port Klang,2865.0,240.0,0.0,3105.0,3005.0,100.0,Tin,2026-02-13
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Netherlands,Rotterdam,675.0,0.0,0.0,675.0,620.0,55.0,Tin,2026-02-13
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Singapore,Singapore,850.0,0.0,0.0,850.0,745.0,105.0,Tin,2026-02-13
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-13
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-13
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+USA,Baltimore,235.0,0.0,0.0,235.0,235.0,0.0,Tin,2026-02-13
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-13
+,,,,,,,,Tin,2026-02-13
+,,,,,,,,Tin,2026-02-13
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-16
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-16
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-16
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-16
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-16
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-16
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-16
+,,,,,,,,Aluminium Alloy,2026-02-16
+,,,,,,,,Aluminium Alloy,2026-02-16
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-16
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-16
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-16
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-16
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-16
+,,,,,,,,Cobalt,2026-02-16
+,,,,,,,,Cobalt,2026-02-16
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Germany,Hamburg,3275.0,0.0,0.0,3275.0,3275.0,0.0,Copper,2026-02-16
+Hong Kong SAR,Hong Kong SAR,11200.0,0.0,0.0,11200.0,11200.0,0.0,Copper,2026-02-16
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-16
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Korea (South),Busan,23550.0,0.0,0.0,23550.0,20775.0,2775.0,Copper,2026-02-16
+Korea (South),Gwangyang,33375.0,2500.0,0.0,35875.0,30475.0,5400.0,Copper,2026-02-16
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-16
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Netherlands,Rotterdam,10075.0,0.0,100.0,9975.0,9475.0,500.0,Copper,2026-02-16
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Singapore,Singapore,6550.0,0.0,100.0,6450.0,5950.0,500.0,Copper,2026-02-16
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+Taiwan,Kaohsiung,91475.0,2000.0,0.0,93475.0,93150.0,325.0,Copper,2026-02-16
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+USA,Baltimore,7900.0,1475.0,0.0,9375.0,9375.0,0.0,Copper,2026-02-16
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-16
+USA,New Orleans,23550.0,4000.0,0.0,27550.0,26550.0,1000.0,Copper,2026-02-16
+,,,,,,,,Copper,2026-02-16
+,,,,,,,,Copper,2026-02-16
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-16
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-16
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Singapore,Singapore,231800.0,54675.0,200.0,286275.0,280000.0,6275.0,Lead,2026-02-16
+Spain,Barcelona,275.0,0.0,0.0,275.0,250.0,25.0,Lead,2026-02-16
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-16
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-16
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-16
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-16
+,,,,,,,,Lead,2026-02-16
+,,,,,,,,Lead,2026-02-16
+,,,,,,,,Lead,2026-02-16
+,,,,,,,,Lead,2026-02-16
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,528.0,372.0,Nickel,2026-02-16
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Hong Kong SAR,Hong Kong SAR,8825.0,0.0,0.0,8825.0,8725.0,100.0,Nickel,2026-02-16
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-16
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Korea (South),Busan,74142.0,0.0,0.0,74142.0,72456.0,1686.0,Nickel,2026-02-16
+Korea (South),Gwangyang,16902.0,0.0,0.0,16902.0,15600.0,1302.0,Nickel,2026-02-16
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Korea (South),Gwangyang,138000.0,0.0,0.0,138000.0,138000.0,0.0,Nickel,2026-02-16
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-16
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-16
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-16
+Malaysia,Port Klang,290275.0,0.0,2000.0,288275.0,236000.0,52275.0,Nickel,2026-02-16
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Malaysia,Port Klang,1600.0,0.0,0.0,1600.0,1250.0,350.0,Nickel,2026-02-16
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Netherlands,Rotterdam,35442.0,0.0,0.0,35442.0,35076.0,366.0,Nickel,2026-02-16
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-16
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-16
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Singapore,Singapore,80238.0,810.0,0.0,81048.0,79542.0,1506.0,Nickel,2026-02-16
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-16
+Singapore,Singapore,71800.0,0.0,150.0,71650.0,64775.0,6875.0,Nickel,2026-02-16
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+Taiwan,Kaohsiung,66732.0,0.0,0.0,66732.0,61908.0,4824.0,Nickel,2026-02-16
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-16
+Taiwan,Kaohsiung,19925.0,0.0,0.0,19925.0,18350.0,1575.0,Nickel,2026-02-16
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-16
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-16
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-16
+,,,,,,,,Nickel,2026-02-16
+,,,,,,,,Nickel,2026-02-16
+,,,,,,,,Nickel,2026-02-16
+,,,,,,,,Nickel,2026-02-16
+,,,,,,,,Nickel,2026-02-16
+,,,,,,,,Nickel,2026-02-16
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Hong Kong SAR,Hong Kong SAR,2700.0,0.0,0.0,2700.0,2590.0,110.0,Tin,2026-02-16
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-16
+Malaysia,Port Klang,3105.0,0.0,0.0,3105.0,3005.0,100.0,Tin,2026-02-16
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Netherlands,Rotterdam,675.0,0.0,0.0,675.0,620.0,55.0,Tin,2026-02-16
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Singapore,Singapore,850.0,0.0,25.0,825.0,745.0,80.0,Tin,2026-02-16
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+Spain,Bilbao,75.0,0.0,0.0,75.0,65.0,10.0,Tin,2026-02-16
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-16
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+USA,Baltimore,235.0,0.0,0.0,235.0,235.0,0.0,Tin,2026-02-16
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-16
+,,,,,,,,Tin,2026-02-16
+,,,,,,,,Tin,2026-02-16
+Belgium,Antwerp,420.0,0.0,0.0,420.0,420.0,0.0,Aluminium Alloy,2026-02-17
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Italy,Genoa,120.0,0.0,0.0,120.0,120.0,0.0,Aluminium Alloy,2026-02-17
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Italy,Trieste,680.0,0.0,0.0,680.0,680.0,0.0,Aluminium Alloy,2026-02-17
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Netherlands,Vlissingen,80.0,0.0,0.0,80.0,80.0,0.0,Aluminium Alloy,2026-02-17
+Singapore,Singapore,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+Spain,Barcelona,140.0,0.0,0.0,140.0,140.0,0.0,Aluminium Alloy,2026-02-17
+Spain,Bilbao,60.0,0.0,0.0,60.0,60.0,0.0,Aluminium Alloy,2026-02-17
+Taiwan,Kaohsiung,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Aluminium Alloy,2026-02-17
+,,,,,,,,Aluminium Alloy,2026-02-17
+,,,,,,,,Aluminium Alloy,2026-02-17
+Belgium,Antwerp,3.0,0.0,0.0,3.0,0.0,3.0,Cobalt,2026-02-17
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Cobalt,2026-02-17
+Netherlands,Rotterdam,65.0,0.0,0.0,65.0,0.0,65.0,Cobalt,2026-02-17
+Singapore,Singapore,19.0,0.0,0.0,19.0,0.0,19.0,Cobalt,2026-02-17
+USA,Baltimore,34.0,0.0,0.0,34.0,0.0,34.0,Cobalt,2026-02-17
+,,,,,,,,Cobalt,2026-02-17
+,,,,,,,,Cobalt,2026-02-17
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Germany,Hamburg,3275.0,0.0,0.0,3275.0,3275.0,0.0,Copper,2026-02-17
+Hong Kong SAR,Hong Kong SAR,11200.0,0.0,0.0,11200.0,11200.0,0.0,Copper,2026-02-17
+Italy,Leghorn,875.0,0.0,0.0,875.0,875.0,0.0,Copper,2026-02-17
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Korea (South),Busan,23550.0,0.0,0.0,23550.0,20775.0,2775.0,Copper,2026-02-17
+Korea (South),Gwangyang,35875.0,0.0,0.0,35875.0,30475.0,5400.0,Copper,2026-02-17
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Malaysia,Johor,25.0,0.0,0.0,25.0,0.0,25.0,Copper,2026-02-17
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Netherlands,Rotterdam,9975.0,0.0,150.0,9825.0,9475.0,350.0,Copper,2026-02-17
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Singapore,Singapore,6450.0,0.0,0.0,6450.0,5950.0,500.0,Copper,2026-02-17
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+Taiwan,Kaohsiung,93475.0,1450.0,0.0,94925.0,94600.0,325.0,Copper,2026-02-17
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+USA,Baltimore,9375.0,0.0,0.0,9375.0,9375.0,0.0,Copper,2026-02-17
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Copper,2026-02-17
+USA,New Orleans,27550.0,1725.0,0.0,29275.0,28275.0,1000.0,Copper,2026-02-17
+,,,,,,,,Copper,2026-02-17
+,,,,,,,,Copper,2026-02-17
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Italy,Leghorn,450.0,0.0,0.0,450.0,450.0,0.0,Lead,2026-02-17
+Italy,Trieste,25.0,0.0,0.0,25.0,25.0,0.0,Lead,2026-02-17
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Malaysia,Port Klang,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Netherlands,Rotterdam,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Singapore,Singapore,286275.0,0.0,0.0,286275.0,280000.0,6275.0,Lead,2026-02-17
+Spain,Barcelona,275.0,0.0,0.0,275.0,250.0,25.0,Lead,2026-02-17
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+Taiwan,Kaohsiung,100.0,0.0,0.0,100.0,100.0,0.0,Lead,2026-02-17
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,Detroit,40.0,0.0,0.0,40.0,40.0,0.0,Lead,2026-02-17
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,New Orleans,80.0,0.0,0.0,80.0,80.0,0.0,Lead,2026-02-17
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Lead,2026-02-17
+,,,,,,,,Lead,2026-02-17
+,,,,,,,,Lead,2026-02-17
+,,,,,,,,Lead,2026-02-17
+,,,,,,,,Lead,2026-02-17
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Hong Kong SAR,Hong Kong SAR,900.0,0.0,0.0,900.0,528.0,372.0,Nickel,2026-02-17
+Hong Kong SAR,Hong Kong SAR,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Hong Kong SAR,Hong Kong SAR,8825.0,0.0,0.0,8825.0,8725.0,100.0,Nickel,2026-02-17
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Italy,Trieste,50.0,0.0,0.0,50.0,0.0,50.0,Nickel,2026-02-17
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Italy,Leghorn,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Japan,Nagoya,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Japan,Yokohama,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Korea (South),Busan,74142.0,0.0,0.0,74142.0,70974.0,3168.0,Nickel,2026-02-17
+Korea (South),Gwangyang,16902.0,0.0,0.0,16902.0,15600.0,1302.0,Nickel,2026-02-17
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Korea (South),Gwangyang,138000.0,0.0,0.0,138000.0,137550.0,450.0,Nickel,2026-02-17
+Korea (South),Incheon,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Malaysia,Johor,2886.0,0.0,0.0,2886.0,2886.0,0.0,Nickel,2026-02-17
+Malaysia,Port Klang,7620.0,0.0,0.0,7620.0,7566.0,54.0,Nickel,2026-02-17
+Malaysia,Johor,2200.0,0.0,0.0,2200.0,2200.0,0.0,Nickel,2026-02-17
+Malaysia,Port Klang,288275.0,0.0,2000.0,286275.0,236000.0,50275.0,Nickel,2026-02-17
+Malaysia,Johor,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Malaysia,Port Klang,1600.0,0.0,0.0,1600.0,1150.0,450.0,Nickel,2026-02-17
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Netherlands,Rotterdam,35442.0,0.0,24.0,35418.0,35076.0,342.0,Nickel,2026-02-17
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Netherlands,Rotterdam,3450.0,0.0,0.0,3450.0,2450.0,1000.0,Nickel,2026-02-17
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Netherlands,Rotterdam,25.0,0.0,0.0,25.0,25.0,0.0,Nickel,2026-02-17
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Saudi Arabia,Jeddah,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Singapore,Singapore,81048.0,0.0,0.0,81048.0,79542.0,1506.0,Nickel,2026-02-17
+Singapore,Singapore,275.0,0.0,0.0,275.0,275.0,0.0,Nickel,2026-02-17
+Singapore,Singapore,71650.0,0.0,25.0,71625.0,64775.0,6850.0,Nickel,2026-02-17
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Spain,Bilbao,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Sweden,Helsingborg,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+Taiwan,Kaohsiung,66732.0,0.0,0.0,66732.0,61590.0,5142.0,Nickel,2026-02-17
+Taiwan,Kaohsiung,45300.0,0.0,0.0,45300.0,45300.0,0.0,Nickel,2026-02-17
+Taiwan,Kaohsiung,19925.0,0.0,0.0,19925.0,18350.0,1575.0,Nickel,2026-02-17
+UAE,Dubai,1950.0,0.0,0.0,1950.0,1950.0,0.0,Nickel,2026-02-17
+UAE,Dubai,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Baltimore,108.0,0.0,0.0,108.0,18.0,90.0,Nickel,2026-02-17
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Owensboro,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Baltimore,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Chicago,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Detroit,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+USA,Toledo,0.0,0.0,0.0,0.0,0.0,0.0,Nickel,2026-02-17
+,,,,,,,,Nickel,2026-02-17
+,,,,,,,,Nickel,2026-02-17
+,,,,,,,,Nickel,2026-02-17
+,,,,,,,,Nickel,2026-02-17
+,,,,,,,,Nickel,2026-02-17
+,,,,,,,,Nickel,2026-02-17
+Belgium,Antwerp,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Germany,Hamburg,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Hong Kong SAR,Hong Kong SAR,2700.0,0.0,0.0,2700.0,2590.0,110.0,Tin,2026-02-17
+Italy,Genoa,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Italy,Trieste,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Korea (South),Busan,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Korea (South),Gwangyang,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Malaysia,Johor,15.0,0.0,0.0,15.0,15.0,0.0,Tin,2026-02-17
+Malaysia,Port Klang,3105.0,0.0,0.0,3105.0,2980.0,125.0,Tin,2026-02-17
+Netherlands,Amsterdam,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Netherlands,Moerdijk,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Netherlands,Rotterdam,675.0,0.0,0.0,675.0,620.0,55.0,Tin,2026-02-17
+Netherlands,Vlissingen,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Singapore,Singapore,825.0,0.0,0.0,825.0,745.0,80.0,Tin,2026-02-17
+Spain,Barcelona,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+Spain,Bilbao,75.0,0.0,10.0,65.0,65.0,0.0,Tin,2026-02-17
+Taiwan,Kaohsiung,25.0,0.0,0.0,25.0,25.0,0.0,Tin,2026-02-17
+UK,Liverpool,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+USA,Baltimore,235.0,0.0,0.0,235.0,235.0,0.0,Tin,2026-02-17
+USA,Mobile,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+USA,New Orleans,0.0,0.0,0.0,0.0,0.0,0.0,Tin,2026-02-17
+,,,,,,,,Tin,2026-02-17
+,,,,,,,,Tin,2026-02-17

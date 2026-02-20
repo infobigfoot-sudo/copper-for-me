@@ -1,0 +1,49 @@
+REGION,COUNTRY/REGION,DELIVERY POINT,AA,AL,CU,NA,NI,PB,SN,ZN,CO,TOTAL
+ASIA,KOREA (SOUTH),GWANGYANG,0.0,33729.0,5344.0,0.0,731.0,0.0,0.0,0.0,0.0,39804.0
+ASIA,KOREA (SOUTH),INCHEON,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+ASIA,MALAYSIA,JOHOR,0.0,7019.0,0.0,0.0,517.0,0.0,0.0,0.0,0.0,7536.0
+ASIA,MALAYSIA,PORT KLANG,0.0,148624.0,1276.0,0.0,97.0,17338.0,51.0,3253.0,0.0,170639.0
+ASIA,SAUDI ARABIA,JEDDAH,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2000.0,0.0,2000.0
+ASIA,SINGAPORE,SINGAPORE,0.0,4112.0,1857.0,0.0,13183.0,47081.0,334.0,5071.0,462.0,72100.0
+ASIA,TAIWAN,KAOHSIUNG,0.0,3256.0,7499.0,0.0,23719.0,2307.0,0.0,149.0,0.0,36930.0
+ASIA,UAE,DUBAI,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+TOTAL ASIA,NAN,,0.0,196796.0,27384.0,0.0,56475.0,67594.0,745.0,10473.0,462.0,359929.0
+,NAN,,,,,,,,,,,
+EUROPE,BELGIUM,ANTWERP,0.0,2495.0,0.0,0.0,0.0,122.0,20.0,779.0,0.0,3416.0
+EUROPE,GERMANY,HAMBURG,0.0,0.0,615.0,0.0,0.0,0.0,0.0,0.0,0.0,615.0
+EUROPE,ITALY,GENOA,0.0,1999.0,0.0,0.0,24.0,0.0,128.0,0.0,0.0,2151.0
+EUROPE,ITALY,LEGHORN,0.0,0.0,150.0,0.0,0.0,0.0,0.0,0.0,0.0,150.0
+EUROPE,ITALY,TRIESTE,0.0,28318.0,0.0,0.0,0.0,0.0,12.0,194.0,0.0,28524.0
+EUROPE,NETHERLANDS,AMSTERDAM,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+EUROPE,NETHERLANDS,MOERDIJK,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+EUROPE,NETHERLANDS,ROTTERDAM,0.0,40721.0,936.0,0.0,10246.0,44.0,555.0,2929.0,493.0,55924.0
+EUROPE,NETHERLANDS,VLISSINGEN,0.0,0.0,0.0,0.0,97.0,147.0,0.0,0.0,0.0,244.0
+EUROPE,SPAIN,BARCELONA,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+EUROPE,SPAIN,BILBAO,0.0,5.0,0.0,0.0,160.0,0.0,3.0,0.0,0.0,168.0
+EUROPE,SWEDEN,HELSINGBORG,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+EUROPE,UK,HULL,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+EUROPE,UK,LIVERPOOL,0.0,2917.0,0.0,0.0,282.0,0.0,0.0,0.0,0.0,3199.0
+TOTAL EUROPE,NAN,,0.0,76455.0,1701.0,0.0,10809.0,313.0,718.0,3902.0,493.0,94391.0
+,NAN,,,,,,,,,,,
+NORTH AMERICAS,USA,BALTIMORE,0.0,6095.0,62.0,0.0,3177.0,0.0,15.0,6.0,0.0,9355.0
+NORTH AMERICAS,USA,CHICAGO,0.0,0.0,9.0,0.0,0.0,0.0,0.0,0.0,0.0,9.0
+NORTH AMERICAS,USA,DETROIT,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+NORTH AMERICAS,USA,LOS ANGELES,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+NORTH AMERICAS,USA,MOBILE,0.0,149.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,149.0
+NORTH AMERICAS,USA,NEW ORLEANS,0.0,2296.0,7793.0,0.0,394.0,0.0,0.0,4862.0,0.0,15345.0
+NORTH AMERICAS,USA,OWENSBORO,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+NORTH AMERICAS,USA,TOLEDO,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+TOTAL NORTH AMERICAS,NAN,,0.0,8540.0,7864.0,0.0,3571.0,0.0,15.0,4868.0,0.0,24858.0
+,NAN,,,,,,,,,,,
+,NAN,,,,,,,,,,,
+GLOBAL TOTAL,NAN,,0.0,281791.0,36949.0,0.0,70855.0,67907.0,1478.0,19243.0,955.0,479178.0
+,NAN,,,,,,,,,,,
+,NAN,,,,,,,,,,,
+"© All the information contained within this report is provided for reference purposes only. While the LME endeavours to ensure the accuracy, reliability and completeness of the information, ",NAN,,,,,,,,,,,
+"neither the LME, nor any of its affiliates makes any warranty or representation, express or implied, or accepts any responsibility or liability for, the accuracy, completeness, reliability or suitability of the information for any particular purpose. ",NAN,,,,,,,,,,,
+"The LME accepts no liability whatsoever to any person for any loss or damage arising from any inaccuracy or omission in the information or from any consequence, decision, action or non-action based on or in reliance upon the information.",NAN,,,,,,,,,,,
+"The LME shall not be responsible or be held liable for any party’s act or omission carried out in reliance on, or in connection with, any of the information provided to the LME.",NAN,,,,,,,,,,,
+"Distribution, redistribution, reproduction, modification or transmission of the information in whole or in part, in any form or by any means are strictly prohibited without the prior written permission of the LME. ",NAN,,,,,,,,,,,
+"The information does not, and is not intended to, constitute investment advice, commentary or a recommendation to make any investment decision.",NAN,,,,,,,,,,,
+The LME is not acting for any person to whom it has provided the information. Persons receiving the information are not clients of the LME and accordingly the LME is not responsible for providing any such persons with regulatory or other protections.,NAN,,,,,,,,,,,
+"All persons in receipt of the information should obtain independent investment, legal, tax and other relevant advice before making any decisions based on the information.",NAN,,,,,,,,,,,
