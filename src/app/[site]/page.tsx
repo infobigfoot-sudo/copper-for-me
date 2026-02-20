@@ -944,6 +944,14 @@ export default async function SiteHomePage({
       id: ind.id,
       label: `${displayIndicatorName(ind.name)}（${formatYmd(ind.lastUpdated || ind.date)}）`
     }));
+  const latestUpdatedItems = [...dashboardIndicators]
+    .sort((a, b) => toTimeMs(b.lastUpdated || b.date) - toTimeMs(a.lastUpdated || a.date))
+    .slice(0, 4)
+    .map((ind) => ({
+      id: ind.id,
+      label: `${displayIndicatorName(ind.name)}（${formatYmd(ind.lastUpdated || ind.date)}）`
+    }));
+  const updateItemsToShow = todayUpdatedItems.length ? todayUpdatedItems : latestUpdatedItems;
   const decisionIndicatorIdSet = new Set(decisionIndicatorsToShow.map((ind) => ind.id));
   const fixedCategoryNav = [
     { slug: 'info', label: '相場情報' },
@@ -1029,8 +1037,8 @@ export default async function SiteHomePage({
                         <Link href={to(`/blog/${featured.slug || featured.id}`)}>最新記事: {featured.title}</Link>
                       </li>
                     ) : null}
-                    {todayUpdatedItems.length ? (
-                      todayUpdatedItems.map((item, idx) => (
+                    {updateItemsToShow.length ? (
+                      updateItemsToShow.map((item, idx) => (
                         <li key={`today-update-${idx}-${item.id}`}>
                           <Link
                             href={
@@ -1043,9 +1051,7 @@ export default async function SiteHomePage({
                           </Link>
                         </li>
                       ))
-                    ) : (
-                      <li>本日更新の取得データはありません。</li>
-                    )}
+                    ) : null}
                   </ul>
                 </div>
                 <div className="cf-card cf-insight-card" style={{ marginTop: '12px' }}>

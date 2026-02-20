@@ -85,7 +85,7 @@ function withChangeFromPrev(
 
 const CACHE_FILE =
   process.env.ECONOMY_CACHE_FILE ||
-  path.join(process.cwd(), '.cache', 'autopilot_blog_economy_cache.json');
+  path.join(process.cwd(), '.cache', 'copper_for_me_economy_cache.json');
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 const CACHE_VERSION = 3;
 
@@ -645,13 +645,22 @@ export async function getEconomyIndicators(): Promise<EconomyBundle> {
     null;
   const alpha = [...(usdJpyMerged ? [usdJpyMerged] : []), ...alphaWithoutUsdJpy];
 
+  // Safety fallback: if fresh fetch produced nothing, keep using the last known cache.
+  if (!fred.length && !alpha.length && cachedAny) {
+    return cachedAny;
+  }
+
+  // Partial fallback: if either side is empty, backfill from last known cache if available.
+  const fredMerged = fred.length ? fred : (cachedAny?.fred || []);
+  const alphaMerged = alpha.length ? alpha : (cachedAny?.alpha || []);
+
   const bundle: EconomyBundle = {
     cacheVersion: CACHE_VERSION,
     updatedAt: new Date().toISOString(),
     cacheDateJst: getTodayJstYmd(),
     cacheBucketJst: getNoonBucketJst(),
-    fred,
-    alpha
+    fred: fredMerged,
+    alpha: alphaMerged
   };
   await writeCache(bundle);
   return bundle;
