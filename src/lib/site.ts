@@ -14,3 +14,14 @@ export function siteLabel(site: SiteKey): string {
   if (site === 'b') return 'B: EC・アフィリエイト・SNS';
   return 'C: やさしいニュース解説';
 }
+
+export function sitePath(site: SiteKey, path: string = '/'): string {
+  const clean = path.startsWith('/') ? path : `/${path}`;
+  if (site === 'a') return clean;
+  return `/${site}${clean === '/' ? '' : clean}`;
+}
+
+export function siteUrl(baseUrl: string, site: SiteKey, path: string = '/'): string {
+  const base = String(baseUrl || '').replace(/\/+$/, '');
+  return `${base}${sitePath(site, path)}`;
+}

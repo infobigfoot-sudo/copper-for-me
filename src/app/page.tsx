@@ -1,5 +1,12 @@
-import { redirect } from 'next/navigation';
+import SiteHomePage from '@/app/[site]/page';
 
-export default function HomePage() {
-  redirect('/a');
+export default async function HomePage({
+  searchParams
+}: {
+  searchParams?: Promise<{ driver?: string; horizon?: string; show?: string }>;
+}) {
+  return SiteHomePage({
+    params: Promise.resolve({ site: 'a' }),
+    searchParams
+  });
 }

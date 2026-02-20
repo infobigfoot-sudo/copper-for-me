@@ -1,8 +1,19 @@
-import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
-import ArticleCard from '@/components/ArticleCard';
-import Breadcrumbs from '@/components/Breadcrumbs';
-import { getCategories, getPostsByCategorySlug } from '@/lib/microcms';
+import SiteCategoryPage, {
+  generateMetadata as generateSiteMetadata
+} from '@/app/[site]/category/[slug]/page';
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const resolved = await params;
+  return generateSiteMetadata({
+    params: Promise.resolve({ site: 'a', slug: resolved.slug })
+  });
+}
 
 export default async function CategoryPage({
   params
@@ -10,29 +21,8 @@ export default async function CategoryPage({
   params: Promise<{ slug: string }>;
 }) {
   const resolved = await params;
-  const [categories, posts] = await Promise.all([
-    getCategories().catch(() => ({ contents: [] as any[] })),
-    getPostsByCategorySlug(resolved.slug).catch(() => ({ contents: [] as any[] }))
-  ]);
-  const category = categories.contents.find((c) => c.slug === resolved.slug);
-  if (!category) notFound();
-
-  return (
-    <section>
-      <Breadcrumbs
-        items={[
-          { label: 'Home', href: '/' },
-          { label: 'Category', href: '/' },
-          { label: category.name }
-        ]}
-      />
-      <h1>カテゴリ: {category.name}</h1>
-      <p>{category.description}</p>
-      <div className="article-grid">
-        {posts.contents.map((post) => (
-          <ArticleCard key={post.id} post={post} />
-        ))}
-      </div>
-    </section>
-  );
+  return SiteCategoryPage({
+    params: Promise.resolve({ site: 'a', slug: resolved.slug })
+  });
 }
+

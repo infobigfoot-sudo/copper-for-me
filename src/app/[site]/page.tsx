@@ -7,7 +7,7 @@ import TradingViewMarketOverview from '@/components/TradingViewMarketOverview';
 import SafeImage from '@/components/SafeImage';
 import { getAnnouncements, getCategories, getPosts, getSiteSettings } from '@/lib/microcms';
 import { formatIndicatorValue, getEconomyIndicators } from '@/lib/economy';
-import { SITE_KEYS, normalizeSite, siteLabel } from '@/lib/site';
+import { SITE_KEYS, normalizeSite, siteLabel, sitePath } from '@/lib/site';
 import { getWarrantDashboardData } from '@/lib/warrant_dashboard';
 
 const fallbackImages = [
@@ -685,6 +685,7 @@ export default async function SiteHomePage({
   const query = (await searchParams) || {};
   const site = normalizeSite(resolved.site);
   if (site !== resolved.site) notFound();
+  const to = (path: string) => sitePath(site, path);
 
   const [postsRes, categoriesRes, economyBundle, warrantDashboard, siteSettings, announcements] = await Promise.all([
     getPosts(8, site).catch(() => ({ contents: [] })),
@@ -961,20 +962,20 @@ export default async function SiteHomePage({
             <p className="cf-logo-sub">Daily Scrap Learning</p>
           </div>
           <div className="cf-nav-links">
-            <a href={`/${site}`}>Home</a>
+            <Link href={to('/')}>Home</Link>
             {fixedCategoryNav.map((cat) => (
-              <a key={cat.slug} href={`/${site}/category/${cat.slug}`}>
+              <Link key={cat.slug} href={to(`/category/${cat.slug}`)}>
                 {cat.label}
-              </a>
+              </Link>
             ))}
           </div>
           <details className="cf-nav-mobile">
             <summary>Menu</summary>
             <div className="cf-nav-mobile-panel">
-              <a href={`/${site}`}>Home</a>
-              <a href={`/${site}?driver=${driverFilter}&horizon=1m#conclusion`}>
+              <Link href={to('/')}>Home</Link>
+              <Link href={to(`/?driver=${driverFilter}&horizon=1m#conclusion`)}>
                 1ヶ月軸の結論
-              </a>
+              </Link>
               <a href="#market-guide">
                 銅価格を知るうえで見るポイント
               </a>
@@ -991,9 +992,9 @@ export default async function SiteHomePage({
                 その他指標
               </a>
               {fixedCategoryNav.map((cat) => (
-                <a key={`mobile-${cat.slug}`} href={`/${site}/category/${cat.slug}`}>
+                <Link key={`mobile-${cat.slug}`} href={to(`/category/${cat.slug}`)}>
                   {cat.label}
-                </a>
+                </Link>
               ))}
             </div>
           </details>
@@ -1025,21 +1026,21 @@ export default async function SiteHomePage({
                   <ul className="cf-today-updates-list">
                     {featured ? (
                       <li key={`today-latest-post-${featured.id}`} className="cf-today-item-featured">
-                        <a href={`/${site}/blog/${featured.slug || featured.id}`}>最新記事: {featured.title}</a>
+                        <Link href={to(`/blog/${featured.slug || featured.id}`)}>最新記事: {featured.title}</Link>
                       </li>
                     ) : null}
                     {todayUpdatedItems.length ? (
                       todayUpdatedItems.map((item, idx) => (
                         <li key={`today-update-${idx}-${item.id}`}>
-                          <a
+                          <Link
                             href={
                               decisionIndicatorIdSet.has(item.id)
-                                ? `/${site}?driver=${driverFilter}&horizon=${horizon}#indicator-${item.id}`
-                                : `/${site}?driver=all&horizon=${horizon}&show=all#all-indicators`
+                                ? to(`/?driver=${driverFilter}&horizon=${horizon}#indicator-${item.id}`)
+                                : to(`/?driver=all&horizon=${horizon}&show=all#all-indicators`)
                             }
                           >
                             {item.label}
-                          </a>
+                          </Link>
                         </li>
                       ))
                     ) : (
@@ -1054,7 +1055,7 @@ export default async function SiteHomePage({
                   <p className="cf-kpi-note">
                     取得失敗時は直近値を表示。詳細は
                     {' '}
-                    <a href={`/${site}/blog/disclaimer`}>免責事項</a>
+                    <Link href={to('/blog/disclaimer')}>免責事項</Link>
                     {' '}
                     を参照。
                   </p>
@@ -1082,19 +1083,19 @@ export default async function SiteHomePage({
                     <div className="cf-tone-switch">
                       <Link
                         className={`cf-tone-btn ${horizon === '1w' ? 'active' : ''}`}
-                        href={`/${site}?driver=${driverFilter}&horizon=1w#conclusion`}
+                        href={to(`/?driver=${driverFilter}&horizon=1w#conclusion`)}
                       >
                         1週間軸
                       </Link>
                       <Link
                         className={`cf-tone-btn ${horizon === '1m' ? 'active' : ''}`}
-                        href={`/${site}?driver=${driverFilter}&horizon=1m#conclusion`}
+                        href={to(`/?driver=${driverFilter}&horizon=1m#conclusion`)}
                       >
                         1ヶ月軸
                       </Link>
                       <Link
                         className={`cf-tone-btn ${horizon === '3m' ? 'active' : ''}`}
-                        href={`/${site}?driver=${driverFilter}&horizon=3m#conclusion`}
+                        href={to(`/?driver=${driverFilter}&horizon=3m#conclusion`)}
                       >
                         3ヶ月軸
                       </Link>
@@ -1761,19 +1762,19 @@ export default async function SiteHomePage({
                     <div className="cf-driver-tabs">
                       <Link
                         className={`cf-tone-btn ${driverFilter === 'all' ? 'active' : ''}`}
-                        href={`/${site}?driver=all&horizon=${horizon}#other-indicators`}
+                        href={to(`/?driver=all&horizon=${horizon}#other-indicators`)}
                       >
                         すべて
                       </Link>
                       <Link
                         className={`cf-tone-btn ${driverFilter === 'bullish' ? 'active' : ''}`}
-                        href={`/${site}?driver=bullish&horizon=${horizon}#other-indicators`}
+                        href={to(`/?driver=bullish&horizon=${horizon}#other-indicators`)}
                       >
                         上昇圧力
                       </Link>
                       <Link
                         className={`cf-tone-btn ${driverFilter === 'bearish' ? 'active' : ''}`}
-                        href={`/${site}?driver=bearish&horizon=${horizon}#other-indicators`}
+                        href={to(`/?driver=bearish&horizon=${horizon}#other-indicators`)}
                       >
                         下落圧力
                       </Link>
@@ -1889,18 +1890,22 @@ export default async function SiteHomePage({
               <div className="cf-latest-head">
                 <h3>経済指標カレンダー</h3>
               </div>
-              <div
-                className="w-full rounded-xl overflow-hidden"
-                style={{ border: '1px solid #eee', background: '#fff' }}
-              >
+              <div className="cf-calendar-wrap">
                 <iframe
                   src="https://sslecal2.investing.com?borderColor=%23ffffff&columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&features=datepicker,timezone&countries=5,4,10,14,48,25,6,36,12,26,41,17,43,22,32,178,42,72,37,110,46,35,11,39&calType=week&timeZone=29&lang=11"
-                  width="100%"
-                  height="600"
-                  style={{ border: 'none' }}
+                  className="cf-calendar-iframe"
                   title="経済カレンダー"
                   loading="lazy"
                 />
+                <p className="cf-calendar-note">
+                  金融ポータルサイト
+                  {' '}
+                  <a href="https://jp.investing.com/" rel="nofollow noreferrer" target="_blank">
+                    Investing.com 日本
+                  </a>
+                  {' '}
+                  提供の経済カレンダー
+                </p>
               </div>
             </section>
 
@@ -1924,10 +1929,10 @@ export default async function SiteHomePage({
                 <div className="cf-featured-card-content">
                   <p className="cf-post-cat">{featured.categories?.[0]?.name || 'Featured'}</p>
                   <h2>
-                    <a href={`/${site}/blog/${featured.slug || featured.id}`}>{featured.title}</a>
+                    <Link href={to(`/blog/${featured.slug || featured.id}`)}>{featured.title}</Link>
                   </h2>
                   <p>{featured.excerpt || '最新の市場インサイトを深く読み解く特集記事です。'}</p>
-                  <a href={`/${site}/blog/${featured.slug || featured.id}`}>Read Article ↗</a>
+                  <Link href={to(`/blog/${featured.slug || featured.id}`)}>Read Article ↗</Link>
                 </div>
               </div>
             </div>
@@ -1957,10 +1962,10 @@ export default async function SiteHomePage({
                   <small>{formatDate(post.publishedAt)}</small>
                 </div>
                 <h4>
-                  <a href={`/${site}/blog/${post.slug || post.id}`}>{post.title}</a>
+                  <Link href={to(`/blog/${post.slug || post.id}`)}>{post.title}</Link>
                 </h4>
                 <p>{post.excerpt || '詳しくは記事本文をご覧ください。'}</p>
-                <a href={`/${site}/blog/${post.slug || post.id}`}>読む</a>
+                <Link href={to(`/blog/${post.slug || post.id}`)}>読む</Link>
               </article>
             ))}
           </div>
@@ -1969,11 +1974,11 @@ export default async function SiteHomePage({
 
       <footer className="cf-footer">
         <p className="cf-footer-links">
-          <a href={`/${site}/category/about`}>このサイトについて</a>
+          <Link href={to('/category/about')}>このサイトについて</Link>
           <span> / </span>
-          <a href={`/${site}/blog/privacypolicy`}>プライバシーポリシー</a>
+          <Link href={to('/blog/privacypolicy')}>プライバシーポリシー</Link>
           <span> / </span>
-          <a href={`/${site}/blog/disclaimer`}>免責事項</a>
+          <Link href={to('/blog/disclaimer')}>免責事項</Link>
         </p>
         <p className="cf-footer-note">
           本サイトは公開データ/APIをもとに情報を掲載しています。できるだけ最新化していますが、反映に時間差が出る場合があります。

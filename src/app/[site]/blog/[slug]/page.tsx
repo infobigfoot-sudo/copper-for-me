@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import RichText from '@/components/RichText';
 import { getPostBySlug, getPosts, getRelatedPosts } from '@/lib/microcms';
-import { SITE_KEYS, normalizeSite } from '@/lib/site';
+import { SITE_KEYS, normalizeSite, sitePath, siteUrl } from '@/lib/site';
 
 export async function generateStaticParams() {
   const params: Array<{ site: string; slug: string }> = [];
@@ -34,7 +34,7 @@ export async function generateMetadata({
     return { title: 'Not Found' };
   }
   const baseUrl = process.env.SITE_URL || 'http://localhost:3000';
-  const canonical = post.canonicalUrl || `${baseUrl}/${site}/blog/${post.slug || resolved.slug}`;
+  const canonical = post.canonicalUrl || siteUrl(baseUrl, site, `/blog/${post.slug || resolved.slug}`);
   const description = post.seoDescription || post.excerpt || '';
   return {
     title: post.seoTitle || post.title,
@@ -73,7 +73,7 @@ export default async function SiteBlogDetailPage({
 
   const related = await getRelatedPosts(post, 4, site).catch(() => ({ contents: [] }));
 
-  const canonical = post.canonicalUrl || `${process.env.SITE_URL || 'http://localhost:3000'}/${site}/blog/${post.slug}`;
+  const canonical = post.canonicalUrl || siteUrl(process.env.SITE_URL || 'http://localhost:3000', site, `/blog/${post.slug}`);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -84,6 +84,7 @@ export default async function SiteBlogDetailPage({
     mainEntityOfPage: canonical
   };
   const baseUrl = process.env.SITE_URL || 'http://localhost:3000';
+  const to = (path: string) => sitePath(site, path);
   const primaryCategory = post.categories?.[0];
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -93,7 +94,7 @@ export default async function SiteBlogDetailPage({
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: `${baseUrl}/${site}`
+        item: siteUrl(baseUrl, site, '/')
       },
       ...(primaryCategory
         ? [
@@ -101,7 +102,7 @@ export default async function SiteBlogDetailPage({
               '@type': 'ListItem',
               position: 2,
               name: primaryCategory.name,
-              item: `${baseUrl}/${site}/category/${primaryCategory.slug || primaryCategory.id}`
+              item: siteUrl(baseUrl, site, `/category/${primaryCategory.slug || primaryCategory.id}`)
             }
           ]
         : []),
@@ -109,7 +110,7 @@ export default async function SiteBlogDetailPage({
         '@type': 'ListItem',
         position: primaryCategory ? 3 : 2,
         name: post.title,
-        item: `${baseUrl}/${site}/blog/${post.slug}`
+        item: siteUrl(baseUrl, site, `/blog/${post.slug}`)
       }
     ]
   };
@@ -136,18 +137,27 @@ export default async function SiteBlogDetailPage({
         <div className="cf-nav-inner">
           <div className="cf-logo-wrap">
             <div className="cf-logo">
-              <a href={`/${site}`}>
+              <a href={to('/')}>
                 Copper for me
               </a>
             </div>
             <p className="cf-logo-sub">Daily Scrap Learning</p>
           </div>
           <div className="cf-nav-links">
-            <a href={`/${site}`}>Home</a>
-            <a href={`/${site}/category/info`}>相場情報</a>
-            <a href={`/${site}/category/index`}>指標まとめ</a>
-            <a href={`/${site}/category/other`}>その他</a>
+            <a href={to('/')}>Home</a>
+            <a href={to('/category/info')}>相場情報</a>
+            <a href={to('/category/index')}>指標まとめ</a>
+            <a href={to('/category/about')}>このサイトについて</a>
           </div>
+          <details className="cf-nav-mobile">
+            <summary>Menu</summary>
+            <div className="cf-nav-mobile-panel">
+              <a href={to('/')}>Home</a>
+              <a href={to('/category/info')}>相場情報</a>
+              <a href={to('/category/index')}>指標まとめ</a>
+              <a href={to('/category/about')}>このサイトについて</a>
+            </div>
+          </details>
         </div>
       </nav>
 
@@ -155,12 +165,12 @@ export default async function SiteBlogDetailPage({
         <article className="cf-detail">
           <Breadcrumbs
             items={[
-              { label: 'Home', href: `/${site}` },
+              { label: 'Home', href: to('/') },
               ...(primaryCategory
                 ? [
                     {
                       label: primaryCategory.name,
-                      href: `/${site}/category/${primaryCategory.slug || primaryCategory.id}`
+                      href: to(`/category/${primaryCategory.slug || primaryCategory.id}`)
                     }
                   ]
                 : []),
@@ -184,12 +194,12 @@ export default async function SiteBlogDetailPage({
 
           <section className="cf-detail-links">
             {(post.categories || []).map((cat) => (
-              <a key={cat.id} href={`/${site}/category/${cat.slug || cat.id}`}>
+              <a key={cat.id} href={to(`/category/${cat.slug || cat.id}`)}>
                 {cat.name}
               </a>
             ))}
             {(post.tags || []).map((tag) => (
-              <a key={tag.id} href={`/${site}/tag/${tag.slug || tag.id}`}>
+              <a key={tag.id} href={to(`/tag/${tag.slug || tag.id}`)}>
                 #{tag.name}
               </a>
             ))}
@@ -224,10 +234,10 @@ export default async function SiteBlogDetailPage({
                     </small>
                   </div>
                   <h4>
-                    <a href={`/${site}/blog/${item.slug || item.id}`}>{item.title}</a>
+                    <a href={to(`/blog/${item.slug || item.id}`)}>{item.title}</a>
                   </h4>
                   <p>{item.excerpt || '詳しくは記事本文をご覧ください。'}</p>
-                  <a href={`/${site}/blog/${item.slug || item.id}`}>読む</a>
+                  <a href={to(`/blog/${item.slug || item.id}`)}>読む</a>
                 </article>
               ))}
             </div>
@@ -237,11 +247,11 @@ export default async function SiteBlogDetailPage({
 
       <footer className="cf-footer">
         <p className="cf-footer-links">
-          <a href={`/${site}/category/about`}>このサイトについて</a>
+          <a href={to('/category/about')}>このサイトについて</a>
           <span> / </span>
-          <a href={`/${site}/blog/privacypolicy`}>プライバシーポリシー</a>
+          <a href={to('/blog/privacypolicy')}>プライバシーポリシー</a>
           <span> / </span>
-          <a href={`/${site}/blog/disclaimer`}>免責事項</a>
+          <a href={to('/blog/disclaimer')}>免責事項</a>
         </p>
         <p>© 2026 Copper for me. All Rights Reserved.</p>
       </footer>

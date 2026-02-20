@@ -6,7 +6,7 @@ import Script from 'next/script';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SafeImage from '@/components/SafeImage';
 import { getCategories, getPostsByCategorySlug } from '@/lib/microcms';
-import { normalizeSite } from '@/lib/site';
+import { normalizeSite, sitePath, siteUrl } from '@/lib/site';
 
 function formatDate(value: string) {
   if (!value) return '';
@@ -35,7 +35,7 @@ export async function generateMetadata({
   if (!category) return { title: 'Not Found' };
 
   const baseUrl = process.env.SITE_URL || 'http://localhost:3000';
-  const canonical = `${baseUrl}/${site}/category/${category.slug || category.id}`;
+  const canonical = siteUrl(baseUrl, site, `/category/${category.slug || category.id}`);
   const title = `${category.name} | Copper for me`;
   const description = `${category.name}カテゴリの記事一覧。銅価格・指標・市況に関する記事をまとめています。`;
   return {
@@ -78,6 +78,7 @@ export default async function SiteCategoryPage({
   );
   if (!category) notFound();
   const baseUrl = process.env.SITE_URL || 'http://localhost:3000';
+  const to = (path: string) => sitePath(site, path);
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -86,13 +87,13 @@ export default async function SiteCategoryPage({
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: `${baseUrl}/${site}`
+        item: siteUrl(baseUrl, site, '/')
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: category.name,
-        item: `${baseUrl}/${site}/category/${category.slug || category.id}`
+        item: siteUrl(baseUrl, site, `/category/${category.slug || category.id}`)
       }
     ]
   };
@@ -106,25 +107,34 @@ export default async function SiteCategoryPage({
         <div className="cf-nav-inner">
           <div className="cf-logo-wrap">
             <div className="cf-logo">
-              <a href={`/${site}`}>
+              <a href={to('/')}>
                 Copper for me
               </a>
             </div>
             <p className="cf-logo-sub">Daily Scrap Learning</p>
           </div>
           <div className="cf-nav-links">
-            <a href={`/${site}`}>Home</a>
-            <a href={`/${site}/category/info`}>相場情報</a>
-            <a href={`/${site}/category/index`}>指標まとめ</a>
-            <a href={`/${site}/category/other`}>その他</a>
+            <a href={to('/')}>Home</a>
+            <a href={to('/category/info')}>相場情報</a>
+            <a href={to('/category/index')}>指標まとめ</a>
+            <a href={to('/category/about')}>このサイトについて</a>
           </div>
+          <details className="cf-nav-mobile">
+            <summary>Menu</summary>
+            <div className="cf-nav-mobile-panel">
+              <a href={to('/')}>Home</a>
+              <a href={to('/category/info')}>相場情報</a>
+              <a href={to('/category/index')}>指標まとめ</a>
+              <a href={to('/category/about')}>このサイトについて</a>
+            </div>
+          </details>
         </div>
       </nav>
       <main className="cf-main">
         <section className="cf-latest">
           <Breadcrumbs
             items={[
-              { label: 'Home', href: `/${site}` },
+              { label: 'Home', href: to('/') },
               { label: category.name }
             ]}
           />
@@ -146,10 +156,10 @@ export default async function SiteCategoryPage({
                   <small>{formatDate(post.publishedAt)}</small>
                 </div>
                 <h4>
-                  <a href={`/${site}/blog/${post.slug || post.id}`}>{post.title}</a>
+                  <a href={to(`/blog/${post.slug || post.id}`)}>{post.title}</a>
                 </h4>
                 <p>{post.excerpt || '詳しくは記事本文をご覧ください。'}</p>
-                <a href={`/${site}/blog/${post.slug || post.id}`}>読む</a>
+                <a href={to(`/blog/${post.slug || post.id}`)}>読む</a>
               </article>
             ))}
           </div>
@@ -157,11 +167,11 @@ export default async function SiteCategoryPage({
       </main>
       <footer className="cf-footer">
         <p className="cf-footer-links">
-          <a href={`/${site}/category/about`}>このサイトについて</a>
+          <a href={to('/category/about')}>このサイトについて</a>
           <span> / </span>
-          <a href={`/${site}/blog/privacypolicy`}>プライバシーポリシー</a>
+          <a href={to('/blog/privacypolicy')}>プライバシーポリシー</a>
           <span> / </span>
-          <a href={`/${site}/blog/disclaimer`}>免責事項</a>
+          <a href={to('/blog/disclaimer')}>免責事項</a>
         </p>
         <p>© 2026 Copper for me. All Rights Reserved.</p>
       </footer>
