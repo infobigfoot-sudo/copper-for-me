@@ -973,7 +973,7 @@ export default async function SiteHomePage({
             <summary>Menu</summary>
             <div className="cf-nav-mobile-panel">
               <Link href={to('/')}>Home</Link>
-              <Link href={to(`/?driver=${driverFilter}&horizon=1m#conclusion`)}>
+              <Link href={to(`/?driver=${driverFilter}&horizon=1m`)}>
                 1ヶ月軸の結論
               </Link>
               <a href="#market-guide">
@@ -1003,7 +1003,7 @@ export default async function SiteHomePage({
 
       <header className="cf-hero">
         <p className="cf-eyebrow">Read the Market, Ahead</p>
-        <h1>
+        <h1 className="cf-hero-title">
           銅の「いま」と「次」を
         </h1>
         <p>LME・為替・在庫から、仕入れ/売値判断に使える指標を更新</p>
@@ -1083,19 +1083,22 @@ export default async function SiteHomePage({
                     <div className="cf-tone-switch">
                       <Link
                         className={`cf-tone-btn ${horizon === '1w' ? 'active' : ''}`}
-                        href={to(`/?driver=${driverFilter}&horizon=1w#conclusion`)}
+                        href={to(`/?driver=${driverFilter}&horizon=1w`)}
+                        prefetch
                       >
                         1週間軸
                       </Link>
                       <Link
                         className={`cf-tone-btn ${horizon === '1m' ? 'active' : ''}`}
-                        href={to(`/?driver=${driverFilter}&horizon=1m#conclusion`)}
+                        href={to(`/?driver=${driverFilter}&horizon=1m`)}
+                        prefetch
                       >
                         1ヶ月軸
                       </Link>
                       <Link
                         className={`cf-tone-btn ${horizon === '3m' ? 'active' : ''}`}
-                        href={to(`/?driver=${driverFilter}&horizon=3m#conclusion`)}
+                        href={to(`/?driver=${driverFilter}&horizon=3m`)}
+                        prefetch
                       >
                         3ヶ月軸
                       </Link>

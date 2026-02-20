@@ -378,6 +378,10 @@ a:hover {
   line-height: 1.08;
 }
 
+.cf-hero-title {
+  white-space: nowrap;
+}
+
 .cf-hero h1 span {
   font-style: normal;
   font-family: 'Avenir Next Condensed', 'Franklin Gothic Medium', sans-serif;
@@ -1832,6 +1836,12 @@ a:hover {
 }
 
 @media (max-width: 640px) {
+  .cf-hero-title {
+    font-size: clamp(1.8rem, 8.2vw, 2.4rem);
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+  }
+
   .cf-latest-head h3 {
     font-size: 1.5rem;
     line-height: 1.2;
@@ -1851,5 +1861,34 @@ a:hover {
 
   .cf-calendar-iframe {
     height: 500px;
+  }
+}
+
+.cf-page-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #faf9f6;
+}
+
+.cf-page-loading-inner {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  color: #5f5a53;
+}
+
+.cf-spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 3px solid #d9d9d9;
+  border-top-color: #9c6d48;
+  animation: cf-spin 0.9s linear infinite;
+}
+
+@keyframes cf-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
