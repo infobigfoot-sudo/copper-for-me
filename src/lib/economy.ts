@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
-type Indicator = {
+export type Indicator = {
   id: string;
   name: string;
   value: string;
@@ -13,11 +13,18 @@ type Indicator = {
   changePercent?: string;
 };
 
-type EconomyBundle = {
+export type EconomyBundle = {
   cacheVersion?: number;
   updatedAt: string;
   cacheDateJst?: string;
   cacheBucketJst?: string;
+  sourceStatus?: {
+    mode?: 'snapshot' | 'live';
+    fred?: 'ok' | 'fallback' | 'empty';
+    alpha?: 'ok' | 'fallback' | 'empty';
+    metals?: 'ok' | 'fallback' | 'disabled' | 'empty';
+    snapshotWrite?: 'ok' | 'error';
+  };
   fred: Indicator[];
   alpha: Indicator[];
 };
@@ -86,6 +93,9 @@ function withChangeFromPrev(
 const CACHE_FILE =
   process.env.ECONOMY_CACHE_FILE ||
   path.join(process.cwd(), '.cache', 'copper_for_me_economy_cache.json');
+const SNAPSHOT_FILE =
+  process.env.ECONOMY_SNAPSHOT_FILE ||
+  path.join(process.cwd(), 'public', 'data', 'economy_snapshot.json');
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 const CACHE_VERSION = 3;
 
@@ -198,6 +208,35 @@ async function writeCache(bundle: EconomyBundle): Promise<void> {
     await fs.writeFile(CACHE_FILE, JSON.stringify(bundle), 'utf8');
   } catch {
     // Ignore cache write errors.
+  }
+}
+
+async function readSnapshot(): Promise<EconomyBundle | null> {
+  try {
+    const raw = await fs.readFile(SNAPSHOT_FILE, 'utf8');
+    const parsed = JSON.parse(raw) as EconomyBundle;
+    if (!parsed?.updatedAt) return null;
+    if (!Array.isArray(parsed.fred) || !Array.isArray(parsed.alpha)) return null;
+    return {
+      ...parsed,
+      sourceStatus: {
+        ...(parsed.sourceStatus || {}),
+        mode: 'snapshot'
+      }
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function writeSnapshot(bundle: EconomyBundle): Promise<boolean> {
+  try {
+    await fs.mkdir(path.dirname(SNAPSHOT_FILE), { recursive: true });
+    await fs.writeFile(SNAPSHOT_FILE, JSON.stringify(bundle, null, 2), 'utf8');
+    return true;
+  } catch {
+    // ignore snapshot write errors (e.g. read-only FS on serverless)
+    return false;
   }
 }
 
@@ -582,14 +621,13 @@ async function fetchAlphaIndicators(): Promise<Indicator[]> {
   return filterFreshIndicators(out);
 }
 
-export async function getEconomyIndicators(): Promise<EconomyBundle> {
+export async function getEconomyIndicatorsLive(): Promise<EconomyBundle> {
   const [cachedAny, cached] = await Promise.all([readCacheAny(), readCache()]);
   if (cached) return cached;
   const hasMetalsKey = Boolean((process.env.METALS_DEV_API_KEY || '').trim());
 
-  const [lme, usdJpyMetals, fredRaw, alphaRaw, fredCopper, fredUsdJpy] = await Promise.all([
+  const [lme, fredRaw, alphaRaw, fredCopper, fredUsdJpy] = await Promise.all([
     fetchLmeCopperFromMetalsDev(),
-    fetchUsdJpyFromMetalsDev(),
     fetchFredIndicators(),
     fetchAlphaIndicators(),
     fetchFredSeriesLatest('PCOPPUSDM'),
@@ -638,7 +676,6 @@ export async function getEconomyIndicators(): Promise<EconomyBundle> {
       : [];
   const prevUsdJpy = prevAlpha.find((i) => i.id === 'usd_jpy') || null;
   const usdJpyMerged =
-    withChangeFromPrev(usdJpyMetals, prevUsdJpy) ||
     alphaRaw.find((i) => i.id === 'usd_jpy') ||
     prevUsdJpy ||
     usdJpyFallback[0] ||
@@ -654,16 +691,38 @@ export async function getEconomyIndicators(): Promise<EconomyBundle> {
   const fredMerged = fred.length ? fred : (cachedAny?.fred || []);
   const alphaMerged = alpha.length ? alpha : (cachedAny?.alpha || []);
 
+  const hasMetals = fredMerged.some((i) => i.id === 'lme_copper_jpy' && i.source === 'Metals.dev');
   const bundle: EconomyBundle = {
     cacheVersion: CACHE_VERSION,
     updatedAt: new Date().toISOString(),
     cacheDateJst: getTodayJstYmd(),
     cacheBucketJst: getNoonBucketJst(),
+    sourceStatus: {
+      mode: 'live',
+      fred: fred.length ? 'ok' : (cachedAny?.fred?.length ? 'fallback' : 'empty'),
+      alpha: alpha.length ? 'ok' : (cachedAny?.alpha?.length ? 'fallback' : 'empty'),
+      metals: hasMetals
+        ? 'ok'
+        : (Boolean((process.env.METALS_DEV_API_KEY || '').trim()) ? 'empty' : 'disabled')
+    },
     fred: fredMerged,
     alpha: alphaMerged
   };
+  const snapshotWritten = await writeSnapshot(bundle);
+  bundle.sourceStatus = {
+    ...(bundle.sourceStatus || {}),
+    snapshotWrite: snapshotWritten ? 'ok' : 'error'
+  };
   await writeCache(bundle);
   return bundle;
+}
+
+export async function getEconomyIndicators(): Promise<EconomyBundle> {
+  const snapshot = await readSnapshot();
+  if (snapshot && (snapshot.fred.length || snapshot.alpha.length)) {
+    return snapshot;
+  }
+  return getEconomyIndicatorsLive();
 }
 
 export function formatIndicatorValue(raw: string): string {

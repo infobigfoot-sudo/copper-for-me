@@ -1,0 +1,269 @@
+{
+  "cacheVersion": 3,
+  "updatedAt": "2026-02-20T10:46:50.199Z",
+  "cacheDateJst": "2026-02-20",
+  "cacheBucketJst": "2026-02-20",
+  "sourceStatus": {
+    "mode": "live",
+    "fred": "ok",
+    "alpha": "ok",
+    "metals": "empty"
+  },
+  "fred": [
+    {
+      "id": "DTWEXBGS",
+      "name": "名目実効ドル指数（Broad）",
+      "value": "117.5258",
+      "date": "2026-02-13",
+      "lastUpdated": "2026-02-17 15:17:18-06",
+      "units": "Index Jan 2006=100",
+      "frequency": "Daily",
+      "source": "FRED",
+      "changePercent": "-0.01%"
+    },
+    {
+      "id": "FEDFUNDS",
+      "name": "米政策金利（FF金利）",
+      "value": "3.64",
+      "date": "2026-01-01",
+      "lastUpdated": "2026-02-02 15:17:18-06",
+      "units": "Percent",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "-2.15%"
+    },
+    {
+      "id": "DGS10",
+      "name": "米10年国債利回り",
+      "value": "4.09",
+      "date": "2026-02-18",
+      "lastUpdated": "2026-02-19 15:16:56-06",
+      "units": "Percent",
+      "frequency": "Daily",
+      "source": "FRED",
+      "changePercent": "+0.99%"
+    },
+    {
+      "id": "VIXCLS",
+      "name": "VIX（恐怖指数）",
+      "value": "19.62",
+      "date": "2026-02-18",
+      "lastUpdated": "2026-02-19 08:37:46-06",
+      "units": "Index",
+      "frequency": "Daily, Close",
+      "source": "FRED",
+      "changePercent": "-3.30%"
+    },
+    {
+      "id": "IPMAN",
+      "name": "米製造業生産指数",
+      "value": "98.2351",
+      "date": "2026-01-01",
+      "lastUpdated": "2026-02-18 08:20:59-06",
+      "units": "Index 2017=100",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "+0.60%"
+    },
+    {
+      "id": "PERMIT",
+      "name": "建設許可件数（米国）",
+      "value": "1448.0",
+      "date": "2025-12-01",
+      "lastUpdated": "2026-02-18 07:33:49-06",
+      "units": "Thousands of Units",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "+4.32%"
+    },
+    {
+      "id": "HOUST",
+      "name": "住宅着工件数",
+      "value": "1404.0",
+      "date": "2025-12-01",
+      "lastUpdated": "2026-02-18 07:33:55-06",
+      "units": "Thousands of Units",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "+6.20%"
+    },
+    {
+      "id": "TCU",
+      "name": "設備稼働率（米国）",
+      "value": "76.2119",
+      "date": "2026-01-01",
+      "lastUpdated": "2026-02-18 08:19:31-06",
+      "units": "Percent",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "+0.62%"
+    },
+    {
+      "id": "DCOILWTICO",
+      "name": "原油価格（WTI）",
+      "value": "62.53",
+      "date": "2026-02-17",
+      "lastUpdated": "2026-02-19 13:07:58-06",
+      "units": "Dollars per Barrel",
+      "frequency": "Daily",
+      "source": "FRED",
+      "changePercent": "-0.82%"
+    },
+    {
+      "id": "DCOILBRENTEU",
+      "name": "原油価格（Brent）",
+      "value": "69.77",
+      "date": "2026-02-17",
+      "lastUpdated": "2026-02-19 13:07:55-06",
+      "units": "Dollars per Barrel",
+      "frequency": "Daily",
+      "source": "FRED",
+      "changePercent": "-1.47%"
+    },
+    {
+      "id": "DHHNGSP",
+      "name": "天然ガス価格（Henry Hub）",
+      "value": "3.13",
+      "date": "2026-02-17",
+      "lastUpdated": "2026-02-19 13:07:50-06",
+      "units": "Dollars per Million BTU",
+      "frequency": "Daily",
+      "source": "FRED",
+      "changePercent": "-3.40%"
+    },
+    {
+      "id": "GASREGCOVW",
+      "name": "ガソリン価格（全米平均）",
+      "value": "2.79",
+      "date": "2026-02-16",
+      "lastUpdated": "2026-02-18 09:04:55-06",
+      "units": "Dollars per Gallon",
+      "frequency": "Weekly",
+      "source": "FRED",
+      "changePercent": "+0.72%"
+    },
+    {
+      "id": "CES3000000003",
+      "name": "製造業の平均時給",
+      "value": "36.20",
+      "date": "2026-01-01",
+      "lastUpdated": "2026-02-11 08:24:19-06",
+      "units": "Dollars per Hour",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "+0.36%"
+    },
+    {
+      "id": "GDP",
+      "name": "米国GDP（四半期）",
+      "value": "31098.027",
+      "date": "2025-07-01",
+      "lastUpdated": "2026-01-22 07:46:34-06",
+      "units": "Billions of Dollars",
+      "frequency": "Quarterly",
+      "source": "FRED",
+      "changePercent": "+2.01%"
+    },
+    {
+      "id": "CPIAUCSL",
+      "name": "米CPI（総合）",
+      "value": "326.588",
+      "date": "2026-01-01",
+      "lastUpdated": "2026-02-13 08:05:50-06",
+      "units": "Index 1982-1984=100",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "+0.17%"
+    },
+    {
+      "id": "PPIACO",
+      "name": "生産者物価指数（PPI）",
+      "value": "260.686",
+      "date": "2025-12-01",
+      "lastUpdated": "2026-01-30 09:18:20-06",
+      "units": "Index 1982=100",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "-0.26%"
+    },
+    {
+      "id": "CES1021210001",
+      "name": "鉱業部門の雇用者数",
+      "value": "39.5",
+      "date": "2026-01-01",
+      "lastUpdated": "2026-02-11 08:24:24-06",
+      "units": "Thousands of Persons",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "-0.25%"
+    },
+    {
+      "id": "DGORDER",
+      "name": "製造業の新規受注",
+      "value": "319627.0",
+      "date": "2025-12-01",
+      "lastUpdated": "2026-02-18 07:33:22-06",
+      "units": "Millions of Dollars",
+      "frequency": "Monthly",
+      "source": "FRED",
+      "changePercent": "-1.43%"
+    }
+  ],
+  "alpha": [
+    {
+      "id": "usd_jpy",
+      "name": "USD/JPY 為替レート",
+      "value": "154.98000",
+      "date": "2026-02-19",
+      "lastUpdated": "2026-02-19",
+      "units": "JPY/USD",
+      "frequency": "Daily",
+      "source": "Alpha Vantage",
+      "changePercent": "+0.10%"
+    },
+    {
+      "id": "copx",
+      "name": "銅ETF（COPX）",
+      "value": "86.1200",
+      "date": "2026-02-19",
+      "lastUpdated": "2026-02-19",
+      "units": "USD",
+      "frequency": "Daily",
+      "source": "Alpha Vantage",
+      "changePercent": "-0.62%"
+    },
+    {
+      "id": "usd_cny",
+      "name": "USD/CNY 為替レート",
+      "value": "6.90300",
+      "date": "2026-02-20",
+      "lastUpdated": "2026-02-20",
+      "units": "CNY/USD",
+      "frequency": "Daily",
+      "source": "Alpha Vantage",
+      "changePercent": "-0.08%"
+    },
+    {
+      "id": "fcx",
+      "name": "Freeport-McMoRan（FCX）",
+      "value": "62.5700",
+      "date": "2026-02-19",
+      "lastUpdated": "2026-02-19",
+      "units": "USD",
+      "frequency": "Daily",
+      "source": "Alpha Vantage",
+      "changePercent": "+0.03%"
+    },
+    {
+      "id": "sp500",
+      "name": "S&P500連動ETF（SPY）",
+      "value": "684.4800",
+      "date": "2026-02-19",
+      "lastUpdated": "2026-02-19",
+      "units": "USD",
+      "frequency": "Daily",
+      "source": "Alpha Vantage",
+      "changePercent": "-0.26%"
+    }
+  ]
+}
