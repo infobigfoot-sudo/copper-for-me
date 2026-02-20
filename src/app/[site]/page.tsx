@@ -981,7 +981,7 @@ export default async function SiteHomePage({
             <summary>Menu</summary>
             <div className="cf-nav-mobile-panel">
               <Link href={to('/')}>Home</Link>
-              <Link href={to(`/?driver=${driverFilter}&horizon=1m`)}>
+              <Link href={to(`/?driver=${driverFilter}&horizon=1m#conclusion`)} scroll={false}>
                 1ヶ月軸の結論
               </Link>
               <a href="#market-guide">
@@ -1089,21 +1089,24 @@ export default async function SiteHomePage({
                     <div className="cf-tone-switch">
                       <Link
                         className={`cf-tone-btn ${horizon === '1w' ? 'active' : ''}`}
-                        href={to(`/?driver=${driverFilter}&horizon=1w`)}
+                        href={to(`/?driver=${driverFilter}&horizon=1w#conclusion`)}
+                        scroll={false}
                         prefetch
                       >
                         1週間軸
                       </Link>
                       <Link
                         className={`cf-tone-btn ${horizon === '1m' ? 'active' : ''}`}
-                        href={to(`/?driver=${driverFilter}&horizon=1m`)}
+                        href={to(`/?driver=${driverFilter}&horizon=1m#conclusion`)}
+                        scroll={false}
                         prefetch
                       >
                         1ヶ月軸
                       </Link>
                       <Link
                         className={`cf-tone-btn ${horizon === '3m' ? 'active' : ''}`}
-                        href={to(`/?driver=${driverFilter}&horizon=3m`)}
+                        href={to(`/?driver=${driverFilter}&horizon=3m#conclusion`)}
+                        scroll={false}
                         prefetch
                       >
                         3ヶ月軸
