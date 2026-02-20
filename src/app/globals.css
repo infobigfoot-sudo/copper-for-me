@@ -1837,9 +1837,10 @@ a:hover {
 
 @media (max-width: 640px) {
   .cf-hero-title {
-    font-size: clamp(1.8rem, 8.2vw, 2.4rem);
+    font-size: clamp(1.45rem, 6.8vw, 2.05rem);
     white-space: nowrap;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+    line-height: 1.06;
   }
 
   .cf-latest-head h3 {

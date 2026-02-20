@@ -16,11 +16,16 @@ const metadataBase = (() => {
 
 export const metadata: Metadata = {
   metadataBase,
-  title: process.env.NEXT_PUBLIC_SITE_NAME || 'AI Content Media',
+  title: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
   description: 'AI自動生成と人の承認を組み合わせたメディアサイト',
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png'
+  },
+  appleWebApp: {
+    title: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
+    capable: true,
+    statusBarStyle: 'default'
   },
   alternates: {
     canonical: '/'
@@ -32,12 +37,12 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: baseUrl,
-    title: process.env.NEXT_PUBLIC_SITE_NAME || 'AI Content Media',
+    title: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
     description: 'AI自動生成と人の承認を組み合わせたメディアサイト'
   },
   twitter: {
     card: 'summary_large_image',
-    title: process.env.NEXT_PUBLIC_SITE_NAME || 'AI Content Media',
+    title: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
     description: 'AI自動生成と人の承認を組み合わせたメディアサイト'
   }
 };
@@ -47,13 +52,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const websiteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: process.env.NEXT_PUBLIC_SITE_NAME || 'AI Content Media',
+    name: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
     url: baseUrl
   };
   const orgJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: process.env.NEXT_PUBLIC_SITE_NAME || 'AI Content Media',
+    name: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
     url: baseUrl
   };
 
