@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   metadataBase,
   title: process.env.NEXT_PUBLIC_SITE_NAME || 'AI Content Media',
   description: 'AI自動生成と人の承認を組み合わせたメディアサイト',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png'
+  },
   alternates: {
     canonical: '/'
   },
