@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { readLatestEconomySnapshotFromMicrocms } from '@/lib/microcms_snapshot';
 
 export type Indicator = {
   id: string;
@@ -344,6 +345,36 @@ function toYmdJst(base: Date, minusDays: number): string {
   return `${yy}-${mm}-${dd}`;
 }
 
+function isTransientNetworkError(err: unknown): boolean {
+  const msg = String((err as any)?.message || '');
+  const causeCode = String((err as any)?.cause?.code || '');
+  return (
+    msg.includes('fetch failed') ||
+    causeCode === 'EAI_AGAIN' ||
+    causeCode === 'ENOTFOUND' ||
+    causeCode === 'ECONNRESET' ||
+    causeCode === 'ETIMEDOUT'
+  );
+}
+
+async function fetchWithRetry(url: string, attempts = 3): Promise<Response> {
+  let lastErr: unknown;
+  for (let i = 0; i < attempts; i += 1) {
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      return res;
+    } catch (err) {
+      lastErr = err;
+      if (!isTransientNetworkError(err) || i === attempts - 1) {
+        throw err;
+      }
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((resolve) => setTimeout(resolve, 800 * (i + 1)));
+    }
+  }
+  throw lastErr instanceof Error ? lastErr : new Error('fetchWithRetry failed');
+}
+
 async function fetchLmeCopperFromMetalsDev(): Promise<Indicator | null> {
   const apiKey = (process.env.METALS_DEV_API_KEY || '').trim();
   if (!apiKey) return null;
@@ -353,7 +384,7 @@ async function fetchLmeCopperFromMetalsDev(): Promise<Indicator | null> {
     const latestUrl =
       `https://api.metals.dev/v1/latest` +
       `?api_key=${apiKey}&currency=USD&unit=kg`;
-    const latestRes = await fetch(latestUrl, { cache: 'no-store' });
+    const latestRes = await fetchWithRetry(latestUrl, 4);
     if (latestRes.ok) {
       const latestData = await latestRes.json();
       const metalUsdPerKg = Number(
@@ -387,7 +418,7 @@ async function fetchLmeCopperFromMetalsDev(): Promise<Indicator | null> {
     const url =
       `https://api.metals.dev/v1/metal/authority` +
       `?authority=lme&metal=copper&currency=GBP&date=${date}&api_key=${apiKey}`;
-    const res = await fetch(url, { cache: 'no-store' });
+    const res = await fetchWithRetry(url, 3);
     if (!res.ok) return null;
     const data = await res.json();
     const v = Number(data?.rates?.copper ?? data?.metals?.copper ?? data?.price);
@@ -395,7 +426,7 @@ async function fetchLmeCopperFromMetalsDev(): Promise<Indicator | null> {
   };
 
   const fxUrl = `https://api.metals.dev/v1/currencies?api_key=${apiKey}`;
-  const fxRes = await fetch(fxUrl, { cache: 'no-store' });
+  const fxRes = await fetchWithRetry(fxUrl, 4);
   if (!fxRes.ok) return null;
   const fxData = await fxRes.json();
   const rates = fxData?.rates || fxData?.currencies || {};
@@ -441,7 +472,7 @@ async function fetchUsdJpyFromMetalsDev(): Promise<Indicator | null> {
     const latestUrl =
       `https://api.metals.dev/v1/latest` +
       `?api_key=${apiKey}&currency=USD&unit=kg`;
-    const res = await fetch(latestUrl, { cache: 'no-store' });
+    const res = await fetchWithRetry(latestUrl, 4);
     if (!res.ok) return null;
     const data = await res.json();
     const usdPerJpy = Number(data?.currencies?.JPY);
@@ -621,8 +652,12 @@ async function fetchAlphaIndicators(): Promise<Indicator[]> {
   return filterFreshIndicators(out);
 }
 
-export async function getEconomyIndicatorsLive(): Promise<EconomyBundle> {
-  const [cachedAny, cached] = await Promise.all([readCacheAny(), readCache()]);
+export async function getEconomyIndicatorsLive(opts?: { force?: boolean }): Promise<EconomyBundle> {
+  const force = Boolean(opts?.force);
+  const [cachedAny, cached] = await Promise.all([
+    readCacheAny(),
+    force ? Promise.resolve(null) : readCache()
+  ]);
   if (cached) return cached;
   const hasMetalsKey = Boolean((process.env.METALS_DEV_API_KEY || '').trim());
 
@@ -683,13 +718,15 @@ export async function getEconomyIndicatorsLive(): Promise<EconomyBundle> {
   const alpha = [...(usdJpyMerged ? [usdJpyMerged] : []), ...alphaWithoutUsdJpy];
 
   // Safety fallback: if fresh fetch produced nothing, keep using the last known cache.
-  if (!fred.length && !alpha.length && cachedAny) {
+  // force時は再取得結果を優先して返す（古い値への巻き戻しを防ぐ）。
+  if (!force && !fred.length && !alpha.length && cachedAny) {
     return cachedAny;
   }
 
   // Partial fallback: if either side is empty, backfill from last known cache if available.
-  const fredMerged = fred.length ? fred : (cachedAny?.fred || []);
-  const alphaMerged = alpha.length ? alpha : (cachedAny?.alpha || []);
+  // force時は空のまま返して、取得失敗を隠さない。
+  const fredMerged = force ? fred : (fred.length ? fred : (cachedAny?.fred || []));
+  const alphaMerged = force ? alpha : (alpha.length ? alpha : (cachedAny?.alpha || []));
 
   const hasMetals = fredMerged.some((i) => i.id === 'lme_copper_jpy' && i.source === 'Metals.dev');
   const bundle: EconomyBundle = {
@@ -722,7 +759,31 @@ export async function getEconomyIndicators(): Promise<EconomyBundle> {
   if (snapshot && (snapshot.fred.length || snapshot.alpha.length)) {
     return snapshot;
   }
-  return getEconomyIndicatorsLive();
+  const remoteSnapshot = await readLatestEconomySnapshotFromMicrocms().catch(() => null);
+  if (remoteSnapshot && (remoteSnapshot.fred.length || remoteSnapshot.alpha.length)) {
+    await writeSnapshot(remoteSnapshot);
+    await writeCache(remoteSnapshot);
+    return remoteSnapshot;
+  }
+  const liveFallbackEnabled = String(process.env.ECONOMY_ALLOW_LIVE_FALLBACK || '')
+    .trim()
+    .toLowerCase() === 'true';
+  if (liveFallbackEnabled) {
+    return getEconomyIndicatorsLive();
+  }
+  const cachedAny = await readCacheAny();
+  if (cachedAny && (cachedAny.fred.length || cachedAny.alpha.length)) {
+    return cachedAny;
+  }
+  return {
+    cacheVersion: CACHE_VERSION,
+    updatedAt: new Date().toISOString(),
+    cacheDateJst: getTodayJstYmd(),
+    cacheBucketJst: getNoonBucketJst(),
+    sourceStatus: { mode: 'snapshot', fred: 'empty', alpha: 'empty', metals: 'empty' },
+    fred: [],
+    alpha: []
+  };
 }
 
 export function formatIndicatorValue(raw: string): string {

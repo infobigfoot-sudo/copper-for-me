@@ -26,6 +26,7 @@ const defaultConfig = {
 };
 
 const revalidateSeconds = 300;
+const cmsTimeoutMs = Number(process.env.MICROCMS_FETCH_TIMEOUT_MS || 12000);
 const CATEGORY_SLUG_ALIASES: Record<string, string> = {
   'c9tqej8cew-6': 'other',
   onbpjgauf3: 'about',
@@ -132,12 +133,20 @@ async function cmsFetch<T>(site: string | undefined, endpoint: string, query = '
     throw new Error(`microCMS env is missing for site: ${config.key}`);
   }
   const url = buildUrl(config.serviceDomain, endpoint, query);
-  const res = await fetch(url, {
-    headers: {
-      'X-MICROCMS-API-KEY': config.apiKey
-    },
-    next: { revalidate: revalidateSeconds }
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), cmsTimeoutMs);
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      headers: {
+        'X-MICROCMS-API-KEY': config.apiKey
+      },
+      signal: controller.signal,
+      next: { revalidate: revalidateSeconds }
+    });
+  } finally {
+    clearTimeout(timer);
+  }
 
   if (!res.ok) {
     const body = await res.text();
@@ -151,12 +160,20 @@ async function cmsFetchPostById(site: string | undefined, endpoint: string, id: 
   const config = getSiteConfig(site);
   if (!config.serviceDomain || !config.apiKey || !id) return null;
   const url = buildUrl(config.serviceDomain, `${endpoint}/${encodeURIComponent(id)}`, 'depth=2');
-  const res = await fetch(url, {
-    headers: {
-      'X-MICROCMS-API-KEY': config.apiKey
-    },
-    next: { revalidate: revalidateSeconds }
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), cmsTimeoutMs);
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      headers: {
+        'X-MICROCMS-API-KEY': config.apiKey
+      },
+      signal: controller.signal,
+      next: { revalidate: revalidateSeconds }
+    });
+  } finally {
+    clearTimeout(timer);
+  }
   if (res.status === 404) return null;
   if (!res.ok) {
     const body = await res.text();
