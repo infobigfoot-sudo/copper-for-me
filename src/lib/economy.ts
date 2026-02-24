@@ -20,7 +20,7 @@ export type EconomyBundle = {
   cacheDateJst?: string;
   cacheBucketJst?: string;
   sourceStatus?: {
-    mode?: 'snapshot' | 'live';
+    mode?: 'snapshot' | 'live' | 'csv';
     fred?: 'ok' | 'fallback' | 'empty';
     alpha?: 'ok' | 'fallback' | 'empty';
     metals?: 'ok' | 'fallback' | 'disabled' | 'empty';
@@ -142,6 +142,177 @@ function isIndicatorFresh(ind: Indicator): boolean {
 
 function filterFreshIndicators(list: Indicator[]): Indicator[] {
   return list.filter(isIndicatorFresh);
+}
+
+const ECONOMY_DATA_ROOT =
+  process.env.ECONOMY_DATA_ROOT ||
+  path.resolve(process.cwd(), '..', '..', 'stock-data-processor', 'data');
+
+type CsvRow = Record<string, string>;
+
+async function readSimpleCsv(filePath: string): Promise<CsvRow[]> {
+  const raw = await fs.readFile(filePath, 'utf8');
+  const lines = raw.split(/\r?\n/).filter((l) => l.trim().length > 0);
+  if (lines.length < 2) return [];
+  const header = lines[0].split(',').map((s) => s.trim());
+  return lines.slice(1).map((line) => {
+    const cols = line.split(',');
+    const row: CsvRow = {};
+    for (let i = 0; i < header.length; i += 1) row[header[i]] = String(cols[i] ?? '').trim();
+    return row;
+  });
+}
+
+function rowDateValue(row: CsvRow): string {
+  return String(row.observation_date || row.date || row.Date || '').trim();
+}
+
+function pickRowAtOrBefore(rows: CsvRow[], targetDate: string): CsvRow | null {
+  const valid = rows
+    .filter((r) => rowDateValue(r))
+    .sort((a, b) => (rowDateValue(a) < rowDateValue(b) ? 1 : -1));
+  return valid.find((r) => rowDateValue(r) <= targetDate) || null;
+}
+
+async function findFredCsvIndicatorAtOrBefore(seriesId: string, targetDate: string): Promise<Indicator | null> {
+  const filePath = path.join(ECONOMY_DATA_ROOT, 'america', seriesId, `${seriesId}_${targetDate.slice(0, 4)}.csv`);
+  let rows: CsvRow[] = [];
+  try {
+    rows = await readSimpleCsv(filePath);
+  } catch {
+    // Try previous year if target is near boundary or file naming differs.
+    try {
+      rows = await readSimpleCsv(
+        path.join(ECONOMY_DATA_ROOT, 'america', seriesId, `${seriesId}_${Number(targetDate.slice(0, 4)) - 1}.csv`)
+      );
+    } catch {
+      return null;
+    }
+  }
+  const row = pickRowAtOrBefore(rows, targetDate);
+  if (!row) return null;
+  const value = String(row[seriesId] ?? '').trim();
+  if (!value || value === '.') return null;
+  const meta = FRED_SERIES.find((s) => s.id === seriesId);
+  const date = rowDateValue(row);
+  const idx = rows.findIndex((r) => rowDateValue(r) === date);
+  let prevValue = '';
+  for (let i = idx - 1; i >= 0; i -= 1) {
+    const v = String(rows[i]?.[seriesId] ?? '').trim();
+    if (v && v !== '.') {
+      prevValue = v;
+      break;
+    }
+  }
+  return {
+    id: seriesId,
+    name: meta?.name || seriesId,
+    value,
+    date,
+    units: '',
+    frequency: '',
+    source: 'FRED',
+    changePercent: formatChangePercent(value, prevValue)
+  };
+}
+
+async function fetchFredSeriesAtOrBefore(seriesId: string, targetDate: string): Promise<{
+  value: string;
+  date: string;
+  lastUpdated?: string;
+  units: string;
+  frequency: string;
+  prevValue?: string;
+} | null> {
+  const apiKey = process.env.FRED_API_KEY;
+  if (!apiKey) return null;
+  try {
+    const obsUrl =
+      `https://api.stlouisfed.org/fred/series/observations` +
+      `?series_id=${seriesId}&api_key=${apiKey}&file_type=json&observation_end=${encodeURIComponent(targetDate)}`;
+    const obsRes = await fetch(obsUrl, { cache: 'no-store' });
+    const obsData = await obsRes.json();
+    const observations = Array.isArray(obsData?.observations) ? obsData.observations : [];
+    const validList = observations
+      .slice()
+      .reverse()
+      .filter((o: any) => o?.value && o.value !== '.' && String(o.date || '') <= targetDate);
+    const latest = validList[0];
+    const prev = validList[1];
+    if (!latest) return null;
+
+    const metaUrl = `https://api.stlouisfed.org/fred/series?series_id=${seriesId}&api_key=${apiKey}&file_type=json`;
+    const metaRes = await fetch(metaUrl, { cache: 'no-store' });
+    const metaData = await metaRes.json();
+    const meta = Array.isArray(metaData?.seriess) ? metaData.seriess[0] : {};
+    return {
+      value: String(latest.value ?? ''),
+      date: String(latest.date ?? ''),
+      lastUpdated: String(meta?.last_updated || ''),
+      units: String(meta?.units ?? ''),
+      frequency: String(meta?.frequency ?? ''),
+      prevValue: String(prev?.value ?? '')
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function getEconomyIndicatorsCsvFirst(opts?: {
+  date?: string;
+  fredFallback?: boolean;
+}): Promise<EconomyBundle> {
+  const targetDate = String(opts?.date || getTodayJstYmd()).trim();
+  const fredFallback = opts?.fredFallback !== false;
+
+  const fredResults = await Promise.all(
+    FRED_SERIES.map(async (s) => {
+      const fromCsv = await findFredCsvIndicatorAtOrBefore(s.id, targetDate);
+      if (fromCsv) return { indicator: fromCsv, source: 'csv' as const };
+      if (!fredFallback) return { indicator: null, source: 'missing' as const };
+      const fromApi = await fetchFredSeriesAtOrBefore(s.id, targetDate);
+      if (!fromApi) return { indicator: null, source: 'missing' as const };
+      return {
+        indicator: {
+          id: s.id,
+          name: s.name,
+          value: fromApi.value,
+          date: fromApi.date,
+          lastUpdated: fromApi.lastUpdated,
+          units: fromApi.units,
+          frequency: fromApi.frequency,
+          source: 'FRED' as const,
+          changePercent: formatChangePercent(fromApi.value, String(fromApi.prevValue || ''))
+        },
+        source: 'api' as const
+      };
+    })
+  );
+
+  const fred = fredResults.map((r) => r.indicator).filter(Boolean) as Indicator[];
+  const csvHits = fredResults.filter((r) => r.source === 'csv').length;
+  const apiHits = fredResults.filter((r) => r.source === 'api').length;
+  const misses = fredResults.filter((r) => !r.indicator).length;
+
+  const bundle: EconomyBundle = {
+    cacheVersion: CACHE_VERSION,
+    updatedAt: new Date().toISOString(),
+    cacheDateJst: targetDate,
+    cacheBucketJst: targetDate,
+    sourceStatus: {
+      mode: 'csv',
+      fred: fred.length ? (apiHits > 0 ? 'fallback' : 'ok') : 'empty',
+      alpha: 'empty',
+      metals: 'disabled'
+    },
+    fred,
+    alpha: []
+  };
+  void writeSnapshot(bundle);
+  void writeCache(bundle);
+  // Attach lightweight debug info for API callers via any-cast pattern consumers can inspect by extending response.
+  (bundle as any).__csvStats = { targetDate, csvHits, fredApiFallbackHits: apiHits, misses };
+  return bundle;
 }
 
 async function readCache(): Promise<EconomyBundle | null> {
@@ -755,15 +926,29 @@ export async function getEconomyIndicatorsLive(opts?: { force?: boolean }): Prom
 }
 
 export async function getEconomyIndicators(): Promise<EconomyBundle> {
-  const snapshot = await readSnapshot();
-  if (snapshot && (snapshot.fred.length || snapshot.alpha.length)) {
-    return snapshot;
-  }
-  const remoteSnapshot = await readLatestEconomySnapshotFromMicrocms().catch(() => null);
-  if (remoteSnapshot && (remoteSnapshot.fred.length || remoteSnapshot.alpha.length)) {
-    await writeSnapshot(remoteSnapshot);
-    await writeCache(remoteSnapshot);
-    return remoteSnapshot;
+  const isProd = process.env.NODE_ENV === 'production';
+  if (isProd) {
+    const remoteSnapshot = await readLatestEconomySnapshotFromMicrocms().catch(() => null);
+    if (remoteSnapshot && (remoteSnapshot.fred.length || remoteSnapshot.alpha.length)) {
+      await writeSnapshot(remoteSnapshot);
+      await writeCache(remoteSnapshot);
+      return remoteSnapshot;
+    }
+    const snapshot = await readSnapshot();
+    if (snapshot && (snapshot.fred.length || snapshot.alpha.length)) {
+      return snapshot;
+    }
+  } else {
+    const snapshot = await readSnapshot();
+    if (snapshot && (snapshot.fred.length || snapshot.alpha.length)) {
+      return snapshot;
+    }
+    const remoteSnapshot = await readLatestEconomySnapshotFromMicrocms().catch(() => null);
+    if (remoteSnapshot && (remoteSnapshot.fred.length || remoteSnapshot.alpha.length)) {
+      await writeSnapshot(remoteSnapshot);
+      await writeCache(remoteSnapshot);
+      return remoteSnapshot;
+    }
   }
   const liveFallbackEnabled = String(process.env.ECONOMY_ALLOW_LIVE_FALLBACK || '')
     .trim()

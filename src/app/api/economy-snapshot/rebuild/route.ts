@@ -1,7 +1,7 @@
 import { timingSafeEqual } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getEconomyIndicatorsLive } from '@/lib/economy';
+import { getEconomyIndicatorsCsvFirst, getEconomyIndicatorsLive } from '@/lib/economy';
 import { upsertEconomySnapshotToMicrocms } from '@/lib/microcms_snapshot';
 
 function isAuthorized(req: NextRequest): boolean {
@@ -31,15 +31,26 @@ async function rebuild(req: NextRequest) {
   if (!isAuthorized(req)) {
     return NextResponse.json({ ok: false, error: 'unauthorized' }, { status: 401 });
   }
-  const bundle = await getEconomyIndicatorsLive({ force: true });
+  const mode = String(req.nextUrl.searchParams.get('mode') || 'live').trim().toLowerCase();
+  const date = String(req.nextUrl.searchParams.get('date') || '').trim();
+  const fredFallbackRaw = String(req.nextUrl.searchParams.get('fredFallback') || '1').trim().toLowerCase();
+  const fredFallback = !['0', 'false', 'off', 'no'].includes(fredFallbackRaw);
+
+  const bundle =
+    mode === 'csv'
+      ? await getEconomyIndicatorsCsvFirst({ date: date || undefined, fredFallback })
+      : await getEconomyIndicatorsLive({ force: true });
   const persisted = await upsertEconomySnapshotToMicrocms(bundle);
   return NextResponse.json(
     {
       ok: true,
+      mode,
+      requestedDate: date || null,
       updatedAt: bundle.updatedAt,
       cacheBucketJst: bundle.cacheBucketJst || '',
       sourceStatus: bundle.sourceStatus || null,
       counts: { fred: bundle.fred.length, alpha: bundle.alpha.length },
+      csvStats: (bundle as any).__csvStats || null,
       persisted
     },
     { status: 200 }
