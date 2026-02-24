@@ -1,5 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 
 import { getEconomyIndicatorsCsvFirst, getEconomyIndicatorsLive } from '@/lib/economy';
 import { upsertEconomySnapshotToMicrocms } from '@/lib/microcms_snapshot';
@@ -41,6 +42,14 @@ async function rebuild(req: NextRequest) {
       ? await getEconomyIndicatorsCsvFirst({ date: date || undefined, fredFallback })
       : await getEconomyIndicatorsLive({ force: true });
   const persisted = await upsertEconomySnapshotToMicrocms(bundle);
+  if (persisted?.ok) {
+    try {
+      revalidatePath('/');
+      revalidatePath('/a');
+    } catch {
+      // Ignore revalidate failure and still return rebuild result.
+    }
+  }
   return NextResponse.json(
     {
       ok: true,
