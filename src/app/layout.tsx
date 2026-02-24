@@ -17,7 +17,7 @@ const metadataBase = (() => {
 export const metadata: Metadata = {
   metadataBase,
   title: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
-  description: 'AI自動生成と人の承認を組み合わせたメディアサイト',
+  description: '銅市場・建値・為替などの関連データを整理して発信するメディアサイト',
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png'
@@ -38,12 +38,12 @@ export const metadata: Metadata = {
     type: 'website',
     url: baseUrl,
     title: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
-    description: 'AI自動生成と人の承認を組み合わせたメディアサイト'
+    description: '銅市場・建値・為替などの関連データを整理して発信するメディアサイト'
   },
   twitter: {
     card: 'summary_large_image',
     title: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
-    description: 'AI自動生成と人の承認を組み合わせたメディアサイト'
+    description: '銅市場・建値・為替などの関連データを整理して発信するメディアサイト'
   }
 };
 
