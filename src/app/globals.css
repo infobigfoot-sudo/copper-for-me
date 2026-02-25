@@ -6,6 +6,8 @@
   --card: #fffdf8;
   --line: #d7cdc1;
   --ad: #ece5db;
+  --font-body-sans: var(--font-body-jp), "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --font-kpi-sans: var(--font-kpi-jp), "IBM Plex Sans JP", "Avenir Next Condensed", "Franklin Gothic Medium", sans-serif;
 }
 
 * {
@@ -18,7 +20,7 @@ body {
   padding: 0;
   background: radial-gradient(circle at top right, #f0dcca 0, var(--bg) 35%), var(--bg);
   color: var(--ink);
-  font-family: "BIZ UDPMincho", "Yu Mincho", "Hiragino Mincho ProN", "Times New Roman", serif;
+  font-family: var(--font-body-sans);
 }
 
 h1,
@@ -380,6 +382,16 @@ a:hover {
 
 .cf-hero-title {
   white-space: nowrap;
+}
+
+.cf-hero-title--supply {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: min(980px, 100%);
+  margin-inline: auto;
+  font-size: clamp(1.6rem, 4.6vw, 3.4rem);
+  line-height: 1.12;
 }
 
 .cf-hero h1 span {
@@ -934,22 +946,31 @@ a:hover {
   flex-wrap: nowrap;
   white-space: nowrap;
   min-width: 0;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
 
 .cf-econ-value {
   margin: 0;
   font-size: 2.15rem;
   letter-spacing: 0.02em;
-  font-family: 'Avenir Next Condensed', 'Franklin Gothic Medium', sans-serif;
+  font-family: var(--font-kpi-sans);
   line-height: 1.05;
   flex: 0 1 auto;
   min-width: 0;
+  font-weight: 800;
+  text-align: right;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
 
 .cf-econ-value-row small {
   color: #93a0b8;
   font-size: 0.85rem;
   flex: 0 0 auto;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
 
 @media (max-width: 420px) {
@@ -971,6 +992,9 @@ a:hover {
   margin: 10px 0 0;
   color: #b0b8c8;
   font-size: 0.84rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
 
 .cf-ind-help {
@@ -1604,6 +1628,8 @@ a:hover {
   align-items: baseline;
   gap: 8px;
   flex-wrap: wrap;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
 
 .cf-latest-label {
@@ -1622,7 +1648,10 @@ a:hover {
   font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: 0.01em;
-  font-family: 'Avenir Next Condensed', 'Franklin Gothic Medium', sans-serif;
+  font-family: var(--font-kpi-sans);
+  text-align: right;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
 
 .cf-latest-unit {
@@ -1633,6 +1662,16 @@ a:hover {
 .cf-latest-date {
   color: #64748b;
   font-size: 0.84rem;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+
+.cf-econ-card .cf-econ-value-row {
+  justify-content: flex-end;
+}
+
+.cf-econ-card .cf-econ-date {
+  text-align: right;
 }
 
 .cf-latest-block {
@@ -1888,6 +1927,12 @@ a:hover {
     max-width: 100%;
     overflow-wrap: anywhere;
     word-break: break-word;
+  }
+
+  .cf-hero-title--supply {
+    font-size: clamp(1.15rem, 5.3vw, 1.55rem);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
   }
 
   .cf-latest-head h3 {

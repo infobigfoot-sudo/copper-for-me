@@ -1,9 +1,22 @@
 import type { Metadata } from 'next';
+import { IBM_Plex_Sans_JP, Noto_Sans_JP } from 'next/font/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import './globals.css';
+
+const notoSansJp = Noto_Sans_JP({
+  subsets: ['latin'],
+  variable: '--font-body-jp',
+  weight: ['400', '500', '700']
+});
+
+const ibmPlexSansJp = IBM_Plex_Sans_JP({
+  subsets: ['latin'],
+  variable: '--font-kpi-jp',
+  weight: ['400', '500', '600', '700']
+});
 
 const baseUrl = process.env.SITE_URL || 'http://localhost:3000';
 const metadataBase = (() => {
@@ -64,7 +77,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   };
 
   return (
-    <html lang="ja">
+    <html lang="ja" className={`${notoSansJp.variable} ${ibmPlexSansJp.variable}`}>
       <body>
         {gaMeasurementId ? (
           <>
