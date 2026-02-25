@@ -947,14 +947,33 @@ export default async function SiteHomePage({
     const dataDate = formatYmd(ind.date);
     return dataDate === todayYmd || dataDate === yesterdayYmd;
   });
+  const latestIndicatorPriority: Record<string, number> = {
+    lme_copper_jpy: 0,
+    usd_jpy: 1,
+    DGS10: 2,
+    DCOILWTICO: 3,
+    DCOILBRENTEU: 4,
+    DTWEXBGS: 5,
+    VIXCLS: 6,
+    copx: 7,
+    fcx: 8,
+    sp500: 9
+  };
+  const sortByLatestIndicatorPriority = (a: typeof dashboardIndicators[number], b: typeof dashboardIndicators[number]) => {
+    const pa = latestIndicatorPriority[a.id] ?? 999;
+    const pb = latestIndicatorPriority[b.id] ?? 999;
+    if (pa !== pb) return pa - pb;
+    return toTimeMs(b.lastUpdated || b.date) - toTimeMs(a.lastUpdated || a.date);
+  };
   const todayOrYesterdayItems = todayOrYesterdayIndicators
+    .sort(sortByLatestIndicatorPriority)
     .slice(0, 4)
     .map((ind) => ({
       id: ind.id,
       label: `${displayIndicatorName(ind.name)}（${formatYmd(ind.date)}）`
     }));
   const latestUpdatedItems = [...dashboardIndicators]
-    .sort((a, b) => toTimeMs(b.lastUpdated || b.date) - toTimeMs(a.lastUpdated || a.date))
+    .sort(sortByLatestIndicatorPriority)
     .slice(0, 4)
     .map((ind) => ({
       id: ind.id,
