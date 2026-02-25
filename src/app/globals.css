@@ -2935,14 +2935,17 @@ a:hover {
 }
 
 @media (max-width: 640px) {
-  .cf-hero-title {
-    font-size: clamp(1.25rem, 6.2vw, 1.8rem);
+  .cf-hero h1.cf-hero-title {
+    font-size: clamp(1.22rem, 6.25vw, 1.64rem);
     white-space: normal;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-    max-width: 100%;
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+    width: min(80vw, 320px);
+    max-width: 80%;
+    margin-inline: auto;
+    text-wrap: balance;
     overflow-wrap: anywhere;
-    word-break: break-word;
+    word-break: normal;
   }
 
   .cf-hero-title--supply {
@@ -3003,6 +3006,15 @@ a:hover {
 
   .cf-calendar-iframe {
     height: 500px;
+  }
+}
+
+@media (max-width: 390px) {
+  .cf-hero h1.cf-hero-title {
+    font-size: clamp(1.12rem, 5.9vw, 1.42rem);
+    width: min(82vw, 300px);
+    max-width: 82%;
+    letter-spacing: -0.025em;
   }
 }
 
