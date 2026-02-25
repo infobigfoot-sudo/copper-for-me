@@ -92,12 +92,14 @@ export default function TateneCalculatorCard({
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
           gap: 10,
-          alignItems: 'start'
+          alignItems: 'start',
+          width: '100%',
+          minWidth: 0
         }}
       >
-        <div style={{ display: 'grid', gap: 6 }}>
+        <div style={{ display: 'grid', gap: 6, minWidth: 0 }}>
           <label style={{ fontWeight: 600, fontSize: 13 }}>LME銅価格（USD/mt）</label>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             <button
@@ -137,7 +139,15 @@ export default function TateneCalculatorCard({
             <select
               value={String(selectedLmeIndex)}
               onChange={(e) => setSelectedLmeIndex(Number(e.target.value))}
-              style={{ padding: '8px 10px', borderRadius: 10, border: '1px solid #d9d7cf', background: '#fff' }}
+              style={{
+                width: '100%',
+                maxWidth: '100%',
+                minWidth: 0,
+                padding: '8px 10px',
+                borderRadius: 10,
+                border: '1px solid #d9d7cf',
+                background: '#fff'
+              }}
             >
               {lmeOptions.map((opt, idx) => (
                 <option key={`lme-${idx}-${opt.date}`} value={idx}>
@@ -152,12 +162,20 @@ export default function TateneCalculatorCard({
               placeholder="LME価格を手入力"
               value={manualLme}
               onChange={(e) => setManualLme(e.target.value)}
-              style={{ padding: '8px 10px', borderRadius: 10, border: '1px solid #d9d7cf', background: '#fff' }}
+              style={{
+                width: '100%',
+                maxWidth: '100%',
+                minWidth: 0,
+                padding: '8px 10px',
+                borderRadius: 10,
+                border: '1px solid #d9d7cf',
+                background: '#fff'
+              }}
             />
           )}
         </div>
 
-        <div style={{ display: 'grid', gap: 6 }}>
+        <div style={{ display: 'grid', gap: 6, minWidth: 0 }}>
           <label style={{ fontWeight: 600, fontSize: 13 }}>USD/JPY</label>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             <button
@@ -197,7 +215,15 @@ export default function TateneCalculatorCard({
             <select
               value={String(selectedFxIndex)}
               onChange={(e) => setSelectedFxIndex(Number(e.target.value))}
-              style={{ padding: '8px 10px', borderRadius: 10, border: '1px solid #d9d7cf', background: '#fff' }}
+              style={{
+                width: '100%',
+                maxWidth: '100%',
+                minWidth: 0,
+                padding: '8px 10px',
+                borderRadius: 10,
+                border: '1px solid #d9d7cf',
+                background: '#fff'
+              }}
             >
               {usdJpyOptions.map((opt, idx) => (
                 <option key={`fx-${idx}-${opt.date}`} value={idx}>
@@ -213,12 +239,20 @@ export default function TateneCalculatorCard({
               placeholder="USD/JPYを手入力"
               value={manualFx}
               onChange={(e) => setManualFx(e.target.value)}
-              style={{ padding: '8px 10px', borderRadius: 10, border: '1px solid #d9d7cf', background: '#fff' }}
+              style={{
+                width: '100%',
+                maxWidth: '100%',
+                minWidth: 0,
+                padding: '8px 10px',
+                borderRadius: 10,
+                border: '1px solid #d9d7cf',
+                background: '#fff'
+              }}
             />
           )}
         </div>
 
-        <div style={{ display: 'grid', gap: 6 }}>
+        <div style={{ display: 'grid', gap: 6, minWidth: 0 }}>
           <label style={{ fontWeight: 600, fontSize: 13 }}>諸コスト・プレミアム（円/mt）</label>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             <button
@@ -261,18 +295,30 @@ export default function TateneCalculatorCard({
               placeholder="例: 0 または 50000"
               value={premium}
               onChange={(e) => setPremium(e.target.value)}
-              style={{ padding: '8px 10px', borderRadius: 10, border: '1px solid #d9d7cf', background: '#fff' }}
+              style={{
+                width: '100%',
+                maxWidth: '100%',
+                minWidth: 0,
+                padding: '8px 10px',
+                borderRadius: 10,
+                border: '1px solid #d9d7cf',
+                background: '#fff'
+              }}
             />
           ) : (
             <div
               style={{
+                width: '100%',
+                maxWidth: '100%',
+                minWidth: 0,
                 padding: '8px 10px',
                 borderRadius: 10,
                 border: '1px solid #e5e2d9',
                 background: '#faf8f2',
                 color: '#4c4639',
                 fontSize: 13,
-                fontWeight: 600
+                fontWeight: 600,
+                overflowWrap: 'anywhere'
               }}
             >
               {fmtNum(initialPremium, 0)} 円/mt（最新建値−最新LME×最新USD/JPY）
@@ -297,7 +343,7 @@ export default function TateneCalculatorCard({
           {calcValue === null ? '-' : fmtNum(calcValue, 0)}
           <span style={{ fontSize: 14, fontWeight: 600, marginLeft: 6, color: '#6f6a5d' }}>JPY/mt</span>
         </div>
-        <div className="cf-kpi-note" style={{ marginTop: 6 }}>
+        <div className="cf-kpi-note" style={{ marginTop: 6, overflowWrap: 'anywhere' }}>
           既定値（最新LME×最新USD/JPY）: {latestProduct === null ? '-' : `${fmtNum(latestProduct, 0)} JPY/mt`}
         </div>
       </div>

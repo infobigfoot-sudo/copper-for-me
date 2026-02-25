@@ -88,6 +88,11 @@ function changeClass(value: number | null) {
   return value >= 0 ? 'up' : 'down';
 }
 
+function changeSymbol(value: number | null) {
+  if (value === null) return '•';
+  return value >= 0 ? '▲' : '▼';
+}
+
 function parsePct(text?: string): number | null {
   if (!text) return null;
   const v = Number(String(text).replace('%', '').trim());
@@ -557,6 +562,7 @@ function displayIndicatorSource(ind: { id?: string; name?: string; source?: stri
   if (!raw) return null;
   const id = ind.id || '';
   const name = ind.name || '';
+  if (id === 'japan_tatene_jpy_mt') return 'JX金属';
   if (id === 'copx' || id === 'fcx' || id === 'sp500') return 'Yahoo Finance';
   if (raw.toUpperCase() === 'CSV') {
     if (id.includes('lme') || /LME/i.test(name)) return 'LME';
@@ -569,6 +575,7 @@ function sourceLabelUrl(label: string | null): string | null {
   if (!label) return null;
   const normalized = label.trim();
   if (normalized === 'LME') return 'https://www.lme.com/';
+  if (normalized === 'JX金属') return 'https://www.jx-nmm.com/';
   if (normalized === 'FRED') return 'https://fred.stlouisfed.org/';
   if (normalized === 'Alpha Vantage') return 'https://www.alphavantage.co/';
   if (normalized === 'Yahoo Finance') return 'https://finance.yahoo.com/';
@@ -578,6 +585,7 @@ function sourceLabelUrl(label: string | null): string | null {
 function indicatorUrl(id: string): string | null {
   const map: Record<string, string> = {
     lme_copper_usd: 'https://www.lme.com/Metals/Non-ferrous/Copper',
+    japan_tatene_jpy_mt: 'https://www.jx-nmm.com/',
     TLRESCONS: 'https://fred.stlouisfed.org/series/TLRESCONS',
     DTWEXBGS: 'https://fred.stlouisfed.org/series/DTWEXBGS',
     FEDFUNDS: 'https://fred.stlouisfed.org/series/FEDFUNDS',
@@ -1000,6 +1008,7 @@ export default async function SiteHomePage({
   });
   const statusUpIndicators = statusIndicators.filter((ind) => ind.dir === 'up');
   const statusDownIndicators = statusIndicators.filter((ind) => ind.dir === 'down');
+  const keyDecisionSignals = statusIndicators.slice(0, 6);
   const warrantSignal =
     warrantDashboard.warrant.diffPct7d !== null && warrantDashboard.warrant.diffPct7d <= -5
       ? '需給ひっ迫'
@@ -1036,6 +1045,14 @@ export default async function SiteHomePage({
     '3m': '3ヶ月軸'
   };
   const horizonTitle = horizonTitleMap[horizon];
+  const inventoryStackWarrant = warrantDashboard.warrant.monthlyLatest?.value ?? warrantDashboard.warrant.latest?.value ?? null;
+  const inventoryStackOff = warrantDashboard.offWarrant.latest?.value ?? null;
+  const inventoryStackTotal =
+    inventoryStackWarrant !== null && inventoryStackOff !== null ? inventoryStackWarrant + inventoryStackOff : null;
+  const inventoryStackWarrantPct =
+    inventoryStackTotal && inventoryStackTotal > 0 ? (inventoryStackWarrant! / inventoryStackTotal) * 100 : null;
+  const inventoryStackOffPct =
+    inventoryStackTotal && inventoryStackTotal > 0 ? (inventoryStackOff! / inventoryStackTotal) * 100 : null;
   const todayYmd = todayYmdJst();
   const yesterdayYmd = (() => {
     const d = new Date(`${todayYmd}T00:00:00+09:00`);
@@ -1312,7 +1329,34 @@ export default async function SiteHomePage({
                   <h4>今後上昇？下降？（要因スコア）</h4>
                   <p className={`cf-kpi-value cf-bias-value ${biasClass}`}>{biasLabel}</p>
                   <p className="cf-kpi-note">上昇要因 {horizonUpCount} / 下落要因 {horizonDownCount}</p>
+                  <div
+                    className="cf-bias-balance"
+                    role="img"
+                    aria-label={`上昇要因${horizonUpCount}件、下落要因${horizonDownCount}件`}
+                  >
+                    <div className="cf-bias-balance-track" aria-hidden="true">
+                      <span className="cf-bias-balance-seg up" style={{ width: `${upPct}%` }} />
+                      <span className="cf-bias-balance-seg down" style={{ width: `${downPct}%` }} />
+                      <span className="cf-bias-balance-center" />
+                    </div>
+                    <div className="cf-bias-balance-meta">
+                      <span>上昇圧力 {upPct}%</span>
+                      <span>下落圧力 {downPct}%</span>
+                    </div>
+                  </div>
                   <p className="cf-kpi-note">需給シグナル: {warrantSignal}</p>
+                  {keyDecisionSignals.length ? (
+                    <ul className="cf-priority-signal-list" aria-label="優先確認シグナル">
+                      {keyDecisionSignals.map((ind) => (
+                        <li key={`priority-signal-${ind.key}`}>
+                          <span className="cf-priority-signal-name">{ind.label}</span>
+                          <span className={`cf-change-pill ${ind.dir === 'up' ? 'up' : 'down'}`}>
+                            {changeSymbol(ind.pct)} {ind.pct >= 0 ? '+' : ''}{ind.pct.toFixed(2)}%
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                   <p className="cf-kpi-note">
                     上昇要因 / 下落要因は複数指標の合算スコア。{horizonUpCount} 対 {horizonDownCount} なら全体は{biasLabel}。
                   </p>
@@ -1834,6 +1878,21 @@ export default async function SiteHomePage({
                   <p className="cf-kpi-note">
                     計算式: Warrant比率 = Warrant在庫 ÷ (Warrant在庫 + off-warrant在庫) × 100
                   </p>
+                  {inventoryStackTotal !== null && inventoryStackWarrantPct !== null && inventoryStackOffPct !== null ? (
+                    <div className="cf-inventory-stack" aria-label="Warrantとoff-warrantの構成比">
+                      <div className="cf-inventory-stack-track" aria-hidden="true">
+                        <span className="cf-inventory-stack-seg warrant" style={{ width: `${inventoryStackWarrantPct}%` }} />
+                        <span className="cf-inventory-stack-seg off" style={{ width: `${inventoryStackOffPct}%` }} />
+                      </div>
+                      <div className="cf-inventory-stack-legend">
+                        <span>Warrant {inventoryStackWarrantPct.toFixed(1)}%</span>
+                        <span>Off {inventoryStackOffPct.toFixed(1)}%</span>
+                      </div>
+                      <p className="cf-kpi-note">
+                        比較基準: Warrant月次最新 + off-warrant月次最新（合計 {formatIndicatorValue(String(Math.round(inventoryStackTotal)))} t）
+                      </p>
+                    </div>
+                  ) : null}
                 </article>
                 <article className="cf-card cf-econ-card cf-explain-card">
                   <h4>off-warrantとは</h4>
