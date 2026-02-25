@@ -945,14 +945,19 @@ export default async function SiteHomePage({
   const lmeUsdDirect = parseNum(lmeUsdIndicator?.value);
   const lmeJpyPerMt = parseNum(lmeIndicator?.value);
   const usdJpyRate = parseNum(usdJpyIndicator?.value);
+  const lmeJpyPerMtDerived =
+    lmeUsdDirect !== null && usdJpyRate !== null && usdJpyRate > 0 ? lmeUsdDirect * usdJpyRate : null;
   const lmeUsdPerMtDerived =
     lmeJpyPerMt !== null && usdJpyRate !== null && usdJpyRate > 0 ? lmeJpyPerMt / usdJpyRate : null;
   const lmeUsdPerMt = lmeUsdDirect ?? lmeUsdPerMtDerived;
-  const lmeJpyValue = formatIndicatorValue(lmeIndicator?.value || '');
+  const lmeJpyPerMtDisplay = lmeJpyPerMt ?? lmeJpyPerMtDerived;
+  const lmeJpyValue =
+    lmeJpyPerMtDisplay !== null ? formatIndicatorValue(String(Math.round(lmeJpyPerMtDisplay))) : '-';
   const lmeHeadlineValue =
     lmeUsdPerMt !== null ? formatIndicatorValue(String(Math.round(lmeUsdPerMt))) : lmeJpyValue;
   const lmeUnitLabel = lmeUsdPerMt !== null ? 'USD/mt' : 'JPY/mt';
   const lmeDisplayDate = lmeUsdIndicator?.date || lmeIndicator?.date;
+  const lmeJpyDisplayDate = lmeIndicator?.date || lmeUsdIndicator?.date;
   const tateValue = warrantDashboard.copperTate.latest
     ? formatIndicatorValue(String(warrantDashboard.copperTate.latest.value))
     : '-';
@@ -1342,9 +1347,9 @@ export default async function SiteHomePage({
                   </li>
                   <li className="cf-latest-row">
                     <span className="cf-latest-label">最新値:</span>
-                    <span className="cf-latest-value">{lmeJpyValue}</span>
-                    <span className="cf-latest-unit">{normalizeUnitLabel(lmeIndicator?.units || 'JPY/mt')}</span>
-                    <span className="cf-latest-date">（{formatYmd(lmeIndicator?.date)}）</span>
+                    <span className="cf-latest-value">{lmeHeadlineValue}</span>
+                    <span className="cf-latest-unit">{lmeUnitLabel}</span>
+                    <span className="cf-latest-date">（{formatYmd(lmeDisplayDate)}）</span>
                   </li>
                 </ol>
 
@@ -1491,7 +1496,7 @@ export default async function SiteHomePage({
               </div>
               <div className="cf-grid">
                 <article className="cf-card cf-econ-card">
-                  <h4>LME銅（円換算）</h4>
+                  <h4>LME銅（USD建て）</h4>
                   <p>
                     前回比:
                     <span
@@ -1507,10 +1512,10 @@ export default async function SiteHomePage({
                     </span>
                   </p>
                   <div className="cf-econ-value-row">
-                    <p className="cf-econ-value">{lmeJpyValue}</p>
-                    <small>JPY/mt</small>
+                    <p className="cf-econ-value">{lmeHeadlineValue}</p>
+                    <small>{lmeUnitLabel}</small>
                   </div>
-                  <p className="cf-econ-date">{formatYmd(lmeIndicator?.date)}</p>
+                  <p className="cf-econ-date">{formatYmd(lmeDisplayDate)}</p>
                 </article>
                 <article className="cf-card cf-econ-card">
                   <h4>国内建値</h4>
