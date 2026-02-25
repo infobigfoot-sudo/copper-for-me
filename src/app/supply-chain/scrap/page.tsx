@@ -6,16 +6,12 @@ import SupplyChainShell from '../_shell';
 import SupplyChainSourceLinks from '../_sourceLinks';
 
 type Point = { date: string; value: number };
-
-function parseNum(v?: string) {
-  if (!v) return null;
-  const n = Number(String(v).replace(/,/g, '').trim());
-  return Number.isFinite(n) ? n : null;
-}
-
-function csvSplitLine(line: string) {
-  return line.split(',').map((x) => x.trim());
-}
+type ScrapProxyJson = {
+  series?: {
+    jp_hs7404_export_tonnes?: Array<{ date?: string; value?: number }>;
+    jp_hs7404_import_tonnes?: Array<{ date?: string; value?: number }>;
+  };
+};
 
 function formatYmd(value?: string) {
   if (!value) return '-';
@@ -24,44 +20,24 @@ function formatYmd(value?: string) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-function ymToMonthEnd(ym: string) {
-  const m = /^(\d{4})-(\d{2})$/.exec(ym);
-  if (!m) return ym;
-  const d = new Date(Number(m[1]), Number(m[2]), 0);
-  return d.toISOString().slice(0, 10);
+function toPoints(points?: Array<{ date?: string; value?: number }>): Point[] {
+  return (points || [])
+    .map((p) => ({ date: String(p?.date || ''), value: Number(p?.value) }))
+    .filter((p) => p.date && Number.isFinite(p.value))
+    .sort((a, b) => a.date.localeCompare(b.date));
 }
 
 async function loadHs7404Series(kind: 'export' | 'import'): Promise<Point[]> {
-  const folder = kind === 'export' ? 'mof_export_item_country' : 'mof_import_item_country';
-  const file = kind === 'export' ? 'mof_export_item_country_2018_2025_all.csv' : 'mof_import_item_country_2018_2025_all.csv';
-  const p = path.join(process.cwd(), '..', '..', 'stock-data-processor', 'data', 'japan', folder, 'combined', file);
-  let raw = '';
+  const p = path.join(process.cwd(), 'public', 'data', 'supply_chain_scrap_hs7404_japan.json');
   try {
-    raw = await fs.readFile(p, 'utf-8');
+    const raw = await fs.readFile(p, 'utf-8');
+    const json = JSON.parse(raw) as ScrapProxyJson;
+    return kind === 'export'
+      ? toPoints(json.series?.jp_hs7404_export_tonnes)
+      : toPoints(json.series?.jp_hs7404_import_tonnes);
   } catch {
-    // Vercel本番にはローカル集計元ディレクトリが存在しないため、空データで継続する。
     return [];
   }
-  const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
-  const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
-  const idx = {
-    ym: cols.indexOf('year_month'),
-    item: cols.indexOf('item_code'),
-    qty2: cols.indexOf('monthly_qty_2'),
-  };
-  const monthly = new Map<string, number>();
-  for (const line of lines) {
-    const cells = csvSplitLine(line);
-    const itemCode = cells[idx.item] || '';
-    if (!itemCode.startsWith('7404')) continue;
-    const ym = cells[idx.ym];
-    const qty = parseNum(cells[idx.qty2]) ?? 0;
-    if (!ym) continue;
-    monthly.set(ym, (monthly.get(ym) ?? 0) + qty);
-  }
-  return [...monthly.entries()]
-    .map(([ym, value]) => ({ date: ymToMonthEnd(ym), value: value / 1000 })) // KG -> tonnes
-    .sort((a, b) => a.date.localeCompare(b.date));
 }
 
 function buildPolyline(points: Point[], width: number, height: number, minY: number, maxY: number) {

@@ -6,16 +6,16 @@ import SupplyChainShell from '../_shell';
 import SupplyChainSourceLinks from '../_sourceLinks';
 
 type Point = { date: string; value: number };
-
-function parseNum(v?: string) {
-  if (!v) return null;
-  const n = Number(String(v).replace(/,/g, '').trim());
-  return Number.isFinite(n) ? n : null;
-}
-
-function csvSplitLine(line: string) {
-  return line.split(',').map((x) => x.trim());
-}
+type RefiningProxyJson = {
+  series?: {
+    icsg_world_refined_balance?: Array<{ date?: string; value?: number }>;
+    icsg_world_refined_production?: Array<{ date?: string; value?: number }>;
+    icsg_world_refined_usage?: Array<{ date?: string; value?: number }>;
+    jp_electric_copper_production_qty?: Array<{ date?: string; value?: number }>;
+    jp_electric_copper_sales_qty?: Array<{ date?: string; value?: number }>;
+    jp_electric_copper_inventory_qty?: Array<{ date?: string; value?: number }>;
+  };
+};
 
 function formatYmd(value?: string) {
   if (!value) return '-';
@@ -24,115 +24,43 @@ function formatYmd(value?: string) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-function ymToMonthEnd(ym: string) {
-  const m = /^(\d{4})-(\d{2})$/.exec(ym);
-  if (!m) return ym;
-  const d = new Date(Number(m[1]), Number(m[2]), 0);
-  return d.toISOString().slice(0, 10);
+function toPoints(points?: Array<{ date?: string; value?: number }>): Point[] {
+  return (points || [])
+    .map((p) => ({ date: String(p?.date || ''), value: Number(p?.value) }))
+    .filter((p) => p.date && Number.isFinite(p.value))
+    .sort((a, b) => a.date.localeCompare(b.date));
 }
 
-async function loadIcsgAnnual(): Promise<Record<string, Point[]>> {
-  const p = path.join(
-    process.cwd(),
-    '..',
-    '..',
-    'stock-data-processor',
-    'data',
-    '予測用',
-    'icsg_core_v1',
-    'monthly_master_core_v1_icsg_addon_actual.csv',
-  );
-  let raw = '';
+async function loadRefiningProxy(): Promise<{
+  icsg: Record<string, Point[]>;
+  japanMeti: { production: Point[]; sales: Point[]; inventory: Point[] };
+}> {
+  const p = path.join(process.cwd(), 'public', 'data', 'supply_chain_refining_proxy.json');
   try {
-    raw = await fs.readFile(p, 'utf-8');
+    const raw = await fs.readFile(p, 'utf-8');
+    const json = JSON.parse(raw) as RefiningProxyJson;
+    return {
+      icsg: {
+        icsg_world_refined_balance: toPoints(json.series?.icsg_world_refined_balance),
+        icsg_world_refined_production: toPoints(json.series?.icsg_world_refined_production),
+        icsg_world_refined_usage: toPoints(json.series?.icsg_world_refined_usage),
+      },
+      japanMeti: {
+        production: toPoints(json.series?.jp_electric_copper_production_qty),
+        sales: toPoints(json.series?.jp_electric_copper_sales_qty),
+        inventory: toPoints(json.series?.jp_electric_copper_inventory_qty),
+      },
+    };
   } catch {
     return {
-      icsg_world_refined_balance: [],
-      icsg_world_refined_production: [],
-      icsg_world_refined_usage: [],
+      icsg: {
+        icsg_world_refined_balance: [],
+        icsg_world_refined_production: [],
+        icsg_world_refined_usage: [],
+      },
+      japanMeti: { production: [], sales: [], inventory: [] },
     };
   }
-  const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
-  const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
-  const idx = {
-    date: cols.indexOf('date'),
-    key: cols.indexOf('series_key'),
-    value: cols.indexOf('value'),
-  };
-  const target = new Set([
-    'icsg_world_refined_balance',
-    'icsg_world_refined_production',
-    'icsg_world_refined_usage',
-  ]);
-  const out: Record<string, Point[]> = {
-    icsg_world_refined_balance: [],
-    icsg_world_refined_production: [],
-    icsg_world_refined_usage: [],
-  };
-  for (const line of lines) {
-    const cells = csvSplitLine(line);
-    const key = cells[idx.key];
-    if (!target.has(key)) continue;
-    const value = parseNum(cells[idx.value]);
-    const date = cells[idx.date];
-    if (!date || value === null) continue;
-    out[key].push({ date, value });
-  }
-  for (const k of Object.keys(out)) out[k].sort((a, b) => a.date.localeCompare(b.date));
-  return out;
-}
-
-async function loadJapanMetiCopperElectric(): Promise<Record<string, Point[]>> {
-  const dir = path.join(process.cwd(), '..', '..', 'stock-data-processor', 'data', 'japan', 'METI_COPPER');
-  let files: string[] = [];
-  try {
-    files = (await fs.readdir(dir))
-      .filter((f) => /^meti_copper_long_\d{4}\.csv$/.test(f))
-      .sort();
-  } catch {
-    return {
-      production: [],
-      sales: [],
-      inventory: [],
-    };
-  }
-  const buckets: Record<string, Point[]> = {
-    production: [],
-    sales: [],
-    inventory: [],
-  };
-  for (const file of files) {
-    let raw = '';
-    try {
-      raw = await fs.readFile(path.join(dir, file), 'utf-8');
-    } catch {
-      continue;
-    }
-    const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
-    const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
-    const idx = {
-      itemName: cols.indexOf('品目名称'),
-      metricName: cols.indexOf('アイテム名'),
-      date: cols.indexOf('date'),
-      value: cols.indexOf('value'),
-    };
-    if (Object.values(idx).some((v) => v < 0)) continue;
-    for (const line of lines) {
-      const cells = csvSplitLine(line);
-      if (cells[idx.itemName] !== '電気銅') continue;
-      const metricName = cells[idx.metricName];
-      const date = cells[idx.date];
-      const value = parseNum(cells[idx.value]);
-      if (!date || value === null) continue;
-      if (metricName === '生産数量') buckets.production.push({ date, value });
-      if (metricName === '販売数量') buckets.sales.push({ date, value });
-      if (metricName === '月末在庫数量') buckets.inventory.push({ date, value });
-    }
-  }
-  for (const k of Object.keys(buckets)) {
-    buckets[k].sort((a, b) => a.date.localeCompare(b.date));
-  }
-  return buckets;
 }
 
 function makeIndexed(points: Point[], take = 24) {
@@ -166,7 +94,7 @@ function buildPolyline(
 }
 
 export default async function SupplyChainRefiningPage() {
-  const [icsg, japanMeti] = await Promise.all([loadIcsgAnnual(), loadJapanMetiCopperElectric()]);
+  const { icsg, japanMeti } = await loadRefiningProxy();
   const width = 920;
   const height = 320;
 

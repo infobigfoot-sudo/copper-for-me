@@ -10,16 +10,18 @@ function parseNum(v?: string) {
   const n = Number(String(v).replace(/,/g, '').trim());
   return Number.isFinite(n) ? n : null;
 }
+type MiningProxyJson = {
+  series?: {
+    chile_mine_output_total_thousand_tmf_cochilco?: Array<{ date?: string; value?: number }>;
+    peru_mine_output_total_tmf_bem?: Array<{ date?: string; value?: number }>;
+  };
+};
 
 function formatYmd(value?: string) {
   if (!value) return '-';
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return value;
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-}
-
-function csvSplitLine(line: string) {
-  return line.split(',').map((x) => x.trim());
 }
 
 type MonthlyPoint = {
@@ -49,76 +51,26 @@ function dedupeMonthlyPoints(
   return out.sort((a, b) => a.date.localeCompare(b.date));
 }
 
-async function loadChileMiningSeries(): Promise<MonthlyPoint[]> {
-  const p = path.join(
-    process.cwd(),
-    '..',
-    '..',
-    'stock-data-processor',
-    'data',
-    'chile',
-    'cochilco_copper_mine_production_by_company',
-    'formatted',
-    'chile_cochilco_copper_mine_production_core_monthly_2018_2025.csv',
+function toMonthlyPoints(points?: Array<{ date?: string; value?: number }>): MonthlyPoint[] {
+  return dedupeMonthlyPoints(
+    (points || [])
+      .map((p) => ({ date: String(p?.date || ''), value: Number(p?.value) }))
+      .filter((p) => p.date && Number.isFinite(p.value)),
   );
-  let raw = '';
-  try {
-    raw = await fs.readFile(p, 'utf-8');
-  } catch {
-    return [];
-  }
-  const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
-  const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
-  const dateIdx = cols.findIndex((c) => c === 'date');
-  const valIdx = cols.findIndex((c) => c === 'cl_chile_copper_mine_output_total_thousand_tmf_cochilco');
-  if (dateIdx < 0 || valIdx < 0) return [];
-  const rows = lines
-    .map((line) => {
-      const cells = csvSplitLine(line);
-      const date = cells[dateIdx];
-      const value = parseNum(cells[valIdx]);
-      if (!date || value === null) return null;
-      return { date, value };
-    })
-    .filter((x): x is MonthlyPoint => Boolean(x))
-    .sort((a, b) => a.date.localeCompare(b.date));
-  return dedupeMonthlyPoints(rows, { maxReasonable: 2000 });
 }
 
-async function loadPeruMiningSeries(): Promise<MonthlyPoint[]> {
-  const p = path.join(
-    process.cwd(),
-    '..',
-    '..',
-    'stock-data-processor',
-    'data',
-    'peru',
-    'bem_copper_production',
-    'formatted',
-    'peru_bem_copper_production_core_monthly_2018_2025_extended.csv',
-  );
-  let raw = '';
+async function loadMiningProxy() {
+  const p = path.join(process.cwd(), 'public', 'data', 'supply_chain_mining_chile_peru.json');
   try {
-    raw = await fs.readFile(p, 'utf-8');
+    const raw = await fs.readFile(p, 'utf-8');
+    const json = JSON.parse(raw) as MiningProxyJson;
+    return {
+      chile: toMonthlyPoints(json.series?.chile_mine_output_total_thousand_tmf_cochilco),
+      peru: toMonthlyPoints(json.series?.peru_mine_output_total_tmf_bem),
+    };
   } catch {
-    return [];
+    return { chile: [], peru: [] };
   }
-  const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
-  const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
-  const dateIdx = cols.findIndex((c) => c === 'date');
-  const valIdx = cols.findIndex((c) => c === 'pe_bem_copper_company_total_month_tmf');
-  if (dateIdx < 0 || valIdx < 0) return [];
-  const rows = lines
-    .map((line) => {
-      const cells = csvSplitLine(line);
-      const date = cells[dateIdx];
-      const value = parseNum(cells[valIdx]);
-      if (!date || value === null) return null;
-      return { date, value };
-    })
-    .filter((x): x is MonthlyPoint => Boolean(x))
-    .sort((a, b) => a.date.localeCompare(b.date));
-  return dedupeMonthlyPoints(rows);
 }
 
 function makeIndexedSeries(points: MonthlyPoint[], take = 24) {
@@ -157,7 +109,9 @@ function buildPolyline(
 }
 
 export default async function SupplyChainMiningPage() {
-  const [chileRaw, peruRaw] = await Promise.all([loadChileMiningSeries(), loadPeruMiningSeries()]);
+  const mining = await loadMiningProxy();
+  const chileRaw = mining.chile;
+  const peruRaw = mining.peru;
   const chile = makeIndexedSeries(chileRaw, 24);
   const peru = makeIndexedSeries(peruRaw, 24);
   const mergedY = [...chile.map((p) => p.index), ...peru.map((p) => p.index)].filter((v): v is number => v !== null);
