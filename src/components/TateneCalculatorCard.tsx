@@ -83,7 +83,7 @@ export default function TateneCalculatorCard({
   const fxSelectLabel = buildSelectLabel(usdJpyOptions.length);
 
   return (
-    <div className="cf-card cf-insight-card" style={{ marginTop: '12px' }}>
+    <div className="cf-card cf-insight-card" style={{ marginTop: '12px', width: '100%', maxWidth: '100%', overflowX: 'hidden' }}>
       <h4>銅建値計算ツール（簡易）</h4>
       <p className="cf-kpi-note" style={{ marginBottom: 10 }}>
         国内建値 ≒ LME銅価格（USD/mt） × USD/JPY + 諸コスト・プレミアム
@@ -144,6 +144,7 @@ export default function TateneCalculatorCard({
                 maxWidth: '100%',
                 minWidth: 0,
                 padding: '8px 10px',
+                fontSize: 16,
                 borderRadius: 10,
                 border: '1px solid #d9d7cf',
                 background: '#fff'
@@ -167,6 +168,7 @@ export default function TateneCalculatorCard({
                 maxWidth: '100%',
                 minWidth: 0,
                 padding: '8px 10px',
+                fontSize: 16,
                 borderRadius: 10,
                 border: '1px solid #d9d7cf',
                 background: '#fff'
@@ -220,6 +222,7 @@ export default function TateneCalculatorCard({
                 maxWidth: '100%',
                 minWidth: 0,
                 padding: '8px 10px',
+                fontSize: 16,
                 borderRadius: 10,
                 border: '1px solid #d9d7cf',
                 background: '#fff'
@@ -244,6 +247,7 @@ export default function TateneCalculatorCard({
                 maxWidth: '100%',
                 minWidth: 0,
                 padding: '8px 10px',
+                fontSize: 16,
                 borderRadius: 10,
                 border: '1px solid #d9d7cf',
                 background: '#fff'
@@ -300,6 +304,7 @@ export default function TateneCalculatorCard({
                 maxWidth: '100%',
                 minWidth: 0,
                 padding: '8px 10px',
+                fontSize: 16,
                 borderRadius: 10,
                 border: '1px solid #d9d7cf',
                 background: '#fff'
@@ -321,7 +326,7 @@ export default function TateneCalculatorCard({
                 overflowWrap: 'anywhere'
               }}
             >
-              {fmtNum(initialPremium, 0)} 円/mt（最新建値−最新LME×最新USD/JPY）
+              {fmtNum(initialPremium, 0)} 円/mt（最新差分 = 最新国内建値−最新LME×最新USD/JPY）
             </div>
           )}
         </div>
@@ -344,7 +349,7 @@ export default function TateneCalculatorCard({
           <span style={{ fontSize: 14, fontWeight: 600, marginLeft: 6, color: '#6f6a5d' }}>JPY/mt</span>
         </div>
         <div className="cf-kpi-note" style={{ marginTop: 6, overflowWrap: 'anywhere' }}>
-          既定値（最新LME×最新USD/JPY）: {latestProduct === null ? '-' : `${fmtNum(latestProduct, 0)} JPY/mt`}
+          既定値（最新LME×最新USD/JPY）+ 最新差分: {latestProduct === null ? '-' : `${fmtNum(latestProduct + initialPremium, 0)}（※最新国内建値） JPY/mt`}
         </div>
       </div>
     </div>

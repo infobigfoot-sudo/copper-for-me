@@ -1631,6 +1631,9 @@ a:hover {
 }
 
 #conclusion,
+#overview,
+#context,
+#details,
 #market-guide,
 #lme-domestic,
 #fx-section,
@@ -1642,6 +1645,9 @@ a:hover {
 }
 
 #conclusion:target,
+#overview:target,
+#context:target,
+#details:target,
 #market-guide:target,
 #lme-domestic:target,
 #fx-section:target,
@@ -1650,6 +1656,33 @@ a:hover {
 #all-indicators:target,
 [id^='indicator-']:target {
   padding-top: 8px;
+}
+
+.cf-pyramid-group {
+  margin-top: 18px;
+}
+
+.cf-pyramid-head {
+  border: 1px solid #e6ebf3;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fcfdff, #f8fbff);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.cf-pyramid-head h3 {
+  margin: 4px 0 0;
+  color: #1f2e45;
+  font-size: 1.2rem;
+}
+
+.cf-pyramid-label {
+  margin: 0;
+  color: #1d4ed8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .cf-explain-card {
@@ -1924,6 +1957,7 @@ a:hover {
   font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
 
+
 @media (max-width: 960px) {
   .cf-nav-inner {
     padding: 12px 16px;
@@ -1973,6 +2007,11 @@ a:hover {
 
   .cf-focus-section {
     padding: 8px;
+    border-radius: 14px;
+  }
+
+  .cf-pyramid-head {
+    padding: 12px;
     border-radius: 14px;
   }
 

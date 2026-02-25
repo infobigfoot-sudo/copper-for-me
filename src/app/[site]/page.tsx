@@ -575,7 +575,7 @@ function sourceLabelUrl(label: string | null): string | null {
   if (!label) return null;
   const normalized = label.trim();
   if (normalized === 'LME') return 'https://www.lme.com/';
-  if (normalized === 'JX金属') return 'https://www.jx-nmm.com/';
+  if (normalized === 'JX金属') return 'https://www.jx-nmm.com/cuprice/';
   if (normalized === 'FRED') return 'https://fred.stlouisfed.org/';
   if (normalized === 'Alpha Vantage') return 'https://www.alphavantage.co/';
   if (normalized === 'Yahoo Finance') return 'https://finance.yahoo.com/';
@@ -585,7 +585,7 @@ function sourceLabelUrl(label: string | null): string | null {
 function indicatorUrl(id: string): string | null {
   const map: Record<string, string> = {
     lme_copper_usd: 'https://www.lme.com/Metals/Non-ferrous/Copper',
-    japan_tatene_jpy_mt: 'https://www.jx-nmm.com/',
+    japan_tatene_jpy_mt: 'https://www.jx-nmm.com/cuprice/',
     TLRESCONS: 'https://fred.stlouisfed.org/series/TLRESCONS',
     DTWEXBGS: 'https://fred.stlouisfed.org/series/DTWEXBGS',
     FEDFUNDS: 'https://fred.stlouisfed.org/series/FEDFUNDS',
@@ -1244,6 +1244,14 @@ export default async function SiteHomePage({
               </div>
             </section>
 
+            <section id="overview" className="cf-pyramid-group">
+              <div className="cf-pyramid-head">
+                <p className="cf-pyramid-label">Overview</p>
+                <h3>まず結論を把握する</h3>
+                <p className="cf-kpi-note">
+                  最重要KPI（LME・国内建値・要因バイアス）を先に確認し、数秒で意思決定の方向感を掴む。
+                </p>
+              </div>
             <section id="conclusion" className="cf-latest cf-focus-section">
               <div className="cf-latest-head">
                 <div className="cf-latest-head-row">
@@ -1436,7 +1444,16 @@ export default async function SiteHomePage({
                 </article>
               </div>
             </section>
+            </section>
 
+            <section id="context" className="cf-pyramid-group">
+              <div className="cf-pyramid-head">
+                <p className="cf-pyramid-label">Context</p>
+                <h3>背景と相関を確認する</h3>
+                <p className="cf-kpi-note">
+                  価格・為替・在庫・主要マクロの関係性を見て、「なぜ今の結論なのか」を確認する。
+                </p>
+              </div>
             <section id="market-guide" className="cf-latest cf-focus-section">
               <div className="cf-latest-head">
                 <h3>銅価格を知るうえで見るポイント</h3>
@@ -1978,6 +1995,16 @@ export default async function SiteHomePage({
               </div>
             </section>
 
+            </section>
+
+            <section id="details" className="cf-pyramid-group">
+              <div className="cf-pyramid-head">
+                <p className="cf-pyramid-label">Details</p>
+                <h3>個別指標を深掘りする</h3>
+                <p className="cf-kpi-note">
+                  期間別フィルタと各カード詳細で、現場判断に必要な根拠を掘り下げる。
+                </p>
+              </div>
             <section id="other-indicators" className="cf-latest cf-focus-section">
               <div className="cf-latest-head">
                 <h3>その他指標</h3>
@@ -2163,6 +2190,7 @@ export default async function SiteHomePage({
                   提供の経済カレンダー
                 </p>
               </div>
+            </section>
             </section>
 
           </>
