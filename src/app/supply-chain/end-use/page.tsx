@@ -7,16 +7,13 @@ import SupplyChainShell from '../_shell';
 import SupplyChainSourceLinks from '../_sourceLinks';
 
 type Point = { date: string; value: number };
-
-function parseNum(v?: string) {
-  if (!v) return null;
-  const n = Number(String(v).replace(/,/g, '').trim());
-  return Number.isFinite(n) ? n : null;
-}
-
-function csvSplitLine(line: string) {
-  return line.split(',').map((x) => x.trim());
-}
+type EndUseProxyJson = {
+  series?: {
+    wire_rod_sales_qty?: Array<{ date?: string; value?: number }>;
+    copper_products_sales_qty?: Array<{ date?: string; value?: number }>;
+    brass_products_sales_qty?: Array<{ date?: string; value?: number }>;
+  };
+};
 
 function formatYmd(value?: string) {
   if (!value) return '-';
@@ -55,76 +52,30 @@ function buildPolyline(
     .join(' ');
 }
 
-function sumSeriesByDate(seriesList: Point[][]): Point[] {
-  const m = new Map<string, number>();
-  for (const series of seriesList) {
-    for (const p of series) m.set(p.date, (m.get(p.date) ?? 0) + p.value);
-  }
-  return [...m.entries()]
-    .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([date, value]) => ({ date, value }));
+function toPoints(points?: Array<{ date?: string; value?: number }>): Point[] {
+  return (points || [])
+    .map((p) => ({ date: String(p?.date || ''), value: Number(p?.value) }))
+    .filter((p) => p.date && Number.isFinite(p.value))
+    .sort((a, b) => a.date.localeCompare(b.date));
 }
 
 async function loadEndUseMetiCopperProxy() {
-  const dir = path.join(process.cwd(), '..', '..', 'stock-data-processor', 'data', 'japan', 'METI_COPPER');
-  let files: string[] = [];
+  const filePath = path.join(process.cwd(), 'public', 'data', 'supply_chain_end_use_proxy.json');
   try {
-    files = (await fs.readdir(dir)).filter((f) => /^meti_copper_long_\d{4}\.csv$/.test(f)).sort();
+    const raw = await fs.readFile(filePath, 'utf-8');
+    const json = JSON.parse(raw) as EndUseProxyJson;
+    return {
+      wireRod: toPoints(json.series?.wire_rod_sales_qty),
+      copperProducts: toPoints(json.series?.copper_products_sales_qty),
+      brassProducts: toPoints(json.series?.brass_products_sales_qty),
+    };
   } catch {
-    // Vercel本番にはローカル集計元ディレクトリが存在しないため、空データで継続する。
     return {
       wireRod: [],
       copperProducts: [],
       brassProducts: [],
     };
   }
-
-  const buckets: Record<string, Point[]> = {
-    wireRod: [],
-    copperProducts: [],
-    brassProducts: [],
-  };
-
-  const copperProductNames = new Set(['銅製品(板)', '銅製品(条)', '銅製品(管)', '銅製品(棒・線)']);
-  const brassProductNames = new Set(['黄銅製品(板)', '黄銅製品(条)', '黄銅製品(管)', '黄銅製品(棒・線)']);
-  const wireRodNames = new Set(['銅裸線(電線メーカー向け心線)', '銅裸線(ユーザー向け)']);
-
-  for (const file of files) {
-    let raw = '';
-    try {
-      raw = await fs.readFile(path.join(dir, file), 'utf-8');
-    } catch {
-      continue;
-    }
-    const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
-    const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
-    const idx = {
-      itemName: cols.indexOf('品目名称'),
-      metricName: cols.indexOf('アイテム名'),
-      date: cols.indexOf('date'),
-      value: cols.indexOf('value'),
-    };
-    if (Object.values(idx).some((v) => v < 0)) continue;
-    for (const line of lines) {
-      const cells = csvSplitLine(line);
-      const itemName = cells[idx.itemName];
-      const metricName = cells[idx.metricName];
-      if (metricName !== '販売数量') continue;
-      const date = cells[idx.date];
-      const value = parseNum(cells[idx.value]);
-      if (!date || value === null) continue;
-
-      if (wireRodNames.has(itemName)) buckets.wireRod.push({ date, value });
-      if (copperProductNames.has(itemName)) buckets.copperProducts.push({ date, value });
-      if (brassProductNames.has(itemName)) buckets.brassProducts.push({ date, value });
-    }
-  }
-
-  return {
-    wireRod: sumSeriesByDate([buckets.wireRod]),
-    copperProducts: sumSeriesByDate([buckets.copperProducts]),
-    brassProducts: sumSeriesByDate([buckets.brassProducts]),
-  };
 }
 
 export default async function SupplyChainEndUsePage() {
