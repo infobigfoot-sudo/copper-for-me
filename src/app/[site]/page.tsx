@@ -1292,7 +1292,7 @@ export default async function SiteHomePage({
               <div className="cf-dashboard-top">
                 <article className="cf-card cf-econ-card cf-stock-chart-card">
                   <h4>最新の価格は？</h4>
-                  <p className="cf-kpi-note">LME（USD建て） / 国内建値（JPY建て）</p>
+                  <p className="cf-kpi-note">LME / 国内建値 / 為替</p>
                   <div className="cf-dual-price">
                     <div className="cf-dual-price-item">
                       <p className="cf-kpi-note">LME</p>
@@ -1330,8 +1330,25 @@ export default async function SiteHomePage({
                       </div>
                       <p className="cf-kpi-note">{formatYmd(tateDisplayDate)}</p>
                     </div>
+                    <div className="cf-dual-price-item">
+                      <p className="cf-kpi-note">USD/JPY</p>
+                      <p className="cf-kpi-note">
+                        前日比:
+                        <span
+                          className={`cf-change-pill ${changeClass(parsePct(usdJpyIndicatorFallback?.changePercent))}`}
+                        >
+                          {usdJpyIndicatorFallback?.changePercent || '-'}
+                        </span>
+                      </p>
+                      <div className="cf-kpi-value-row">
+                        <p className="cf-kpi-value">{usdJpyValue || '-'}</p>
+                        <small className="cf-kpi-unit">
+                          {normalizeUnitLabel(usdJpyIndicatorFallback?.units || 'JPY/USD')}
+                        </small>
+                      </div>
+                      <p className="cf-kpi-note">{formatYmd(usdJpyIndicatorFallback?.date)}</p>
+                    </div>
                   </div>
-                  <p className="cf-kpi-note">為替（USD/JPY）: {usdJpyValue}</p>
                 </article>
                 <article className="cf-card cf-econ-card cf-stock-chart-card">
                   <h4>今後上昇？下降？（要因スコア）</h4>
