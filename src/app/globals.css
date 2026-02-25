@@ -1232,7 +1232,7 @@ a:hover {
 
 .cf-dashboard-top {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -1256,7 +1256,7 @@ a:hover {
 
 .cf-dual-price {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   margin-top: 6px;
 }
@@ -1266,6 +1266,7 @@ a:hover {
   border-radius: 12px;
   padding: 10px 12px;
   background: #fbfcfe;
+  min-width: 0;
 }
 
 .cf-dual-price-item .cf-kpi-note:first-child {
@@ -1459,6 +1460,7 @@ a:hover {
   font-variant-numeric: tabular-nums lining-nums;
   font-feature-settings: 'tnum' 1, 'lnum' 1;
 }
+
 
 .cf-priority-signal-list {
   margin: 10px 0 0;
@@ -2137,6 +2139,12 @@ a:hover {
   }
 }
 
+@media (max-width: 900px) {
+  .cf-dual-price {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   .cf-hero-title {
     font-size: clamp(1.25rem, 6.2vw, 1.8rem);
@@ -2156,6 +2164,21 @@ a:hover {
 
   .cf-latest-head h3 {
     font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .cf-dual-price-item .cf-kpi-value {
+    font-size: 1.7rem;
+  }
+
+  .cf-dual-price-item .cf-kpi-value-row {
+    flex-wrap: wrap;
+    white-space: normal;
+    gap: 4px 8px;
+  }
+
+  .cf-dual-price-item .cf-kpi-unit {
+    display: block;
     line-height: 1.2;
   }
 

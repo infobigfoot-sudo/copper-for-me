@@ -924,26 +924,29 @@ export default async function SiteHomePage({
     .filter((ind) => !decisionIds.has(ind.id))
     .sort(byUpdatedDesc);
   const decisionIndicatorsToShow = [...decisionPrimary, ...decisionSupplemental].slice(0, 8);
-  const buildBiasFactors = (target: Horizon): Array<{ dir: 'up' | 'down'; label: string }> => {
-    const list: Array<{ dir: 'up' | 'down'; label: string }> = [];
+  const buildBiasFactors = (target: Horizon): Array<{ dir: 'up' | 'down'; label: string; pct: number }> => {
+    const list: Array<{ dir: 'up' | 'down'; label: string; pct: number }> = [];
     const scope = dashboardIndicators.filter((ind) => isFreshForHorizon(ind.date, ind.frequency, target));
     for (const ind of scope) {
       if (ind.pct === null || ind.pct === undefined || !ind.direction) continue;
       list.push({
         dir: ind.direction,
-        label: `${displayIndicatorName(ind.name)} ${ind.pct >= 0 ? '+' : ''}${ind.pct.toFixed(2)}%`
+        label: displayIndicatorName(ind.name),
+        pct: ind.pct
       });
     }
     if (warrant7dPct !== null) {
       list.push({
         dir: warrant7dPct <= 0 ? 'up' : 'down',
-        label: `Warrant 7日比 ${warrant7dPct >= 0 ? '+' : ''}${warrant7dPct.toFixed(2)}%`
+        label: 'Warrant 7日比',
+        pct: warrant7dPct
       });
     }
     if (target !== '1w' && offMoMPct !== null) {
       list.push({
         dir: offMoMPct >= 0 ? 'down' : 'up',
-        label: `off-warrant 前月比 ${offMoMPct >= 0 ? '+' : ''}${offMoMPct.toFixed(2)}%`
+        label: 'off-warrant 前月比',
+        pct: offMoMPct
       });
     }
     return list;
@@ -1750,10 +1753,6 @@ export default async function SiteHomePage({
               <div className="cf-latest-head">
                 <h3>USD/JPY とUSD/CNY</h3>
               </div>
-              <p className="cf-kpi-note">
-                参照元: <a href="https://www.alphavantage.co/" target="_blank" rel="noopener noreferrer">Alpha Vantage</a> /{' '}
-                <a href="https://fred.stlouisfed.org/" target="_blank" rel="noopener noreferrer">FRED</a>
-              </p>
               <div className="cf-grid">
                 <article className="cf-card cf-econ-card">
                   <h4>USD/JPY</h4>
@@ -1813,6 +1812,10 @@ export default async function SiteHomePage({
                 <h4>通貨マーケット概要（TradingView）</h4>
                 <TradingViewMarketOverview />
               </article>
+              <p className="cf-kpi-note" style={{ marginTop: '12px' }}>
+                参照元: <a href="https://www.alphavantage.co/" target="_blank" rel="noopener noreferrer">Alpha Vantage</a> /{' '}
+                <a href="https://fred.stlouisfed.org/" target="_blank" rel="noopener noreferrer">FRED</a>
+              </p>
             </section>
 
             <section id="inventory-section" className="cf-latest cf-focus-section">
