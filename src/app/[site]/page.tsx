@@ -2026,7 +2026,7 @@ export default async function SiteHomePage({
             <section id="details" className="cf-pyramid-group">
               <div className="cf-pyramid-head">
                 <p className="cf-pyramid-label">Details</p>
-                <h3>個別指標を深掘りする</h3>
+                <h3>個別指標を深堀り</h3>
                 <p className="cf-kpi-note">
                   期間別フィルタと各カード詳細で、現場判断に必要な根拠を掘り下げる。
                 </p>
