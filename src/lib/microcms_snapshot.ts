@@ -214,7 +214,7 @@ export async function readRecentIndicatorValuesFromEconomySnapshots(
     if (key && seenDates.has(key)) continue;
     if (key) seenDates.add(key);
     hits.push(hit);
-    if (hits.length >= 2) break;
+    if (hits.length >= safeLimit) break;
   }
 
   return hits;

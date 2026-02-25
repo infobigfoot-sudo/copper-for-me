@@ -257,6 +257,47 @@ async function findLmeCsvUsdIndicatorAtOrBefore(targetDate: string): Promise<Ind
   };
 }
 
+async function findJapanTateneCsvIndicatorAtOrBefore(targetDate: string): Promise<Indicator | null> {
+  const year = targetDate.slice(0, 4);
+  const filePath = path.join(ECONOMY_DATA_ROOT, 'japan', 'tate_ne', `copper_tate_ne_${year}.csv`);
+  let rows: CsvRow[] = [];
+  try {
+    rows = await readSimpleCsv(filePath);
+  } catch {
+    try {
+      rows = await readSimpleCsv(
+        path.join(ECONOMY_DATA_ROOT, 'japan', 'tate_ne', `copper_tate_ne_${Number(year) - 1}.csv`)
+      );
+    } catch {
+      return null;
+    }
+  }
+  const row = pickRowAtOrBefore(rows, targetDate);
+  if (!row) return null;
+  const value = String(row.price_jpy_per_ton || '').trim();
+  const date = rowDateValue(row);
+  if (!value || !date) return null;
+  const idx = rows.findIndex((r) => rowDateValue(r) === date);
+  let prevValue = '';
+  for (let i = idx - 1; i >= 0; i -= 1) {
+    const v = String(rows[i]?.price_jpy_per_ton || '').trim();
+    if (v) {
+      prevValue = v;
+      break;
+    }
+  }
+  return {
+    id: 'japan_tatene_jpy_mt',
+    name: '国内建値',
+    value,
+    date,
+    units: 'JPY/mt',
+    frequency: 'Daily',
+    source: 'CSV',
+    changePercent: formatChangePercent(value, prevValue)
+  };
+}
+
 async function fetchFredSeriesAtOrBefore(seriesId: string, targetDate: string): Promise<{
   value: string;
   date: string;
@@ -306,8 +347,9 @@ export async function getEconomyIndicatorsCsvFirst(opts?: {
   const targetDate = String(opts?.date || getTodayJstYmd()).trim();
   const fredFallback = opts?.fredFallback !== false;
 
-  const [lmeUsdCsv, fredResults] = await Promise.all([
+  const [lmeUsdCsv, tateCsv, fredResults] = await Promise.all([
     findLmeCsvUsdIndicatorAtOrBefore(targetDate),
+    findJapanTateneCsvIndicatorAtOrBefore(targetDate),
     Promise.all(
     FRED_SERIES.map(async (s) => {
       const fromCsv = await findFredCsvIndicatorAtOrBefore(s.id, targetDate);
@@ -334,7 +376,11 @@ export async function getEconomyIndicatorsCsvFirst(opts?: {
   ]);
 
   const fredBase = fredResults.map((r) => r.indicator).filter(Boolean) as Indicator[];
-  const fred = [...(lmeUsdCsv ? [lmeUsdCsv] : []), ...fredBase.filter((i) => i.id !== 'lme_copper_usd')];
+  const fred = [
+    ...(lmeUsdCsv ? [lmeUsdCsv] : []),
+    ...(tateCsv ? [tateCsv] : []),
+    ...fredBase.filter((i) => i.id !== 'lme_copper_usd' && i.id !== 'japan_tatene_jpy_mt')
+  ];
   const csvHits = fredResults.filter((r) => r.source === 'csv').length;
   const apiHits = fredResults.filter((r) => r.source === 'api').length;
   const misses = fredResults.filter((r) => !r.indicator).length;
@@ -909,8 +955,9 @@ export async function getEconomyIndicatorsLive(opts?: { force?: boolean }): Prom
   if (cached) return cached;
   const hasMetalsKey = false;
 
-  const [lmeUsdCsv, fredRaw, alphaRaw, fredCopper, fredUsdJpy] = await Promise.all([
+  const [lmeUsdCsv, tateCsv, fredRaw, alphaRaw, fredCopper, fredUsdJpy] = await Promise.all([
     findLmeCsvUsdIndicatorAtOrBefore(getNoonBucketJst()),
+    findJapanTateneCsvIndicatorAtOrBefore(getNoonBucketJst()),
     fetchFredIndicators(),
     fetchAlphaIndicators(),
     fetchFredSeriesLatest('PCOPPUSDM'),
@@ -939,8 +986,9 @@ export async function getEconomyIndicatorsLive(opts?: { force?: boolean }): Prom
   const fred = [
     ...(lmeMerged ? [lmeMerged] : []),
     ...(lmeUsd ? [lmeUsd] : []),
+    ...(tateCsv ? [tateCsv] : []),
     ...fredWithoutLme
-  ];
+  ].filter((ind, idx, arr) => arr.findIndex((x) => x.id === ind.id) === idx);
 
   const hasUsdJpy = alphaRaw.some((i) => i.id === 'usd_jpy');
   const prevAlpha = cachedAny?.alpha || [];
