@@ -10,7 +10,7 @@ export type Indicator = {
   lastUpdated?: string;
   units: string;
   frequency: string;
-  source: 'FRED' | 'Alpha Vantage' | 'Metals.dev';
+  source: 'FRED' | 'Alpha Vantage' | 'Metals.dev' | 'CSV';
   changePercent?: string;
 };
 
@@ -216,6 +216,47 @@ async function findFredCsvIndicatorAtOrBefore(seriesId: string, targetDate: stri
   };
 }
 
+async function findLmeCsvUsdIndicatorAtOrBefore(targetDate: string): Promise<Indicator | null> {
+  const year = targetDate.slice(0, 4);
+  const filePath = path.join(ECONOMY_DATA_ROOT, 'london', 'lme', `lme_copper_${year}.csv`);
+  let rows: CsvRow[] = [];
+  try {
+    rows = await readSimpleCsv(filePath);
+  } catch {
+    try {
+      rows = await readSimpleCsv(
+        path.join(ECONOMY_DATA_ROOT, 'london', 'lme', `lme_copper_${Number(year) - 1}.csv`)
+      );
+    } catch {
+      return null;
+    }
+  }
+  const row = pickRowAtOrBefore(rows, targetDate);
+  if (!row) return null;
+  const value = String(row.lme_copper_cash_settlement_usd_t || '').trim();
+  const date = rowDateValue(row);
+  if (!value || !date) return null;
+  const idx = rows.findIndex((r) => rowDateValue(r) === date);
+  let prevValue = '';
+  for (let i = idx - 1; i >= 0; i -= 1) {
+    const v = String(rows[i]?.lme_copper_cash_settlement_usd_t || '').trim();
+    if (v) {
+      prevValue = v;
+      break;
+    }
+  }
+  return {
+    id: 'lme_copper_usd',
+    name: 'LME銅',
+    value,
+    date,
+    units: 'USD/mt',
+    frequency: 'Daily',
+    source: 'CSV',
+    changePercent: formatChangePercent(value, prevValue)
+  };
+}
+
 async function fetchFredSeriesAtOrBefore(seriesId: string, targetDate: string): Promise<{
   value: string;
   date: string;
@@ -265,7 +306,9 @@ export async function getEconomyIndicatorsCsvFirst(opts?: {
   const targetDate = String(opts?.date || getTodayJstYmd()).trim();
   const fredFallback = opts?.fredFallback !== false;
 
-  const fredResults = await Promise.all(
+  const [lmeUsdCsv, fredResults] = await Promise.all([
+    findLmeCsvUsdIndicatorAtOrBefore(targetDate),
+    Promise.all(
     FRED_SERIES.map(async (s) => {
       const fromCsv = await findFredCsvIndicatorAtOrBefore(s.id, targetDate);
       if (fromCsv) return { indicator: fromCsv, source: 'csv' as const };
@@ -287,9 +330,11 @@ export async function getEconomyIndicatorsCsvFirst(opts?: {
         source: 'api' as const
       };
     })
-  );
+    )
+  ]);
 
-  const fred = fredResults.map((r) => r.indicator).filter(Boolean) as Indicator[];
+  const fredBase = fredResults.map((r) => r.indicator).filter(Boolean) as Indicator[];
+  const fred = [...(lmeUsdCsv ? [lmeUsdCsv] : []), ...fredBase.filter((i) => i.id !== 'lme_copper_usd')];
   const csvHits = fredResults.filter((r) => r.source === 'csv').length;
   const apiHits = fredResults.filter((r) => r.source === 'api').length;
   const misses = fredResults.filter((r) => !r.indicator).length;
@@ -635,6 +680,38 @@ async function fetchLmeCopperFromMetalsDev(): Promise<Indicator | null> {
   };
 }
 
+async function fetchLmeCopperUsdFromMetalsDev(): Promise<Indicator | null> {
+  const apiKey = (process.env.METALS_DEV_API_KEY || '').trim();
+  if (!apiKey) return null;
+
+  try {
+    const latestUrl =
+      `https://api.metals.dev/v1/latest` +
+      `?api_key=${apiKey}&currency=USD&unit=kg`;
+    const latestRes = await fetchWithRetry(latestUrl, 4);
+    if (!latestRes.ok) return null;
+    const latestData = await latestRes.json();
+    const metalUsdPerKg = Number(
+      latestData?.metals?.lme_copper ?? latestData?.metals?.copper
+    );
+    if (!Number.isFinite(metalUsdPerKg)) return null;
+    const usdPerMt = metalUsdPerKg * 1000;
+    const ts = String(latestData?.timestamps?.metal || '').slice(0, 10);
+    return {
+      id: 'lme_copper_usd',
+      name: 'LME銅',
+      value: String(usdPerMt),
+      date: ts || toYmd(new Date()),
+      lastUpdated: String(latestData?.timestamps?.metal || ''),
+      units: 'USD/mt',
+      frequency: 'Daily',
+      source: 'Metals.dev'
+    };
+  } catch {
+    return null;
+  }
+}
+
 async function fetchUsdJpyFromMetalsDev(): Promise<Indicator | null> {
   const apiKey = (process.env.METALS_DEV_API_KEY || '').trim();
   if (!apiKey) return null;
@@ -830,15 +907,17 @@ export async function getEconomyIndicatorsLive(opts?: { force?: boolean }): Prom
     force ? Promise.resolve(null) : readCache()
   ]);
   if (cached) return cached;
-  const hasMetalsKey = Boolean((process.env.METALS_DEV_API_KEY || '').trim());
+  const hasMetalsKey = false;
 
-  const [lme, fredRaw, alphaRaw, fredCopper, fredUsdJpy] = await Promise.all([
-    fetchLmeCopperFromMetalsDev(),
+  const [lmeUsdCsv, fredRaw, alphaRaw, fredCopper, fredUsdJpy] = await Promise.all([
+    findLmeCsvUsdIndicatorAtOrBefore(getNoonBucketJst()),
     fetchFredIndicators(),
     fetchAlphaIndicators(),
     fetchFredSeriesLatest('PCOPPUSDM'),
     fetchFredSeriesLatest('DEXJPUS')
   ]);
+  const lme = null;
+  const lmeUsd = lmeUsdCsv;
   const prevLme =
     cachedAny?.fred?.find((i) => i.id === 'lme_copper_jpy') || null;
   const lmeFallback =
@@ -856,7 +935,12 @@ export async function getEconomyIndicatorsLive(opts?: { force?: boolean }): Prom
         }
       : null;
   const lmeMerged = withChangeFromPrev(lme, prevLme) || prevLme || lmeFallback;
-  const fred = lmeMerged ? [lmeMerged, ...fredRaw.filter((i) => i.id !== 'lme_copper_jpy')] : fredRaw;
+  const fredWithoutLme = fredRaw.filter((i) => i.id !== 'lme_copper_jpy' && i.id !== 'lme_copper_usd');
+  const fred = [
+    ...(lmeMerged ? [lmeMerged] : []),
+    ...(lmeUsd ? [lmeUsd] : []),
+    ...fredWithoutLme
+  ];
 
   const hasUsdJpy = alphaRaw.some((i) => i.id === 'usd_jpy');
   const prevAlpha = cachedAny?.alpha || [];

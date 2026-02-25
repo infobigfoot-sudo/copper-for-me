@@ -748,6 +748,7 @@ export default async function SiteHomePage({
   const adSlotTop = process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOP;
   const adSlotMid = process.env.NEXT_PUBLIC_ADSENSE_SLOT_MID;
   const lmeIndicator = fredIndicators.find((i) => i.id === 'lme_copper_jpy');
+  const lmeUsdIndicator = fredIndicators.find((i) => i.id === 'lme_copper_usd');
   const usdJpyIndicator = alphaIndicators.find((i) => i.id === 'usd_jpy');
   const usdCnyIndicator = alphaIndicators.find((i) => i.id === 'usd_cny');
   const warrantValues = warrantDashboard.charts.warrantDaily.map((p) => p.value);
@@ -778,6 +779,7 @@ export default async function SiteHomePage({
   const tone: Tone = 'beginner';
   const lmeRecentFromSnapshots = await readRecentIndicatorValuesFromEconomySnapshots('lme_copper_jpy').catch(() => []);
   const lmeFallbackChangePercent = (() => {
+    if ((lmeUsdIndicator?.changePercent || '').trim()) return lmeUsdIndicator?.changePercent || null;
     if ((lmeIndicator?.changePercent || '').trim()) return lmeIndicator?.changePercent || null;
     const latest = lmeRecentFromSnapshots[0];
     const prev = lmeRecentFromSnapshots[1];
@@ -938,13 +940,17 @@ export default async function SiteHomePage({
         ? '供給緩和'
         : '中立';
   const usdJpyValue = formatIndicatorValue(usdJpyIndicator?.value || '');
+  const lmeUsdDirect = parseNum(lmeUsdIndicator?.value);
   const lmeJpyPerMt = parseNum(lmeIndicator?.value);
   const usdJpyRate = parseNum(usdJpyIndicator?.value);
-  const lmeUsdPerMt =
+  const lmeUsdPerMtDerived =
     lmeJpyPerMt !== null && usdJpyRate !== null && usdJpyRate > 0 ? lmeJpyPerMt / usdJpyRate : null;
-  const lmeValue =
-    lmeUsdPerMt !== null ? formatIndicatorValue(String(Math.round(lmeUsdPerMt))) : formatIndicatorValue(lmeIndicator?.value || '');
+  const lmeUsdPerMt = lmeUsdDirect ?? lmeUsdPerMtDerived;
+  const lmeJpyValue = formatIndicatorValue(lmeIndicator?.value || '');
+  const lmeHeadlineValue =
+    lmeUsdPerMt !== null ? formatIndicatorValue(String(Math.round(lmeUsdPerMt))) : lmeJpyValue;
   const lmeUnitLabel = lmeUsdPerMt !== null ? 'USD/mt' : 'JPY/mt';
+  const lmeDisplayDate = lmeUsdIndicator?.date || lmeIndicator?.date;
   const tateValue = warrantDashboard.copperTate.latest
     ? formatIndicatorValue(String(warrantDashboard.copperTate.latest.value))
     : '-';
@@ -1196,8 +1202,8 @@ export default async function SiteHomePage({
                           {lmeFallbackChangePercent || '-'}
                         </span>
                       </p>
-                      <p className="cf-kpi-value">{lmeValue}</p>
-                      <p className="cf-kpi-note">{lmeUnitLabel} ・ {formatYmd(lmeIndicator?.date)}</p>
+                      <p className="cf-kpi-value">{lmeHeadlineValue}</p>
+                      <p className="cf-kpi-note">{lmeUnitLabel} ・ {formatYmd(lmeDisplayDate)}</p>
                     </div>
                     <div className="cf-dual-price-item">
                       <p className="cf-kpi-note">国内建値</p>
@@ -1333,7 +1339,7 @@ export default async function SiteHomePage({
                   </li>
                   <li className="cf-latest-row">
                     <span className="cf-latest-label">最新値:</span>
-                    <span className="cf-latest-value">{lmeValue}</span>
+                    <span className="cf-latest-value">{lmeJpyValue}</span>
                     <span className="cf-latest-unit">{normalizeUnitLabel(lmeIndicator?.units || 'JPY/mt')}</span>
                     <span className="cf-latest-date">（{formatYmd(lmeIndicator?.date)}）</span>
                   </li>
@@ -1498,7 +1504,7 @@ export default async function SiteHomePage({
                     </span>
                   </p>
                   <div className="cf-econ-value-row">
-                    <p className="cf-econ-value">{lmeValue}</p>
+                    <p className="cf-econ-value">{lmeJpyValue}</p>
                     <small>JPY/mt</small>
                   </div>
                   <p className="cf-econ-date">{formatYmd(lmeIndicator?.date)}</p>
