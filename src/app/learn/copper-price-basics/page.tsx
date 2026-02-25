@@ -92,15 +92,6 @@ export default async function CopperPriceBasicsPage() {
           <div className="cf-dash-hero-body">
             <h2>Market Overview</h2>
             <p>銅価格を知るうえで見るポイント（LME・為替・在庫）を整理</p>
-            <div className="cf-quick-links" aria-label="よく見る項目へのリンク">
-              <Link href="#three-points-summary">3つのポイント</Link>
-              <Link href="#qa-reading">Q&Aで見る銅価格の読み方</Link>
-              <Link href="/#conclusion">今日の結論</Link>
-              <Link href="/#lme-domestic">LME/建値</Link>
-              <Link href="/#fx-section">為替</Link>
-              <Link href="/#inventory-section">LME在庫</Link>
-              <Link href="/supply-chain">サプライチェーン</Link>
-            </div>
           </div>
         </section>
 

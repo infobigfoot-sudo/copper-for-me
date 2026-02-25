@@ -57,19 +57,10 @@ export default function SupplyChainIndexPage() {
       </header>
 
       <main className="cf-main">
-      <section className="cf-dash-hero">
+        <section className="cf-dash-hero">
         <div className="cf-dash-hero-body">
           <h2>Supply Chain</h2>
           <p>銅サプライチェーンの全体像</p>
-          <div className="cf-quick-links" aria-label="よく見る項目へのリンク">
-            <Link href="#what-is-copper">銅とは？</Link>
-            <Link href="#page-list">ページ一覧</Link>
-            <Link href="/supply-chain/mining">鉱山</Link>
-            <Link href="/supply-chain/refining">精錬</Link>
-            <Link href="/supply-chain/end-use">用途</Link>
-            <Link href="/supply-chain/scrap">スクラップ回収</Link>
-            <Link href="/supply-chain/market">市場</Link>
-          </div>
         </div>
       </section>
 
