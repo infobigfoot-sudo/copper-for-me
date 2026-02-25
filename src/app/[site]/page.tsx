@@ -169,8 +169,8 @@ type Horizon = '1w' | '1m' | '3m';
 
 function indicatorHelp(id: string, tone: Tone): { what: string; copperImpact: string } {
   const mapBeginner: Record<string, { what: string; copperImpact: string }> = {
-    lme_copper_jpy: {
-      what: '世界の銅価格を日本円で見た目安です。',
+    lme_copper_usd: {
+      what: '世界の銅価格（LME）をUSD/mtで見た基準値です。',
       copperImpact: '上がると国内の銅価格も上がりやすく、仕入れ負担が増えやすいです。'
     },
     TLRESCONS: {
@@ -287,8 +287,8 @@ function indicatorHelp(id: string, tone: Tone): { what: string; copperImpact: st
     }
   };
   const mapPro: Record<string, { what: string; copperImpact: string }> = {
-    lme_copper_jpy: {
-      what: 'LME銅先物を円建て換算した実務ベンチマーク。',
+    lme_copper_usd: {
+      what: 'LME銅価格（USD/mt）の実務ベンチマーク。',
       copperImpact: '建値算定・在庫評価・短期ヘッジ判断の基準値。'
     },
     TLRESCONS: {
@@ -418,7 +418,7 @@ function indicatorHelp(id: string, tone: Tone): { what: string; copperImpact: st
 
 function indicatorUpDownImpact(id: string): { up: string; down: string } {
   const map: Record<string, { up: string; down: string }> = {
-    lme_copper_jpy: {
+    lme_copper_usd: {
       up: '国内建値の上昇圧力が強まりやすい。',
       down: '国内建値の上昇圧力が和らぎやすい。'
     },
@@ -553,7 +553,7 @@ function toPlainStyle(text: string): string {
 
 function indicatorUrl(id: string): string | null {
   const map: Record<string, string> = {
-    lme_copper_jpy: 'https://www.lme.com/Metals/Non-ferrous/Copper',
+    lme_copper_usd: 'https://www.lme.com/Metals/Non-ferrous/Copper',
     TLRESCONS: 'https://fred.stlouisfed.org/series/TLRESCONS',
     DTWEXBGS: 'https://fred.stlouisfed.org/series/DTWEXBGS',
     FEDFUNDS: 'https://fred.stlouisfed.org/series/FEDFUNDS',
@@ -588,7 +588,7 @@ function indicatorUrl(id: string): string | null {
 
 function factorDirection(id: string, pct: number): 'up' | 'down' | null {
   const positiveUp = new Set([
-    'lme_copper_jpy',
+    'lme_copper_usd',
     'TLRESCONS',
     'HOUST',
     'DCOILWTICO',
@@ -777,12 +777,14 @@ export default async function SiteHomePage({
   const offDeltaPct =
     offBars.first !== 0 ? ((offBars.last - offBars.first) / Math.abs(offBars.first)) * 100 : null;
   const tone: Tone = 'beginner';
-  const lmeRecentFromSnapshots = await readRecentIndicatorValuesFromEconomySnapshots('lme_copper_jpy').catch(() => []);
+  const lmeRecentFromUsdSnapshots = await readRecentIndicatorValuesFromEconomySnapshots('lme_copper_usd').catch(() => []);
+  const lmeRecentFromJpySnapshots = await readRecentIndicatorValuesFromEconomySnapshots('lme_copper_jpy').catch(() => []);
   const lmeFallbackChangePercent = (() => {
     if ((lmeUsdIndicator?.changePercent || '').trim()) return lmeUsdIndicator?.changePercent || null;
     if ((lmeIndicator?.changePercent || '').trim()) return lmeIndicator?.changePercent || null;
-    const latest = lmeRecentFromSnapshots[0];
-    const prev = lmeRecentFromSnapshots[1];
+    const recent = lmeRecentFromUsdSnapshots.length >= 2 ? lmeRecentFromUsdSnapshots : lmeRecentFromJpySnapshots;
+    const latest = recent[0];
+    const prev = recent[1];
     const latestVal = parseNum(latest?.value);
     const prevVal = parseNum(prev?.value);
     if (latestVal === null || prevVal === null || prevVal === 0) return null;
@@ -921,7 +923,7 @@ export default async function SiteHomePage({
     });
   }
   const statusPriority: Record<string, number> = {
-    lme_copper_jpy: 0,
+    lme_copper_usd: 0,
     warrant_7d: 1,
     offwarrant_mom: 2
   };
@@ -971,7 +973,7 @@ export default async function SiteHomePage({
     return dataDate === todayYmd || dataDate === yesterdayYmd;
   });
   const latestIndicatorPriority: Record<string, number> = {
-    lme_copper_jpy: 0,
+    lme_copper_usd: 0,
     usd_jpy: 1,
     DGS10: 2,
     DCOILWTICO: 3,
@@ -1003,10 +1005,11 @@ export default async function SiteHomePage({
   const baseUpdateItems = todayOrYesterdayItems.length
     ? todayOrYesterdayItems
     : latestUpdatedItems.slice(0, 4);
-  const lmeOverviewItem = lmeIndicator
+  const lmeOverviewSource = lmeUsdIndicator || lmeIndicator;
+  const lmeOverviewItem = lmeOverviewSource
     ? {
-        id: lmeIndicator.id,
-        label: `${displayIndicatorName(lmeIndicator.name)}（${formatYmd(lmeIndicator.date)}）`
+        id: lmeOverviewSource.id,
+        label: `${displayIndicatorName(lmeOverviewSource.name)}（${formatYmd(lmeOverviewSource.date)}）`
       }
     : null;
   const updateItemsToShow = (lmeOverviewItem ? [lmeOverviewItem, ...baseUpdateItems] : baseUpdateItems).filter(
