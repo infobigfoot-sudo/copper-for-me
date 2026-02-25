@@ -691,8 +691,8 @@ export default async function SiteHomePage({
     getPosts(8, site).catch(() => ({ contents: [] })),
     getCategories(site).catch(() => ({ contents: [] })),
     site === 'a'
-      ? getEconomyIndicators().catch(() => ({ updatedAt: '', fred: [], alpha: [] }))
-      : Promise.resolve({ updatedAt: '', fred: [], alpha: [] }),
+      ? getEconomyIndicators().catch(() => ({ updatedAt: '', cacheBucketJst: '', fred: [], alpha: [] }))
+      : Promise.resolve({ updatedAt: '', cacheBucketJst: '', fred: [], alpha: [] }),
     site === 'a'
       ? getWarrantDashboardData().catch(() => ({
           copperTate: { latest: null, prev: null, diffPct1d: null },
