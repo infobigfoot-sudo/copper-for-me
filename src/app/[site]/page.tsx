@@ -967,19 +967,25 @@ export default async function SiteHomePage({
   };
   const todayOrYesterdayItems = todayOrYesterdayIndicators
     .sort(sortByLatestIndicatorPriority)
-    .slice(0, 4)
     .map((ind) => ({
       id: ind.id,
       label: `${displayIndicatorName(ind.name)}（${formatYmd(ind.date)}）`
     }));
   const latestUpdatedItems = [...dashboardIndicators]
     .sort(sortByLatestIndicatorPriority)
-    .slice(0, 4)
     .map((ind) => ({
       id: ind.id,
       label: `${displayIndicatorName(ind.name)}（${formatYmd(ind.lastUpdated || ind.date)}）`
     }));
-  const updateItemsToShow = todayOrYesterdayItems.length ? todayOrYesterdayItems : latestUpdatedItems;
+  const updateItemsMerged = [...todayOrYesterdayItems, ...latestUpdatedItems];
+  const seenUpdateItemIds = new Set<string>();
+  const updateItemsToShow = updateItemsMerged
+    .filter((item) => {
+      if (seenUpdateItemIds.has(item.id)) return false;
+      seenUpdateItemIds.add(item.id);
+      return true;
+    })
+    .slice(0, 4);
   const decisionIndicatorIdSet = new Set(decisionIndicatorsToShow.map((ind) => ind.id));
   const fixedCategoryNav = [
     { slug: 'info', label: '相場情報' },
