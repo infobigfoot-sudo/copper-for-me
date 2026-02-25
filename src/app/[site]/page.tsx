@@ -733,7 +733,11 @@ export default async function SiteHomePage({
     getSiteSettings(site).catch(() => null),
     getAnnouncements(3, site).catch(() => [])
   ]);
-  const posts = postsRes.contents;
+  const posts = [...postsRes.contents].sort((a: any, b: any) => {
+    const at = toTimeMs(String(a?.publishedAt || a?.updatedAt || a?.createdAt || ''));
+    const bt = toTimeMs(String(b?.publishedAt || b?.updatedAt || b?.createdAt || ''));
+    return bt - at;
+  });
   const categories = categoriesRes.contents;
   const fredIndicators = economyBundle.fred;
   const alphaIndicators = economyBundle.alpha;
@@ -934,15 +938,20 @@ export default async function SiteHomePage({
   };
   const horizonTitle = horizonTitleMap[horizon];
   const todayYmd = todayYmdJst();
-  const todayUpdatedIndicators = dashboardIndicators.filter((ind) => {
-    const updated = formatYmd(ind.lastUpdated || ind.date);
-    return updated === todayYmd;
+  const yesterdayYmd = (() => {
+    const d = new Date(`${todayYmd}T00:00:00+09:00`);
+    d.setDate(d.getDate() - 1);
+    return d.toISOString().slice(0, 10);
+  })();
+  const todayOrYesterdayIndicators = dashboardIndicators.filter((ind) => {
+    const dataDate = formatYmd(ind.date);
+    return dataDate === todayYmd || dataDate === yesterdayYmd;
   });
-  const todayUpdatedItems = todayUpdatedIndicators
+  const todayOrYesterdayItems = todayOrYesterdayIndicators
     .slice(0, 4)
     .map((ind) => ({
       id: ind.id,
-      label: `${displayIndicatorName(ind.name)}（${formatYmd(ind.lastUpdated || ind.date)}）`
+      label: `${displayIndicatorName(ind.name)}（${formatYmd(ind.date)}）`
     }));
   const latestUpdatedItems = [...dashboardIndicators]
     .sort((a, b) => toTimeMs(b.lastUpdated || b.date) - toTimeMs(a.lastUpdated || a.date))
@@ -951,7 +960,7 @@ export default async function SiteHomePage({
       id: ind.id,
       label: `${displayIndicatorName(ind.name)}（${formatYmd(ind.lastUpdated || ind.date)}）`
     }));
-  const updateItemsToShow = todayUpdatedItems.length ? todayUpdatedItems : latestUpdatedItems;
+  const updateItemsToShow = todayOrYesterdayItems.length ? todayOrYesterdayItems : latestUpdatedItems;
   const decisionIndicatorIdSet = new Set(decisionIndicatorsToShow.map((ind) => ind.id));
   const fixedCategoryNav = [
     { slug: 'info', label: '相場情報' },
@@ -1025,11 +1034,14 @@ export default async function SiteHomePage({
                 <h2>Market Overview</h2>
                 <p>
                   非鉄金属・市況のインサイトを表示中
-                  {economyBundle.updatedAt ? ` / 更新: ${new Date(economyBundle.updatedAt).toLocaleString('ja-JP')}` : ''}
+                  {economyBundle.cacheBucketJst
+                    ? ` / 表示基準日: ${new Date(economyBundle.cacheBucketJst).toLocaleDateString('ja-JP')}`
+                    : ''}
                 </p>
                 <div className="cf-today-updates">
                   <div className="cf-today-updates-head">
-                    <p className="cf-today-updates-title">本日更新の記事・指標</p>
+                    <p className="cf-today-updates-title">最新記事・主要指標</p>
+                    <p className="cf-kpi-note">※ 市場休場日や統計の更新頻度により、指標の日付は当日以外になる場合があります。</p>
                   </div>
                   <ul className="cf-today-updates-list">
                     {featured ? (
