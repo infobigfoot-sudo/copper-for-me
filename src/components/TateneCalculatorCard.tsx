@@ -1,5 +1,6 @@
 'use client';
 
+import type { CSSProperties } from 'react';
 import { useMemo, useState } from 'react';
 
 type CalcOption = {
@@ -82,8 +83,31 @@ export default function TateneCalculatorCard({
   const lmeSelectLabel = buildSelectLabel(lmeOptions.length);
   const fxSelectLabel = buildSelectLabel(usdJpyOptions.length);
 
+  const tabButtonStyle = (active: boolean): CSSProperties => ({
+    padding: '6px 10px',
+    borderRadius: 999,
+    border: active ? '1px solid #cfdcf4' : '1px solid #d8e0ed',
+    background: active ? '#eef5ff' : '#fff',
+    fontSize: 12,
+    fontWeight: 700,
+    color: active ? '#315a92' : '#5f6f85',
+    cursor: 'pointer',
+  });
+
+  const inputBaseStyle: CSSProperties = {
+    width: '100%',
+    maxWidth: '100%',
+    minWidth: 0,
+    padding: '8px 10px',
+    fontSize: 16,
+    borderRadius: 10,
+    border: '1px solid #dbe3ef',
+    background: '#fff',
+    color: '#1f2937',
+  };
+
   return (
-    <div className="cf-card cf-insight-card" style={{ marginTop: '12px', width: '100%', maxWidth: '100%', overflowX: 'hidden' }}>
+    <div className="cf-card cf-econ-card cf-stock-chart-card" style={{ marginTop: '12px', width: '100%', maxWidth: '100%', overflowX: 'hidden' }}>
       <h4>銅建値計算ツール（簡易）</h4>
       <p className="cf-kpi-note" style={{ marginBottom: 10 }}>
         国内建値 ≒ LME銅価格（USD/mt） × USD/JPY + 諸コスト・プレミアム
@@ -105,32 +129,14 @@ export default function TateneCalculatorCard({
             <button
               type="button"
               onClick={() => setLmeMode('select')}
-              style={{
-                padding: '6px 10px',
-                borderRadius: 999,
-                border: lmeMode === 'select' ? '1px solid #b1762f' : '1px solid #d9d7cf',
-                background: lmeMode === 'select' ? '#fff5e7' : '#fff',
-                fontSize: 12,
-                fontWeight: 600,
-                color: lmeMode === 'select' ? '#8a5417' : '#6f6a5d',
-                cursor: 'pointer'
-              }}
+              style={tabButtonStyle(lmeMode === 'select')}
             >
               {lmeSelectLabel}
             </button>
             <button
               type="button"
               onClick={() => setLmeMode('manual')}
-              style={{
-                padding: '6px 10px',
-                borderRadius: 999,
-                border: lmeMode === 'manual' ? '1px solid #b1762f' : '1px solid #d9d7cf',
-                background: lmeMode === 'manual' ? '#fff5e7' : '#fff',
-                fontSize: 12,
-                fontWeight: 600,
-                color: lmeMode === 'manual' ? '#8a5417' : '#6f6a5d',
-                cursor: 'pointer'
-              }}
+              style={tabButtonStyle(lmeMode === 'manual')}
             >
               手入力
             </button>
@@ -139,16 +145,7 @@ export default function TateneCalculatorCard({
             <select
               value={String(selectedLmeIndex)}
               onChange={(e) => setSelectedLmeIndex(Number(e.target.value))}
-              style={{
-                width: '100%',
-                maxWidth: '100%',
-                minWidth: 0,
-                padding: '8px 10px',
-                fontSize: 16,
-                borderRadius: 10,
-                border: '1px solid #d9d7cf',
-                background: '#fff'
-              }}
+              style={inputBaseStyle}
             >
               {lmeOptions.map((opt, idx) => (
                 <option key={`lme-${idx}-${opt.date}`} value={idx}>
@@ -163,16 +160,7 @@ export default function TateneCalculatorCard({
               placeholder="LME価格を手入力"
               value={manualLme}
               onChange={(e) => setManualLme(e.target.value)}
-              style={{
-                width: '100%',
-                maxWidth: '100%',
-                minWidth: 0,
-                padding: '8px 10px',
-                fontSize: 16,
-                borderRadius: 10,
-                border: '1px solid #d9d7cf',
-                background: '#fff'
-              }}
+              style={inputBaseStyle}
             />
           )}
         </div>
@@ -183,32 +171,14 @@ export default function TateneCalculatorCard({
             <button
               type="button"
               onClick={() => setFxMode('select')}
-              style={{
-                padding: '6px 10px',
-                borderRadius: 999,
-                border: fxMode === 'select' ? '1px solid #b1762f' : '1px solid #d9d7cf',
-                background: fxMode === 'select' ? '#fff5e7' : '#fff',
-                fontSize: 12,
-                fontWeight: 600,
-                color: fxMode === 'select' ? '#8a5417' : '#6f6a5d',
-                cursor: 'pointer'
-              }}
+              style={tabButtonStyle(fxMode === 'select')}
             >
               {fxSelectLabel}
             </button>
             <button
               type="button"
               onClick={() => setFxMode('manual')}
-              style={{
-                padding: '6px 10px',
-                borderRadius: 999,
-                border: fxMode === 'manual' ? '1px solid #b1762f' : '1px solid #d9d7cf',
-                background: fxMode === 'manual' ? '#fff5e7' : '#fff',
-                fontSize: 12,
-                fontWeight: 600,
-                color: fxMode === 'manual' ? '#8a5417' : '#6f6a5d',
-                cursor: 'pointer'
-              }}
+              style={tabButtonStyle(fxMode === 'manual')}
             >
               手入力
             </button>
@@ -217,16 +187,7 @@ export default function TateneCalculatorCard({
             <select
               value={String(selectedFxIndex)}
               onChange={(e) => setSelectedFxIndex(Number(e.target.value))}
-              style={{
-                width: '100%',
-                maxWidth: '100%',
-                minWidth: 0,
-                padding: '8px 10px',
-                fontSize: 16,
-                borderRadius: 10,
-                border: '1px solid #d9d7cf',
-                background: '#fff'
-              }}
+              style={inputBaseStyle}
             >
               {usdJpyOptions.map((opt, idx) => (
                 <option key={`fx-${idx}-${opt.date}`} value={idx}>
@@ -242,16 +203,7 @@ export default function TateneCalculatorCard({
               placeholder="USD/JPYを手入力"
               value={manualFx}
               onChange={(e) => setManualFx(e.target.value)}
-              style={{
-                width: '100%',
-                maxWidth: '100%',
-                minWidth: 0,
-                padding: '8px 10px',
-                fontSize: 16,
-                borderRadius: 10,
-                border: '1px solid #d9d7cf',
-                background: '#fff'
-              }}
+              style={inputBaseStyle}
             />
           )}
         </div>
@@ -262,32 +214,14 @@ export default function TateneCalculatorCard({
             <button
               type="button"
               onClick={() => setPremiumMode('default')}
-              style={{
-                padding: '6px 10px',
-                borderRadius: 999,
-                border: premiumMode === 'default' ? '1px solid #b1762f' : '1px solid #d9d7cf',
-                background: premiumMode === 'default' ? '#fff5e7' : '#fff',
-                fontSize: 12,
-                fontWeight: 600,
-                color: premiumMode === 'default' ? '#8a5417' : '#6f6a5d',
-                cursor: 'pointer'
-              }}
+              style={tabButtonStyle(premiumMode === 'default')}
             >
               最新差分を使用
             </button>
             <button
               type="button"
               onClick={() => setPremiumMode('manual')}
-              style={{
-                padding: '6px 10px',
-                borderRadius: 999,
-                border: premiumMode === 'manual' ? '1px solid #b1762f' : '1px solid #d9d7cf',
-                background: premiumMode === 'manual' ? '#fff5e7' : '#fff',
-                fontSize: 12,
-                fontWeight: 600,
-                color: premiumMode === 'manual' ? '#8a5417' : '#6f6a5d',
-                cursor: 'pointer'
-              }}
+              style={tabButtonStyle(premiumMode === 'manual')}
             >
               手入力
             </button>
@@ -299,16 +233,7 @@ export default function TateneCalculatorCard({
               placeholder="例: 0 または 50000"
               value={premium}
               onChange={(e) => setPremium(e.target.value)}
-              style={{
-                width: '100%',
-                maxWidth: '100%',
-                minWidth: 0,
-                padding: '8px 10px',
-                fontSize: 16,
-                borderRadius: 10,
-                border: '1px solid #d9d7cf',
-                background: '#fff'
-              }}
+              style={inputBaseStyle}
             />
           ) : (
             <div
@@ -318,9 +243,9 @@ export default function TateneCalculatorCard({
                 minWidth: 0,
                 padding: '8px 10px',
                 borderRadius: 10,
-                border: '1px solid #e5e2d9',
-                background: '#faf8f2',
-                color: '#4c4639',
+                border: '1px solid #e6edf6',
+                background: '#f8fbff',
+                color: '#465569',
                 fontSize: 13,
                 fontWeight: 600,
                 overflowWrap: 'anywhere'
@@ -336,17 +261,17 @@ export default function TateneCalculatorCard({
         style={{
           marginTop: 12,
           borderRadius: 12,
-          border: '1px solid #e5e2d9',
-          background: '#faf8f2',
+          border: '1px solid #e6edf6',
+          background: 'linear-gradient(180deg, #ffffff, #f8fbff)',
           padding: '12px 14px'
         }}
       >
         <div className="cf-kpi-note" style={{ marginBottom: 4 }}>
           計算結果（概算）
         </div>
-        <div style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.2 }}>
+        <div style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.2, color: '#0f172a' }}>
           {calcValue === null ? '-' : fmtNum(calcValue, 0)}
-          <span style={{ fontSize: 14, fontWeight: 600, marginLeft: 6, color: '#6f6a5d' }}>JPY/mt</span>
+          <span style={{ fontSize: 14, fontWeight: 600, marginLeft: 6, color: '#64748b' }}>JPY/mt</span>
         </div>
         <div className="cf-kpi-note" style={{ marginTop: 6, overflowWrap: 'anywhere' }}>
           既定値（最新LME×最新USD/JPY）+ 最新差分: {latestProduct === null ? '-' : `${fmtNum(latestProduct + initialPremium, 0)}（※最新国内建値） JPY/mt`}

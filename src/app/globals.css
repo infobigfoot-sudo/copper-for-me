@@ -447,6 +447,44 @@ a:hover {
   font-size: 0.9rem;
 }
 
+.cf-quick-links {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cf-quick-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #e2e8f5;
+  background: #f3f7ff;
+  color: #405672;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    transform 120ms ease;
+}
+
+.cf-quick-links a:hover {
+  border-color: #cfdcf4;
+  background: #eaf2ff;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.cf-quick-links a:focus-visible {
+  outline: 2px solid #5f86cf;
+  outline-offset: 2px;
+}
+
 .cf-dash-tools {
   display: flex;
   gap: 8px;
@@ -584,6 +622,35 @@ a:hover {
   width: 100%;
 }
 
+.cf-price-overview-card {
+  border-color: #e8edf5;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff, #f9fbff);
+  box-shadow: none;
+  padding: 12px 14px;
+}
+
+.cf-price-overview-card h4 {
+  margin: 0;
+  color: #344256;
+  font-size: 0.9rem;
+}
+
+.cf-price-overview-card > .cf-kpi-note {
+  margin-top: 6px;
+  color: #687385;
+}
+
+.cf-price-overview-card .cf-dual-price {
+  margin-top: 8px;
+}
+
+.cf-price-overview-card .cf-dual-price-item {
+  background: #ffffff;
+  border-color: #e6edf6;
+  box-shadow: 0 1px 1px rgba(15, 23, 42, 0.02);
+}
+
 .cf-today-updates-head {
   display: flex;
   align-items: baseline;
@@ -632,6 +699,51 @@ a:hover {
   border-color: #cddcf7;
   color: #274a7e;
   font-weight: 700;
+}
+
+.cf-today-updates-latest {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #31445f;
+}
+
+.cf-today-updates-latest a {
+  color: #244b84;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cf-today-updates-latest a:hover {
+  text-decoration: underline;
+}
+
+.cf-today-updates-detail {
+  margin-top: 8px;
+  border-top: 1px dashed #dce5f3;
+  padding-top: 8px;
+}
+
+.cf-today-updates-detail summary {
+  cursor: pointer;
+  color: #4a5f80;
+  font-size: 0.78rem;
+  font-weight: 700;
+  list-style: none;
+}
+
+.cf-today-updates-detail summary::-webkit-details-marker {
+  display: none;
+}
+
+.cf-today-updates-detail summary::after {
+  content: ' ▼';
+  font-size: 0.72rem;
+  color: #7b8ba4;
+}
+
+.cf-today-updates-detail[open] summary::after {
+  content: ' ▲';
 }
 
 .cf-grid {
@@ -1620,20 +1732,58 @@ a:hover {
 }
 
 .cf-pricing-link {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  background: #fff;
-  color: #1f2937;
-  font-size: 0.8rem;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 12px;
+  padding: 11px 34px 11px 18px;
+  border-radius: 8px;
+  border: 1px solid #d7dde8;
+  background: #ffffff;
+  color: #253448;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0;
   text-decoration: none;
+  box-shadow: none;
+  transition:
+    transform 140ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
 }
 
 .cf-pricing-link:hover {
-  background: #f6d5b7;
+  background: #f7faff;
+  border-color: #bfd1ef;
   text-decoration: none;
+  transform: translateY(-1px);
+  color: #1f4f93;
+}
+
+.cf-pricing-link:active {
+  transform: translateY(0);
+}
+
+.cf-pricing-link::after {
+  content: "→";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 900;
+  color: currentColor;
+  transition: transform 140ms ease;
+}
+
+.cf-pricing-link:hover::after {
+  transform: translate(2px, -50%);
+}
+
+.cf-pricing-link:focus-visible {
+  outline: 2px solid #5f86cf;
+  outline-offset: 2px;
 }
 
 .cf-focus-section {
@@ -1704,26 +1854,37 @@ a:hover {
 }
 
 .cf-pyramid-head {
-  border: 1px solid #e6ebf3;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #fcfdff, #f8fbff);
-  padding: 14px 16px;
-  margin-bottom: 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 10px;
 }
 
 .cf-pyramid-head h3 {
-  margin: 4px 0 0;
-  color: #1f2e45;
-  font-size: 1.2rem;
+  margin: 0;
+  color: #111827;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  letter-spacing: -0.03em;
+  font-style: italic;
+  line-height: 1.05;
 }
 
 .cf-pyramid-label {
   margin: 0;
-  color: #1d4ed8;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: #111827;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-style: italic;
+  text-transform: none;
+  line-height: 1.05;
+}
+
+.cf-pyramid-head .cf-kpi-note {
+  margin-top: 8px;
+  color: #687385;
+  font-size: 0.9rem;
 }
 
 .cf-explain-card {
@@ -1937,6 +2098,54 @@ a:hover {
   font-size: 0.82rem;
 }
 
+.cf-learn-page .cf-guide-block {
+  border-color: #e8edf5;
+  background: linear-gradient(180deg, #ffffff, #f9fbff);
+}
+
+.cf-learn-page .cf-guide-block h4,
+.cf-learn-page .cf-guide-block h5 {
+  color: #2c3f5a;
+}
+
+.cf-learn-page .cf-guide-block h5 {
+  border-top-color: #e4ebf6;
+}
+
+.cf-learn-page .cf-point-card {
+  border-color: #e6edf6;
+  background: #ffffff;
+}
+
+.cf-learn-page .cf-point-no {
+  color: #5875a2;
+}
+
+.cf-learn-page .cf-point-title {
+  color: #2f415d;
+}
+
+.cf-learn-page .cf-point-note {
+  color: #5d6f86;
+}
+
+#what-is-copper .cf-point-card {
+  border-color: #e6edf6;
+  background: #ffffff;
+}
+
+#what-is-copper .cf-point-no {
+  color: #5875a2;
+}
+
+#what-is-copper .cf-point-title {
+  color: #2f415d;
+}
+
+#what-is-copper .cf-point-note {
+  color: #5d6f86;
+}
+
 .cf-bias-list {
   margin: 10px 0 0;
   padding: 0;
@@ -1960,6 +2169,107 @@ a:hover {
   color: #5b667d;
   font-size: 0.84rem;
   line-height: 1.5;
+}
+
+.cf-supply-stage-links {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.cf-supply-stage-links a {
+  display: grid;
+  place-items: center;
+  position: relative;
+  min-height: 54px;
+  padding: 8px 28px 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #d7dde8;
+  background: #ffffff;
+  color: #253448;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: none;
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.cf-supply-stage-links a::after {
+  content: '→';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 900;
+  color: currentColor;
+  opacity: 0.8;
+  transition: transform 140ms ease, opacity 140ms ease;
+}
+
+.cf-supply-stage-links a:hover {
+  text-decoration: none;
+  border-color: #bfd1ef;
+  background: #f7faff;
+  transform: translateY(-1px);
+  color: #1f4f93;
+}
+
+.cf-supply-stage-links a:hover::after {
+  transform: translate(2px, -50%);
+  opacity: 1;
+}
+
+.cf-supply-stage-links a.is-active,
+.cf-supply-stage-links a[aria-current='page'] {
+  border-color: #98b5e6;
+  background: #edf4ff;
+  color: #1f4f93;
+  box-shadow: none;
+}
+
+.cf-supply-stage-links a.is-active:hover,
+.cf-supply-stage-links a[aria-current='page']:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.cf-supply-stage-links a:focus-visible {
+  outline: 2px solid #5f86cf;
+  outline-offset: 2px;
+}
+
+.cf-supply-nav-card {
+  border-radius: 18px;
+}
+
+.cf-supply-page {
+  font-family: var(--font-body-jp);
+}
+
+.cf-supply-page .cf-main,
+.cf-supply-page .cf-focus-section,
+.cf-supply-page .cf-footer,
+.cf-supply-page .cf-nav-links,
+.cf-supply-page .cf-nav-mobile-panel {
+  font-family: var(--font-body-jp);
+}
+
+.cf-supply-content-shell {
+  margin-top: 16px;
+  padding: 10px;
+}
+
+@media (max-width: 640px) {
+  .cf-supply-content-shell {
+    padding: 10px;
+  }
 }
 
 .cf-inventory-stack {
@@ -2015,6 +2325,15 @@ a:hover {
 
   .cf-nav-links {
     display: none;
+  }
+
+  .cf-quick-links {
+    gap: 6px;
+  }
+
+  .cf-quick-links a {
+    font-size: 0.74rem;
+    padding: 6px 9px;
   }
 
   .cf-nav-mobile {
@@ -2108,6 +2427,10 @@ a:hover {
     grid-template-columns: 1fr;
   }
 
+  .cf-supply-stage-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .cf-field-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2184,6 +2507,15 @@ a:hover {
 
   .cf-featured-card {
     padding: 16px 14px;
+  }
+
+  .cf-supply-stage-links {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-supply-stage-links a {
+    min-height: 46px;
+    font-size: 0.95rem;
   }
 
   .cf-featured-card-image {

@@ -108,17 +108,21 @@ export default async function SiteTagPage({
             <p className="cf-logo-sub">Daily Scrap Learning</p>
           </div>
           <div className="cf-nav-links">
-            <a href={to('/')}>Home</a>
-            <a href={to('/category/info')}>相場情報</a>
-            <a href={to('/category/index')}>指標まとめ</a>
+            <a href={to('/')}>HOME</a>
+            <a href={to('/category/info')}>相場記事</a>
+            <a href={to('/category/index')}>指標記事</a>
+            <a href={to('/learn/copper-price-basics')}>銅を見るポイント</a>
+            <a href={to('/supply-chain')}>サプライチェーン</a>
             <a href={to('/category/about')}>このサイトについて</a>
           </div>
           <details className="cf-nav-mobile">
             <summary>Menu</summary>
             <div className="cf-nav-mobile-panel">
-              <a href={to('/')}>Home</a>
-              <a href={to('/category/info')}>相場情報</a>
-              <a href={to('/category/index')}>指標まとめ</a>
+              <a href={to('/')}>HOME</a>
+              <a href={to('/category/info')}>相場記事</a>
+              <a href={to('/category/index')}>指標記事</a>
+              <a href={to('/learn/copper-price-basics')}>銅を見るポイント</a>
+              <a href={to('/supply-chain')}>サプライチェーン</a>
               <a href={to('/category/about')}>このサイトについて</a>
             </div>
           </details>

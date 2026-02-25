@@ -19,14 +19,6 @@ const fallbackImages = [
   '/images/article-placeholder.svg'
 ];
 
-const copperFieldPhotos = [
-  '/images/copper-field/copper_1.jpg',
-  '/images/copper-field/copper_2.jpg',
-  '/images/copper-field/copper_3.jpg',
-  '/images/copper-field/copper_4.jpg',
-  '/images/copper-field/copper_5.jpg'
-];
-
 function resolveCardImage(url: string | undefined, fallback: string, slug?: string) {
   const src = String(url || '').trim();
   if (!src) return fallback;
@@ -1110,34 +1102,33 @@ export default async function SiteHomePage({
     (item, idx, arr) => arr.findIndex((x) => x.id === item.id) === idx
   );
   const decisionIndicatorIdSet = new Set(decisionIndicatorsToShow.map((ind) => ind.id));
-  const fixedCategoryNav = [
-    { slug: 'info', label: '相場情報' },
-    { slug: 'index', label: '指標まとめ' },
-    { slug: 'about', label: 'このサイトについて' }
-  ] as const;
-
   return (
     <div className="cf-page">
       <nav className="cf-nav">
         <div className="cf-nav-inner">
           <div className="cf-logo-wrap">
             <div className="cf-logo">
-              Copper for me
+              <Link href={to('/')}>Copper for me</Link>
             </div>
             <p className="cf-logo-sub">Daily Scrap Learning</p>
           </div>
           <div className="cf-nav-links">
-            <Link href={to('/')}>Home</Link>
-            {fixedCategoryNav.map((cat) => (
-              <Link key={cat.slug} href={to(`/category/${cat.slug}`)}>
-                {cat.label}
-              </Link>
-            ))}
+            <Link href={to('/')}>HOME</Link>
+            <Link href={to('/category/info')}>相場記事</Link>
+            <Link href={to('/category/index')}>指標記事</Link>
+            <Link href={to('/learn/copper-price-basics')}>銅を見るポイント</Link>
+            <Link href={to('/supply-chain')}>サプライチェーン</Link>
+            <Link href={to('/category/about')}>このサイトについて</Link>
           </div>
           <details className="cf-nav-mobile">
             <summary>Menu</summary>
             <div className="cf-nav-mobile-panel">
-              <Link href={to('/')}>Home</Link>
+              <Link href={to('/')}>HOME</Link>
+              <Link href={to('/category/info')}>相場記事</Link>
+              <Link href={to('/category/index')}>指標記事</Link>
+              <Link href={to('/learn/copper-price-basics')}>銅を見るポイント</Link>
+              <Link href={to('/supply-chain')}>サプライチェーン</Link>
+              <Link href={to('/category/about')}>このサイトについて</Link>
               <Link href={to(`/?driver=${driverFilter}&horizon=1m#conclusion`)} scroll={false}>
                 1ヶ月軸の結論
               </Link>
@@ -1156,11 +1147,6 @@ export default async function SiteHomePage({
               <a href="#other-indicators">
                 その他指標
               </a>
-              {fixedCategoryNav.map((cat) => (
-                <Link key={`mobile-${cat.slug}`} href={to(`/category/${cat.slug}`)}>
-                  {cat.label}
-                </Link>
-              ))}
             </div>
           </details>
         </div>
@@ -1186,36 +1172,28 @@ export default async function SiteHomePage({
                     ? ` / 表示基準日: ${new Date(economyBundle.cacheBucketJst).toLocaleDateString('ja-JP')}`
                     : ''}
                 </p>
+                <div className="cf-quick-links" aria-label="参考情報へのリンク">
+                  <span
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      minHeight: 32,
+                      padding: '6px 2px 6px 0',
+                      color: '#64748b',
+                      fontSize: '0.78rem',
+                      fontWeight: 700,
+                    }}
+                  >
+                    参考情報:
+                  </span>
+                  <Link href={to('/learn/copper-price-basics')}>銅価格を知るうえで見るポイント →</Link>
+                  <Link href={to('/supply-chain')}>サプライチェーン →</Link>
+                </div>
                 <div className="cf-today-updates">
                   <div className="cf-today-updates-head">
-                    <p className="cf-today-updates-title">最新記事・主要指標</p>
-                    <p className="cf-kpi-note">※ 市場休場日や統計の更新頻度により、指標の日付は当日以外になる場合があります。</p>
+                    <p className="cf-today-updates-title">このページの見方・更新情報</p>
                   </div>
-                  <ul className="cf-today-updates-list">
-                    {featured ? (
-                      <li key={`today-latest-post-${featured.id}`} className="cf-today-item-featured">
-                        <Link href={to(`/blog/${featured.slug || featured.id}`)}>最新記事: {featured.title}</Link>
-                      </li>
-                    ) : null}
-                    {updateItemsToShow.length ? (
-                      updateItemsToShow.map((item, idx) => (
-                        <li key={`today-update-${idx}-${item.id}`}>
-                          <Link
-                            href={
-                              decisionIndicatorIdSet.has(item.id)
-                                ? to(`/?driver=${driverFilter}&horizon=${horizon}#indicator-${item.id}`)
-                                : to(`/?driver=all&horizon=${horizon}&show=all#all-indicators`)
-                            }
-                          >
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))
-                    ) : null}
-                  </ul>
-                </div>
-                <div className="cf-card cf-insight-card" style={{ marginTop: '12px' }}>
-                  <h4>更新方針</h4>
+                  <p className="cf-kpi-note">※ 市場休場日や統計の更新頻度により、指標の日付は当日以外になる場合があります。</p>
                   <p className="cf-kpi-note">取得時刻: 原則 毎日12:00 JST（キャッシュ更新）</p>
                   <p className="cf-kpi-note">
                     取得失敗時は直近値を表示。詳細は
@@ -1224,6 +1202,31 @@ export default async function SiteHomePage({
                     {' '}
                     を参照。
                   </p>
+                  {featured ? (
+                    <p className="cf-today-updates-latest">
+                      <Link href={to(`/blog/${featured.slug || featured.id}`)}>最新記事: {featured.title}</Link>
+                    </p>
+                  ) : null}
+                  {updateItemsToShow.length ? (
+                    <details className="cf-today-updates-detail">
+                      <summary>主要指標の最新日付（抜粋）</summary>
+                      <ul className="cf-today-updates-list">
+                        {updateItemsToShow.map((item, idx) => (
+                          <li key={`today-update-${idx}-${item.id}`}>
+                            <Link
+                              href={
+                                decisionIndicatorIdSet.has(item.id)
+                                  ? to(`/?driver=${driverFilter}&horizon=${horizon}#indicator-${item.id}`)
+                                  : to(`/?driver=all&horizon=${horizon}&show=all#all-indicators`)
+                              }
+                            >
+                              {item.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  ) : null}
                 </div>
                 {announcements.length ? (
                   <div className="cf-card cf-insight-card" style={{ marginTop: '12px' }}>
@@ -1237,6 +1240,66 @@ export default async function SiteHomePage({
                     </ul>
                   </div>
                 ) : null}
+                <div className="cf-card cf-econ-card cf-stock-chart-card cf-price-overview-card" style={{ marginTop: '12px' }}>
+                  <h4>最新の価格は？</h4>
+                  <p className="cf-kpi-note">LME / 国内建値 / 為替</p>
+                  <div className="cf-dual-price">
+                    <div className="cf-dual-price-item">
+                      <p className="cf-kpi-note">LME</p>
+                      <p className="cf-kpi-note">
+                        前回比:
+                        <span
+                          className={`cf-change-pill ${
+                            parsePct(lmeFallbackChangePercent || undefined) === null
+                              ? 'neutral'
+                              : String(lmeFallbackChangePercent || '').startsWith('+')
+                                ? 'up'
+                                : 'down'
+                          }`}
+                        >
+                          {lmeFallbackChangePercent || '-'}
+                        </span>
+                      </p>
+                      <div className="cf-kpi-value-row">
+                        <p className="cf-kpi-value">{lmeHeadlineValue}</p>
+                        <small className="cf-kpi-unit">{lmeUnitLabel}</small>
+                      </div>
+                      <p className="cf-kpi-note">{formatYmd(lmeDisplayDate)}</p>
+                    </div>
+                    <div className="cf-dual-price-item">
+                      <p className="cf-kpi-note">USD/JPY</p>
+                      <p className="cf-kpi-note">
+                        前日比:
+                        <span
+                          className={`cf-change-pill ${changeClass(parsePct(usdJpyIndicatorFallback?.changePercent))}`}
+                        >
+                          {usdJpyIndicatorFallback?.changePercent || '-'}
+                        </span>
+                      </p>
+                      <div className="cf-kpi-value-row">
+                        <p className="cf-kpi-value">{usdJpyValue || '-'}</p>
+                        <small className="cf-kpi-unit">
+                          {normalizeUnitLabel(usdJpyIndicatorFallback?.units || 'JPY/USD')}
+                        </small>
+                      </div>
+                      <p className="cf-kpi-note">{formatYmd(usdJpyIndicatorFallback?.date)}</p>
+                    </div>
+                    <div className="cf-dual-price-item">
+                      <p className="cf-kpi-note">国内建値</p>
+                      <p className="cf-kpi-note">
+                        前回比:
+                        <span className={`cf-change-pill ${changeClass(tateChangePctDisplay)}`}>
+                          {fmtPct(tateChangePctDisplay)}
+                        </span>
+                      </p>
+                      <div className="cf-kpi-value-row">
+                        <p className="cf-kpi-value">{tateValue}</p>
+                        <small className="cf-kpi-unit">JPY/mt</small>
+                      </div>
+                      <p className="cf-kpi-note">{formatYmd(tateDisplayDate)}</p>
+                    </div>
+                  </div>
+                </div>
                 <TateneCalculatorCard
                   lmeOptions={lmeCalcOptions}
                   usdJpyOptions={usdJpyCalcOptions}
@@ -1250,9 +1313,8 @@ export default async function SiteHomePage({
             <section id="overview" className="cf-pyramid-group">
               <div className="cf-pyramid-head">
                 <p className="cf-pyramid-label">Overview</p>
-                <h3>まず結論を把握する</h3>
                 <p className="cf-kpi-note">
-                  最重要KPI（LME・国内建値・要因バイアス）を先に確認し、数秒で意思決定の方向感を掴む。
+                  最重要KPI（LME・国内建値・要因バイアス）を確認し、意思決定の方向感を掴む。
                 </p>
               </div>
             <section id="conclusion" className="cf-latest cf-focus-section">
@@ -1293,66 +1355,6 @@ export default async function SiteHomePage({
                 </div>
               </div>
               <div className="cf-dashboard-top">
-                <article className="cf-card cf-econ-card cf-stock-chart-card">
-                  <h4>最新の価格は？</h4>
-                  <p className="cf-kpi-note">LME / 国内建値 / 為替</p>
-                  <div className="cf-dual-price">
-                    <div className="cf-dual-price-item">
-                      <p className="cf-kpi-note">LME</p>
-                      <p className="cf-kpi-note">
-                        前回比:
-                        <span
-                          className={`cf-change-pill ${
-                            parsePct(lmeFallbackChangePercent || undefined) === null
-                              ? 'neutral'
-                              : String(lmeFallbackChangePercent || '').startsWith('+')
-                                ? 'up'
-                                : 'down'
-                          }`}
-                        >
-                          {lmeFallbackChangePercent || '-'}
-                        </span>
-                      </p>
-                      <div className="cf-kpi-value-row">
-                        <p className="cf-kpi-value">{lmeHeadlineValue}</p>
-                        <small className="cf-kpi-unit">{lmeUnitLabel}</small>
-                      </div>
-                      <p className="cf-kpi-note">{formatYmd(lmeDisplayDate)}</p>
-                    </div>
-                    <div className="cf-dual-price-item">
-                      <p className="cf-kpi-note">国内建値</p>
-                      <p className="cf-kpi-note">
-                        前回比:
-                        <span className={`cf-change-pill ${changeClass(tateChangePctDisplay)}`}>
-                          {fmtPct(tateChangePctDisplay)}
-                        </span>
-                      </p>
-                      <div className="cf-kpi-value-row">
-                        <p className="cf-kpi-value">{tateValue}</p>
-                        <small className="cf-kpi-unit">JPY/mt</small>
-                      </div>
-                      <p className="cf-kpi-note">{formatYmd(tateDisplayDate)}</p>
-                    </div>
-                    <div className="cf-dual-price-item">
-                      <p className="cf-kpi-note">USD/JPY</p>
-                      <p className="cf-kpi-note">
-                        前日比:
-                        <span
-                          className={`cf-change-pill ${changeClass(parsePct(usdJpyIndicatorFallback?.changePercent))}`}
-                        >
-                          {usdJpyIndicatorFallback?.changePercent || '-'}
-                        </span>
-                      </p>
-                      <div className="cf-kpi-value-row">
-                        <p className="cf-kpi-value">{usdJpyValue || '-'}</p>
-                        <small className="cf-kpi-unit">
-                          {normalizeUnitLabel(usdJpyIndicatorFallback?.units || 'JPY/USD')}
-                        </small>
-                      </div>
-                      <p className="cf-kpi-note">{formatYmd(usdJpyIndicatorFallback?.date)}</p>
-                    </div>
-                  </div>
-                </article>
                 <article className="cf-card cf-econ-card cf-stock-chart-card">
                   <h4>今後上昇？下降？（要因スコア）</h4>
                   <p className={`cf-kpi-value cf-bias-value ${biasClass}`}>{biasLabel}</p>
@@ -1475,183 +1477,10 @@ export default async function SiteHomePage({
             <section id="context" className="cf-pyramid-group">
               <div className="cf-pyramid-head">
                 <p className="cf-pyramid-label">Context</p>
-                <h3>背景と相関を確認する</h3>
                 <p className="cf-kpi-note">
                   価格・為替・在庫・主要マクロの関係性を見て、「なぜ今の結論なのか」を確認する。
                 </p>
               </div>
-            <section id="market-guide" className="cf-latest cf-focus-section">
-              <div className="cf-latest-head">
-                <h3>銅価格を知るうえで見るポイント</h3>
-              </div>
-              <div className="cf-guide-block">
-                <h4>まず押さえる3つのポイント</h4>
-                <p className="cf-kpi-note">
-                  この3つを日次で見れば、仕入れ・在庫・売値判断の精度が上がる。
-                </p>
-
-                <h5>POINT 1: LME銅価格</h5>
-                <ol className="cf-guide-list">
-                  <li>
-                    <p className="cf-qa-q">Q. LMEってなに？</p>
-                    <p className="cf-qa-a">
-                      A. London Metal Exchange。非鉄金属の国際取引所で、銅の世界価格を判断する
-                      もっとも基本的な基準点。
-                    </p>
-                  </li>
-                  <li>
-                    <p className="cf-qa-q">Q. 日本価格への影響は？</p>
-                    <p className="cf-qa-a">
-                      A. 国内建値はLME価格と為替を土台に決まるため、LMEが上がる局面では
-                      日本の仕入れ価格にも上昇圧力がかかりやすい。
-                    </p>
-                  </li>
-                  <li>
-                    <p className="cf-qa-q">Q. LMEの見方は？</p>
-                    <p className="cf-qa-a">
-                      A. 「価格水準」と「直近の増減」をセットで見る。さらに在庫や為替と合わせると、
-                      単なる一時的な上下か、トレンド変化かを判別しやすくなる。
-                    </p>
-                  </li>
-                  <li className="cf-latest-row">
-                    <span className="cf-latest-label">最新値:</span>
-                    <span className="cf-latest-value">{lmeHeadlineValue}</span>
-                    <span className="cf-latest-unit">{lmeUnitLabel}</span>
-                    <span className="cf-latest-date">（{formatYmd(lmeDisplayDate)}）</span>
-                  </li>
-                </ol>
-
-                <h5>POINT 2: USD/JPY</h5>
-                <ol className="cf-guide-list">
-                  <li>
-                    <p className="cf-qa-q">Q. 為替ってなに？</p>
-                    <p className="cf-qa-a">
-                      A. 1ドルを買うのに必要な円の価格。銅はドル建てで取引されるため、日本では
-                      為替の影響を強く受ける。
-                    </p>
-                  </li>
-                  <li>
-                    <p className="cf-qa-q">Q. 日本価格への影響は？</p>
-                    <p className="cf-qa-a">
-                      A. 円安（USD/JPY上昇）ほど輸入コストが上がり、建値の上昇要因になりやすい。
-                      円高は逆にコスト低下要因として働く。
-                    </p>
-                  </li>
-                  <li>
-                    <p className="cf-qa-q">Q. 為替の見方は？</p>
-                    <p className="cf-qa-a">
-                      A. 日次の向きだけでなく、節目となる価格帯（例: 150円台）を確認する。
-                      短期のブレと中期の方向を分けて見ると、仕入れ判断が安定する。
-                    </p>
-                  </li>
-                  <li className="cf-latest-row">
-                    <span className="cf-latest-label">最新値:</span>
-                    <span className="cf-latest-value">{usdJpyValue}</span>
-                    <span className="cf-latest-unit">{normalizeUnitLabel(usdJpyIndicatorFallback?.units || 'JPY/USD')}</span>
-                    <span className="cf-latest-date">（{formatYmd(usdJpyIndicatorFallback?.date)}）</span>
-                  </li>
-                </ol>
-
-                <h5>POINT 3: Warrant / Off-warrant</h5>
-                <ol className="cf-guide-list">
-                  <li>
-                    <p className="cf-qa-q">Q. Warrant / Off-warrantとは？</p>
-                    <p className="cf-qa-a">
-                      A. Warrantは「すぐ引き渡し可能な在庫」、
-                      Off-warrantは「倉庫にはあるが市場に出ていない潜在在庫」。
-                    </p>
-                  </li>
-                  <li>
-                    <p className="cf-qa-q">Q. 日本価格への影響は？</p>
-                    <p className="cf-qa-a">
-                      A. Warrant減少は目先の供給ひっ迫を示し、上昇圧力になりやすい。
-                      逆にOff-warrant増加は将来の供給余力を示し、下押し要因として意識される。
-                    </p>
-                  </li>
-                  <li>
-                    <p className="cf-qa-q">Q. 見方は？</p>
-                    <p className="cf-qa-a">
-                      A. 短期はWarrant（日次）で需給の温度感を確認。中期はOff-warrant（月次）と
-                      Warrant比率を合わせて、供給余力の積み上がりを読む。
-                    </p>
-                  </li>
-                  <li>
-                    <div className="cf-latest-row">
-                      <span className="cf-latest-label">最新値:</span>
-                      <span className="cf-latest-name">Warrant</span>
-                      <span className="cf-latest-value">
-                        {warrantDashboard.warrant.latest
-                          ? formatIndicatorValue(String(warrantDashboard.warrant.latest.value))
-                          : '-'}
-                      </span>
-                      <span className="cf-latest-unit">t</span>
-                      <span className="cf-latest-date">（{formatYmd(warrantDashboard.warrant.latest?.date)}）</span>
-                    </div>
-                    <p className="cf-latest-detail">
-                      前日比: {fmtPct(warrantDashboard.warrant.diffPct1d)} / 7日比: {fmtPct(warrantDashboard.warrant.diffPct7d)}
-                    </p>
-                    <div className="cf-latest-row">
-                      <span className="cf-latest-label">最新値:</span>
-                      <span className="cf-latest-name">Off-warrant</span>
-                      <span className="cf-latest-value">
-                        {warrantDashboard.offWarrant.latest
-                          ? formatIndicatorValue(String(warrantDashboard.offWarrant.latest.value))
-                          : '-'}
-                      </span>
-                      <span className="cf-latest-unit">t</span>
-                      <span className="cf-latest-date">（{formatYearMonth(warrantDashboard.offWarrant.latest?.month)}）</span>
-                    </div>
-                    <p className="cf-latest-detail">
-                      前月比: {fmtPct(warrantDashboard.offWarrant.diffPctMoM)}
-                    </p>
-                  </li>
-                </ol>
-
-                <h5>その他</h5>
-                <ul className="cf-guide-list">
-                  <li>
-                    銅の流れ: 鉱山→精錬→電線・建設・EV・家電→スクラップ回収→銅市場へ。
-                    この循環のどこで詰まりが起きるかが、価格変動の起点になる。
-                  </li>
-                  <li>
-                    国内で見るべき指標: 建値、円相場、国内在庫回転、需要先の稼働感。
-                    実務では「いくらで買えるか」と「いつ売れるか」の両方を同時に見る。
-                  </li>
-                  <li>
-                    海外で見るべき指標: LME在庫、米中景気指標、エネルギー価格、生産国動向（チリ・ペルーなど）。
-                    海外指標は国内価格の先行シグナルとして機能しやすい。
-                  </li>
-                </ul>
-
-                <h5>そもそも銅とは？（身近な銅）</h5>
-                <ul className="cf-guide-list">
-                  <li>
-                    銅は「電気を通しやすい」「加工しやすい」「再利用しやすい」金属。電線・住宅配線・モーター・家電・給湯器など、
-                    生活インフラの中核で使われる。
-                  </li>
-                  <li>
-                    身近なところでは、エアコン配管、電源ケーブル、ブレーカー周辺、EVやハイブリッド車の配線などに多く使われる。
-                    景気・建設・電力投資の影響を受けやすい金属でもある。
-                  </li>
-                  <li>
-                    スクラップ市場では「建値」「為替」「在庫」の3点を押さえると、仕入れ・在庫・売値判断の精度が上がる。
-                    数字と現場感の両方を見ることが実務では重要。
-                  </li>
-                </ul>
-                <div className="cf-field-gallery">
-                  {copperFieldPhotos.map((src, idx) => (
-                    <figure key={src} className="cf-field-photo-card">
-                      <img src={src} alt={`現場の銅材写真 ${idx + 1}`} loading="lazy" />
-                    </figure>
-                  ))}
-                </div>
-                <p className="cf-kpi-note cf-field-gallery-note">
-                  現場で扱う銅材は、太さ・被覆・混在状況で実務価値が変わる。
-                  相場データに加えて、実物の状態を毎日確認することが仕入れ精度の底上げにつながる。
-                </p>
-              </div>
-            </section>
-
             {adsEnabled ? (
               <section className="cf-latest">
                 <AdSlot slot={adSlotTop} label="トップ広告" />
@@ -2026,14 +1855,13 @@ export default async function SiteHomePage({
             <section id="details" className="cf-pyramid-group">
               <div className="cf-pyramid-head">
                 <p className="cf-pyramid-label">Details</p>
-                <h3>個別指標を深堀り</h3>
                 <p className="cf-kpi-note">
                   期間別フィルタと各カード詳細で、現場判断に必要な根拠を掘り下げる。
                 </p>
               </div>
             <section id="other-indicators" className="cf-latest cf-focus-section">
               <div className="cf-latest-head">
-                <h3>その他指標</h3>
+                <h3>指標</h3>
               </div>
 
               <div className="cf-dashboard-body cf-dashboard-body--single">
@@ -2222,64 +2050,45 @@ export default async function SiteHomePage({
           </>
         ) : null}
 
-        {featured ? (
-          <section className="cf-featured cf-articles-start">
-            <div className="cf-latest-head">
-              <h3>注目記事</h3>
-            </div>
-            <div className="cf-featured-card">
-              <div className="cf-featured-card-layout">
-                <div className="cf-featured-card-image">
-                  <SafeImage
-                    src={resolveCardImage(featured.coverImage?.url, fallbackImages[0], featured.slug)}
-                    fallback={fallbackImages[0]}
-                    alt={featured.title}
-                  />
-                </div>
-                <div className="cf-featured-card-content">
-                  <p className="cf-post-cat">{featured.categories?.[0]?.name || 'Featured'}</p>
-                  <h2>
-                    <Link href={to(`/blog/${featured.slug || featured.id}`)}>{featured.title}</Link>
-                  </h2>
-                  <p>{featured.excerpt || '最新の市場インサイトを深く読み解く特集記事です。'}</p>
-                  <Link href={to(`/blog/${featured.slug || featured.id}`)}>Read Article ↗</Link>
-                </div>
+        {(() => {
+          const articleItems = [featured, ...others].filter(Boolean).slice(0, 3) as Array<(typeof others)[number]>;
+          if (!articleItems.length) return null;
+          return (
+            <section className="cf-featured cf-articles-start">
+              <div className="cf-pyramid-head" style={{ marginBottom: 18 }}>
+                <p className="cf-pyramid-label">ARTICLE</p>
+                <p className="cf-kpi-note">相場・指標記事</p>
               </div>
-            </div>
-          </section>
-        ) : null}
-
-        <section className="cf-latest">
-          <div className="cf-latest-head">
-            <h3>最新記事</h3>
-          </div>
-          <div className="cf-grid">
-            {others.map((post, index) => (
-              <article key={post.id} className="cf-card">
-                <div className="cf-card-image">
-                  <SafeImage
-                    src={resolveCardImage(
-                      post.coverImage?.url,
-                      fallbackImages[(index + 1) % fallbackImages.length],
-                      post.slug
-                    )}
-                    fallback={fallbackImages[(index + 1) % fallbackImages.length]}
-                    alt={post.title}
-                  />
-                </div>
-                <div className="cf-meta">
-                  <span>{post.categories?.[0]?.name || 'Article'}</span>
-                  <small>{formatDate(post.publishedAt)}</small>
-                </div>
-                <h4>
-                  <Link href={to(`/blog/${post.slug || post.id}`)}>{post.title}</Link>
-                </h4>
-                <p>{post.excerpt || '詳しくは記事本文をご覧ください。'}</p>
-                <Link href={to(`/blog/${post.slug || post.id}`)}>読む</Link>
-              </article>
-            ))}
-          </div>
-        </section>
+              <div style={{ display: 'grid', gap: 14 }}>
+                {articleItems.map((post, index) => (
+                  <div key={post.id} className="cf-featured-card">
+                    <div className="cf-featured-card-layout">
+                      <div className="cf-featured-card-image">
+                        <SafeImage
+                          src={resolveCardImage(
+                            post.coverImage?.url,
+                            fallbackImages[index % fallbackImages.length],
+                            post.slug
+                          )}
+                          fallback={fallbackImages[index % fallbackImages.length]}
+                          alt={post.title}
+                        />
+                      </div>
+                      <div className="cf-featured-card-content">
+                        <p className="cf-post-cat">{post.categories?.[0]?.name || 'Article'}</p>
+                        <h2>
+                          <Link href={to(`/blog/${post.slug || post.id}`)}>{post.title}</Link>
+                        </h2>
+                        <p>{post.excerpt || '詳しくは記事本文をご覧ください。'}</p>
+                        <Link href={to(`/blog/${post.slug || post.id}`)}>Read Article ↗</Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
       </main>
 
       <footer className="cf-footer">
