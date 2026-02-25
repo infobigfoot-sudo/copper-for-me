@@ -977,9 +977,18 @@ export default async function SiteHomePage({
       id: ind.id,
       label: `${displayIndicatorName(ind.name)}（${formatYmd(ind.lastUpdated || ind.date)}）`
     }));
-  const updateItemsToShow = todayOrYesterdayItems.length
+  const baseUpdateItems = todayOrYesterdayItems.length
     ? todayOrYesterdayItems
     : latestUpdatedItems.slice(0, 4);
+  const lmeOverviewItem = lmeIndicator
+    ? {
+        id: lmeIndicator.id,
+        label: `${displayIndicatorName(lmeIndicator.name)}（${formatYmd(lmeIndicator.date)}）`
+      }
+    : null;
+  const updateItemsToShow = (lmeOverviewItem ? [lmeOverviewItem, ...baseUpdateItems] : baseUpdateItems).filter(
+    (item, idx, arr) => arr.findIndex((x) => x.id === item.id) === idx
+  );
   const decisionIndicatorIdSet = new Set(decisionIndicatorsToShow.map((ind) => ind.id));
   const fixedCategoryNav = [
     { slug: 'info', label: '相場情報' },
