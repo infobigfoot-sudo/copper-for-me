@@ -1210,8 +1210,11 @@ export default async function SiteHomePage({
                           {lmeFallbackChangePercent || '-'}
                         </span>
                       </p>
-                      <p className="cf-kpi-value">{lmeHeadlineValue}</p>
-                      <p className="cf-kpi-note">{lmeUnitLabel} ・ {formatYmd(lmeDisplayDate)}</p>
+                      <div className="cf-kpi-value-row">
+                        <p className="cf-kpi-value">{lmeHeadlineValue}</p>
+                        <small className="cf-kpi-unit">{lmeUnitLabel}</small>
+                      </div>
+                      <p className="cf-kpi-note">{formatYmd(lmeDisplayDate)}</p>
                     </div>
                     <div className="cf-dual-price-item">
                       <p className="cf-kpi-note">国内建値</p>
@@ -1221,8 +1224,11 @@ export default async function SiteHomePage({
                           {fmtPct(warrantDashboard.copperTate.diffPct1d)}
                         </span>
                       </p>
-                      <p className="cf-kpi-value">{tateValue}</p>
-                      <p className="cf-kpi-note">JPY/mt ・ {formatYmd(warrantDashboard.copperTate.latest?.date)}</p>
+                      <div className="cf-kpi-value-row">
+                        <p className="cf-kpi-value">{tateValue}</p>
+                        <small className="cf-kpi-unit">JPY/mt</small>
+                      </div>
+                      <p className="cf-kpi-note">{formatYmd(warrantDashboard.copperTate.latest?.date)}</p>
                     </div>
                   </div>
                   <p className="cf-kpi-note">為替（USD/JPY）: {usdJpyValue}</p>
