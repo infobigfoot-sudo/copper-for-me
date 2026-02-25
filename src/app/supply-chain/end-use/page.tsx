@@ -67,7 +67,17 @@ function sumSeriesByDate(seriesList: Point[][]): Point[] {
 
 async function loadEndUseMetiCopperProxy() {
   const dir = path.join(process.cwd(), '..', '..', 'stock-data-processor', 'data', 'japan', 'METI_COPPER');
-  const files = (await fs.readdir(dir)).filter((f) => /^meti_copper_long_\d{4}\.csv$/.test(f)).sort();
+  let files: string[] = [];
+  try {
+    files = (await fs.readdir(dir)).filter((f) => /^meti_copper_long_\d{4}\.csv$/.test(f)).sort();
+  } catch {
+    // Vercel本番にはローカル集計元ディレクトリが存在しないため、空データで継続する。
+    return {
+      wireRod: [],
+      copperProducts: [],
+      brassProducts: [],
+    };
+  }
 
   const buckets: Record<string, Point[]> = {
     wireRod: [],
@@ -80,7 +90,12 @@ async function loadEndUseMetiCopperProxy() {
   const wireRodNames = new Set(['銅裸線(電線メーカー向け心線)', '銅裸線(ユーザー向け)']);
 
   for (const file of files) {
-    const raw = await fs.readFile(path.join(dir, file), 'utf-8');
+    let raw = '';
+    try {
+      raw = await fs.readFile(path.join(dir, file), 'utf-8');
+    } catch {
+      continue;
+    }
     const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
     const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
     const idx = {
