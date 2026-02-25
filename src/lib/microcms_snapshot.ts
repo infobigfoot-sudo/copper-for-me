@@ -184,3 +184,38 @@ export async function readLatestEconomySnapshotFromMicrocms(): Promise<EconomyBu
     alpha
   };
 }
+
+export async function readRecentIndicatorValuesFromEconomySnapshots(
+  indicatorId: string,
+  limit = 10
+): Promise<Indicator[]> {
+  const cfg = getSnapshotConfig();
+  if (!cfg.serviceDomain || !cfg.endpoint || !cfg.apiKey) return [];
+
+  const safeLimit = Math.min(Math.max(limit, 1), 50);
+  const res = await fetch(
+    toUrl(cfg.serviceDomain, cfg.endpoint, `?orders=-date&limit=${safeLimit}`),
+    {
+      headers: { 'X-MICROCMS-API-KEY': cfg.apiKey },
+      cache: 'no-store'
+    }
+  );
+  if (!res.ok) return [];
+  const data = (await res.json()) as { contents?: Array<Record<string, unknown>> };
+  const rows = data?.contents || [];
+  const hits: Indicator[] = [];
+  const seenDates = new Set<string>();
+
+  for (const row of rows) {
+    const indicators = parseJsonField<Indicator[]>(row.indicators, []);
+    const hit = indicators.find((ind) => String(ind?.id || '') === indicatorId);
+    if (!hit) continue;
+    const key = String(hit.date || row.date || '').trim();
+    if (key && seenDates.has(key)) continue;
+    if (key) seenDates.add(key);
+    hits.push(hit);
+    if (hits.length >= 2) break;
+  }
+
+  return hits;
+}

@@ -6,6 +6,7 @@ import AdSlot from '@/components/AdSlot';
 import TradingViewMarketOverview from '@/components/TradingViewMarketOverview';
 import SafeImage from '@/components/SafeImage';
 import { getAnnouncements, getCategories, getPosts, getSiteSettings } from '@/lib/microcms';
+import { readRecentIndicatorValuesFromEconomySnapshots } from '@/lib/microcms_snapshot';
 import { formatIndicatorValue, getEconomyIndicators } from '@/lib/economy';
 import { SITE_KEYS, normalizeSite, siteLabel, sitePath } from '@/lib/site';
 import { getWarrantDashboardData } from '@/lib/warrant_dashboard';
@@ -775,6 +776,16 @@ export default async function SiteHomePage({
   const offDeltaPct =
     offBars.first !== 0 ? ((offBars.last - offBars.first) / Math.abs(offBars.first)) * 100 : null;
   const tone: Tone = 'beginner';
+  const lmeRecentFromSnapshots = await readRecentIndicatorValuesFromEconomySnapshots('lme_copper_jpy').catch(() => []);
+  const lmeFallbackChangePercent = (() => {
+    if ((lmeIndicator?.changePercent || '').trim()) return lmeIndicator?.changePercent || null;
+    const latest = lmeRecentFromSnapshots[0];
+    const prev = lmeRecentFromSnapshots[1];
+    const latestVal = parseNum(latest?.value);
+    const prevVal = parseNum(prev?.value);
+    if (latestVal === null || prevVal === null || prevVal === 0) return null;
+    return fmtPct(((latestVal - prevVal) / Math.abs(prevVal)) * 100);
+  })();
   const driverRaw = String(query.driver || 'all').toLowerCase();
   const driverFilter: 'all' | 'bullish' | 'bearish' =
     driverRaw === 'bullish' || driverRaw === 'bearish' ? (driverRaw as 'bullish' | 'bearish') : 'all';
@@ -1175,14 +1186,14 @@ export default async function SiteHomePage({
                         前回比:
                         <span
                           className={`cf-change-pill ${
-                            parsePct(lmeIndicator?.changePercent) === null
+                            parsePct(lmeFallbackChangePercent || undefined) === null
                               ? 'neutral'
-                              : String(lmeIndicator?.changePercent || '').startsWith('+')
+                              : String(lmeFallbackChangePercent || '').startsWith('+')
                                 ? 'up'
                                 : 'down'
                           }`}
                         >
-                          {lmeIndicator?.changePercent || '-'}
+                          {lmeFallbackChangePercent || '-'}
                         </span>
                       </p>
                       <p className="cf-kpi-value">{lmeValue}</p>
@@ -1476,14 +1487,14 @@ export default async function SiteHomePage({
                     前回比:
                     <span
                       className={`cf-change-pill ${
-                        parsePct(lmeIndicator?.changePercent) === null
+                        parsePct(lmeFallbackChangePercent || undefined) === null
                           ? 'neutral'
-                          : String(lmeIndicator?.changePercent || '').startsWith('+')
+                          : String(lmeFallbackChangePercent || '').startsWith('+')
                             ? 'up'
                             : 'down'
                       }`}
                     >
-                      {lmeIndicator?.changePercent || '-'}
+                      {lmeFallbackChangePercent || '-'}
                     </span>
                   </p>
                   <div className="cf-econ-value-row">
