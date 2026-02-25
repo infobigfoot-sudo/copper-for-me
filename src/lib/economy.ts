@@ -927,6 +927,9 @@ export async function getEconomyIndicatorsLive(opts?: { force?: boolean }): Prom
 
 export async function getEconomyIndicators(): Promise<EconomyBundle> {
   const isProd = process.env.NODE_ENV === 'production';
+  const prodAllowLocalSnapshotFallback = String(process.env.ECONOMY_PROD_ALLOW_LOCAL_SNAPSHOT_FALLBACK || '')
+    .trim()
+    .toLowerCase() === 'true';
   if (isProd) {
     const remoteSnapshot = await readLatestEconomySnapshotFromMicrocms().catch(() => null);
     if (remoteSnapshot && (remoteSnapshot.fred.length || remoteSnapshot.alpha.length)) {
@@ -934,9 +937,12 @@ export async function getEconomyIndicators(): Promise<EconomyBundle> {
       await writeCache(remoteSnapshot);
       return remoteSnapshot;
     }
-    const snapshot = await readSnapshot();
-    if (snapshot && (snapshot.fred.length || snapshot.alpha.length)) {
-      return snapshot;
+    // 本番表示は microCMS を正とする。障害時の一時回避だけ env で local snapshot fallback を許可。
+    if (prodAllowLocalSnapshotFallback) {
+      const snapshot = await readSnapshot();
+      if (snapshot && (snapshot.fred.length || snapshot.alpha.length)) {
+        return snapshot;
+      }
     }
   } else {
     const snapshot = await readSnapshot();
@@ -953,7 +959,8 @@ export async function getEconomyIndicators(): Promise<EconomyBundle> {
   const liveFallbackEnabled = String(process.env.ECONOMY_ALLOW_LIVE_FALLBACK || '')
     .trim()
     .toLowerCase() === 'true';
-  if (liveFallbackEnabled) {
+  // 本番表示では live API fallback を避け、データの正を microCMS に寄せる。
+  if (liveFallbackEnabled && !isProd) {
     return getEconomyIndicatorsLive();
   }
   const cachedAny = await readCacheAny();
