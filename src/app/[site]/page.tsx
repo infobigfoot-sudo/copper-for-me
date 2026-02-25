@@ -1397,8 +1397,11 @@ export default async function SiteHomePage({
                 </article>
               </div>
               <div className="cf-dashboard-bottom">
-                <article className="cf-card cf-econ-card">
-                  <h4>上昇圧力ステータス（指標一覧）</h4>
+                <details className="cf-card cf-econ-card cf-status-accordion">
+                  <summary>
+                    <span>上昇圧力ステータス（指標一覧）</span>
+                    <small>{statusUpIndicators.length}件</small>
+                  </summary>
                   <ul className="cf-status-ind-list">
                     {statusUpIndicators.map((ind) => (
                       <li key={ind.key}>
@@ -1427,9 +1430,12 @@ export default async function SiteHomePage({
                     ))}
                   </ul>
                   <p className="cf-kpi-note">ゲージは変化率の強さ（0%中心、目安±5%で最大）。実数値は上段に表示。</p>
-                </article>
-                <article className="cf-card cf-econ-card">
-                  <h4>下落圧力ステータス（指標一覧）</h4>
+                </details>
+                <details className="cf-card cf-econ-card cf-status-accordion">
+                  <summary>
+                    <span>下落圧力ステータス（指標一覧）</span>
+                    <small>{statusDownIndicators.length}件</small>
+                  </summary>
                   <ul className="cf-status-ind-list">
                     {statusDownIndicators.map((ind) => (
                       <li key={ind.key}>
@@ -1458,7 +1464,7 @@ export default async function SiteHomePage({
                     ))}
                   </ul>
                   <p className="cf-kpi-note">ゲージは変化率の強さ（0%中心、目安±5%で最大）。実数値は上段に表示。</p>
-                </article>
+                </details>
               </div>
             </section>
             </section>
@@ -1653,10 +1659,6 @@ export default async function SiteHomePage({
               <div className="cf-latest-head">
                 <h3>LME価格と国内建値</h3>
               </div>
-              <p className="cf-kpi-note">
-                参照元: <a href="https://www.lme.com/" target="_blank" rel="noopener noreferrer">LME</a> /{' '}
-                <a href="https://www.jx-nmm.com/cuprice/" target="_blank" rel="noopener noreferrer">JX金属（建値）</a>
-              </p>
               <div className="cf-grid">
                 <article className="cf-card cf-econ-card">
                   <h4>LME銅（USD建て）</h4>
@@ -1738,6 +1740,10 @@ export default async function SiteHomePage({
                   </div>
                 </div>
               ) : null}
+              <p className="cf-kpi-note" style={{ marginTop: '12px' }}>
+                参照元: <a href="https://www.lme.com/" target="_blank" rel="noopener noreferrer">LME</a> /{' '}
+                <a href="https://www.jx-nmm.com/cuprice/" target="_blank" rel="noopener noreferrer">JX金属（建値）</a>
+              </p>
             </section>
 
             <section id="fx-section" className="cf-latest cf-focus-section" style={{ marginTop: '16px' }}>
@@ -1813,9 +1819,6 @@ export default async function SiteHomePage({
               <div className="cf-latest-head">
                 <h3>LME在庫　Warrant / Off-warrant</h3>
               </div>
-              <p className="cf-kpi-note">
-                参照元: <a href="https://www.lme.com/" target="_blank" rel="noopener noreferrer">LME</a>
-              </p>
               <div className="cf-grid">
                 <article className="cf-card cf-econ-card">
                   <h4>Warrant銅在庫（最新日）</h4>
@@ -2010,6 +2013,9 @@ export default async function SiteHomePage({
                   <li><strong>短期判断:</strong> warrant（日次） / <strong>中期判断:</strong> off-warrant（月次）+ warrant比率。</li>
                 </ul>
               </div>
+              <p className="cf-kpi-note" style={{ marginTop: '12px' }}>
+                参照元: <a href="https://www.lme.com/" target="_blank" rel="noopener noreferrer">LME</a>
+              </p>
             </section>
 
             </section>

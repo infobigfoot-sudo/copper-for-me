@@ -1317,6 +1317,45 @@ a:hover {
   background: #fbfcfe;
 }
 
+.cf-status-accordion summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: #40506b;
+  font-weight: 700;
+}
+
+.cf-status-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.cf-status-accordion summary::after {
+  content: '＋';
+  color: #64748b;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+.cf-status-accordion[open] summary::after {
+  content: '－';
+}
+
+.cf-status-accordion summary small {
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-left: 8px;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+
+.cf-status-accordion > .cf-status-ind-list {
+  margin-top: 10px;
+}
+
 .cf-status-ind-head {
   display: flex;
   justify-content: space-between;
