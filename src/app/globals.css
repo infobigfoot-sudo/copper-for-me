@@ -931,6 +931,9 @@ a:hover {
   display: flex;
   align-items: baseline;
   gap: 8px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .cf-econ-value {
@@ -938,11 +941,30 @@ a:hover {
   font-size: 2.15rem;
   letter-spacing: 0.02em;
   font-family: 'Avenir Next Condensed', 'Franklin Gothic Medium', sans-serif;
+  line-height: 1.05;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 .cf-econ-value-row small {
   color: #93a0b8;
   font-size: 0.85rem;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 420px) {
+  .cf-econ-value-row {
+    gap: 6px;
+  }
+
+  .cf-econ-value {
+    font-size: 1.95rem;
+    letter-spacing: 0.01em;
+  }
+
+  .cf-econ-value-row small {
+    font-size: 0.8rem;
+  }
 }
 
 .cf-econ-date {
