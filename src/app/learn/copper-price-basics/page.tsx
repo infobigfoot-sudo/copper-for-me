@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+import FooterReferenceLinks from '@/components/FooterReferenceLinks';
+import SiteFooter from '@/components/SiteFooter';
 import { formatIndicatorValue, getEconomyIndicators } from '@/lib/economy';
 import { getWarrantDashboardData } from '@/lib/warrant_dashboard';
 
@@ -73,9 +75,6 @@ export default async function CopperPriceBasicsPage() {
               <Link href="/learn/copper-price-basics">銅を見るポイント</Link>
               <Link href="/supply-chain">サプライチェーン</Link>
               <Link href="/category/about">このサイトについて</Link>
-              <Link href="/#conclusion">今日の結論</Link>
-              <Link href="/#lme-domestic">LME価格と国内建値</Link>
-              <Link href="/#inventory-section">LME在庫</Link>
             </div>
           </details>
         </div>
@@ -90,7 +89,7 @@ export default async function CopperPriceBasicsPage() {
       <main className="cf-main">
         <section className="cf-dash-hero">
           <div className="cf-dash-hero-body">
-            <h2>Market Overview</h2>
+            <h2>Copper Price Guide</h2>
             <p>銅価格を知るうえで見るポイント（LME・為替・在庫）を整理</p>
           </div>
         </section>
@@ -260,21 +259,9 @@ export default async function CopperPriceBasicsPage() {
           </div>
         </div>
       </section>
-      </main>
 
-      <footer className="cf-footer">
-        <p className="cf-footer-links">
-          <Link href="/">トップ（相場ダッシュボード）</Link>
-          <span> / </span>
-          <Link href="/supply-chain">銅サプライチェーン一覧</Link>
-          <span> / </span>
-          <Link href="/blog/disclaimer">免責事項</Link>
-        </p>
-        <p className="cf-footer-note">
-          本ページは公開データ/APIをもとに、銅価格の基本的な読み方を整理した学習ページです。最新値は更新タイミングにより当日以外の日付となる場合があります。
-        </p>
-        <p>© 2026 Copper for me. All Rights Reserved.</p>
-      </footer>
+      </main>
+      <SiteFooter />
     </div>
   );
 }

@@ -114,6 +114,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         ) : null}
 
         {children}
+        <a href="#" className="cf-scroll-top cf-scroll-top--always" aria-label="ページ上部へ戻る">
+          ↑
+        </a>
         <CookieConsentBanner />
       </body>
     </html>

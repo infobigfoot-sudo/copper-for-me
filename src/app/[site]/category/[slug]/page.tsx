@@ -5,6 +5,7 @@ import Script from 'next/script';
 
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SafeImage from '@/components/SafeImage';
+import SiteFooter from '@/components/SiteFooter';
 import { getCategories, getPostsByCategorySlug } from '@/lib/microcms';
 import { normalizeSite, sitePath, siteUrl } from '@/lib/site';
 
@@ -142,8 +143,17 @@ export default async function SiteCategoryPage({
               { label: category.name }
             ]}
           />
-          <div className="cf-latest-head">
-            <h3>{category.name}</h3>
+          <div className="cf-listing-intro" aria-label="一覧ページ情報">
+            <p className="cf-listing-intro-eyebrow">ARTICLE</p>
+            <div className="cf-listing-intro-row">
+              <div>
+                <h3 className="cf-listing-intro-title">{category.name}</h3>
+                <p className="cf-listing-intro-note">
+                  {category.name}に関する記事一覧です。銅価格の判断や指標の見方に役立つ記事をまとめています。
+                </p>
+              </div>
+              <div className="cf-listing-intro-count">全{posts.contents.length}件</div>
+            </div>
           </div>
           <div className="cf-grid">
             {posts.contents.map((post) => (
@@ -169,16 +179,11 @@ export default async function SiteCategoryPage({
           </div>
         </section>
       </main>
-      <footer className="cf-footer">
-        <p className="cf-footer-links">
-          <a href={to('/category/about')}>このサイトについて</a>
-          <span> / </span>
-          <a href={to('/blog/privacypolicy')}>プライバシーポリシー</a>
-          <span> / </span>
-          <a href={to('/blog/disclaimer')}>免責事項</a>
-        </p>
-        <p>© 2026 Copper for me. All Rights Reserved.</p>
-      </footer>
+      <SiteFooter
+        aboutHref={to('/category/about')}
+        privacyHref={to('/blog/privacypolicy')}
+        disclaimerHref={to('/blog/disclaimer')}
+      />
     </div>
   );
 }

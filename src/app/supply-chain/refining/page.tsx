@@ -24,6 +24,16 @@ function formatYmd(value?: string) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
+function fmtPct(value: number | null) {
+  if (value === null) return '-';
+  return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
+}
+
+function changeClass(value: number | null) {
+  if (value === null) return 'neutral';
+  return value >= 0 ? 'up' : 'down';
+}
+
 function toPoints(points?: Array<{ date?: string; value?: number }>): Point[] {
   return (points || [])
     .map((p) => ({ date: String(p?.date || ''), value: Number(p?.value) }))
@@ -225,19 +235,19 @@ export default async function SupplyChainRefiningPage() {
               <p style={{ margin: 0, color: '#475569', fontWeight: 700, textAlign: 'left' }}>電気銅 生産数量</p>
               <p style={{ margin: '8px 0 0', fontSize: '1.5rem' }}>{latestJpProd ? latestJpProd.value.toLocaleString('ja-JP') : '-'}</p>
               <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>t / {formatYmd(latestJpProd?.date)}</p>
-              <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>前月比: {jpProdMom === null ? '-' : `${jpProdMom >= 0 ? '+' : ''}${jpProdMom.toFixed(2)}%`}</p>
+              <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>前月比:<span className={`cf-change-pill ${changeClass(jpProdMom)}`}>{fmtPct(jpProdMom)}</span></p>
             </article>
             <article style={{ border: '1px solid #edf0f5', borderRadius: 8, padding: 8, background: '#fbfcfe', textAlign: 'right' }}>
               <p style={{ margin: 0, color: '#475569', fontWeight: 700, textAlign: 'left' }}>電気銅 販売数量</p>
               <p style={{ margin: '8px 0 0', fontSize: '1.5rem' }}>{latestJpSales ? latestJpSales.value.toLocaleString('ja-JP') : '-'}</p>
               <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>t / {formatYmd(latestJpSales?.date)}</p>
-              <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>前月比: {jpSalesMom === null ? '-' : `${jpSalesMom >= 0 ? '+' : ''}${jpSalesMom.toFixed(2)}%`}</p>
+              <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>前月比:<span className={`cf-change-pill ${changeClass(jpSalesMom)}`}>{fmtPct(jpSalesMom)}</span></p>
             </article>
             <article style={{ border: '1px solid #edf0f5', borderRadius: 8, padding: 8, background: '#fbfcfe', textAlign: 'right' }}>
               <p style={{ margin: 0, color: '#475569', fontWeight: 700, textAlign: 'left' }}>電気銅 月末在庫数量</p>
               <p style={{ margin: '8px 0 0', fontSize: '1.5rem' }}>{latestJpInv ? latestJpInv.value.toLocaleString('ja-JP') : '-'}</p>
               <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>t / {formatYmd(latestJpInv?.date)}</p>
-              <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>前月比: {jpInvMom === null ? '-' : `${jpInvMom >= 0 ? '+' : ''}${jpInvMom.toFixed(2)}%`}</p>
+              <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>前月比:<span className={`cf-change-pill ${changeClass(jpInvMom)}`}>{fmtPct(jpInvMom)}</span></p>
             </article>
             <article style={{ border: '1px solid #edf0f5', borderRadius: 8, padding: 8, background: '#fbfcfe', textAlign: 'right' }}>
               <p style={{ margin: 0, color: '#475569', fontWeight: 700, textAlign: 'left' }}>需給ギャップ近似（生産-販売）</p>
@@ -318,6 +328,7 @@ export default async function SupplyChainRefiningPage() {
         >
           <Link
             href="/supply-chain/mining"
+            className="cf-supply-bottom-link cf-supply-bottom-link--left"
             style={{
               display: 'block',
               border: '1px solid #e5e7eb',
@@ -331,10 +342,11 @@ export default async function SupplyChainRefiningPage() {
               fontSize: '0.95rem',
             }}
           >
-            ← 前の工程: 鉱山
+            鉱山
           </Link>
           <Link
             href="/supply-chain/end-use"
+            className="cf-supply-bottom-link cf-supply-bottom-link--right"
             style={{
               display: 'block',
               border: '1px solid #e5e7eb',
@@ -349,7 +361,7 @@ export default async function SupplyChainRefiningPage() {
               textAlign: 'right',
             }}
           >
-            次の工程: 用途 →
+            用途
           </Link>
         </nav>
 

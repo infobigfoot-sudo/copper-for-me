@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 
 import Breadcrumbs from '@/components/Breadcrumbs';
 import RichText from '@/components/RichText';
+import SiteFooter from '@/components/SiteFooter';
 import { getPostBySlug, getPosts, getRelatedPosts } from '@/lib/microcms';
 import { SITE_KEYS, normalizeSite, sitePath, siteUrl } from '@/lib/site';
 
@@ -249,16 +250,11 @@ export default async function SiteBlogDetailPage({
         ) : null}
       </main>
 
-      <footer className="cf-footer">
-        <p className="cf-footer-links">
-          <a href={to('/category/about')}>このサイトについて</a>
-          <span> / </span>
-          <a href={to('/blog/privacypolicy')}>プライバシーポリシー</a>
-          <span> / </span>
-          <a href={to('/blog/disclaimer')}>免責事項</a>
-        </p>
-        <p>© 2026 Copper for me. All Rights Reserved.</p>
-      </footer>
+      <SiteFooter
+        aboutHref={to('/category/about')}
+        privacyHref={to('/blog/privacypolicy')}
+        disclaimerHref={to('/blog/disclaimer')}
+      />
     </div>
   );
 }

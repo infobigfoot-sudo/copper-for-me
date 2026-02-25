@@ -24,6 +24,16 @@ function formatYmd(value?: string) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
+function fmtPct(value: number | null) {
+  if (value === null) return '-';
+  return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
+}
+
+function changeClass(value: number | null) {
+  if (value === null) return 'neutral';
+  return value >= 0 ? 'up' : 'down';
+}
+
 type MonthlyPoint = {
   date: string;
   value: number;
@@ -167,7 +177,8 @@ export default async function SupplyChainMiningPage() {
           <p style={{ margin: '8px 0 0', fontSize: '1.8rem', lineHeight: 1.05 }}>{latestChile ? latestChile.value.toFixed(1) : '-'}</p>
           <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>thousand TMF / {formatYmd(latestChile?.date)}</p>
           <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>
-            前月比: {chileMom === null ? '-' : `${chileMom >= 0 ? '+' : ''}${chileMom.toFixed(2)}%`}
+            前月比:
+            <span className={`cf-change-pill ${changeClass(chileMom)}`}>{fmtPct(chileMom)}</span>
           </p>
         </article>
         <article style={{ border: '1px solid #e5e7eb', borderRadius: 12, background: '#fff', padding: 12, textAlign: 'right' }}>
@@ -175,7 +186,8 @@ export default async function SupplyChainMiningPage() {
           <p style={{ margin: '8px 0 0', fontSize: '1.8rem', lineHeight: 1.05 }}>{latestPeru ? latestPeru.value.toLocaleString('ja-JP', { maximumFractionDigits: 0 }) : '-'}</p>
           <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>TMF / {formatYmd(latestPeru?.date)}</p>
           <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>
-            前月比: {peruMom === null ? '-' : `${peruMom >= 0 ? '+' : ''}${peruMom.toFixed(2)}%`}
+            前月比:
+            <span className={`cf-change-pill ${changeClass(peruMom)}`}>{fmtPct(peruMom)}</span>
           </p>
         </article>
       </section>
@@ -323,11 +335,11 @@ export default async function SupplyChainMiningPage() {
       />
 
       <nav style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12 }}>
-        <Link href="/supply-chain" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit' }}>
-          ← 一覧へ戻る
+        <Link href="/supply-chain" className="cf-supply-bottom-link cf-supply-bottom-link--left" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit' }}>
+          一覧へ戻る
         </Link>
-        <Link href="/supply-chain/refining" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
-          次の工程: 精錬 →
+        <Link href="/supply-chain/refining" className="cf-supply-bottom-link cf-supply-bottom-link--right" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
+          精錬
         </Link>
       </nav>
       </div>

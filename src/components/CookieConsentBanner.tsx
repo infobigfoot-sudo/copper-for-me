@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { usePathname } from 'next/navigation';
 
 const CONSENT_KEY = 'cf_cookie_consent_v1';
 
@@ -34,10 +33,10 @@ function loadGaOnce(measurementId: string) {
 }
 
 export default function CookieConsentBanner() {
-  const pathname = usePathname();
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
   const hasGa = useMemo(() => Boolean(measurementId), [measurementId]);
   const [consent, setConsent] = useState<ConsentValue | null>(null);
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '/';
   const firstSeg = (pathname || '/').split('/').filter(Boolean)[0];
   const policyHref = firstSeg ? `/${firstSeg}/blog/privacypolicy` : '/blog/privacypolicy';
 

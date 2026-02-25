@@ -5,6 +5,7 @@ import Link from 'next/link';
 import AdSlot from '@/components/AdSlot';
 import TradingViewMarketOverview from '@/components/TradingViewMarketOverview';
 import SafeImage from '@/components/SafeImage';
+import SiteFooter from '@/components/SiteFooter';
 import TateneCalculatorCard from '@/components/TateneCalculatorCard';
 import { getAnnouncements, getCategories, getPosts, getSiteSettings } from '@/lib/microcms';
 import { readRecentIndicatorValuesFromEconomySnapshots } from '@/lib/microcms_snapshot';
@@ -1129,24 +1130,6 @@ export default async function SiteHomePage({
               <Link href={to('/learn/copper-price-basics')}>銅を見るポイント</Link>
               <Link href={to('/supply-chain')}>サプライチェーン</Link>
               <Link href={to('/category/about')}>このサイトについて</Link>
-              <Link href={to(`/?driver=${driverFilter}&horizon=1m#conclusion`)} scroll={false}>
-                1ヶ月軸の結論
-              </Link>
-              <a href="#market-guide">
-                銅価格を知るうえで見るポイント
-              </a>
-              <a href="#lme-domestic">
-                LME価格と国内建値
-              </a>
-              <a href="#fx-section">
-                USD/JPY とUSD/CNY
-              </a>
-              <a href="#inventory-section">
-                LME在庫　Warrant / Off-warrant
-              </a>
-              <a href="#other-indicators">
-                その他指標
-              </a>
             </div>
           </details>
         </div>
@@ -1172,7 +1155,7 @@ export default async function SiteHomePage({
                     ? ` / 表示基準日: ${new Date(economyBundle.cacheBucketJst).toLocaleDateString('ja-JP')}`
                     : ''}
                 </p>
-                <div className="cf-quick-links" aria-label="参考情報へのリンク">
+                <div className="cf-quick-links cf-quick-links--hero" aria-label="参考情報へのリンク">
                   <span
                     style={{
                       display: 'inline-flex',
@@ -1184,49 +1167,49 @@ export default async function SiteHomePage({
                       fontWeight: 700,
                     }}
                   >
-                    参考情報:
+                    おすすめ:
                   </span>
+                  <Link href="#price-overview">最新の価格 →</Link>
+                  <Link href="#tatene-calculator">銅建値計算ツール →</Link>
                   <Link href={to('/learn/copper-price-basics')}>銅価格を知るうえで見るポイント →</Link>
                   <Link href={to('/supply-chain')}>サプライチェーン →</Link>
                 </div>
                 <div className="cf-today-updates">
                   <div className="cf-today-updates-head">
-                    <p className="cf-today-updates-title">このページの見方・更新情報</p>
+                    <p className="cf-today-updates-title">更新情報</p>
                   </div>
-                  <p className="cf-kpi-note">※ 市場休場日や統計の更新頻度により、指標の日付は当日以外になる場合があります。</p>
-                  <p className="cf-kpi-note">取得時刻: 原則 毎日12:00 JST（キャッシュ更新）</p>
-                  <p className="cf-kpi-note">
-                    取得失敗時は直近値を表示。詳細は
-                    {' '}
-                    <Link href={to('/blog/disclaimer')}>免責事項</Link>
-                    {' '}
-                    を参照。
-                  </p>
-                  {featured ? (
-                    <p className="cf-today-updates-latest">
-                      <Link href={to(`/blog/${featured.slug || featured.id}`)}>最新記事: {featured.title}</Link>
+                  <p className="cf-kpi-note">取得時刻: 原則 毎日12:00</p>
+                  <details className="cf-today-updates-detail">
+                    <summary>詳細を見る</summary>
+                    <p className="cf-kpi-note">※ 市場休場日や統計の更新頻度により、指標の日付は当日以外になる場合があります。</p>
+                    <p className="cf-kpi-note">
+                      取得失敗時は直近値を表示。詳細は
+                      {' '}
+                      <Link href={to('/blog/disclaimer')}>免責事項</Link>
+                      {' '}
+                      を参照。
                     </p>
-                  ) : null}
-                  {updateItemsToShow.length ? (
-                    <details className="cf-today-updates-detail">
-                      <summary>主要指標の最新日付（抜粋）</summary>
-                      <ul className="cf-today-updates-list">
-                        {updateItemsToShow.map((item, idx) => (
-                          <li key={`today-update-${idx}-${item.id}`}>
-                            <Link
-                              href={
-                                decisionIndicatorIdSet.has(item.id)
-                                  ? to(`/?driver=${driverFilter}&horizon=${horizon}#indicator-${item.id}`)
-                                  : to(`/?driver=all&horizon=${horizon}&show=all#all-indicators`)
-                              }
-                            >
-                              {item.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </details>
-                  ) : null}
+                    {updateItemsToShow.length ? (
+                      <>
+                        <p className="cf-kpi-note" style={{ marginTop: 8 }}>主要指標の最新日付（抜粋）</p>
+                        <ul className="cf-today-updates-list">
+                          {updateItemsToShow.map((item, idx) => (
+                            <li key={`today-update-${idx}-${item.id}`}>
+                              <Link
+                                href={
+                                  decisionIndicatorIdSet.has(item.id)
+                                    ? to(`/?driver=${driverFilter}&horizon=${horizon}#indicator-${item.id}`)
+                                    : to(`/?driver=all&horizon=${horizon}&show=all#all-indicators`)
+                                }
+                              >
+                                {item.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    ) : null}
+                  </details>
                 </div>
                 {announcements.length ? (
                   <div className="cf-card cf-insight-card" style={{ marginTop: '12px' }}>
@@ -1240,8 +1223,10 @@ export default async function SiteHomePage({
                     </ul>
                   </div>
                 ) : null}
-                <div className="cf-card cf-econ-card cf-stock-chart-card cf-price-overview-card" style={{ marginTop: '12px' }}>
-                  <h4>最新の価格は？</h4>
+                <div id="price-overview" className="cf-card cf-econ-card cf-stock-chart-card cf-price-overview-card" style={{ marginTop: '12px' }}>
+                  <div className="cf-latest-head" style={{ marginBottom: 12 }}>
+                    <h3>最新の価格</h3>
+                  </div>
                   <p className="cf-kpi-note">LME / 国内建値 / 為替</p>
                   <div className="cf-dual-price">
                     <div className="cf-dual-price-item">
@@ -1301,6 +1286,7 @@ export default async function SiteHomePage({
                   </div>
                 </div>
                 <TateneCalculatorCard
+                  id="tatene-calculator"
                   lmeOptions={lmeCalcOptions}
                   usdJpyOptions={usdJpyCalcOptions}
                   defaultLme={latestLmeForCalc}
@@ -1381,7 +1367,7 @@ export default async function SiteHomePage({
                         <li key={`priority-signal-${ind.key}`}>
                           <span className="cf-priority-signal-name">{ind.label}</span>
                           <span className={`cf-change-pill ${ind.dir === 'up' ? 'up' : 'down'}`}>
-                            {changeSymbol(ind.pct)} {ind.pct >= 0 ? '+' : ''}{ind.pct.toFixed(2)}%
+                            {ind.pct >= 0 ? '+' : ''}{ind.pct.toFixed(2)}%
                           </span>
                         </li>
                       ))}
@@ -1653,30 +1639,6 @@ export default async function SiteHomePage({
               </div>
               <div className="cf-grid">
                 <article className="cf-card cf-econ-card">
-                  <h4>Warrant銅在庫（最新日）</h4>
-                  <div className="cf-econ-value-row">
-                    <p className="cf-econ-value">
-                      {warrantDashboard.warrant.latest
-                        ? formatIndicatorValue(String(warrantDashboard.warrant.latest.value))
-                        : '-'}
-                    </p>
-                    <small>t</small>
-                  </div>
-                  <p className="cf-econ-date">{formatYmd(warrantDashboard.warrant.latest?.date)}</p>
-                  <p>
-                    前日比:{' '}
-                    {warrantDashboard.warrant.diffPct1d !== null
-                      ? `${warrantDashboard.warrant.diffPct1d >= 0 ? '+' : ''}${warrantDashboard.warrant.diffPct1d.toFixed(2)}%`
-                      : '-'}
-                  </p>
-                  <p>
-                    7日比:{' '}
-                    {warrantDashboard.warrant.diffPct7d !== null
-                      ? `${warrantDashboard.warrant.diffPct7d >= 0 ? '+' : ''}${warrantDashboard.warrant.diffPct7d.toFixed(2)}%`
-                      : '-'}
-                  </p>
-                </article>
-                <article className="cf-card cf-econ-card">
                   <h4>Warrant銅在庫（月次）</h4>
                   <div className="cf-econ-value-row">
                     <p className="cf-econ-value">
@@ -1697,35 +1659,6 @@ export default async function SiteHomePage({
                     前月比:
                     <span className={`cf-change-pill ${changeClass(warrantDashboard.warrant.diffPctMoM)}`}>
                       {fmtPct(warrantDashboard.warrant.diffPctMoM)}
-                    </span>
-                  </p>
-                </article>
-                <article className="cf-card cf-econ-card cf-explain-card">
-                  <h4>Warrantとは</h4>
-                  <p className="cf-kpi-note">
-                    Warrantは「すぐ引き渡し可能な登録在庫」。
-                  </p>
-                  <p className="cf-kpi-note">
-                    在庫が減ると供給ひっ迫のサインになり、価格上昇圧力の先行指標になる。
-                  </p>
-                </article>
-              </div>
-              <div className="cf-grid" style={{ marginTop: '16px' }}>
-                <article className="cf-card cf-econ-card">
-                  <h4>off-warrant銅在庫（最新月）</h4>
-                  <div className="cf-econ-value-row">
-                    <p className="cf-econ-value">
-                      {warrantDashboard.offWarrant.latest
-                        ? formatIndicatorValue(String(warrantDashboard.offWarrant.latest.value))
-                        : '-'}
-                    </p>
-                    <small>t</small>
-                  </div>
-                  <p className="cf-econ-date">{formatYearMonth(warrantDashboard.offWarrant.latest?.month)}</p>
-                  <p>
-                    前月比:
-                    <span className={`cf-change-pill ${changeClass(warrantDashboard.offWarrant.diffPctMoM)}`}>
-                      {fmtPct(warrantDashboard.offWarrant.diffPctMoM)}
                     </span>
                   </p>
                 </article>
@@ -1764,18 +1697,47 @@ export default async function SiteHomePage({
                   ) : null}
                 </article>
                 <article className="cf-card cf-econ-card cf-explain-card">
-                  <h4>off-warrantとは</h4>
+                  <h4>在庫の見方（Warrant / off-warrant）</h4>
                   <p className="cf-kpi-note">
-                    off-warrantは「倉庫にはあるが市場に出ていない在庫」。
+                    <strong>Warrant</strong> は「すぐ引き渡し可能な登録在庫」。在庫が減ると供給ひっ迫のサインになり、価格上昇圧力の先行指標になりやすい。
                   </p>
                   <p className="cf-kpi-note">
-                    増加は供給余力の積み上がりを示し、将来の売り圧力を読む手がかりになる。
+                    <strong>off-warrant</strong> は「倉庫にはあるが市場に出ていない在庫」。増加は供給余力の積み上がりを示し、将来の売り圧力を読む手がかりになる。
                   </p>
                 </article>
               </div>
               <div className="cf-grid cf-stock-two-col" style={{ marginTop: '16px' }}>
                 <article className="cf-card cf-econ-card cf-stock-chart-card">
                   <h4>Warrant銅在庫（直近30営業日）</h4>
+                  <div className="cf-stock-chart-summary cf-stock-chart-summary--right">
+                    <div className="cf-stock-chart-summary-main">
+                      <div className="cf-econ-value-row">
+                        <p className="cf-econ-value">
+                          {warrantDashboard.warrant.latest
+                            ? formatIndicatorValue(String(warrantDashboard.warrant.latest.value))
+                            : '-'}
+                        </p>
+                        <small>t</small>
+                      </div>
+                    </div>
+                    <div className="cf-stock-chart-summary-row">
+                      <div className="cf-stock-chart-summary-meta cf-stock-chart-summary-meta--compact">
+                        <p>
+                          前日比:
+                          <span className={`cf-change-pill ${changeClass(warrantDashboard.warrant.diffPct1d)}`}>
+                            {fmtPct(warrantDashboard.warrant.diffPct1d)}
+                          </span>
+                        </p>
+                        <p>
+                          7日比:
+                          <span className={`cf-change-pill ${changeClass(warrantDashboard.warrant.diffPct7d)}`}>
+                            {fmtPct(warrantDashboard.warrant.diffPct7d)}
+                          </span>
+                        </p>
+                      </div>
+                      <p className="cf-econ-date cf-stock-chart-summary-date">{formatYmd(warrantDashboard.warrant.latest?.date)}</p>
+                    </div>
+                  </div>
                   {warrantSpark.points ? (
                     <>
                       <div className="cf-chart-wrap">
@@ -1807,6 +1769,29 @@ export default async function SiteHomePage({
                 </article>
                 <article className="cf-card cf-econ-card cf-stock-chart-card">
                   <h4>off-warrant銅在庫（直近12ヶ月）</h4>
+                  <div className="cf-stock-chart-summary cf-stock-chart-summary--right">
+                    <div className="cf-stock-chart-summary-main">
+                      <div className="cf-econ-value-row">
+                        <p className="cf-econ-value">
+                          {warrantDashboard.offWarrant.latest
+                            ? formatIndicatorValue(String(warrantDashboard.offWarrant.latest.value))
+                            : '-'}
+                        </p>
+                        <small>t</small>
+                      </div>
+                    </div>
+                    <div className="cf-stock-chart-summary-row">
+                      <div className="cf-stock-chart-summary-meta">
+                        <p>
+                          前月比:
+                          <span className={`cf-change-pill ${changeClass(warrantDashboard.offWarrant.diffPctMoM)}`}>
+                            {fmtPct(warrantDashboard.offWarrant.diffPctMoM)}
+                          </span>
+                        </p>
+                      </div>
+                      <p className="cf-econ-date cf-stock-chart-summary-date">{formatYearMonth(warrantDashboard.offWarrant.latest?.month)}</p>
+                    </div>
+                  </div>
                   {offSpark.points ? (
                     <>
                       <div className="cf-chart-wrap">
@@ -1888,8 +1873,10 @@ export default async function SiteHomePage({
                       </Link>
                     </div>
                   </div>
-                    <div className="cf-econ-list">
-                      {decisionIndicatorsToShow.map((ind) => {
+                    <div className="cf-indicator-carousel-wrap">
+                      <p className="cf-indicator-carousel-hint" aria-hidden="true">← スワイプで見る →</p>
+                      <div className="cf-indicator-carousel-list">
+                        {decisionIndicatorsToShow.map((ind) => {
                       const sourceLabel = displayIndicatorSource(ind);
                       const sourceHref = indicatorUrl(ind.id) || sourceLabelUrl(sourceLabel);
                       return (
@@ -1946,12 +1933,15 @@ export default async function SiteHomePage({
                         </details>
                       </article>
                     );})}
-                  </div>
+                      </div>
+                    </div>
 
                   <details id="all-indicators" className="cf-all-indicators" open={showAllIndicators}>
                     <summary>全指標を見る（{freshIndicators.length}件 / 期間有効・{staleIndicatorsCount}件 / 期間外）</summary>
-                    <div className="cf-econ-list" style={{ marginTop: '12px' }}>
-                      {allIndicatorsWithFresh.map((ind) => {
+                    <div className="cf-indicator-carousel-wrap" style={{ marginTop: '12px' }}>
+                      <p className="cf-indicator-carousel-hint" aria-hidden="true">← スワイプで見る →</p>
+                      <div className="cf-indicator-carousel-list">
+                        {allIndicatorsWithFresh.map((ind) => {
                         const sourceLabel = displayIndicatorSource(ind);
                         const sourceHref = indicatorUrl(ind.id) || sourceLabelUrl(sourceLabel);
                         return (
@@ -2008,6 +1998,7 @@ export default async function SiteHomePage({
                           </details>
                         </article>
                       );})}
+                      </div>
                     </div>
                   </details>
                 </div>
@@ -2023,7 +2014,7 @@ export default async function SiteHomePage({
               </section>
             ) : null}
 
-            <section className="cf-latest cf-focus-section" style={{ marginTop: '30px' }}>
+            <section id="economic-calendar" className="cf-latest cf-focus-section" style={{ marginTop: '30px' }}>
               <div className="cf-latest-head">
                 <h3>経済指標カレンダー</h3>
               </div>
@@ -2054,7 +2045,7 @@ export default async function SiteHomePage({
           const articleItems = [featured, ...others].filter(Boolean).slice(0, 3) as Array<(typeof others)[number]>;
           if (!articleItems.length) return null;
           return (
-            <section className="cf-featured cf-articles-start">
+            <section id="article-section" className="cf-featured cf-articles-start">
               <div className="cf-pyramid-head" style={{ marginBottom: 18 }}>
                 <p className="cf-pyramid-label">ARTICLE</p>
                 <p className="cf-kpi-note">相場・指標記事</p>
@@ -2089,21 +2080,27 @@ export default async function SiteHomePage({
             </section>
           );
         })()}
-      </main>
 
-      <footer className="cf-footer">
-        <p className="cf-footer-links">
-          <Link href={to('/category/about')}>このサイトについて</Link>
-          <span> / </span>
-          <Link href={to('/blog/privacypolicy')}>プライバシーポリシー</Link>
-          <span> / </span>
-          <Link href={to('/blog/disclaimer')}>免責事項</Link>
-        </p>
-        <p className="cf-footer-note">
-          本サイトは公開データ/APIをもとに情報を掲載しています。できるだけ最新化していますが、反映に時間差が出る場合があります。
-        </p>
-        <p>© 2026 Copper for me. All Rights Reserved.</p>
-      </footer>
+      </main>
+      <SiteFooter
+        referenceItems={[
+          { href: '#price-overview', label: '最新の価格' },
+          { href: '#tatene-calculator', label: '銅建値計算ツール（簡易）' },
+          { href: '#conclusion', label: '1ヶ月軸の結論' },
+          { href: '#lme-domestic', label: 'LME価格と国内建値' },
+          { href: '#fx-section', label: 'USD/JPY とUSD/CNY' },
+          { href: '#inventory-section', label: 'LME在庫　Warrant / Off-warrant' },
+          { href: '#other-indicators', label: '指標' },
+          { href: '#economic-calendar', label: '経済指標カレンダー' },
+          { href: '#article-section', label: 'ARTICLE' },
+          { href: to('/learn/copper-price-basics'), label: '銅価格を知るうえで見るポイント' },
+          { href: to('/supply-chain'), label: 'サプライチェーン' },
+          { href: to('/category/index'), label: '指標記事' },
+        ]}
+        aboutHref={to('/category/about')}
+        privacyHref={to('/blog/privacypolicy')}
+        disclaimerHref={to('/blog/disclaimer')}
+      />
     </div>
   );
 }

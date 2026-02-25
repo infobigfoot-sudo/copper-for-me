@@ -20,6 +20,16 @@ function formatYmd(value?: string) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
+function fmtPct(value: number | null) {
+  if (value === null) return '-';
+  return `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
+}
+
+function changeClass(value: number | null) {
+  if (value === null) return 'neutral';
+  return value >= 0 ? 'up' : 'down';
+}
+
 function toPoints(points?: Array<{ date?: string; value?: number }>): Point[] {
   return (points || [])
     .map((p) => ({ date: String(p?.date || ''), value: Number(p?.value) }))
@@ -111,7 +121,7 @@ export default async function SupplyChainScrapPage() {
             </p>
             <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>tonnes / {formatYmd(latestExp?.date)}</p>
             <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>
-              前月比: {expMom === null ? '-' : `${expMom >= 0 ? '+' : ''}${expMom.toFixed(2)}%`}
+              前月比:<span className={`cf-change-pill ${changeClass(expMom)}`}>{fmtPct(expMom)}</span>
             </p>
           </article>
           <article style={{ border: '1px solid #e5e7eb', borderRadius: 12, background: '#fff', padding: 12, textAlign: 'right' }}>
@@ -121,7 +131,7 @@ export default async function SupplyChainScrapPage() {
             </p>
             <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>tonnes / {formatYmd(latestImp?.date)}</p>
             <p style={{ margin: '6px 0 0', color: '#64748b', fontSize: '0.9rem' }}>
-              前月比: {impMom === null ? '-' : `${impMom >= 0 ? '+' : ''}${impMom.toFixed(2)}%`}
+              前月比:<span className={`cf-change-pill ${changeClass(impMom)}`}>{fmtPct(impMom)}</span>
             </p>
           </article>
         </section>
@@ -211,6 +221,7 @@ export default async function SupplyChainScrapPage() {
         >
           <Link
             href="/supply-chain/end-use"
+            className="cf-supply-bottom-link cf-supply-bottom-link--left"
             style={{
               display: 'block',
               border: '1px solid #e5e7eb',
@@ -224,10 +235,11 @@ export default async function SupplyChainScrapPage() {
               fontSize: '0.95rem',
             }}
           >
-            ←前の工程: 用途
+            用途
           </Link>
           <Link
             href="/supply-chain/market"
+            className="cf-supply-bottom-link cf-supply-bottom-link--right"
             style={{
               display: 'block',
               border: '1px solid #e5e7eb',
@@ -242,7 +254,7 @@ export default async function SupplyChainScrapPage() {
               textAlign: 'right',
             }}
           >
-            次の工程: 市場 →
+            市場
           </Link>
         </nav>
 

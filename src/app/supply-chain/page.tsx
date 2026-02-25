@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SiteFooter from '@/components/SiteFooter';
 import { SUPPLY_CHAIN_PAGES } from './_pages';
 
 const copperFieldPhotos = [
@@ -40,11 +41,6 @@ export default function SupplyChainIndexPage() {
               <Link href="/learn/copper-price-basics">銅を見るポイント</Link>
               <Link href="/supply-chain">サプライチェーン</Link>
               <Link href="/category/about">このサイトについて</Link>
-              <Link href="/supply-chain/mining">鉱山</Link>
-              <Link href="/supply-chain/refining">精錬</Link>
-              <Link href="/supply-chain/end-use">用途</Link>
-              <Link href="/supply-chain/scrap">スクラップ回収</Link>
-              <Link href="/supply-chain/market">市場</Link>
             </div>
           </details>
         </div>
@@ -177,6 +173,7 @@ export default function SupplyChainIndexPage() {
           >
             <Link
               href="/"
+              className="cf-supply-bottom-link cf-supply-bottom-link--left"
               style={{
                 display: 'block',
                 border: '1px solid #e5e7eb',
@@ -190,10 +187,11 @@ export default function SupplyChainIndexPage() {
                 fontSize: '0.95rem',
               }}
             >
-              ← HOME
+              HOME
             </Link>
             <Link
               href="/supply-chain/mining"
+              className="cf-supply-bottom-link cf-supply-bottom-link--right"
               style={{
                 display: 'block',
                 border: '1px solid #e5e7eb',
@@ -208,27 +206,14 @@ export default function SupplyChainIndexPage() {
                 textAlign: 'right',
               }}
             >
-              最初の工程: 鉱山 →
+              鉱山
             </Link>
           </nav>
         </div>
       </section>
 
       </main>
-
-      <footer className="cf-footer">
-        <p className="cf-footer-links">
-          <Link href="/">トップ（相場ダッシュボード）</Link>
-          <span> / </span>
-          <Link href="/learn/copper-price-basics">銅価格の見方</Link>
-          <span> / </span>
-          <Link href="/blog/disclaimer">免責事項</Link>
-        </p>
-        <p className="cf-footer-note">
-          サプライチェーン各ページは、公開データと proxy 指標を組み合わせた解説ページです。指標ごとに更新頻度と粒度が異なります。
-        </p>
-        <p>© 2026 Copper for me. All Rights Reserved.</p>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

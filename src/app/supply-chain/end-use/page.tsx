@@ -291,11 +291,11 @@ export default async function SupplyChainEndUsePage() {
       />
 
         <nav style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12 }}>
-          <Link href="/supply-chain/refining" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit' }}>
-            ← 前の工程: 精錬
+          <Link href="/supply-chain/refining" className="cf-supply-bottom-link cf-supply-bottom-link--left" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit' }}>
+            精錬
           </Link>
-          <Link href="/supply-chain/scrap" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
-            次の工程: スクラップ回収 →
+          <Link href="/supply-chain/scrap" className="cf-supply-bottom-link cf-supply-bottom-link--right" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
+            スクラップ回収
           </Link>
         </nav>
       </div>

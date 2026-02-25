@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import SiteFooter from '@/components/SiteFooter';
 import SupplyChainStageNavCard from './_stageNavCard';
 
 type Props = {
@@ -17,8 +18,6 @@ export default function SupplyChainShell({
   currentSlug,
   children,
 }: Props) {
-  const displayTitle = title.replace(/^銅サプライチェーン：/, '');
-
   return (
     <div className="cf-page cf-supply-page">
       <nav className="cf-nav">
@@ -44,40 +43,17 @@ export default function SupplyChainShell({
               <Link href="/learn/copper-price-basics">銅を見るポイント</Link>
               <Link href="/supply-chain">サプライチェーン</Link>
               <Link href="/category/about">このサイトについて</Link>
-              <Link href="/#conclusion">今日の結論</Link>
-              <Link href="/#lme-domestic">LME価格と国内建値</Link>
-              <Link href="/#fx-section">USD/JPY とUSD/CNY</Link>
-              <Link href="/#inventory-section">LME在庫　Warrant / Off-warrant</Link>
-              <Link href="/#details">個別指標</Link>
             </div>
           </details>
         </div>
       </nav>
-
-      <header className="cf-hero">
-        <p className="cf-eyebrow">Read the Market, Ahead</p>
-        <h1 className="cf-hero-title cf-hero-title--supply">{displayTitle}</h1>
-        <p>{lead}</p>
-      </header>
 
       <main className="cf-main">
         {currentSlug ? <SupplyChainStageNavCard currentSlug={currentSlug} /> : null}
         <section className="cf-latest cf-focus-section cf-supply-content-shell">{children}</section>
       </main>
 
-      <footer className="cf-footer">
-        <p className="cf-footer-links">
-          <Link href="/category/about">このサイトについて</Link>
-          <span> / </span>
-          <Link href="/blog/privacypolicy">プライバシーポリシー</Link>
-          <span> / </span>
-          <Link href="/blog/disclaimer">免責事項</Link>
-        </p>
-        <p className="cf-footer-note">
-          本サイトは公開データ/APIをもとに情報を掲載しています。できるだけ最新化していますが、反映に時間差が出る場合があります。
-        </p>
-        <p>© 2026 Copper for me. All Rights Reserved.</p>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

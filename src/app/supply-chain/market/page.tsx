@@ -24,10 +24,8 @@ function fmtPct(value: number | null) {
 }
 
 function changeClass(value: number | null) {
-  if (value === null) return { bg: '#f2f4f7', color: '#6b7280' };
-  return value >= 0
-    ? { bg: '#e8f8ef', color: '#0b8f5a' }
-    : { bg: '#feecef', color: '#c23643' };
+  if (value === null) return 'neutral';
+  return value >= 0 ? 'up' : 'down';
 }
 
 export default async function SupplyChainMarketPage() {
@@ -94,13 +92,13 @@ export default async function SupplyChainMarketPage() {
           {statCards.map((card) => {
             const n = Number(String(card.pct).replace('%', '').replace('+', ''));
             const validPct = Number.isFinite(n) && card.pct !== '-';
-            const style = changeClass(validPct ? (String(card.pct).startsWith('-') ? -Math.abs(n) : Math.abs(n)) : null);
+            const pillClass = changeClass(validPct ? (String(card.pct).startsWith('-') ? -Math.abs(n) : Math.abs(n)) : null);
             return (
               <article key={card.label} style={{ border: '1px solid #edf0f5', borderRadius: 8, padding: 8, background: '#fbfcfe' }}>
                 <p style={{ margin: 0, color: '#475569', fontWeight: 700 }}>{card.label}</p>
                 <p style={{ margin: '6px 0 8px', color: '#64748b', fontSize: '0.9rem', textAlign: 'right' }}>
                   前回比:
-                  <span style={{ marginLeft: 8, borderRadius: 999, padding: '2px 8px', fontWeight: 700, fontSize: 12, background: style.bg, color: style.color }}>
+                  <span className={`cf-change-pill ${pillClass}`} style={{ fontSize: 12 }}>
                     {card.pct}
                   </span>
                 </p>
@@ -148,11 +146,11 @@ export default async function SupplyChainMarketPage() {
       />
 
       <nav style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12 }}>
-        <Link href="/supply-chain/scrap" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit' }}>
-          ← 前の工程: スクラップ回収
+        <Link href="/supply-chain/scrap" className="cf-supply-bottom-link cf-supply-bottom-link--left" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit' }}>
+          スクラップ回収
         </Link>
-        <Link href="/supply-chain" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
-          一覧へ戻る →
+        <Link href="/supply-chain" className="cf-supply-bottom-link cf-supply-bottom-link--right" style={{ border: '1px solid #e5e7eb', borderRadius: 12, padding: 14, textDecoration: 'none', color: 'inherit', textAlign: 'right' }}>
+          一覧へ戻る
         </Link>
       </nav>
       </div>

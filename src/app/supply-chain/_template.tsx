@@ -73,6 +73,7 @@ export default function SupplyChainPageTemplate({ page }: Props) {
         }}
       >
         <div
+          className="cf-supply-bottom-link cf-supply-bottom-link--left"
           style={{
             border: '1px solid #e5e7eb',
             borderRadius: 12,
@@ -82,18 +83,15 @@ export default function SupplyChainPageTemplate({ page }: Props) {
           }}
         >
           {prev ? (
-            <>
-              <div style={{ color: '#64748b', fontSize: 13, marginBottom: 4 }}>前の工程</div>
-              <Link href={`/supply-chain/${prev.slug}`}>{prev.shortTitle}</Link>
-            </>
+            <Link href={`/supply-chain/${prev.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+              {prev.shortTitle}
+            </Link>
           ) : (
-            <>
-              <div style={{ color: '#64748b', fontSize: 13, marginBottom: 4 }}>前の工程</div>
-              <span style={{ color: '#94a3b8' }}>なし</span>
-            </>
+            <span style={{ color: '#94a3b8' }}>なし</span>
           )}
         </div>
         <div
+          className="cf-supply-bottom-link cf-supply-bottom-link--right"
           style={{
             border: '1px solid #e5e7eb',
             borderRadius: 12,
@@ -104,15 +102,11 @@ export default function SupplyChainPageTemplate({ page }: Props) {
           }}
         >
           {next ? (
-            <>
-              <div style={{ color: '#64748b', fontSize: 13, marginBottom: 4 }}>次の工程</div>
-              <Link href={`/supply-chain/${next.slug}`}>{next.shortTitle}</Link>
-            </>
+            <Link href={`/supply-chain/${next.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+              {next.shortTitle}
+            </Link>
           ) : (
-            <>
-              <div style={{ color: '#64748b', fontSize: 13, marginBottom: 4 }}>次の工程</div>
-              <span style={{ color: '#94a3b8' }}>なし</span>
-            </>
+            <span style={{ color: '#94a3b8' }}>なし</span>
           )}
         </div>
       </nav>

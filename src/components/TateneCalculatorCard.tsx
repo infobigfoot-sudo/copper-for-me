@@ -14,6 +14,7 @@ type Props = {
   defaultLme?: number | null;
   defaultUsdJpy?: number | null;
   defaultPremium?: number | null;
+  id?: string;
 };
 
 function fmtNum(value: number, maxFractionDigits = 3) {
@@ -39,6 +40,7 @@ export default function TateneCalculatorCard({
   defaultLme,
   defaultUsdJpy,
   defaultPremium,
+  id,
 }: Props) {
   const initialLme = defaultLme ?? lmeOptions[0]?.value ?? null;
   const initialUsdJpy = defaultUsdJpy ?? usdJpyOptions[0]?.value ?? null;
@@ -107,8 +109,10 @@ export default function TateneCalculatorCard({
   };
 
   return (
-    <div className="cf-card cf-econ-card cf-stock-chart-card" style={{ marginTop: '12px', width: '100%', maxWidth: '100%', overflowX: 'hidden' }}>
-      <h4>銅建値計算ツール（簡易）</h4>
+    <div id={id} className="cf-card cf-econ-card cf-stock-chart-card" style={{ marginTop: '12px', width: '100%', maxWidth: '100%', overflowX: 'hidden' }}>
+      <div className="cf-latest-head" style={{ marginBottom: 12 }}>
+        <h3>銅建値計算ツール（簡易）</h3>
+      </div>
       <p className="cf-kpi-note" style={{ marginBottom: 10 }}>
         国内建値 ≒ LME銅価格（USD/mt） × USD/JPY + 諸コスト・プレミアム
       </p>
