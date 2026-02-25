@@ -5,6 +5,7 @@ import Link from 'next/link';
 import AdSlot from '@/components/AdSlot';
 import TradingViewMarketOverview from '@/components/TradingViewMarketOverview';
 import SafeImage from '@/components/SafeImage';
+import TateneCalculatorCard from '@/components/TateneCalculatorCard';
 import { getAnnouncements, getCategories, getPosts, getSiteSettings } from '@/lib/microcms';
 import { readRecentIndicatorValuesFromEconomySnapshots } from '@/lib/microcms_snapshot';
 import { formatIndicatorValue, getEconomyIndicators } from '@/lib/economy';
@@ -551,6 +552,29 @@ function toPlainStyle(text: string): string {
     .replace(/ます$/g, '');
 }
 
+function displayIndicatorSource(ind: { id?: string; name?: string; source?: string | null }): string | null {
+  const raw = (ind.source || '').trim();
+  if (!raw) return null;
+  const id = ind.id || '';
+  const name = ind.name || '';
+  if (id === 'copx' || id === 'fcx' || id === 'sp500') return 'Yahoo Finance';
+  if (raw.toUpperCase() === 'CSV') {
+    if (id.includes('lme') || /LME/i.test(name)) return 'LME';
+    return '内部整形データ';
+  }
+  return raw;
+}
+
+function sourceLabelUrl(label: string | null): string | null {
+  if (!label) return null;
+  const normalized = label.trim();
+  if (normalized === 'LME') return 'https://www.lme.com/';
+  if (normalized === 'FRED') return 'https://fred.stlouisfed.org/';
+  if (normalized === 'Alpha Vantage') return 'https://www.alphavantage.co/';
+  if (normalized === 'Yahoo Finance') return 'https://finance.yahoo.com/';
+  return null;
+}
+
 function indicatorUrl(id: string): string | null {
   const map: Record<string, string> = {
     lme_copper_usd: 'https://www.lme.com/Metals/Non-ferrous/Copper',
@@ -747,8 +771,8 @@ export default async function SiteHomePage({
   const adsEnabled = Boolean(process.env.NEXT_PUBLIC_ADSENSE_CLIENT) && siteSettings?.adEnabled !== false;
   const adSlotTop = process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOP;
   const adSlotMid = process.env.NEXT_PUBLIC_ADSENSE_SLOT_MID;
-  const lmeIndicator = fredIndicators.find((i) => i.id === 'lme_copper_jpy');
   const lmeUsdIndicator = fredIndicators.find((i) => i.id === 'lme_copper_usd');
+  const tateSnapshotIndicator = fredIndicators.find((i) => i.id === 'japan_tatene_jpy_mt');
   const usdJpyIndicator = alphaIndicators.find((i) => i.id === 'usd_jpy');
   const usdCnyIndicator = alphaIndicators.find((i) => i.id === 'usd_cny');
   const warrantValues = warrantDashboard.charts.warrantDaily.map((p) => p.value);
@@ -777,12 +801,49 @@ export default async function SiteHomePage({
   const offDeltaPct =
     offBars.first !== 0 ? ((offBars.last - offBars.first) / Math.abs(offBars.first)) * 100 : null;
   const tone: Tone = 'beginner';
-  const lmeRecentFromUsdSnapshots = await readRecentIndicatorValuesFromEconomySnapshots('lme_copper_usd').catch(() => []);
-  const lmeRecentFromJpySnapshots = await readRecentIndicatorValuesFromEconomySnapshots('lme_copper_jpy').catch(() => []);
+  const lmeRecentFromUsdSnapshots = await readRecentIndicatorValuesFromEconomySnapshots('lme_copper_usd', 7).catch(() => []);
+  const usdJpyRecentFromSnapshots = await readRecentIndicatorValuesFromEconomySnapshots('usd_jpy', 7).catch(() => []);
+  const usdCnyRecentFromSnapshots = await readRecentIndicatorValuesFromEconomySnapshots('usd_cny', 7).catch(() => []);
+  const lmeCalcOptions = lmeRecentFromUsdSnapshots
+    .map((ind) => ({ date: String(ind.date || ''), value: parseNum(ind.value) }))
+    .filter((row): row is { date: string; value: number } => Number.isFinite(row.value as number));
+  const usdJpyCalcOptions = usdJpyRecentFromSnapshots
+    .map((ind) => ({ date: String(ind.date || ''), value: parseNum(ind.value) }))
+    .filter((row): row is { date: string; value: number } => Number.isFinite(row.value as number));
+  const usdJpyIndicatorFallback =
+    usdJpyIndicator ??
+    (() => {
+      const ind = usdJpyRecentFromSnapshots[0];
+      if (!ind) return undefined;
+      return {
+        ...ind,
+        source: ind.source || 'Alpha Vantage',
+        units: ind.units || 'JPY/USD',
+      };
+    })();
+  const usdCnyIndicatorFallback =
+    usdCnyIndicator ??
+    (() => {
+      const ind = usdCnyRecentFromSnapshots[0];
+      if (!ind) return undefined;
+      return {
+        ...ind,
+        source: ind.source || 'Alpha Vantage',
+        units: ind.units || 'CNY/USD',
+      };
+    })();
+  const latestTateneForCalc =
+    parseNum(tateSnapshotIndicator?.value) ??
+    (warrantDashboard.copperTate.latest ? Number(warrantDashboard.copperTate.latest.value) : null);
+  const latestLmeForCalc = parseNum(lmeUsdIndicator?.value) ?? lmeCalcOptions[0]?.value ?? null;
+  const latestUsdJpyForCalc = parseNum(usdJpyIndicatorFallback?.value) ?? usdJpyCalcOptions[0]?.value ?? null;
+  const defaultTatenePremium =
+    latestTateneForCalc !== null && latestLmeForCalc !== null && latestUsdJpyForCalc !== null
+      ? latestTateneForCalc - latestLmeForCalc * latestUsdJpyForCalc
+      : 0;
   const lmeFallbackChangePercent = (() => {
     if ((lmeUsdIndicator?.changePercent || '').trim()) return lmeUsdIndicator?.changePercent || null;
-    if ((lmeIndicator?.changePercent || '').trim()) return lmeIndicator?.changePercent || null;
-    const recent = lmeRecentFromUsdSnapshots.length >= 2 ? lmeRecentFromUsdSnapshots : lmeRecentFromJpySnapshots;
+    const recent = lmeRecentFromUsdSnapshots;
     const latest = recent[0];
     const prev = recent[1];
     const latestVal = parseNum(latest?.value);
@@ -799,7 +860,11 @@ export default async function SiteHomePage({
   const showAllIndicators = String(query.show || '').toLowerCase() === 'all';
   const warrant7dPct = warrantDashboard.warrant.diffPct7d;
   const offMoMPct = warrantDashboard.offWarrant.diffPctMoM;
-  const dashboardIndicators = [...fredIndicators, ...alphaIndicators].map((ind) => {
+  const baseDashboardIndicators = [...fredIndicators, ...alphaIndicators];
+  const hasLmeUsdInDashboard = baseDashboardIndicators.some((i) => i.id === 'lme_copper_usd');
+  const dashboardIndicators = baseDashboardIndicators
+    .filter((ind) => !(hasLmeUsdInDashboard && ind.id === 'lme_copper_jpy'))
+    .map((ind) => {
     const pct = parsePct(ind.changePercent);
     const direction = pct === null ? null : factorDirection(ind.id, pct);
     const help = indicatorHelp(ind.id, tone);
@@ -941,26 +1006,30 @@ export default async function SiteHomePage({
       : warrantDashboard.warrant.diffPct7d !== null && warrantDashboard.warrant.diffPct7d >= 5
         ? '供給緩和'
         : '中立';
-  const usdJpyValue = formatIndicatorValue(usdJpyIndicator?.value || '');
+  const usdJpyValue = formatIndicatorValue(usdJpyIndicatorFallback?.value || '');
   const lmeUsdDirect = parseNum(lmeUsdIndicator?.value);
-  const lmeJpyPerMt = parseNum(lmeIndicator?.value);
-  const usdJpyRate = parseNum(usdJpyIndicator?.value);
-  const lmeJpyPerMtDerived =
+  const usdJpyRate = parseNum(usdJpyIndicatorFallback?.value);
+  const lmeJpyPerMtDisplay =
     lmeUsdDirect !== null && usdJpyRate !== null && usdJpyRate > 0 ? lmeUsdDirect * usdJpyRate : null;
-  const lmeUsdPerMtDerived =
-    lmeJpyPerMt !== null && usdJpyRate !== null && usdJpyRate > 0 ? lmeJpyPerMt / usdJpyRate : null;
-  const lmeUsdPerMt = lmeUsdDirect ?? lmeUsdPerMtDerived;
-  const lmeJpyPerMtDisplay = lmeJpyPerMt ?? lmeJpyPerMtDerived;
+  const lmeUsdPerMt = lmeUsdDirect;
   const lmeJpyValue =
     lmeJpyPerMtDisplay !== null ? formatIndicatorValue(String(Math.round(lmeJpyPerMtDisplay))) : '-';
   const lmeHeadlineValue =
-    lmeUsdPerMt !== null ? formatIndicatorValue(String(Math.round(lmeUsdPerMt))) : lmeJpyValue;
-  const lmeUnitLabel = lmeUsdPerMt !== null ? 'USD/mt' : 'JPY/mt';
-  const lmeDisplayDate = lmeUsdIndicator?.date || lmeIndicator?.date;
-  const lmeJpyDisplayDate = lmeIndicator?.date || lmeUsdIndicator?.date;
-  const tateValue = warrantDashboard.copperTate.latest
-    ? formatIndicatorValue(String(warrantDashboard.copperTate.latest.value))
-    : '-';
+    lmeUsdPerMt !== null ? formatIndicatorValue(String(Math.round(lmeUsdPerMt))) : '-';
+  const lmeUnitLabel = 'USD/mt';
+  const lmeDisplayDate = lmeUsdIndicator?.date;
+  const lmeJpyDisplayDate = lmeUsdIndicator?.date;
+  const tateValue = tateSnapshotIndicator
+    ? formatIndicatorValue(String(tateSnapshotIndicator.value))
+    : warrantDashboard.copperTate.latest
+      ? formatIndicatorValue(String(warrantDashboard.copperTate.latest.value))
+      : '-';
+  const tateDisplayDate = tateSnapshotIndicator?.date || warrantDashboard.copperTate.latest?.date;
+  const tateSnapshotChangeText = tateSnapshotIndicator?.changePercent?.trim() || '';
+  const tateChangePctDisplay =
+    tateSnapshotChangeText
+      ? parsePct(tateSnapshotChangeText)
+      : warrantDashboard.copperTate.diffPct1d;
   const horizonTitleMap: Record<Horizon, string> = {
     '1w': '1週間軸',
     '1m': '1ヶ月軸',
@@ -1010,7 +1079,7 @@ export default async function SiteHomePage({
   const baseUpdateItems = todayOrYesterdayItems.length
     ? todayOrYesterdayItems
     : latestUpdatedItems.slice(0, 4);
-  const lmeOverviewSource = lmeUsdIndicator || lmeIndicator;
+  const lmeOverviewSource = lmeUsdIndicator;
   const lmeOverviewItem = lmeOverviewSource
     ? {
         id: lmeOverviewSource.id,
@@ -1126,8 +1195,7 @@ export default async function SiteHomePage({
                   </ul>
                 </div>
                 <div className="cf-card cf-insight-card" style={{ marginTop: '12px' }}>
-                  <h4>データソースと更新方針</h4>
-                  <p className="cf-kpi-note">データソース: FRED / Metals.dev / Alpha Vantage</p>
+                  <h4>更新方針</h4>
                   <p className="cf-kpi-note">取得時刻: 原則 毎日12:00 JST（キャッシュ更新）</p>
                   <p className="cf-kpi-note">
                     取得失敗時は直近値を表示。詳細は
@@ -1149,6 +1217,13 @@ export default async function SiteHomePage({
                     </ul>
                   </div>
                 ) : null}
+                <TateneCalculatorCard
+                  lmeOptions={lmeCalcOptions}
+                  usdJpyOptions={usdJpyCalcOptions}
+                  defaultLme={latestLmeForCalc}
+                  defaultUsdJpy={latestUsdJpyForCalc}
+                  defaultPremium={defaultTatenePremium}
+                />
               </div>
             </section>
 
@@ -1220,15 +1295,15 @@ export default async function SiteHomePage({
                       <p className="cf-kpi-note">国内建値</p>
                       <p className="cf-kpi-note">
                         前回比:
-                        <span className={`cf-change-pill ${changeClass(warrantDashboard.copperTate.diffPct1d)}`}>
-                          {fmtPct(warrantDashboard.copperTate.diffPct1d)}
+                        <span className={`cf-change-pill ${changeClass(tateChangePctDisplay)}`}>
+                          {fmtPct(tateChangePctDisplay)}
                         </span>
                       </p>
                       <div className="cf-kpi-value-row">
                         <p className="cf-kpi-value">{tateValue}</p>
                         <small className="cf-kpi-unit">JPY/mt</small>
                       </div>
-                      <p className="cf-kpi-note">{formatYmd(warrantDashboard.copperTate.latest?.date)}</p>
+                      <p className="cf-kpi-note">{formatYmd(tateDisplayDate)}</p>
                     </div>
                   </div>
                   <p className="cf-kpi-note">為替（USD/JPY）: {usdJpyValue}</p>
@@ -1385,8 +1460,8 @@ export default async function SiteHomePage({
                   <li className="cf-latest-row">
                     <span className="cf-latest-label">最新値:</span>
                     <span className="cf-latest-value">{usdJpyValue}</span>
-                    <span className="cf-latest-unit">{normalizeUnitLabel(usdJpyIndicator?.units || 'JPY/USD')}</span>
-                    <span className="cf-latest-date">（{formatYmd(usdJpyIndicator?.date)}）</span>
+                    <span className="cf-latest-unit">{normalizeUnitLabel(usdJpyIndicatorFallback?.units || 'JPY/USD')}</span>
+                    <span className="cf-latest-date">（{formatYmd(usdJpyIndicatorFallback?.date)}）</span>
                   </li>
                 </ol>
 
@@ -1448,7 +1523,7 @@ export default async function SiteHomePage({
                 <h5>その他</h5>
                 <ul className="cf-guide-list">
                   <li>
-                    銅の流れ: 鉱山→精錬→電線・建設・EV・家電→スクラップ回収→再資源化。
+                    銅の流れ: 鉱山→精錬→電線・建設・EV・家電→スクラップ回収→銅市場へ。
                     この循環のどこで詰まりが起きるかが、価格変動の起点になる。
                   </li>
                   <li>
@@ -1500,6 +1575,10 @@ export default async function SiteHomePage({
               <div className="cf-latest-head">
                 <h3>LME価格と国内建値</h3>
               </div>
+              <p className="cf-kpi-note">
+                参照元: <a href="https://www.lme.com/" target="_blank" rel="noopener noreferrer">LME</a> /{' '}
+                <a href="https://www.jx-nmm.com/cuprice/" target="_blank" rel="noopener noreferrer">JX金属（建値）</a>
+              </p>
               <div className="cf-grid">
                 <article className="cf-card cf-econ-card">
                   <h4>LME銅（USD建て）</h4>
@@ -1525,23 +1604,19 @@ export default async function SiteHomePage({
                 </article>
                 <article className="cf-card cf-econ-card">
                   <h4>国内建値</h4>
-                  {warrantDashboard.copperTate.diffPct1d !== null ? (
+                  {tateChangePctDisplay !== null ? (
                     <p>
                       前回改定比:
-                      <span className={`cf-change-pill ${changeClass(warrantDashboard.copperTate.diffPct1d)}`}>
-                        {fmtPct(warrantDashboard.copperTate.diffPct1d)}
+                      <span className={`cf-change-pill ${changeClass(tateChangePctDisplay)}`}>
+                        {fmtPct(tateChangePctDisplay)}
                       </span>
                     </p>
                   ) : null}
                   <div className="cf-econ-value-row">
-                    <p className="cf-econ-value">
-                      {warrantDashboard.copperTate.latest
-                        ? formatIndicatorValue(String(warrantDashboard.copperTate.latest.value))
-                        : '-'}
-                    </p>
+                    <p className="cf-econ-value">{tateValue}</p>
                     <small>JPY/mt</small>
                   </div>
-                  <p className="cf-econ-date">{formatYmd(warrantDashboard.copperTate.latest?.date)}</p>
+                  <p className="cf-econ-date">{formatYmd(tateDisplayDate)}</p>
                 </article>
                 <article className="cf-card cf-econ-card cf-explain-card">
                   <h4>LME価格から国内建値の計算</h4>
@@ -1591,24 +1666,28 @@ export default async function SiteHomePage({
               <div className="cf-latest-head">
                 <h3>USD/JPY とUSD/CNY</h3>
               </div>
+              <p className="cf-kpi-note">
+                参照元: <a href="https://www.alphavantage.co/" target="_blank" rel="noopener noreferrer">Alpha Vantage</a> /{' '}
+                <a href="https://fred.stlouisfed.org/" target="_blank" rel="noopener noreferrer">FRED</a>
+              </p>
               <div className="cf-grid">
                 <article className="cf-card cf-econ-card">
                   <h4>USD/JPY</h4>
-                  {usdJpyIndicator ? (
+                  {usdJpyIndicatorFallback ? (
                     <>
-                      {usdJpyIndicator.changePercent ? (
+                      {usdJpyIndicatorFallback.changePercent ? (
                         <p>
                           前日比:
-                          <span className={`cf-change-pill ${changeClass(parsePct(usdJpyIndicator.changePercent))}`}>
-                            {usdJpyIndicator.changePercent}
+                          <span className={`cf-change-pill ${changeClass(parsePct(usdJpyIndicatorFallback.changePercent))}`}>
+                            {usdJpyIndicatorFallback.changePercent}
                           </span>
                         </p>
                       ) : null}
                       <div className="cf-econ-value-row">
-                        <p className="cf-econ-value">{formatIndicatorValue(usdJpyIndicator.value || '')}</p>
-                        <small>{usdJpyIndicator.units || '-'}</small>
+                        <p className="cf-econ-value">{formatIndicatorValue(usdJpyIndicatorFallback.value || '')}</p>
+                        <small>{usdJpyIndicatorFallback.units || '-'}</small>
                       </div>
-                      <p className="cf-econ-date">{formatYmd(usdJpyIndicator.date)}</p>
+                      <p className="cf-econ-date">{formatYmd(usdJpyIndicatorFallback.date)}</p>
                     </>
                   ) : (
                     <p className="cf-kpi-note">USD/JPYデータなし</p>
@@ -1616,21 +1695,21 @@ export default async function SiteHomePage({
                 </article>
                 <article className="cf-card cf-econ-card">
                   <h4>USD/CNY</h4>
-                  {usdCnyIndicator ? (
+                  {usdCnyIndicatorFallback ? (
                     <>
-                      {usdCnyIndicator.changePercent ? (
+                      {usdCnyIndicatorFallback.changePercent ? (
                         <p>
                           前日比:
-                          <span className={`cf-change-pill ${changeClass(parsePct(usdCnyIndicator.changePercent))}`}>
-                            {usdCnyIndicator.changePercent}
+                          <span className={`cf-change-pill ${changeClass(parsePct(usdCnyIndicatorFallback.changePercent))}`}>
+                            {usdCnyIndicatorFallback.changePercent}
                           </span>
                         </p>
                       ) : null}
                       <div className="cf-econ-value-row">
-                        <p className="cf-econ-value">{formatIndicatorValue(usdCnyIndicator.value || '')}</p>
-                        <small>{usdCnyIndicator.units || '-'}</small>
+                        <p className="cf-econ-value">{formatIndicatorValue(usdCnyIndicatorFallback.value || '')}</p>
+                        <small>{usdCnyIndicatorFallback.units || '-'}</small>
                       </div>
-                      <p className="cf-econ-date">{formatYmd(usdCnyIndicator.date)}</p>
+                      <p className="cf-econ-date">{formatYmd(usdCnyIndicatorFallback.date)}</p>
                     </>
                   ) : (
                     <p className="cf-kpi-note">USD/CNYデータなし</p>
@@ -1656,6 +1735,9 @@ export default async function SiteHomePage({
               <div className="cf-latest-head">
                 <h3>LME在庫　Warrant / Off-warrant</h3>
               </div>
+              <p className="cf-kpi-note">
+                参照元: <a href="https://www.lme.com/" target="_blank" rel="noopener noreferrer">LME</a>
+              </p>
               <div className="cf-grid">
                 <article className="cf-card cf-econ-card">
                   <h4>Warrant銅在庫（最新日）</h4>
@@ -1841,9 +1923,6 @@ export default async function SiteHomePage({
               <div className="cf-latest-head">
                 <h3>その他指標</h3>
               </div>
-              <p className="cf-kpi-note">
-                データソース: FRED / Metals.dev / Alpha Vantage。更新日と更新日時を各カードに表示。
-              </p>
 
               <div className="cf-dashboard-body cf-dashboard-body--single">
                 <div className="cf-dashboard-main">
@@ -1870,7 +1949,10 @@ export default async function SiteHomePage({
                     </div>
                   </div>
                     <div className="cf-econ-list">
-                      {decisionIndicatorsToShow.map((ind) => (
+                      {decisionIndicatorsToShow.map((ind) => {
+                      const sourceLabel = displayIndicatorSource(ind);
+                      const sourceHref = indicatorUrl(ind.id) || sourceLabelUrl(sourceLabel);
+                      return (
                       <article key={ind.id} id={`indicator-${ind.id}`} className="cf-econ-card">
                         <div className="cf-econ-top">
                           <h4>{displayIndicatorName(ind.name)}</h4>
@@ -1888,6 +1970,16 @@ export default async function SiteHomePage({
                         </div>
                         <p className="cf-econ-date">{formatYmd(ind.date)}</p>
                         {ind.lastUpdated ? <p className="cf-econ-date">更新日時: {formatYmd(ind.lastUpdated)}</p> : null}
+                        {sourceLabel ? (
+                          <p className="cf-econ-date">
+                            参照元:{' '}
+                            {sourceHref ? (
+                              <a href={sourceHref} target="_blank" rel="noopener noreferrer">{sourceLabel}</a>
+                            ) : (
+                              sourceLabel
+                            )}
+                          </p>
+                        ) : null}
                         <p className="cf-kpi-note">
                           変化:
                           <span
@@ -1913,13 +2005,16 @@ export default async function SiteHomePage({
                           <p className="cf-ind-help">{toPlainStyle(directionAction(ind.direction).sell)}</p>
                         </details>
                       </article>
-                    ))}
+                    );})}
                   </div>
 
                   <details id="all-indicators" className="cf-all-indicators" open={showAllIndicators}>
                     <summary>全指標を見る（{freshIndicators.length}件 / 期間有効・{staleIndicatorsCount}件 / 期間外）</summary>
                     <div className="cf-econ-list" style={{ marginTop: '12px' }}>
-                      {allIndicatorsWithFresh.map((ind) => (
+                      {allIndicatorsWithFresh.map((ind) => {
+                        const sourceLabel = displayIndicatorSource(ind);
+                        const sourceHref = indicatorUrl(ind.id) || sourceLabelUrl(sourceLabel);
+                        return (
                         <article key={`all-${ind.id}`} className="cf-econ-card">
                           <div className="cf-econ-top">
                             <h4>{displayIndicatorName(ind.name)}</h4>
@@ -1937,6 +2032,16 @@ export default async function SiteHomePage({
                           </div>
                           <p className="cf-econ-date">{formatYmd(ind.date)}</p>
                           {ind.lastUpdated ? <p className="cf-econ-date">更新日時: {formatYmd(ind.lastUpdated)}</p> : null}
+                          {sourceLabel ? (
+                            <p className="cf-econ-date">
+                              参照元:{' '}
+                              {sourceHref ? (
+                                <a href={sourceHref} target="_blank" rel="noopener noreferrer">{sourceLabel}</a>
+                              ) : (
+                                sourceLabel
+                              )}
+                            </p>
+                          ) : null}
                           <p className="cf-kpi-note">
                             変化:
                             <span
@@ -1962,11 +2067,14 @@ export default async function SiteHomePage({
                             <p className="cf-ind-help">{toPlainStyle(directionAction(ind.direction).sell)}</p>
                           </details>
                         </article>
-                      ))}
+                      );})}
                     </div>
                   </details>
                 </div>
               </div>
+              <p className="cf-kpi-note" style={{ marginTop: '12px' }}>
+                更新日・更新日時・参照元は各カードに表示。
+              </p>
             </section>
 
             {adsEnabled ? (
