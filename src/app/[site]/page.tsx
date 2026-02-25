@@ -926,8 +926,14 @@ export default async function SiteHomePage({
       : warrantDashboard.warrant.diffPct7d !== null && warrantDashboard.warrant.diffPct7d >= 5
         ? '供給緩和'
         : '中立';
-  const lmeValue = formatIndicatorValue(lmeIndicator?.value || '');
   const usdJpyValue = formatIndicatorValue(usdJpyIndicator?.value || '');
+  const lmeJpyPerMt = parseNum(lmeIndicator?.value);
+  const usdJpyRate = parseNum(usdJpyIndicator?.value);
+  const lmeUsdPerMt =
+    lmeJpyPerMt !== null && usdJpyRate !== null && usdJpyRate > 0 ? lmeJpyPerMt / usdJpyRate : null;
+  const lmeValue =
+    lmeUsdPerMt !== null ? formatIndicatorValue(String(Math.round(lmeUsdPerMt))) : formatIndicatorValue(lmeIndicator?.value || '');
+  const lmeUnitLabel = lmeUsdPerMt !== null ? 'USD/mt' : 'JPY/mt';
   const tateValue = warrantDashboard.copperTate.latest
     ? formatIndicatorValue(String(warrantDashboard.copperTate.latest.value))
     : '-';
@@ -1161,7 +1167,7 @@ export default async function SiteHomePage({
               <div className="cf-dashboard-top">
                 <article className="cf-card cf-econ-card cf-stock-chart-card">
                   <h4>最新の価格は？</h4>
-                  <p className="cf-kpi-note">LME円換算 / 国内建値（同スケール表示）</p>
+                  <p className="cf-kpi-note">LME（USD建て） / 国内建値（JPY建て）</p>
                   <div className="cf-dual-price">
                     <div className="cf-dual-price-item">
                       <p className="cf-kpi-note">LME</p>
@@ -1180,7 +1186,7 @@ export default async function SiteHomePage({
                         </span>
                       </p>
                       <p className="cf-kpi-value">{lmeValue}</p>
-                      <p className="cf-kpi-note">JPY/mt ・ {formatYmd(lmeIndicator?.date)}</p>
+                      <p className="cf-kpi-note">{lmeUnitLabel} ・ {formatYmd(lmeIndicator?.date)}</p>
                     </div>
                     <div className="cf-dual-price-item">
                       <p className="cf-kpi-note">国内建値</p>
