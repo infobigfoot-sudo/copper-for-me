@@ -42,7 +42,16 @@ async function loadIcsgAnnual(): Promise<Record<string, Point[]>> {
     'icsg_core_v1',
     'monthly_master_core_v1_icsg_addon_actual.csv',
   );
-  const raw = await fs.readFile(p, 'utf-8');
+  let raw = '';
+  try {
+    raw = await fs.readFile(p, 'utf-8');
+  } catch {
+    return {
+      icsg_world_refined_balance: [],
+      icsg_world_refined_production: [],
+      icsg_world_refined_usage: [],
+    };
+  }
   const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
   const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
   const idx = {
@@ -75,16 +84,30 @@ async function loadIcsgAnnual(): Promise<Record<string, Point[]>> {
 
 async function loadJapanMetiCopperElectric(): Promise<Record<string, Point[]>> {
   const dir = path.join(process.cwd(), '..', '..', 'stock-data-processor', 'data', 'japan', 'METI_COPPER');
-  const files = (await fs.readdir(dir))
-    .filter((f) => /^meti_copper_long_\d{4}\.csv$/.test(f))
-    .sort();
+  let files: string[] = [];
+  try {
+    files = (await fs.readdir(dir))
+      .filter((f) => /^meti_copper_long_\d{4}\.csv$/.test(f))
+      .sort();
+  } catch {
+    return {
+      production: [],
+      sales: [],
+      inventory: [],
+    };
+  }
   const buckets: Record<string, Point[]> = {
     production: [],
     sales: [],
     inventory: [],
   };
   for (const file of files) {
-    const raw = await fs.readFile(path.join(dir, file), 'utf-8');
+    let raw = '';
+    try {
+      raw = await fs.readFile(path.join(dir, file), 'utf-8');
+    } catch {
+      continue;
+    }
     const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
     const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
     const idx = {

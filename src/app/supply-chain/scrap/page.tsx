@@ -35,7 +35,13 @@ async function loadHs7404Series(kind: 'export' | 'import'): Promise<Point[]> {
   const folder = kind === 'export' ? 'mof_export_item_country' : 'mof_import_item_country';
   const file = kind === 'export' ? 'mof_export_item_country_2018_2025_all.csv' : 'mof_import_item_country_2018_2025_all.csv';
   const p = path.join(process.cwd(), '..', '..', 'stock-data-processor', 'data', 'japan', folder, 'combined', file);
-  const raw = await fs.readFile(p, 'utf-8');
+  let raw = '';
+  try {
+    raw = await fs.readFile(p, 'utf-8');
+  } catch {
+    // Vercel本番にはローカル集計元ディレクトリが存在しないため、空データで継続する。
+    return [];
+  }
   const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
   const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
   const idx = {

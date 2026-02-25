@@ -61,7 +61,12 @@ async function loadChileMiningSeries(): Promise<MonthlyPoint[]> {
     'formatted',
     'chile_cochilco_copper_mine_production_core_monthly_2018_2025.csv',
   );
-  const raw = await fs.readFile(p, 'utf-8');
+  let raw = '';
+  try {
+    raw = await fs.readFile(p, 'utf-8');
+  } catch {
+    return [];
+  }
   const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
   const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
   const dateIdx = cols.findIndex((c) => c === 'date');
@@ -92,7 +97,12 @@ async function loadPeruMiningSeries(): Promise<MonthlyPoint[]> {
     'formatted',
     'peru_bem_copper_production_core_monthly_2018_2025_extended.csv',
   );
-  const raw = await fs.readFile(p, 'utf-8');
+  let raw = '';
+  try {
+    raw = await fs.readFile(p, 'utf-8');
+  } catch {
+    return [];
+  }
   const [header, ...lines] = raw.split(/\r?\n/).filter(Boolean);
   const cols = csvSplitLine(header).map((c) => c.replace(/^\ufeff/, ''));
   const dateIdx = cols.findIndex((c) => c === 'date');
