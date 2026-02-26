@@ -97,6 +97,9 @@ const CACHE_FILE =
 const SNAPSHOT_FILE =
   process.env.ECONOMY_SNAPSHOT_FILE ||
   path.join(process.cwd(), 'public', 'data', 'economy_snapshot.json');
+const PUBLISH_SELECTED_SERIES_FILE =
+  process.env.PUBLISH_SELECTED_SERIES_FILE ||
+  path.join(process.cwd(), 'public', 'data', 'selected_series_bundle.json');
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 const CACHE_VERSION = 3;
 
@@ -149,6 +152,19 @@ const ECONOMY_DATA_ROOT =
   path.resolve(process.cwd(), '..', '..', 'stock-data-processor', 'data');
 
 type CsvRow = Record<string, string>;
+type PublishPoint = { date: string; value: number };
+type PublishMetaRow = {
+  indicator_key?: string;
+  display_name?: string;
+  freq_hint?: string;
+  series_key?: string | null;
+};
+type PublishSeriesBundle = {
+  generated_at?: string;
+  series?: Record<string, PublishPoint[]>;
+  latest?: Record<string, PublishPoint | null>;
+  meta?: Record<string, PublishMetaRow>;
+};
 
 async function readSimpleCsv(filePath: string): Promise<CsvRow[]> {
   const raw = await fs.readFile(filePath, 'utf8');
@@ -161,6 +177,136 @@ async function readSimpleCsv(filePath: string): Promise<CsvRow[]> {
     for (let i = 0; i < header.length; i += 1) row[header[i]] = String(cols[i] ?? '').trim();
     return row;
   });
+}
+
+function toDisplayFreq(freqHint?: string): string {
+  const raw = String(freqHint || '').trim().toLowerCase();
+  if (!raw) return '';
+  if (raw === 'daily') return 'Daily';
+  if (raw === 'weekly') return 'Weekly';
+  if (raw === 'monthly') return 'Monthly';
+  if (raw === 'yearly' || raw === 'annual') return 'Yearly';
+  return raw;
+}
+
+function publishAliasToIndicatorId(alias: string, meta?: PublishMetaRow): string {
+  const explicit: Record<string, string> = {
+    lme_copper_cash_usd_t: 'lme_copper_usd',
+    japan_tatene_jpy_t: 'japan_tatene_jpy_mt',
+    america_dexjpus: 'usd_jpy',
+    america_dexchus: 'usd_cny',
+    america_fcx_close: 'fcx',
+    america_copx_close: 'copx',
+    america_spy_close: 'sp500',
+    dgs10: 'DGS10'
+  };
+  if (explicit[alias]) return explicit[alias];
+  const seriesKey = String(meta?.series_key || '').trim();
+  if (seriesKey) return seriesKey;
+  const indicatorKey = String(meta?.indicator_key || '').trim();
+  if (indicatorKey.startsWith('america_')) return indicatorKey.replace(/^america_/, '').toUpperCase();
+  return alias;
+}
+
+function publishAliasToUnits(alias: string, indicatorId: string): string {
+  const map: Record<string, string> = {
+    lme_copper_cash_usd_t: 'USD/mt',
+    lme_copper_3month_usd_t: 'USD/mt',
+    lme_copper_stock_t: 't',
+    japan_tatene_jpy_t: 'JPY/mt',
+    america_dexjpus: 'JPY/USD',
+    america_dexchus: 'CNY/USD',
+    america_fcx_close: 'USD',
+    america_copx_close: 'USD',
+    america_spy_close: 'USD',
+    warrant_copper_daily_t: 't',
+    warrant_copper_monthly_t: 't',
+    offwarrant_copper_monthly_t: 't'
+  };
+  return map[alias] || map[indicatorId] || '';
+}
+
+function publishAliasToName(alias: string, indicatorId: string, meta?: PublishMetaRow): string {
+  const map: Record<string, string> = {
+    lme_copper_cash_usd_t: 'LME銅',
+    lme_copper_stock_t: 'LME銅在庫',
+    japan_tatene_jpy_t: '国内建値',
+    america_dexjpus: 'USD/JPY 為替レート',
+    america_dexchus: 'USD/CNY 為替レート',
+    america_fcx_close: 'Freeport-McMoRan（FCX）',
+    america_copx_close: '銅ETF（COPX）',
+    america_spy_close: 'S&P500連動ETF（SPY）'
+  };
+  return map[alias] || String(meta?.display_name || indicatorId || alias);
+}
+
+function buildIndicatorFromPublishSeries(
+  alias: string,
+  bundle: PublishSeriesBundle
+): Indicator | null {
+  const series = Array.isArray(bundle.series?.[alias]) ? (bundle.series?.[alias] as PublishPoint[]) : [];
+  const latest = (bundle.latest?.[alias] as PublishPoint | null | undefined) ?? series[series.length - 1] ?? null;
+  if (!latest || latest.value == null || !latest.date) return null;
+  const meta = bundle.meta?.[alias];
+  const id = publishAliasToIndicatorId(alias, meta);
+  const prev = series.length >= 2 ? series[series.length - 2] : null;
+  const valueStr = String(latest.value);
+  const prevStr = prev ? String(prev.value) : '';
+  return {
+    id,
+    name: publishAliasToName(alias, id, meta),
+    value: valueStr,
+    date: String(latest.date),
+    lastUpdated: String(bundle.generated_at || ''),
+    units: publishAliasToUnits(alias, id),
+    frequency: toDisplayFreq(meta?.freq_hint),
+    source: 'CSV',
+    changePercent: formatChangePercent(valueStr, prevStr)
+  };
+}
+
+async function readPublishSelectedSeriesBundle(): Promise<PublishSeriesBundle | null> {
+  try {
+    const raw = await fs.readFile(PUBLISH_SELECTED_SERIES_FILE, 'utf8');
+    const parsed = JSON.parse(raw) as PublishSeriesBundle;
+    if (!parsed || typeof parsed !== 'object') return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+async function getEconomyIndicatorsFromPublishJson(): Promise<EconomyBundle | null> {
+  const bundle = await readPublishSelectedSeriesBundle();
+  if (!bundle?.series) return null;
+  const aliases = Object.keys(bundle.series || {});
+  if (!aliases.length) return null;
+  const indicators = aliases
+    .map((alias) => buildIndicatorFromPublishSeries(alias, bundle))
+    .filter((i): i is Indicator => Boolean(i))
+    .filter((i) => i.id !== 'ISM_PMI' && i.id !== 'NAPM');
+
+  if (!indicators.length) return null;
+
+  const alphaIds = new Set(['usd_jpy', 'usd_cny', 'fcx', 'copx', 'sp500', 'sector_performance']);
+  const alpha = indicators.filter((i) => alphaIds.has(i.id));
+  const fred = indicators.filter((i) => !alphaIds.has(i.id));
+
+  const out: EconomyBundle = {
+    cacheVersion: CACHE_VERSION,
+    updatedAt: String(bundle.generated_at || new Date().toISOString()),
+    cacheDateJst: getTodayJstYmd(),
+    cacheBucketJst: getNoonBucketJst(),
+    sourceStatus: {
+      mode: 'csv',
+      fred: fred.length ? 'ok' : 'empty',
+      alpha: alpha.length ? 'ok' : 'empty',
+      metals: 'disabled'
+    },
+    fred,
+    alpha
+  };
+  return out;
 }
 
 function rowDateValue(row: CsvRow): string {
@@ -1058,6 +1204,12 @@ export async function getEconomyIndicatorsLive(opts?: { force?: boolean }): Prom
 }
 
 export async function getEconomyIndicators(): Promise<EconomyBundle> {
+  const publishBundle = await getEconomyIndicatorsFromPublishJson();
+  if (publishBundle && (publishBundle.fred.length || publishBundle.alpha.length)) {
+    await writeSnapshot(publishBundle);
+    await writeCache(publishBundle);
+    return publishBundle;
+  }
   const isProd = process.env.NODE_ENV === 'production';
   const prodAllowLocalSnapshotFallback = String(process.env.ECONOMY_PROD_ALLOW_LOCAL_SNAPSHOT_FALLBACK || '')
     .trim()

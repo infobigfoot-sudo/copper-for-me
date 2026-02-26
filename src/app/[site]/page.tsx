@@ -552,13 +552,35 @@ function toPlainStyle(text: string): string {
 
 function displayIndicatorSource(ind: { id?: string; name?: string; source?: string | null }): string | null {
   const raw = (ind.source || '').trim();
-  if (!raw) return null;
   const id = ind.id || '';
   const name = ind.name || '';
+  const yahooIds = new Set(['copx', 'fcx', 'sp500']);
+  const lmeInventoryIds = new Set([
+    'warrant_copper_daily_t',
+    'warrant_copper_monthly_t',
+    'offwarrant_copper_monthly_t'
+  ]);
+  if (yahooIds.has(id)) return 'Yahoo Finance';
+  if (
+    lmeInventoryIds.has(id) ||
+    id.includes('warrant') ||
+    id.includes('offwarrant') ||
+    /Warrant/i.test(name)
+  ) return 'LME';
+  if (!raw) return null;
+  const fredIds = new Set([
+    'DGS10', 'VIXCLS', 'DTWEXBGS', 'FEDFUNDS', 'IPMAN', 'CHNPIEATI01GYQ', 'PERMIT', 'HOUST', 'TCU',
+    'DCOILWTICO', 'DCOILBRENTEU', 'DHHNGSP', 'GASREGCOVW', 'CES3000000003', 'GDP', 'CPIAUCSL', 'PPIACO',
+    'CES1021210001', 'CHLPROINDMISMEI', 'PERPROINDMISMEI', 'DGORDER', 'TTLCONS', 'TLRESCONS',
+    'DEXJPUS', 'DEXCHUS', 'NAPM', 'USSLIND', 'PCOPPUSDM',
+    // america indicators (publish/json aliases mapped to FRED IDs)
+    'APU000074714', 'AWHMAN', 'INDPRO', 'UNRATE', 'PAYEMS'
+  ]);
   if (id === 'japan_tatene_jpy_mt') return 'JX金属';
-  if (id === 'copx' || id === 'fcx' || id === 'sp500') return 'Yahoo Finance';
+  if (id === 'usd_jpy' || id === 'usd_cny') return 'Alpha Vantage';
   if (raw.toUpperCase() === 'CSV') {
     if (id.includes('lme') || /LME/i.test(name)) return 'LME';
+    if (fredIds.has(id)) return 'FRED';
     return '内部整形データ';
   }
   return raw;
@@ -571,7 +593,7 @@ function sourceLabelUrl(label: string | null): string | null {
   if (normalized === 'JX金属') return 'https://www.jx-nmm.com/cuprice/';
   if (normalized === 'FRED') return 'https://fred.stlouisfed.org/';
   if (normalized === 'Alpha Vantage') return 'https://www.alphavantage.co/';
-  if (normalized === 'Yahoo Finance') return 'https://finance.yahoo.com/';
+  if (normalized === 'Yahoo Finance' || normalized === 'ヤフーファイナンス') return 'https://finance.yahoo.com/';
   return null;
 }
 

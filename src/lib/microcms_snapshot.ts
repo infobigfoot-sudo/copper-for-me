@@ -1,3 +1,5 @@
+import { promises as fs } from 'fs';
+import path from 'path';
 import type { EconomyBundle, Indicator } from '@/lib/economy';
 
 type SnapshotPersistResult = {
@@ -54,6 +56,63 @@ function getSnapshotConfig() {
     endpoint: String(endpoint).trim(),
     apiKey: String(apiKey).trim()
   };
+}
+
+const PUBLISH_SELECTED_SERIES_FILE =
+  process.env.PUBLISH_SELECTED_SERIES_FILE ||
+  path.join(process.cwd(), 'public', 'data', 'selected_series_bundle.json');
+
+type PublishPoint = { date: string; value: number };
+type PublishSeriesBundle = {
+  generated_at?: string;
+  series?: Record<string, PublishPoint[]>;
+};
+
+function snapshotIndicatorIdToPublishAlias(indicatorId: string): string | null {
+  const map: Record<string, string> = {
+    lme_copper_usd: 'lme_copper_cash_usd_t',
+    usd_jpy: 'america_dexjpus',
+    usd_cny: 'america_dexchus'
+  };
+  return map[indicatorId] || null;
+}
+
+function snapshotIndicatorDefaults(indicatorId: string): Pick<Indicator, 'name' | 'units' | 'frequency' | 'source'> {
+  const map: Record<string, Pick<Indicator, 'name' | 'units' | 'frequency' | 'source'>> = {
+    lme_copper_usd: { name: 'LME銅', units: 'USD/mt', frequency: 'Daily', source: 'CSV' },
+    usd_jpy: { name: 'USD/JPY 為替レート', units: 'JPY/USD', frequency: 'Daily', source: 'CSV' },
+    usd_cny: { name: 'USD/CNY 為替レート', units: 'CNY/USD', frequency: 'Daily', source: 'CSV' }
+  };
+  return map[indicatorId] || { name: indicatorId, units: '', frequency: '', source: 'CSV' };
+}
+
+async function readRecentIndicatorValuesFromPublishSeries(
+  indicatorId: string,
+  limit: number
+): Promise<Indicator[]> {
+  const alias = snapshotIndicatorIdToPublishAlias(indicatorId);
+  if (!alias) return [];
+  try {
+    const raw = await fs.readFile(PUBLISH_SELECTED_SERIES_FILE, 'utf8');
+    const parsed = JSON.parse(raw) as PublishSeriesBundle;
+    const series = Array.isArray(parsed?.series?.[alias]) ? (parsed.series?.[alias] as PublishPoint[]) : [];
+    if (!series.length) return [];
+    const safeLimit = Math.min(Math.max(limit, 1), 50);
+    const picked = series.slice(-safeLimit).reverse();
+    const defaults = snapshotIndicatorDefaults(indicatorId);
+    return picked.map((p) => ({
+      id: indicatorId,
+      name: defaults.name,
+      value: String(p.value),
+      date: String(p.date),
+      lastUpdated: String(parsed?.generated_at || ''),
+      units: defaults.units,
+      frequency: defaults.frequency,
+      source: defaults.source
+    }));
+  } catch {
+    return [];
+  }
 }
 
 function toUrl(serviceDomain: string, endpoint: string, suffix = ''): string {
@@ -190,7 +249,9 @@ export async function readRecentIndicatorValuesFromEconomySnapshots(
   limit = 10
 ): Promise<Indicator[]> {
   const cfg = getSnapshotConfig();
-  if (!cfg.serviceDomain || !cfg.endpoint || !cfg.apiKey) return [];
+  if (!cfg.serviceDomain || !cfg.endpoint || !cfg.apiKey) {
+    return readRecentIndicatorValuesFromPublishSeries(indicatorId, limit);
+  }
 
   const safeLimit = Math.min(Math.max(limit, 1), 50);
   const res = await fetch(
@@ -200,7 +261,9 @@ export async function readRecentIndicatorValuesFromEconomySnapshots(
       cache: 'no-store'
     }
   );
-  if (!res.ok) return [];
+  if (!res.ok) {
+    return readRecentIndicatorValuesFromPublishSeries(indicatorId, limit);
+  }
   const data = (await res.json()) as { contents?: Array<Record<string, unknown>> };
   const rows = data?.contents || [];
   const hits: Indicator[] = [];
@@ -217,5 +280,6 @@ export async function readRecentIndicatorValuesFromEconomySnapshots(
     if (hits.length >= safeLimit) break;
   }
 
-  return hits;
+  if (hits.length) return hits;
+  return readRecentIndicatorValuesFromPublishSeries(indicatorId, limit);
 }

@@ -4,6 +4,9 @@ import path from 'path';
 
 type DayPoint = { date: string; value: number };
 type MonthPoint = { month: string; value: number };
+type PublishSeriesBundle = {
+  series?: Record<string, Array<{ date: string; value: number }>>;
+};
 
 export type WarrantDashboardData = {
   copperTate: {
@@ -71,76 +74,129 @@ function avg(values: number[]): number | null {
   return s / values.length;
 }
 
+function emptyDashboard(message: string): WarrantDashboardData {
+  return {
+    warrant: {
+      latest: null,
+      prev: null,
+      diffPct1d: null,
+      diffPct7d: null,
+      ma20: null,
+      monthlyLatest: null,
+      monthlyPrev: null,
+      diffPctMoM: null
+    },
+    copperTate: { latest: null, prev: null, diffPct1d: null },
+    offWarrant: { latest: null, prev: null, diffPctMoM: null },
+    ratio: null,
+    alerts: [message],
+    charts: { warrantDaily: [], offWarrantMonthly: [], copperTateDaily: [] },
+    breakdown: { warrantLatestByLocation: [], offWarrantLatestByPoint: [] }
+  };
+}
+
+async function readPublishSeries(dataDir: string): Promise<{
+  warrantDaily: DayPoint[];
+  offWarrantMonthly: MonthPoint[];
+  copperTateDaily: DayPoint[];
+} | null> {
+  try {
+    const file = path.join(dataDir, 'selected_series_bundle.json');
+    const raw = await fs.readFile(file, 'utf8');
+    const parsed = JSON.parse(raw) as PublishSeriesBundle;
+    const warrantDailyRaw = Array.isArray(parsed?.series?.warrant_copper_daily_t)
+      ? parsed.series!.warrant_copper_daily_t
+      : [];
+    const offRaw = Array.isArray(parsed?.series?.offwarrant_copper_monthly_t)
+      ? parsed.series!.offwarrant_copper_monthly_t
+      : [];
+    const tateRaw = Array.isArray(parsed?.series?.japan_tatene_jpy_t)
+      ? parsed.series!.japan_tatene_jpy_t
+      : [];
+    if (!warrantDailyRaw.length && !offRaw.length && !tateRaw.length) return null;
+    const warrantDaily: DayPoint[] = warrantDailyRaw
+      .map((p) => ({ date: String(p.date).slice(0, 10), value: Number(p.value) }))
+      .filter((p) => p.date && Number.isFinite(p.value))
+      .sort((a, b) => (a.date < b.date ? -1 : 1));
+    const offWarrantMonthly: MonthPoint[] = offRaw
+      .map((p) => ({ month: String(p.date).slice(0, 7).replace('-', '_'), value: Number(p.value) }))
+      .filter((p) => p.month && Number.isFinite(p.value))
+      .sort((a, b) => (a.month < b.month ? -1 : 1));
+    const copperTateDaily: DayPoint[] = tateRaw
+      .map((p) => ({ date: String(p.date).slice(0, 10), value: Number(p.value) }))
+      .filter((p) => p.date && Number.isFinite(p.value))
+      .sort((a, b) => (a.date < b.date ? -1 : 1));
+    return { warrantDaily, offWarrantMonthly, copperTateDaily };
+  } catch {
+    return null;
+  }
+}
+
 export const getWarrantDashboardData = cache(async (): Promise<WarrantDashboardData> => {
   const dataDir = path.join(process.cwd(), 'public', 'data');
   let files: string[] = [];
   try {
     files = await fs.readdir(dataDir);
   } catch {
-    return {
-      warrant: {
-        latest: null,
-        prev: null,
-        diffPct1d: null,
-        diffPct7d: null,
-        ma20: null,
-        monthlyLatest: null,
-        monthlyPrev: null,
-        diffPctMoM: null
-      },
-      copperTate: { latest: null, prev: null, diffPct1d: null },
-      offWarrant: { latest: null, prev: null, diffPctMoM: null },
-      ratio: null,
-      alerts: ['データフォルダが見つかりません（public/data）。'],
-      charts: { warrantDaily: [], offWarrantMonthly: [], copperTateDaily: [] },
-      breakdown: { warrantLatestByLocation: [], offWarrantLatestByPoint: [] }
-    };
+    return emptyDashboard('データフォルダが見つかりません（public/data）。');
   }
+
+  const publishSeries = await readPublishSeries(dataDir);
 
   const warrantFiles = files.filter((f) => /^warrant_\d{4}_\d{2}\.csv$/.test(f)).sort();
   const offFiles = files.filter((f) => /^offwarrant_\d{4}_\d{2}\.csv$/.test(f)).sort();
   const copperPath = path.join(dataDir, "copper_tate_ne_2021_2026.csv");
 
-  const dayMap = new Map<string, number>();
-  for (const f of warrantFiles) {
-    const raw = await fs.readFile(path.join(dataDir, f), 'utf8');
-    const rows = parseCsvRows(raw);
-    for (const row of rows) {
-      if ((row['Metal'] || '').trim() !== 'Copper') continue;
-      const d = (row['Date'] || '').slice(0, 10);
-      if (!d) continue;
-      const prev = dayMap.get(d) || 0;
-      dayMap.set(d, prev + toNum(row['Closing Stock']));
-    }
-  }
-  const daySeries = Array.from(dayMap.entries())
-    .map(([date, value]) => ({ date, value }))
-    .sort((a, b) => (a.date < b.date ? -1 : 1));
+  let daySeries: DayPoint[] = [];
+  let offSeries: MonthPoint[] = [];
+  let copperSeries: DayPoint[] = [];
 
-  const offSeries: MonthPoint[] = [];
-  for (const f of offFiles) {
-    const month = f.replace('offwarrant_', '').replace('.csv', '');
-    const raw = await fs.readFile(path.join(dataDir, f), 'utf8');
-    const rows = parseCsvRows(raw);
-    let total = 0;
-    for (const row of rows) total += toNum(row['CU']);
-    offSeries.push({ month, value: total });
-  }
-  offSeries.sort((a, b) => (a.month < b.month ? -1 : 1));
-
-  const copperSeries: DayPoint[] = [];
-  try {
-    const copperRaw = await fs.readFile(copperPath, "utf8");
-    const copperRows = parseCsvRows(copperRaw);
-    for (const row of copperRows) {
-      const date = (row["date"] || "").slice(0, 10);
-      const value = toNum(row["price_jpy_per_ton"]);
-      if (!date || !value) continue;
-      copperSeries.push({ date, value });
+  if (publishSeries) {
+    daySeries = publishSeries.warrantDaily;
+    offSeries = publishSeries.offWarrantMonthly;
+    copperSeries = publishSeries.copperTateDaily;
+  } else {
+    const dayMap = new Map<string, number>();
+    for (const f of warrantFiles) {
+      const raw = await fs.readFile(path.join(dataDir, f), 'utf8');
+      const rows = parseCsvRows(raw);
+      for (const row of rows) {
+        if ((row['Metal'] || '').trim() !== 'Copper') continue;
+        const d = (row['Date'] || '').slice(0, 10);
+        if (!d) continue;
+        const prev = dayMap.get(d) || 0;
+        dayMap.set(d, prev + toNum(row['Closing Stock']));
+      }
     }
-    copperSeries.sort((a, b) => (a.date < b.date ? -1 : 1));
-  } catch {
-    // Optional dataset.
+    daySeries = Array.from(dayMap.entries())
+      .map(([date, value]) => ({ date, value }))
+      .sort((a, b) => (a.date < b.date ? -1 : 1));
+
+    offSeries = [];
+    for (const f of offFiles) {
+      const month = f.replace('offwarrant_', '').replace('.csv', '');
+      const raw = await fs.readFile(path.join(dataDir, f), 'utf8');
+      const rows = parseCsvRows(raw);
+      let total = 0;
+      for (const row of rows) total += toNum(row['CU']);
+      offSeries.push({ month, value: total });
+    }
+    offSeries.sort((a, b) => (a.month < b.month ? -1 : 1));
+
+    copperSeries = [];
+    try {
+      const copperRaw = await fs.readFile(copperPath, "utf8");
+      const copperRows = parseCsvRows(copperRaw);
+      for (const row of copperRows) {
+        const date = (row["date"] || "").slice(0, 10);
+        const value = toNum(row["price_jpy_per_ton"]);
+        if (!date || !value) continue;
+        copperSeries.push({ date, value });
+      }
+      copperSeries.sort((a, b) => (a.date < b.date ? -1 : 1));
+    } catch {
+      // Optional dataset.
+    }
   }
 
   const copperLatest = copperSeries[copperSeries.length - 1] || null;
