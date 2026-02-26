@@ -26,6 +26,7 @@ const metadataBase = (() => {
     return new URL('http://localhost:3000');
   }
 })();
+const defaultOgImage = '/og-default.png';
 
 export const metadata: Metadata = {
   metadataBase,
@@ -51,12 +52,21 @@ export const metadata: Metadata = {
     type: 'website',
     url: baseUrl,
     title: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
-    description: '銅市場・建値・為替などの関連データを整理して発信するメディアサイト'
+    description: '銅市場・建値・為替などの関連データを整理して発信するメディアサイト',
+    images: [
+      {
+        url: defaultOgImage,
+        width: 1200,
+        height: 630,
+        alt: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me'
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
     title: process.env.NEXT_PUBLIC_SITE_NAME || 'Copper-for-me',
-    description: '銅市場・建値・為替などの関連データを整理して発信するメディアサイト'
+    description: '銅市場・建値・為替などの関連データを整理して発信するメディアサイト',
+    images: [defaultOgImage]
   }
 };
 
