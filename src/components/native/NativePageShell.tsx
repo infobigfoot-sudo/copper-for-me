@@ -146,10 +146,9 @@ export default function NativePageShell({
               <div>
                 <h6 className="text-[10px] font-black text-off-white uppercase tracking-[0.3em] mb-10">Information</h6>
                 <ul className="space-y-5 text-xs font-bold text-cool-grey uppercase tracking-widest">
-                  <li><a className="hover:text-positive transition-colors" href="#">参照元</a></li>
                   <li><Link className="hover:text-positive transition-colors" href="/blog/privacypolicy">プライバシーポリシーについて</Link></li>
                   <li><Link className="hover:text-positive transition-colors" href="/blog/disclaimer">免責事項</Link></li>
-                  <li><Link className="hover:text-positive transition-colors" href="/category/about">このサイトについて</Link></li>
+                  <li><Link className="hover:text-positive transition-colors" href="/blog/about">このサイトについて</Link></li>
                 </ul>
               </div>
             </div>
