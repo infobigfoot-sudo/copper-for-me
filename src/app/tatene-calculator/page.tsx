@@ -17,7 +17,7 @@ export default async function TateneCalculatorPage() {
   };
 
   const lmeOptions = lmeRows.slice(-7).reverse().map((row) => ({ date: row.date, value: row.value }));
-  const fxOptions = fxRows.slice(-5).reverse().map((row) => ({ date: row.date, value: row.value }));
+  const fxOptions = fxRows.slice(-7).reverse().map((row) => ({ date: row.date, value: row.value }));
   const latestTatene = tateneRows.at(-1) ?? null;
   const premiumOnLatestTatene =
     latestTatene

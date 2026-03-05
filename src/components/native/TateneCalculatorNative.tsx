@@ -63,6 +63,8 @@ export default function TateneCalculatorNative({
 
   const modelValue = lmeValue !== null && fxValue !== null ? lmeValue * fxValue : null;
   const resultValue = modelValue !== null && premiumValue !== null ? modelValue + premiumValue : null;
+  const lmePicked = lmeOptions[Number(selectedLme)] ?? lmeOptions[0] ?? null;
+  const fxPicked = fxOptions[Number(selectedFx)] ?? fxOptions[0] ?? null;
 
   const modeBtn = (active: boolean) =>
     `px-3 py-1.5 text-[11px] font-bold transition-colors ${
@@ -92,7 +94,7 @@ export default function TateneCalculatorNative({
                 >
                   {lmeOptions.map((row, idx) => (
                     <option key={`lme-opt-${row.date}-${idx}`} value={idx}>
-                      {`${idx === 0 ? '最新データ' : row.date} / ${fmtNum(row.value, 0)}`}
+                      {`${fmtNum(row.value, 0)} (${row.date})`}
                     </option>
                   ))}
                 </select>
@@ -107,12 +109,17 @@ export default function TateneCalculatorNative({
               )}
               <span className="pointer-events-none absolute bottom-2 right-3 text-[10px] font-black uppercase tracking-[0.08em] text-[#99a0ac]">USD</span>
             </div>
+            {lmeMode === 'preset' && lmePicked ? (
+              <p className="mt-1 text-[10px] font-bold tracking-[0.08em] text-[#7b8697]">
+                日付: {lmePicked.date}
+              </p>
+            ) : null}
           </section>
 
           <section className="h-full rounded-2xl border border-[#e8e3da] bg-[#f3f0ea] p-3.5 sm:p-4">
             <h4 className="text-[14px] font-black text-cool-grey tracking-[0.04em]">USD / JPY</h4>
             <div className="mt-2 inline-flex rounded-lg border border-[#d6dce5] overflow-hidden bg-white/60">
-              <button type="button" className={modeBtn(fxMode === 'preset')} onClick={() => setFxMode('preset')}>直近5件から選択</button>
+              <button type="button" className={modeBtn(fxMode === 'preset')} onClick={() => setFxMode('preset')}>直近7件から選択</button>
               <button type="button" className={modeBtn(fxMode === 'manual')} onClick={() => setFxMode('manual')}>手入力</button>
             </div>
             <div className="relative mt-2.5">
@@ -124,7 +131,7 @@ export default function TateneCalculatorNative({
                 >
                   {fxOptions.map((row, idx) => (
                     <option key={`fx-opt-${row.date}-${idx}`} value={idx}>
-                      {`${idx === 0 ? '最新データ' : row.date} / ${fmtNum(row.value, 2)}`}
+                      {`${fmtNum(row.value, 2)} (${row.date})`}
                     </option>
                   ))}
                 </select>
@@ -138,6 +145,11 @@ export default function TateneCalculatorNative({
                 />
               )}
             </div>
+            {fxMode === 'preset' && fxPicked ? (
+              <p className="mt-1 text-[10px] font-bold tracking-[0.08em] text-[#7b8697]">
+                日付: {fxPicked.date}
+              </p>
+            ) : null}
           </section>
 
           <section className="h-full rounded-2xl border border-[#e8e3da] bg-[#f3f0ea] p-3.5 sm:p-4">
