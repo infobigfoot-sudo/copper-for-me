@@ -38,11 +38,10 @@ export default async function ArticlePage() {
             ) : (
               <div className="absolute inset-0 bg-gradient-to-br from-[#203246] via-[#2d4359] to-[#1e2c3b]" />
             )}
-            <span className="absolute left-3 top-3 rounded-md bg-[#f08a3e] px-2 py-1 text-[10px] font-black text-white tracking-[0.08em]">FEATURED</span>
           </div>
 
           <div className="p-5 sm:p-7">
-            <p className="text-[11px] font-bold text-[#b86d53] mb-3">{featuredDate}</p>
+            <p className="text-[11px] font-bold text-cool-grey mb-3">{featuredDate}</p>
             <h3 className="text-off-white text-2xl sm:text-3xl font-black leading-snug mb-4">
               <Link href={featuredHref} className="hover:text-positive transition-colors">
                 {featuredTitle}

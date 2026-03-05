@@ -41,7 +41,7 @@ export default async function BlogDetailPage({
 
   return (
     <NativePageShell active="article" title={post.title} description={post.excerpt || '相場・指標記事'}>
-      <SectionCard title="本文">
+      <SectionCard>
         <p className="text-cool-grey text-sm mb-4">{formatDateLabel(post.publishedAt)}</p>
         <RichText html={post.body || ''} />
       </SectionCard>

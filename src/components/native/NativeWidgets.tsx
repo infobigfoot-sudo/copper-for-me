@@ -330,19 +330,22 @@ export function SectionCard({
   headerClassName,
   titleClassName,
 }: {
-  title: string;
+  title?: string;
   right?: ReactNode;
   children: ReactNode;
   className?: string;
   headerClassName?: string;
   titleClassName?: string;
 }) {
+  const hasHeader = Boolean(title) || Boolean(right);
   return (
     <article className={`glass-card rounded-3xl p-8 ${className ?? ''}`}>
-      <div className={`mb-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between ${headerClassName ?? ''}`}>
-        <h4 className={`text-[14px] leading-none font-black text-cool-grey uppercase tracking-[0.2em] sm:tracking-[0.3em] ${titleClassName ?? ''}`}>{title}</h4>
-        {right}
-      </div>
+      {hasHeader ? (
+        <div className={`mb-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between ${headerClassName ?? ''}`}>
+          {title ? <h4 className={`text-[14px] leading-none font-black text-cool-grey uppercase tracking-[0.2em] sm:tracking-[0.3em] ${titleClassName ?? ''}`}>{title}</h4> : <div />}
+          {right}
+        </div>
+      ) : null}
       {children}
     </article>
   );
