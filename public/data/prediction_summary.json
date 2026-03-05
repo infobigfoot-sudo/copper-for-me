@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-03-05T09:28:31Z",
+  "source": {
+    "summary_csv": "data/primary_processing/prediction/model_results/japan_tatene_operational_scenarios/japan_tatene_h1_operational_scenarios_latest_summary.csv",
+    "monthly_master_v1": "data/primary_processing/prediction/monthly_master_v1/monthly_master_v1_all.csv",
+    "tatene_daily_dir": "data/primary_processing/japan/tate_ne"
+  },
+  "latest": {
+    "date": "2026-03-04",
+    "adopted_value_jpy_mt": 2130000.0,
+    "adopted_lower_jpy_mt": 2048276.318412487,
+    "adopted_upper_jpy_mt": 2140650.0,
+    "reference_value_jpy_mt": 2166990.6263438202,
+    "reference_lower_jpy_mt": 2083847.6911558164,
+    "reference_upper_jpy_mt": 2177825.5794755393,
+    "lme_pred_naive_usd_mt": 12750.0,
+    "usdjpy_pred_naive": 152.77,
+    "usdjpy_pred_xgboost": 155.47369460582735,
+    "lme_direction_signal": 0.0,
+    "lme_range_bucket": 0.0,
+    "premium_proxy_current": 122182.49999999977,
+    "premium_proxy_3m_avg": 44153.61000000002,
+    "premium_proxy_dev_pct": 0.0487445986862664,
+    "warning_flag": 1.0,
+    "warning_reason": "基準/参考乖離>=1.00% / latest-month override"
+  }
+}

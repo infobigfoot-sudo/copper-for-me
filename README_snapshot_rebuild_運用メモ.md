@@ -103,3 +103,93 @@ curl -X POST "http://127.0.0.1:3000/api/economy-snapshot/rebuild?mode=csv&date=2
 ## 補足
 - `mode=live`（従来挙動）は live API ベースで保存する
 - `mode=csv` はローカル運用向け（本番Vercelで `stock-data-processor/data` を読めない前提）
+
+## 表示用の運用ルール（重要）
+- 現在の CSV には `USD/JPY`（`usd_jpy`）を入れていない
+- そのため、**本番表示で使う最新 snapshot は `mode=live` で作る**
+- `mode=csv` は、欠け日を埋める backfill（再現性重視）に使う
+
+### おすすめ手順（実務）
+1. 過去日の欠けを埋める → `mode=csv`（ローカルで実行）
+2. 最後に当日分を更新 → `mode=live`
+3. 本番表示を確認
+
+### 例（本番表示用の最新更新）
+```bash
+curl -X POST "https://www.copper-for-me.com/api/economy-snapshot/rebuild?mode=live" \
+  -H "Authorization: Bearer 実トークン"
+```
+
+## コピペ用（運用パターン別）
+
+### 共通前提（ローカルAPIを叩く前に1回）
+`http://127.0.0.1:3000/...` を使うコマンドの前に、ローカルで `copper-for-me` を起動しておく。
+
+```bash
+cd /home/bigfooter/dev/openclaw-project/copper-for-me
+npm run dev
+```
+
+### パターンA: 毎日版（CSV更新なし）
+- 目的: 当日分の表示を更新する（`USD/JPY` を含む）
+
+#### 1) ローカルで microCMS 更新（live）
+```bash
+curl -X POST "http://127.0.0.1:3000/api/economy-snapshot/rebuild?mode=live" \
+  -H "Authorization: Bearer 実トークン"
+```
+
+#### 2) 本番表示を再検証（revalidate）
+```bash
+curl -X POST "https://www.copper-for-me.com/api/economy-snapshot/rebuild?mode=live" \
+  -H "Authorization: Bearer 実トークン"
+```
+
+---
+
+### パターンB: CSV更新あり版（backfill + 当日表示更新）
+- 目的: CSVを反映しつつ、最後に表示用の最新 snapshot も更新する
+
+#### 1) ローカルで CSVベース更新（指定日）
+```bash
+curl -X POST "http://127.0.0.1:3000/api/economy-snapshot/rebuild?mode=csv&date=2026-02-25&fredFallback=1" \
+  -H "Authorization: Bearer 実トークン"
+```
+
+#### 2) ローカルで microCMS 更新（live, 表示用）
+```bash
+curl -X POST "http://127.0.0.1:3000/api/economy-snapshot/rebuild?mode=live" \
+  -H "Authorization: Bearer 実トークン"
+```
+
+#### 3) 本番表示を再検証（revalidate）
+```bash
+curl -X POST "https://www.copper-for-me.com/api/economy-snapshot/rebuild?mode=live" \
+  -H "Authorization: Bearer 実トークン"
+```
+
+---
+
+### パターンC: 欠け日まとめ埋め（複数日 backfill）
+- 目的: 過去日の `economy_snapshots` をまとめて補完する
+
+#### 1) ローカルで CSV backfill（複数日）
+```bash
+for d in 2026-02-20 2026-02-21 2026-02-22 2026-02-23 2026-02-24; do
+  curl -X POST "http://127.0.0.1:3000/api/economy-snapshot/rebuild?mode=csv&date=${d}&fredFallback=1" \
+    -H "Authorization: Bearer 実トークン"
+  echo
+done
+```
+
+#### 2) ローカルで live 更新（表示用に最新を作る）
+```bash
+curl -X POST "http://127.0.0.1:3000/api/economy-snapshot/rebuild?mode=live" \
+  -H "Authorization: Bearer 実トークン"
+```
+
+#### 3) 本番表示を再検証（revalidate）
+```bash
+curl -X POST "https://www.copper-for-me.com/api/economy-snapshot/rebuild?mode=live" \
+  -H "Authorization: Bearer 実トークン"
+```

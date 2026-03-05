@@ -1,12 +1,5 @@
-import SiteHomePage from '@/app/[site]/page';
+import TopNativePage from '@/components/TopNativePage';
 
-export default async function HomePage({
-  searchParams
-}: {
-  searchParams?: Promise<{ driver?: string; horizon?: string; show?: string }>;
-}) {
-  return SiteHomePage({
-    params: Promise.resolve({ site: 'a' }),
-    searchParams
-  });
+export default async function HomePage() {
+  return <TopNativePage />;
 }

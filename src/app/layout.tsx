@@ -1,22 +1,9 @@
-import type { Metadata } from 'next';
-import { IBM_Plex_Sans_JP, Noto_Sans_JP } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import './globals.css';
-
-const notoSansJp = Noto_Sans_JP({
-  subsets: ['latin'],
-  variable: '--font-body-jp',
-  weight: ['400', '500', '700']
-});
-
-const ibmPlexSansJp = IBM_Plex_Sans_JP({
-  subsets: ['latin'],
-  variable: '--font-kpi-jp',
-  weight: ['400', '500', '600', '700']
-});
 
 const baseUrl = process.env.SITE_URL || 'http://localhost:3000';
 const metadataBase = (() => {
@@ -70,9 +57,14 @@ export const metadata: Metadata = {
   }
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const websiteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -87,26 +79,21 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   };
 
   return (
-    <html lang="ja" className={`${notoSansJp.variable} ${ibmPlexSansJp.variable}`}>
+    <html lang="ja">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
-        {gaMeasurementId ? (
-          <>
-            <Script
-              id="gtag-src"
-              async
-              strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
-            />
-            <Script id="gtag-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${gaMeasurementId}');
-              `}
-            </Script>
-          </>
-        ) : null}
         <Script id="jsonld-website" type="application/ld+json">
           {JSON.stringify(websiteJsonLd)}
         </Script>
@@ -124,9 +111,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         ) : null}
 
         {children}
-        <a href="#" className="cf-scroll-top cf-scroll-top--always" aria-label="ページ上部へ戻る">
-          ↑
-        </a>
         <CookieConsentBanner />
       </body>
     </html>

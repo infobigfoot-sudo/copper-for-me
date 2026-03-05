@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { readLatestEconomySnapshotFromMicrocms } from '@/lib/microcms_snapshot';
+import { readMergedPublishSeriesBundle } from '@/lib/publish_series_bundle';
 
 export type Indicator = {
   id: string;
@@ -97,9 +98,6 @@ const CACHE_FILE =
 const SNAPSHOT_FILE =
   process.env.ECONOMY_SNAPSHOT_FILE ||
   path.join(process.cwd(), 'public', 'data', 'economy_snapshot.json');
-const PUBLISH_SELECTED_SERIES_FILE =
-  process.env.PUBLISH_SELECTED_SERIES_FILE ||
-  path.join(process.cwd(), 'public', 'data', 'selected_series_bundle.json');
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 const CACHE_VERSION = 3;
 
@@ -214,7 +212,7 @@ function publishAliasToUnits(alias: string, indicatorId: string): string {
     lme_copper_3month_usd_t: 'USD/mt',
     lme_copper_stock_t: 't',
     japan_tatene_jpy_t: 'JPY/mt',
-    america_dexjpus: 'JPY/USD',
+    america_dexjpus: 'USD/JPY',
     america_dexchus: 'CNY/USD',
     america_fcx_close: 'USD',
     america_copx_close: 'USD',
@@ -266,14 +264,9 @@ function buildIndicatorFromPublishSeries(
 }
 
 async function readPublishSelectedSeriesBundle(): Promise<PublishSeriesBundle | null> {
-  try {
-    const raw = await fs.readFile(PUBLISH_SELECTED_SERIES_FILE, 'utf8');
-    const parsed = JSON.parse(raw) as PublishSeriesBundle;
-    if (!parsed || typeof parsed !== 'object') return null;
-    return parsed;
-  } catch {
-    return null;
-  }
+  const parsed = await readMergedPublishSeriesBundle();
+  if (!parsed || typeof parsed !== 'object') return null;
+  return parsed as PublishSeriesBundle;
 }
 
 async function getEconomyIndicatorsFromPublishJson(): Promise<EconomyBundle | null> {
@@ -639,14 +632,10 @@ async function readSnapshot(): Promise<EconomyBundle | null> {
 }
 
 async function writeSnapshot(bundle: EconomyBundle): Promise<boolean> {
-  try {
-    await fs.mkdir(path.dirname(SNAPSHOT_FILE), { recursive: true });
-    await fs.writeFile(SNAPSHOT_FILE, JSON.stringify(bundle, null, 2), 'utf8');
-    return true;
-  } catch {
-    // ignore snapshot write errors (e.g. read-only FS on serverless)
-    return false;
-  }
+  // Local snapshot file output is disabled.
+  // Source of truth is publish JSON / microCMS.
+  void bundle;
+  return false;
 }
 
 async function fetchFredIndicators(): Promise<Indicator[]> {
@@ -925,7 +914,7 @@ async function fetchUsdJpyFromMetalsDev(): Promise<Indicator | null> {
       date: String(data?.timestamps?.currency || data?.timestamps?.metal || '').slice(0, 10) ||
         toYmd(new Date()),
       lastUpdated: String(data?.timestamps?.currency || data?.timestamps?.metal || ''),
-      units: 'JPY/USD',
+      units: 'USD/JPY',
       frequency: 'Daily',
       source: 'Metals.dev'
     };
@@ -942,7 +931,7 @@ async function fetchAlphaIndicators(): Promise<Indicator[]> {
     {
       id: 'usd_jpy',
       name: 'USD/JPY 為替レート',
-      units: 'JPY/USD',
+      units: 'USD/JPY',
       frequency: 'Daily',
       url: `https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=JPY&apikey=${apiKey}`,
       parse: (data: any) => {
@@ -1151,7 +1140,7 @@ export async function getEconomyIndicatorsLive(opts?: { force?: boolean }): Prom
             value: fredUsdJpy.value,
             date: fredUsdJpy.date,
             lastUpdated: fredUsdJpy.lastUpdated,
-            units: fredUsdJpy.units || 'JPY/USD',
+            units: fredUsdJpy.units || 'USD/JPY',
             frequency: fredUsdJpy.frequency || 'Daily',
             source: 'FRED' as const,
             changePercent: formatChangePercent(fredUsdJpy.value, String(fredUsdJpy.prevValue || ''))

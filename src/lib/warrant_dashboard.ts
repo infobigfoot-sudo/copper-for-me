@@ -1,6 +1,7 @@
 import { cache } from 'react';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { readMergedPublishSeriesBundle } from '@/lib/publish_series_bundle';
 
 type DayPoint = { date: string; value: number };
 type MonthPoint = { month: string; value: number };
@@ -101,9 +102,9 @@ async function readPublishSeries(dataDir: string): Promise<{
   copperTateDaily: DayPoint[];
 } | null> {
   try {
-    const file = path.join(dataDir, 'selected_series_bundle.json');
-    const raw = await fs.readFile(file, 'utf8');
-    const parsed = JSON.parse(raw) as PublishSeriesBundle;
+    void dataDir;
+    const parsed = (await readMergedPublishSeriesBundle()) as PublishSeriesBundle | null;
+    if (!parsed) return null;
     const warrantDailyRaw = Array.isArray(parsed?.series?.warrant_copper_daily_t)
       ? parsed.series!.warrant_copper_daily_t
       : [];
