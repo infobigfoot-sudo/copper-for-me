@@ -15,6 +15,13 @@ function fmtNum(value: number | null, digits = 0): string {
   });
 }
 
+function parseInputNumber(raw: string): number | null {
+  const normalized = raw.replace(/[,\uFF0C\s]/g, '');
+  if (!normalized) return null;
+  const parsed = Number(normalized);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
 type Props = {
   lmeOptions: PresetPoint[];
   fxOptions: PresetPoint[];
@@ -33,17 +40,16 @@ export default function TateneCalculatorNative({
   const [premiumMode, setPremiumMode] = useState<'latest' | 'manual'>('latest');
   const [selectedLme, setSelectedLme] = useState('0');
   const [selectedFx, setSelectedFx] = useState('0');
-  const [lmeManual, setLmeManual] = useState(lmeOptions[0] ? String(lmeOptions[0].value) : '');
+  const [lmeManual, setLmeManual] = useState(lmeOptions[0] ? fmtNum(lmeOptions[0].value, 0) : '');
   const [fxManual, setFxManual] = useState(fxOptions[0] ? String(fxOptions[0].value) : '');
-  const [premiumManual, setPremiumManual] = useState(latestPremium ? String(Math.round(latestPremium.value)) : '');
+  const [premiumManual, setPremiumManual] = useState(latestPremium ? fmtNum(Math.round(latestPremium.value), 0) : '');
 
   const lmeValue = useMemo(() => {
     if (lmeMode === 'preset') {
       const picked = lmeOptions[Number(selectedLme)];
       return picked?.value ?? lmeOptions[0]?.value ?? null;
     }
-    const parsed = Number(lmeManual);
-    return Number.isFinite(parsed) ? parsed : null;
+    return parseInputNumber(lmeManual);
   }, [lmeMode, selectedLme, lmeOptions, lmeManual]);
 
   const fxValue = useMemo(() => {
@@ -57,8 +63,7 @@ export default function TateneCalculatorNative({
 
   const premiumValue = useMemo(() => {
     if (premiumMode === 'latest') return latestPremium?.value ?? null;
-    const parsed = Number(premiumManual);
-    return Number.isFinite(parsed) ? parsed : null;
+    return parseInputNumber(premiumManual);
   }, [premiumMode, latestPremium, premiumManual]);
 
   const modelValue = lmeValue !== null && fxValue !== null ? lmeValue * fxValue : null;
@@ -83,7 +88,16 @@ export default function TateneCalculatorNative({
             <h4 className="text-[14px] font-black text-cool-grey tracking-[0.04em]">LME銅価格（USD/mt）</h4>
             <div className="mt-2 inline-flex rounded-lg border border-[#d6dce5] overflow-hidden bg-white/60">
               <button type="button" className={modeBtn(lmeMode === 'preset')} onClick={() => setLmeMode('preset')}>直近７件</button>
-              <button type="button" className={modeBtn(lmeMode === 'manual')} onClick={() => setLmeMode('manual')}>手入力</button>
+              <button
+                type="button"
+                className={modeBtn(lmeMode === 'manual')}
+                onClick={() => {
+                  setLmeManual(fmtNum(lmePicked?.value ?? null, 0).replace('-', ''));
+                  setLmeMode('manual');
+                }}
+              >
+                手入力
+              </button>
             </div>
             <div className="relative mt-2.5">
               {lmeMode === 'preset' ? (
@@ -109,7 +123,7 @@ export default function TateneCalculatorNative({
                   onChange={(e) => setLmeManual(e.target.value)}
                   className="w-full rounded-xl border border-[#d8d2c8] bg-white px-4 py-3 text-lg sm:text-xl text-off-white font-semibold"
                   inputMode="decimal"
-                  placeholder="例: 13171"
+                  placeholder="例: 13,171"
                 />
               )}
               <span className="pointer-events-none absolute bottom-2 right-3 text-[10px] font-black uppercase tracking-[0.08em] text-[#99a0ac]">USD</span>
@@ -166,7 +180,16 @@ export default function TateneCalculatorNative({
             <h4 className="text-[14px] font-black text-cool-grey tracking-[0.04em]">諸コスト・プレミアム（円/mt）</h4>
             <div className="mt-2 inline-flex rounded-lg border border-[#d6dce5] overflow-hidden bg-white/60">
               <button type="button" className={modeBtn(premiumMode === 'latest')} onClick={() => setPremiumMode('latest')}>最新差分を使用</button>
-              <button type="button" className={modeBtn(premiumMode === 'manual')} onClick={() => setPremiumMode('manual')}>手入力</button>
+              <button
+                type="button"
+                className={modeBtn(premiumMode === 'manual')}
+                onClick={() => {
+                  setPremiumManual(fmtNum(latestPremium ? Math.round(latestPremium.value) : null, 0).replace('-', ''));
+                  setPremiumMode('manual');
+                }}
+              >
+                手入力
+              </button>
             </div>
             <div className="relative mt-2.5">
               {premiumMode === 'latest' ? (
@@ -181,7 +204,7 @@ export default function TateneCalculatorNative({
                   onChange={(e) => setPremiumManual(e.target.value)}
                   className="w-full rounded-xl border border-[#d8d2c8] bg-white px-4 py-3 text-lg sm:text-xl text-off-white font-semibold"
                   inputMode="numeric"
-                  placeholder="例: 80978"
+                  placeholder="例: 80,978"
                 />
               )}
               <span className="pointer-events-none absolute bottom-2 right-3 text-[10px] font-black uppercase tracking-[0.08em] text-[#99a0ac]">JPY</span>
