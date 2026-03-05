@@ -82,22 +82,27 @@ export default function TateneCalculatorNative({
           <section className="h-full rounded-2xl border border-[#e8e3da] bg-[#f3f0ea] p-3.5 sm:p-4">
             <h4 className="text-[14px] font-black text-cool-grey tracking-[0.04em]">LME銅価格（USD/mt）</h4>
             <div className="mt-2 inline-flex rounded-lg border border-[#d6dce5] overflow-hidden bg-white/60">
-              <button type="button" className={modeBtn(lmeMode === 'preset')} onClick={() => setLmeMode('preset')}>直近7件から選択</button>
+              <button type="button" className={modeBtn(lmeMode === 'preset')} onClick={() => setLmeMode('preset')}>直近７件</button>
               <button type="button" className={modeBtn(lmeMode === 'manual')} onClick={() => setLmeMode('manual')}>手入力</button>
             </div>
             <div className="relative mt-2.5">
               {lmeMode === 'preset' ? (
-                <select
-                  value={selectedLme}
-                  onChange={(e) => setSelectedLme(e.target.value)}
-                  className="w-full rounded-xl border border-[#d8d2c8] bg-white px-4 py-3 text-lg sm:text-xl text-off-white font-semibold"
-                >
-                  {lmeOptions.map((row, idx) => (
-                    <option key={`lme-opt-${row.date}-${idx}`} value={idx}>
-                      {`${fmtNum(row.value, 0)} (${row.date})`}
-                    </option>
-                  ))}
-                </select>
+                <>
+                  <select
+                    value={selectedLme}
+                    onChange={(e) => setSelectedLme(e.target.value)}
+                    className="w-full rounded-xl border border-[#d8d2c8] bg-white px-4 py-3 text-lg sm:text-xl text-transparent font-semibold"
+                  >
+                    {lmeOptions.map((row, idx) => (
+                      <option key={`lme-opt-${row.date}-${idx}`} value={idx} style={{ color: '#0f172a' }}>
+                        {`${row.date} ${fmtNum(row.value, 0)}`}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-lg sm:text-xl text-off-white font-semibold">
+                    {fmtNum(lmePicked?.value ?? null, 0)}
+                  </span>
+                </>
               ) : (
                 <input
                   value={lmeManual}
@@ -119,22 +124,27 @@ export default function TateneCalculatorNative({
           <section className="h-full rounded-2xl border border-[#e8e3da] bg-[#f3f0ea] p-3.5 sm:p-4">
             <h4 className="text-[14px] font-black text-cool-grey tracking-[0.04em]">USD / JPY</h4>
             <div className="mt-2 inline-flex rounded-lg border border-[#d6dce5] overflow-hidden bg-white/60">
-              <button type="button" className={modeBtn(fxMode === 'preset')} onClick={() => setFxMode('preset')}>直近7件から選択</button>
+              <button type="button" className={modeBtn(fxMode === 'preset')} onClick={() => setFxMode('preset')}>直近７件</button>
               <button type="button" className={modeBtn(fxMode === 'manual')} onClick={() => setFxMode('manual')}>手入力</button>
             </div>
             <div className="relative mt-2.5">
               {fxMode === 'preset' ? (
-                <select
-                  value={selectedFx}
-                  onChange={(e) => setSelectedFx(e.target.value)}
-                  className="w-full rounded-xl border border-[#d8d2c8] bg-white px-4 py-3 text-lg sm:text-xl text-off-white font-semibold"
-                >
-                  {fxOptions.map((row, idx) => (
-                    <option key={`fx-opt-${row.date}-${idx}`} value={idx}>
-                      {`${fmtNum(row.value, 2)} (${row.date})`}
-                    </option>
-                  ))}
-                </select>
+                <>
+                  <select
+                    value={selectedFx}
+                    onChange={(e) => setSelectedFx(e.target.value)}
+                    className="w-full rounded-xl border border-[#d8d2c8] bg-white px-4 py-3 text-lg sm:text-xl text-transparent font-semibold"
+                  >
+                    {fxOptions.map((row, idx) => (
+                      <option key={`fx-opt-${row.date}-${idx}`} value={idx} style={{ color: '#0f172a' }}>
+                        {`${row.date} ${fmtNum(row.value, 2)}`}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-lg sm:text-xl text-off-white font-semibold">
+                    {fmtNum(fxPicked?.value ?? null, 2)}
+                  </span>
+                </>
               ) : (
                 <input
                   value={fxManual}
