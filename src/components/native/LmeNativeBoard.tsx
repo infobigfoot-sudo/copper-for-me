@@ -17,11 +17,8 @@ const SPANS: Array<{ key: SpanKey; label: string; days: number }> = [
   { key: '5y', label: '5Y', days: 365 * 5 },
 ];
 
-const FIXED_WORLD_MONTH = '2025-12';
 const LME_CONTRIBUTION_START_MONTH = '2025-01';
 const LME_CONTRIBUTION_END_MONTH = '2025-12';
-const FIXED_WORLD_RAW_MATERIAL_EXPORT_WAN_T = 90.048744;
-const FIXED_WORLD_COPPER_EXPORT_UNIT_USD_T = 11201.295866;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -394,24 +391,8 @@ export default function LmeNativeBoard({
 
   const pUsd = latestPair(priceMonthlyUsdSeries);
   const fx = latestPair(usdCnyMonthlySeries);
-  const rawBase = pairAtMonth(rawMaterialExportMonthlySeries, FIXED_WORLD_MONTH);
-  const raw =
-    rawBase.latest && Number.isFinite(rawBase.latest.value) && rawBase.latest.value > 0
-      ? rawBase
-      : {
-          latest: { date: FIXED_WORLD_MONTH, value: FIXED_WORLD_RAW_MATERIAL_EXPORT_WAN_T },
-          prev: null,
-        };
-  const copperExportBase = pairAtMonth(copperExportUnitMonthlySeries, FIXED_WORLD_MONTH);
-  const copperExport =
-    copperExportBase.latest &&
-    Number.isFinite(copperExportBase.latest.value) &&
-    copperExportBase.latest.value > 0
-      ? copperExportBase
-      : {
-          latest: { date: FIXED_WORLD_MONTH, value: FIXED_WORLD_COPPER_EXPORT_UNIT_USD_T },
-          prev: null,
-        };
+  const raw = latestPair(rawMaterialExportMonthlySeries);
+  const copperExport = latestPair(copperExportUnitMonthlySeries);
   const pUsdChg = calcChange(pUsd.latest?.value ?? null, pUsd.prev?.value ?? null);
   const fxChg = calcChange(fx.latest?.value ?? null, fx.prev?.value ?? null);
   const rawChg = calcChange(raw.latest?.value ?? null, raw.prev?.value ?? null);
@@ -584,7 +565,7 @@ export default function LmeNativeBoard({
           titleUnderBadge
           gaugeSize="large"
           titlePadRight={false}
-          date={copperExport.latest?.date || FIXED_WORLD_MONTH}
+          date={copperExport.latest?.date || '-'}
         />
         <MetricCard
           label="原材料輸出"
@@ -597,7 +578,7 @@ export default function LmeNativeBoard({
           titleUnderBadge
           gaugeSize="large"
           titlePadRight={false}
-          date={raw.latest?.date || FIXED_WORLD_MONTH}
+          date={raw.latest?.date || '-'}
         />
         <MetricCard
           label="USD/CHY"

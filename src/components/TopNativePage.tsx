@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import CurrentJstTime from '@/components/CurrentJstTime';
 import MobileBottomNavClient from '@/components/native/MobileBottomNavClient';
 import { OTHER_NAV_LINKS, PRIMARY_NAV_LINKS } from '@/components/native/nav';
 import TopTrendChart from '@/components/native/TopTrendChart';
@@ -65,24 +66,6 @@ function latestPair(rows: SeriesPoint[]): {
     latest: rows[rows.length - 1] ?? null,
     prev: rows.length > 1 ? rows[rows.length - 2] : null
   };
-}
-
-function formatJstNow(): { date: string; time: string } {
-  const now = new Date();
-  const date = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Asia/Tokyo',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-  }).format(now);
-  const time = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Asia/Tokyo',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false
-  }).format(now);
-  return { date, time };
 }
 
 function miniBar(values: number[], type: 'up' | 'down') {
@@ -417,8 +400,6 @@ export default async function TopNativePage() {
       : null;
   const lmeMaeScore = scoreFromPct(lmeMaeDiffPct);
   const lmeMaeUp = lmeMaeDiffPct !== null && lmeMaeDiffPct >= 0;
-  const jst = formatJstNow();
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f7f3ec] via-[#efe7dc] to-[#f9f6f0] text-[#0f172a]">
       <nav className="sticky top-0 z-50 border-b border-[#e6dfd3] bg-[#f3f1ed]/95 backdrop-blur-xl">
@@ -481,9 +462,7 @@ export default async function TopNativePage() {
           <div className="w-full">
             <div className="glass-card p-4 rounded-xl min-w-0 text-left sm:text-right">
               <p className="text-[10px] font-bold text-cool-grey uppercase tracking-tighter mb-1">基準時刻</p>
-              <p className="text-sm sm:text-xl font-mono font-bold text-off-white tracking-[0.08em] sm:tracking-widest">
-                {jst.date} <span className="text-positive">{jst.time}</span>
-              </p>
+              <CurrentJstTime />
             </div>
           </div>
         </div>

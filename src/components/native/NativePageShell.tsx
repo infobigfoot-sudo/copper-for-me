@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
+import CurrentJstTime from '@/components/CurrentJstTime';
 import DataDisclaimerBlock from '@/components/native/DataDisclaimerBlock';
 import MobileBottomNavClient from '@/components/native/MobileBottomNavClient';
 import { isOtherNavKey, OTHER_NAV_LINKS, PRIMARY_NAV_LINKS } from '@/components/native/nav';
@@ -27,20 +28,6 @@ export default function NativePageShell({
   latestArticle?: { title: string; href: string } | null;
   children: ReactNode;
 }) {
-  const now = new Date();
-  const date = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Asia/Tokyo',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).format(now);
-  const time = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Asia/Tokyo',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  }).format(now);
   const isOtherActive = isOtherNavKey(active);
   const showStatusCard = !hideStatusCard;
   const widthClass = fullWidth ? 'w-full' : 'max-w-[1440px] mx-auto';
@@ -112,9 +99,7 @@ export default function NativePageShell({
               ) : null}
               <div className="glass-card p-4 rounded-xl min-w-0 text-left sm:text-right">
                 <p className="text-[10px] font-bold text-cool-grey uppercase tracking-tighter mb-1">基準時刻</p>
-                <p className="text-sm sm:text-xl font-mono font-bold text-off-white tracking-[0.08em] sm:tracking-widest">
-                  {date} <span className="text-positive">{time}</span>
-                </p>
+                <CurrentJstTime />
               </div>
             </div>
           )}
