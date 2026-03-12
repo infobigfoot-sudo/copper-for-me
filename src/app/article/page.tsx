@@ -9,7 +9,6 @@ export default async function ArticlePage() {
   const postsRes = await getPosts(12, 'a').catch(() => ({ contents: [] as any[] }));
   const posts = (postsRes.contents || []).slice(0, 12);
   const featured = posts[0] ?? null;
-
   const featuredTitle = featured ? String(featured?.title || 'Untitled') : '銅価格を読む指標まとめ（毎日・週次・地合い確認）';
   const featuredHref = featured ? `/blog/${featured?.slug || featured?.id || ''}` : '/learn/copper-price-basics';
   const featuredDate = featured ? formatDateLabel(featured?.publishedAt) : '-';
@@ -17,6 +16,40 @@ export default async function ArticlePage() {
     ? String(featured?.excerpt || '').trim() || '相場を追うときに「何を・どの順で見るか」を整理した短い解説です。'
     : '相場を追うときに「何を・どの順で見るか」がわかる短い解説です。';
   const featuredImage = featured?.coverImage?.url || null;
+  const fallbackCards = [
+    {
+      title: '免責事項',
+      href: '/blog/disclaimer',
+      excerpt: '当サイトの情報利用に関する注意事項（正確性・投資判断・責任範囲）を記載。',
+    },
+    {
+      title: 'プライバシーポリシー',
+      href: '/blog/privacypolicy',
+      excerpt: '当サイトのプライバシーポリシーです。Cookie、広告配信、個人情報の取り扱いを掲載。',
+    },
+    {
+      title: 'このサイトについて',
+      href: '/category/about',
+      excerpt: '運営方針、データ出所、価格情報の反映頻度、指標の見方を説明します。',
+    },
+  ];
+  const secondaryCards = Array.from({ length: 3 }, (_, index) => {
+    const post = posts[index + 1];
+    if (post) {
+      return {
+        title: String(post?.title || 'Untitled'),
+        href: `/blog/${post?.slug || post?.id || ''}`,
+        excerpt:
+          String(post?.excerpt || '').trim() ||
+          '相場・指標の更新内容を短く整理した記事です。',
+        date: formatDateLabel(post?.publishedAt),
+      };
+    }
+    return {
+      ...fallbackCards[index],
+      date: featuredDate,
+    };
+  });
 
   return (
     <NativePageShell active="article" title="記事" description="相場・指標の最新情報" hideHeaderCards>
@@ -59,30 +92,14 @@ export default async function ArticlePage() {
       </article>
 
       <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <article className="glass-card rounded-2xl p-5">
-          <p className="text-cool-grey text-[10px] mb-2">{featuredDate}</p>
-          <h4 className="text-[14px] font-black text-off-white mb-3">免責事項</h4>
-          <p className="text-cool-grey text-sm leading-relaxed mb-4">
-            当サイトの情報利用に関する注意事項（正確性・投資判断・責任範囲）を記載。
-          </p>
-          <Link href="/blog/disclaimer" className="text-positive text-sm font-bold hover:underline">詳細を確認する</Link>
-        </article>
-        <article className="glass-card rounded-2xl p-5">
-          <p className="text-cool-grey text-[10px] mb-2">{featuredDate}</p>
-          <h4 className="text-[14px] font-black text-off-white mb-3">プライバシーポリシー</h4>
-          <p className="text-cool-grey text-sm leading-relaxed mb-4">
-            当サイトのプライバシーポリシーです。Cookie、広告配信、個人情報の取り扱いを掲載。
-          </p>
-          <Link href="/blog/privacypolicy" className="text-positive text-sm font-bold hover:underline">詳細を確認する</Link>
-        </article>
-        <article className="glass-card rounded-2xl p-5">
-          <p className="text-cool-grey text-[10px] mb-2">{featuredDate}</p>
-          <h4 className="text-[14px] font-black text-off-white mb-3">このサイトについて</h4>
-          <p className="text-cool-grey text-sm leading-relaxed mb-4">
-            運営方針、データ出所、価格情報の反映頻度、指標の見方を説明します。
-          </p>
-          <Link href="/category/about" className="text-positive text-sm font-bold hover:underline">詳細を確認する</Link>
-        </article>
+        {secondaryCards.map((card) => (
+          <article key={`${card.href}-${card.title}`} className="glass-card rounded-2xl p-5">
+            <p className="text-cool-grey text-[10px] mb-2">{card.date}</p>
+            <h4 className="text-[14px] font-black text-off-white mb-3">{card.title}</h4>
+            <p className="text-cool-grey text-sm leading-relaxed mb-4">{card.excerpt}</p>
+            <Link href={card.href} className="text-positive text-sm font-bold hover:underline">詳細を確認する</Link>
+          </article>
+        ))}
       </div>
 
     </NativePageShell>

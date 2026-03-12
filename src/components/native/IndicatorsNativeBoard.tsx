@@ -923,15 +923,15 @@ export default function IndicatorsNativeBoard({
     if (trendPair === 'volume_bars') return volumeImportSpan;
     return scrapEstimateSpan;
   }, [trendPair, scrapExportSpan, scrapImportSpan, scrapEstimateSpan, volumeImportSpan]);
-  const trendPrimaryLabel = trendPair === 'volume_bars' ? '輸出量(t)' : '国内建値(JPY/t)';
+  const trendPrimaryLabel = trendPair === 'volume_bars' ? '輸出量(t)' : '国内建値(JPY/mt)';
   const trendSecondaryLabel =
     trendPair === 'tatene_export'
-      ? '輸出単価(JPY/t)'
+      ? '輸出単価(JPY/mt)'
       : trendPair === 'tatene_import'
-        ? '輸入単価(JPY/t)'
+        ? '輸入単価(JPY/mt)'
         : trendPair === 'volume_bars'
           ? '輸入量(t)'
-        : '推定単価(JPY/t)';
+        : '推定単価(JPY/mt)';
   const trendPrimaryMonthlyRows = useMemo(() => toMonthlyAverage(trendPrimaryRows), [trendPrimaryRows]);
   const trendSecondaryMonthlyRows = useMemo(() => toMonthlyAverage(trendSecondaryRows), [trendSecondaryRows]);
 
@@ -1107,7 +1107,7 @@ export default function IndicatorsNativeBoard({
     Boolean(latestCommonTradeDate && latestCommonTradeDate.slice(0, 7) >= '2025-01') &&
     (scrapUnit.latest?.value ?? null) === 0;
   const exportCardValue = isExportPending ? '待機中' : fmtNum(scrapUnit.latest?.value ?? null, 0);
-  const exportCardUnit = isExportPending ? '' : 'JPY/t';
+  const exportCardUnit = isExportPending ? '' : 'JPY/mt';
 
   return (
     <>
@@ -1134,7 +1134,7 @@ export default function IndicatorsNativeBoard({
           change={scrapImportUnitChg}
           positiveWhenUp={false}
           value={fmtNum(scrapImportUnit.latest?.value ?? null, 0)}
-          unit="JPY/t"
+          unit="JPY/mt"
           polyline={buildPolyline(pairedScrapSeries.importRows.slice(-7).map((r) => r.value))}
           gaugeRangeValues={pairedScrapSeries.importRows.slice(-31).map((r) => r.value)}
           gaugeCurrentChange={scrapImportUnitChg}
@@ -1166,7 +1166,7 @@ export default function IndicatorsNativeBoard({
           change={scrapPurchasePriceChg}
           positiveWhenUp={true}
           value={fmtNum(scrapPurchasePrice.latest?.value ?? null, 0)}
-          unit="JPY/t"
+          unit="JPY/mt"
           polyline={buildPolyline(scrapPurchasePriceSeries.slice(-7).map((r) => r.value))}
           gaugeRangeValues={scrapPurchasePriceSeries.slice(-31).map((r) => r.value)}
           gaugeCurrentChange={scrapPurchasePriceChg}

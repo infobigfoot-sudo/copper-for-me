@@ -568,7 +568,7 @@ export default function TateneNativeBoard({
           labelNote="HS7403.11 月次平均（MOF）"
           change={importUnitChg}
           value={fmtNum(importUnitValue, 1)}
-          unit="JPY/t"
+          unit="JPY/mt"
           polyline={buildPolyline(importUnitDisplaySeries.slice(-7).map((r) => r.value))}
           gaugeRangeValues={importUnitDisplaySeries.slice(-31).map((r) => r.value)}
           gaugeCurrentChange={importUnitChg}
@@ -658,7 +658,7 @@ export default function TateneNativeBoard({
         <article className="glass-card rounded-3xl p-8">
           <div className="mb-4 flex items-start justify-between gap-3">
             <h4 className="text-[14px] font-black text-cool-grey uppercase tracking-[0.2em] sm:tracking-[0.3em] whitespace-nowrap">3年データ</h4>
-            <p className="text-[10px] font-bold tracking-[0.08em] text-cool-grey whitespace-nowrap">※単位: JPY/mt, JPY/t</p>
+            <p className="text-[10px] font-bold tracking-[0.08em] text-cool-grey whitespace-nowrap">※単位: JPY/mt</p>
           </div>
           <div
             className="w-full overflow-y-scroll overflow-x-hidden calm-scrollbar rounded-lg border border-white/10 bg-[#f3f1ed]/70"

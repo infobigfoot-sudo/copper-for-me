@@ -77,11 +77,10 @@ function filterByPeriodDays(rows: SeriesPoint[], days: number): SeriesPoint[] {
 function alignSeriesByDate(axisDates: string[], rows: SeriesPoint[]): Array<number | null> {
   if (!axisDates.length) return [];
   if (!rows.length) return axisDates.map(() => null);
-  let j = 0;
+  const byDate = new Map(rows.map((row) => [row.date, row.value] as const));
   return axisDates.map((date) => {
-    while (j + 1 < rows.length && rows[j + 1].date <= date) j += 1;
-    const curr = rows[j];
-    return curr && curr.date <= date && Number.isFinite(curr.value) ? curr.value : null;
+    const value = byDate.get(date);
+    return value !== undefined && Number.isFinite(value) ? value : null;
   });
 }
 

@@ -114,12 +114,10 @@ const RELATIVE_OPTION_TABS: Array<{ key: RelativeOptionalKey; label: string; col
 
 function alignSeriesByDate(baseRows: SeriesPoint[], rows: SeriesPoint[]): Array<number | null> {
   if (!baseRows.length || !rows.length) return baseRows.map(() => null);
-  let j = 0;
+  const byDate = new Map(rows.map((row) => [row.date, row.value] as const));
   return baseRows.map((base) => {
-    // Carry forward the latest known value so missing recent months (e.g. 2026-01/02 export unit) use 2025-12 data.
-    while (j + 1 < rows.length && rows[j + 1].date <= base.date) j += 1;
-    const curr = rows[j];
-    return curr && curr.date <= base.date && Number.isFinite(curr.value) ? curr.value : null;
+    const value = byDate.get(base.date);
+    return value !== undefined && Number.isFinite(value) ? value : null;
   });
 }
 
@@ -393,10 +391,22 @@ export default function LmeNativeBoard({
   const fx = latestPair(usdCnyMonthlySeries);
   const raw = latestPair(rawMaterialExportMonthlySeries);
   const copperExport = latestPair(copperExportUnitMonthlySeries);
+  const referenceLatestMonth =
+    priceMonthlyUsdSeries.at(-1)?.date ||
+    usdCnyMonthlySeries.at(-1)?.date ||
+    rawMaterialExportMonthlySeries.at(-1)?.date ||
+    copperExportUnitMonthlySeries.at(-1)?.date ||
+    '-';
+  const isRawPending = Boolean(referenceLatestMonth && raw.latest?.date && raw.latest.date < referenceLatestMonth);
+  const isCopperExportPending = Boolean(
+    referenceLatestMonth && copperExport.latest?.date && copperExport.latest.date < referenceLatestMonth
+  );
   const pUsdChg = calcChange(pUsd.latest?.value ?? null, pUsd.prev?.value ?? null);
   const fxChg = calcChange(fx.latest?.value ?? null, fx.prev?.value ?? null);
-  const rawChg = calcChange(raw.latest?.value ?? null, raw.prev?.value ?? null);
-  const copperExportChg = calcChange(copperExport.latest?.value ?? null, copperExport.prev?.value ?? null);
+  const rawChg = isRawPending ? null : calcChange(raw.latest?.value ?? null, raw.prev?.value ?? null);
+  const copperExportChg = isCopperExportPending
+    ? null
+    : calcChange(copperExport.latest?.value ?? null, copperExport.prev?.value ?? null);
   const endDate = pUsd.latest?.date || fx.latest?.date || raw.latest?.date || copperExport.latest?.date || '-';
 
   const spanDays = SPANS.find((x) => x.key === span)?.days ?? 365;
@@ -557,20 +567,20 @@ export default function LmeNativeBoard({
           label="輸出単価"
           labelNote="※銅輸出単価"
           change={copperExportChg}
-          value={fmtNum(copperExport.latest?.value ?? null, 0)}
-          unit="USD/t"
+          value={isCopperExportPending ? '待機中' : fmtNum(copperExport.latest?.value ?? null, 0)}
+          unit="USD/mt"
           gaugeRangeValues={copperExportUnitMonthlySeries.slice(-31).map((r) => r.value)}
           gaugeCurrentChange={copperExportChg}
           chartMode="gauge"
           titleUnderBadge
           gaugeSize="large"
           titlePadRight={false}
-          date={copperExport.latest?.date || '-'}
+          date={isCopperExportPending ? referenceLatestMonth : copperExport.latest?.date || '-'}
         />
         <MetricCard
           label="原材料輸出"
           change={rawChg}
-          value={fmtNum(raw.latest?.value ?? null, 3)}
+          value={isRawPending ? '待機中' : fmtNum(raw.latest?.value ?? null, 3)}
           unit="万t"
           gaugeRangeValues={rawMaterialExportMonthlySeries.slice(-31).map((r) => r.value)}
           gaugeCurrentChange={rawChg}
@@ -578,7 +588,7 @@ export default function LmeNativeBoard({
           titleUnderBadge
           gaugeSize="large"
           titlePadRight={false}
-          date={raw.latest?.date || '-'}
+          date={isRawPending ? referenceLatestMonth : raw.latest?.date || '-'}
         />
         <MetricCard
           label="USD/CHY"
