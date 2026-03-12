@@ -87,6 +87,7 @@ function fmtGaugeExtreme(value: number, kind: 'min' | 'max'): string {
 export function MetricCard({
   label,
   labelNote,
+  alertNote,
   change,
   value,
   unit,
@@ -101,9 +102,11 @@ export function MetricCard({
   gaugeSize = 'default',
   titlePadRight = false,
   gaugeFixedRange,
+  alertNoteClassName,
 }: {
   label: string;
   labelNote?: string;
+  alertNote?: string;
   change: number | null;
   value: string;
   unit: string;
@@ -118,6 +121,7 @@ export function MetricCard({
   gaugeSize?: 'default' | 'large';
   titlePadRight?: boolean;
   gaugeFixedRange?: { min: number; max: number };
+  alertNoteClassName?: string;
 }) {
   const supportive = change === null ? null : positiveWhenUp ? change >= 0 : change < 0;
   const badgeCls =
@@ -319,6 +323,9 @@ export function MetricCard({
           </svg>
         </div>
       )}
+      {alertNote ? (
+        <p className={`mt-3 text-[10px] font-bold leading-snug ${alertNoteClassName ?? 'text-[#b86d53]'}`}>{alertNote}</p>
+      ) : null}
       <p className="mt-2 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.18em] text-cool-grey text-right">{date}</p>
     </div>
   );

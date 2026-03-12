@@ -905,6 +905,10 @@ export default function IndicatorsNativeBoard({
   }, [lmeMonthlySeries, usdJpyMonthlySeries]);
   const scrapUnit = latestPair(pairedScrapSeries.exportRows);
   const scrapImportUnit = latestPair(pairedScrapSeries.importRows);
+  const validScrapExportRows = useMemo(
+    () => pairedScrapSeries.exportRows.filter((row) => Number.isFinite(row.value) && row.value > 0),
+    [pairedScrapSeries.exportRows]
+  );
   const latestCommonTradeDate = pairedScrapSeries.commonTradeDates.at(-1) ?? null;
   const prevCommonTradeDate =
     pairedScrapSeries.commonTradeDates.length >= 2
@@ -920,6 +924,28 @@ export default function IndicatorsNativeBoard({
   };
   const scrapUnitChg = calcChange(scrapUnit.latest?.value ?? null, scrapUnit.prev?.value ?? null);
   const scrapImportUnitChg = calcChange(scrapImportUnit.latest?.value ?? null, scrapImportUnit.prev?.value ?? null);
+  const exportYieldRatioBaseline = useMemo(() => {
+    const recentRatios = validScrapExportRows
+      .slice()
+      .reverse()
+      .map((row) => {
+        const tatene = valueAtOrBefore(tateneSeries, row.date);
+        if (tatene === null || !Number.isFinite(tatene) || tatene === 0) return null;
+        return row.value / tatene;
+      })
+      .filter((value): value is number => value !== null && Number.isFinite(value))
+      .slice(0, 6);
+    if (recentRatios.length) {
+      return recentRatios.reduce((sum, value) => sum + value, 0) / recentRatios.length;
+    }
+    return 0.85;
+  }, [tateneSeries, validScrapExportRows]);
+  const estimatedScrapExportUnit = useMemo(() => {
+    if (!latestCommonTradeDate || !Number.isFinite(exportYieldRatioBaseline)) return null;
+    const tatene = valueAtOrBefore(tateneSeries, latestCommonTradeDate);
+    if (tatene === null || !Number.isFinite(tatene)) return null;
+    return tatene * exportYieldRatioBaseline;
+  }, [exportYieldRatioBaseline, latestCommonTradeDate, tateneSeries]);
   const oneYearNetRows = useMemo(
     () =>
       latestCommonTradeDate
@@ -1178,8 +1204,15 @@ export default function IndicatorsNativeBoard({
   const isExportPending =
     Boolean(latestCommonTradeDate && latestCommonTradeDate.slice(0, 7) >= '2025-01') &&
     (scrapUnit.latest?.value ?? null) === 0;
-  const exportCardValue = isExportPending ? '待機中' : fmtNum(scrapUnit.latest?.value ?? null, 0);
-  const exportCardUnit = isExportPending ? '' : 'JPY/mt';
+  const isExportEstimated = isExportPending && estimatedScrapExportUnit !== null;
+  const exportCardValue = isExportEstimated
+    ? fmtNum(estimatedScrapExportUnit, 0)
+    : isExportPending
+      ? '待機中'
+      : fmtNum(scrapUnit.latest?.value ?? null, 0);
+  const exportCardUnit = isExportPending && !isExportEstimated ? '' : 'JPY/mt';
+  const exportCardChange = isExportEstimated ? null : scrapUnitChg;
+  const exportGaugeRangeValues = validScrapExportRows.slice(-31).map((r) => r.value);
 
   return (
     <>
@@ -1187,13 +1220,15 @@ export default function IndicatorsNativeBoard({
         <MetricCard
           label="7404 輸出単価（日本）"
           labelNote={`~2024:7404合計 / 2025~:明細 / 最新:${latestYm(latestCommonTradeDate)}`}
-          change={scrapUnitChg}
+          alertNote={isExportEstimated ? '※現在、純銅の輸出実績がゼロのため、推定値を使用しています' : undefined}
+          alertNoteClassName="text-[#b86d53]"
+          change={exportCardChange}
           positiveWhenUp={true}
           value={exportCardValue}
           unit={exportCardUnit}
           polyline={buildPolyline(pairedScrapSeries.exportRows.slice(-7).map((r) => r.value))}
-          gaugeRangeValues={pairedScrapSeries.exportRows.slice(-31).map((r) => r.value)}
-          gaugeCurrentChange={scrapUnitChg}
+          gaugeRangeValues={exportGaugeRangeValues}
+          gaugeCurrentChange={exportCardChange}
           chartMode="gauge"
           titleUnderBadge
           gaugeSize="large"
