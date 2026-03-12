@@ -490,7 +490,7 @@ export default function TateneNativeBoard({
     [relTateneSpan, electricCopperInventorySeries]
   );
   const relativeLines = useMemo(() => {
-    const lines: Array<{ values: number[]; color: string }> = [{ values: relTatene.map((r) => r.value), color: TATENE_PRICE_COLOR }];
+    const lines: Array<{ values: Array<number | null>; color: string }> = [{ values: relTatene.map((r) => r.value), color: TATENE_PRICE_COLOR }];
     if (relativeSelection.import_unit) lines.push({ values: relImportUnit, color: TATENE_IMPORT_COLOR });
     if (relativeSelection.usd_jpy) lines.push({ values: relUsd, color: TATENE_USD_COLOR });
     if (relativeSelection.inventory) lines.push({ values: relInventory, color: TATENE_INVENTORY_COLOR });
@@ -601,7 +601,7 @@ export default function TateneNativeBoard({
           label="輸入単価"
           labelNote={isImportPending ? 'HS7403.11 / データ更新待ち' : 'HS7403.11 '}
           change={importUnitChg}
-          value={fmtNum(importUnitValue, 1)}
+          value={fmtNum(importUnitValue, 0)}
           unit="JPY/mt"
           polyline={buildPolyline(importUnitDisplaySeries.slice(-7).map((r) => r.value))}
           gaugeRangeValues={importUnitDisplaySeries.slice(-31).map((r) => r.value)}
