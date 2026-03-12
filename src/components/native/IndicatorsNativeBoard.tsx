@@ -814,7 +814,7 @@ export default function IndicatorsNativeBoard({
   scrapNetImportSeries: SeriesPoint[];
 }) {
   const latestYm = (d?: string | null) => (d && d.length >= 7 ? d.slice(0, 7) : '-');
-  const [span, setSpan] = useState<SpanKey>('5y');
+  const [span, setSpan] = useState<SpanKey>('1y');
   const [trendPair, setTrendPair] = useState<TrendPairKey>('tatene_export');
   const [dataTab, setDataTab] = useState<IndicatorDataTabKey>('yield_export');
   const [relativeSelection, setRelativeSelection] = useState<Record<ScrapRelativeKey, boolean>>({
@@ -934,7 +934,7 @@ export default function IndicatorsNativeBoard({
     scrapPurchasePrice.prev?.value ?? null
   );
 
-  const spanDays = SPANS.find((x) => x.key === span)?.days ?? 93;
+  const spanDays = SPANS.find((x) => x.key === span)?.days ?? 365;
   const spanMonths = SPAN_MONTHS[span] ?? 12;
   const scopedByCommonLatest = (rows: SeriesPoint[], days: number) =>
     latestCommonTradeDate ? filterByPeriodDaysEndingAt(rows, days, latestCommonTradeDate) : filterByPeriodDays(rows, days);

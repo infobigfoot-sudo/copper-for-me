@@ -90,20 +90,11 @@ function tateneDirectionBadge(tateneDiffMt: number | null): BadgeDecision {
   return { text: 'DOWN↓', className: BADGE_RED };
 }
 
-function impactContributionBadge(tateneDiffMt: number | null, impactMt: number | null): BadgeDecision {
-  if (
-    tateneDiffMt === null ||
-    impactMt === null ||
-    !Number.isFinite(tateneDiffMt) ||
-    !Number.isFinite(impactMt)
-  ) {
+function impactContributionBadge(impactMt: number | null): BadgeDecision {
+  if (impactMt === null || !Number.isFinite(impactMt)) {
     return { text: '-', className: BADGE_NEUTRAL };
   }
-  if (tateneDiffMt >= 0) {
-    if (impactMt >= 0) return { text: '上昇要因↑', className: BADGE_GREEN };
-    return { text: '下降圧力↓', className: BADGE_GREEN };
-  }
-  if (impactMt >= 0) return { text: '下支え↑', className: BADGE_GREEN };
+  if (impactMt >= 0) return { text: '上昇要因↑', className: BADGE_GREEN };
   return { text: '下降要因↓', className: BADGE_RED };
 }
 
@@ -337,9 +328,9 @@ export default async function TopNativePage() {
   const fxImpactMt = roundedImpacts.fxImpactMt;
   const costImpactMt = roundedImpacts.costImpactMt;
   const tateneDiffBadge = tateneDirectionBadge(tateneDiffMt);
-  const lmeImpactBadge = impactContributionBadge(tateneDiffMt, lmeMarketImpactMt);
-  const fxImpactBadge = impactContributionBadge(tateneDiffMt, fxImpactMt);
-  const costImpactBadge = impactContributionBadge(tateneDiffMt, costImpactMt);
+  const lmeImpactBadge = impactContributionBadge(lmeMarketImpactMt);
+  const fxImpactBadge = impactContributionBadge(fxImpactMt);
+  const costImpactBadge = impactContributionBadge(costImpactMt);
   const rawExportRows = Array.from(
     new Map(
       topRawMaterialExportRows

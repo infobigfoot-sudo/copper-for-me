@@ -226,9 +226,9 @@ export default function TopTrendChart({
   predictionLower = null,
   predictionUpper = null,
 }: Props) {
-  const [span, setSpan] = useState<SpanKey>('6m');
+  const [span, setSpan] = useState<SpanKey>('1y');
   const [viewTab, setViewTab] = useState<ViewTab>('tatene_ma');
-  const spanDays = SPANS.find((item) => item.key === span)?.days ?? 186;
+  const spanDays = SPANS.find((item) => item.key === span)?.days ?? 365;
 
   const tateneSpan = useMemo(() => filterByPeriodDays(tateneRows, spanDays), [tateneRows, spanDays]);
   const lmeUsdSpan = useMemo(() => filterByPeriodDays(lmeUsdRows, spanDays), [lmeUsdRows, spanDays]);
