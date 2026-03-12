@@ -235,6 +235,19 @@ function mergeMonthlySeries(baseRows: SeriesPoint[], overrideRows: SeriesPoint[]
     .map(([date, value]) => ({ date, value }));
 }
 
+function sumSeriesByDate(rowsList: SeriesPoint[][]): SeriesPoint[] {
+  const map = new Map<string, number>();
+  for (const rows of rowsList) {
+    for (const row of rows) {
+      if (!row?.date || !Number.isFinite(row.value)) continue;
+      map.set(row.date, (map.get(row.date) || 0) + row.value);
+    }
+  }
+  return Array.from(map.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([date, value]) => ({ date, value }));
+}
+
 function pointAtOrBeforeDate(rows: SeriesPoint[], date: string): SeriesPoint | null {
   for (let i = rows.length - 1; i >= 0; i -= 1) {
     if (rows[i].date <= date) return rows[i];
@@ -265,9 +278,15 @@ export default async function TopNativePage() {
   }));
   const lmeCashRows = convertUsdMtSeriesToJpyKg(lmeCashUsdRows, usdjpyRows);
   const lme3mRows = convertUsdMtSeriesToJpyKg(lme3mUsdRows, usdjpyRows);
-  const worldRawMaterialExportRows = normalizeSeries(
-    series.trade_world_raw_material_export_wan_t || series.trade_raw_material_export_wan_t
-  );
+  const rawMaterialExportRows = normalizeSeries(series.trade_raw_material_export_wan_t);
+  const chileRawMaterialExportRows = normalizeSeries(series.trade_chile_hs2603_export_wan_t);
+  const peruRawMaterialExportRows = normalizeSeries(series.trade_peru_hs2603_export_wan_t);
+  const worldRawMaterialExportRows = normalizeSeries(series.trade_world_raw_material_export_wan_t);
+  const topRawMaterialExportRows = rawMaterialExportRows.length
+    ? rawMaterialExportRows
+    : chileRawMaterialExportRows.length || peruRawMaterialExportRows.length
+      ? sumSeriesByDate([chileRawMaterialExportRows, peruRawMaterialExportRows])
+      : worldRawMaterialExportRows;
   const japanDomesticDemandRows = normalizeSeries(
     series.trade_japan_hs7403_11_import_wan_t || series.trade_japan_hs7403_import_wan_t
   );
@@ -340,7 +359,7 @@ export default async function TopNativePage() {
   const costImpactBadge = impactContributionBadge(tateneDiffMt, costImpactMt);
   const rawExportRows = Array.from(
     new Map(
-      worldRawMaterialExportRows
+      topRawMaterialExportRows
         .map((row) => [monthKey(row.date), row.value] as const)
     ).entries()
   )

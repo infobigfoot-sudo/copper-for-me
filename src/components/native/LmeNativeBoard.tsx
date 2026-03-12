@@ -336,7 +336,7 @@ function LmeTrendPlot({ lmeRows, exportUnitRows, xLabels }: LmeTrendPlotProps) {
             <circle key={`export-dot-${i}`} cx={p.x.toFixed(2)} cy={p.y.toFixed(2)} r="1.55" fill={exportColor} fillOpacity="0.52" />
           ))}
 
-          <line x1={activeX.toFixed(2)} y1={PLOT_TOP.toFixed(2)} x2={activeX.toFixed(2)} y2={PLOT_BOTTOM.toFixed(2)} stroke="rgba(53,92,125,0.25)" strokeDasharray="4 3" />
+          <line x1={activeX.toFixed(2)} y1={PLOT_TOP.toFixed(2)} x2={activeX.toFixed(2)} y2={PLOT_BOTTOM.toFixed(2)} stroke="rgba(53,92,125,0.52)" strokeWidth="1.35" strokeDasharray="4 3" />
           <circle cx={(shape.pricePoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.pricePoints[clampedIndex]?.y || 0).toFixed(2)} r="4.2" fill={priceColor} />
           <circle cx={(shape.exportPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.exportPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={exportColor} />
         </svg>
@@ -574,7 +574,7 @@ export default function LmeNativeBoard({
         />
         <MetricCard
           label="輸出単価"
-          labelNote="※世界銅輸出単価"
+          labelNote="※銅輸出単価"
           change={copperExportChg}
           value={fmtNum(copperExport.latest?.value ?? null, 0)}
           unit="USD/t"
@@ -587,7 +587,7 @@ export default function LmeNativeBoard({
           date={copperExport.latest?.date || FIXED_WORLD_MONTH}
         />
         <MetricCard
-          label="世界原材料輸出(チリ)"
+          label="原材料輸出"
           change={rawChg}
           value={fmtNum(raw.latest?.value ?? null, 3)}
           unit="万t"

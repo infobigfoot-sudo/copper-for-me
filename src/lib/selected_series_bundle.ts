@@ -44,6 +44,19 @@ function toMonthlyAverage(rows: SeriesPoint[]): SeriesPoint[] {
     .filter((row) => Number.isFinite(row.value));
 }
 
+function sumSeriesByDate(rowsList: SeriesPoint[][]): SeriesPoint[] {
+  const map = new Map<string, number>();
+  for (const rows of rowsList) {
+    for (const row of rows) {
+      if (!row?.date || !Number.isFinite(row.value)) continue;
+      map.set(row.date, (map.get(row.date) || 0) + row.value);
+    }
+  }
+  return Array.from(map.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([date, value]) => ({ date, value }));
+}
+
 type SelectedSeriesBundle = {
   series?: Record<string, Array<{ date?: string; value?: number | string }>>;
 };
@@ -66,8 +79,19 @@ export async function getLmeBoardSeries() {
   const offWarrantSeries = toMonthlyAverage(normalizeSeries(series.offwarrant_copper_monthly_t));
   const usdJpySeries = toMonthlyAverage(normalizeSeries(series.america_dexjpus));
   const usdCnySeries = toMonthlyAverage(normalizeSeries(series.america_dexchus));
-  const rawMaterialExportSeries = toMonthlyAverage(normalizeSeries(series.trade_world_raw_material_export_wan_t));
-  const copperExportUnitSeries = toMonthlyAverage(normalizeSeries(series.trade_world_copper_export_unit_usd_t));
+  const worldRawMaterialExportSeries = toMonthlyAverage(normalizeSeries(series.trade_world_raw_material_export_wan_t));
+  const rawMaterialExportSeriesBase = toMonthlyAverage(normalizeSeries(series.trade_raw_material_export_wan_t));
+  const chileRawMaterialExportSeries = toMonthlyAverage(normalizeSeries(series.trade_chile_hs2603_export_wan_t));
+  const peruRawMaterialExportSeries = toMonthlyAverage(normalizeSeries(series.trade_peru_hs2603_export_wan_t));
+  const rawMaterialExportSeries = rawMaterialExportSeriesBase.length
+    ? rawMaterialExportSeriesBase
+    : chileRawMaterialExportSeries.length || peruRawMaterialExportSeries.length
+      ? sumSeriesByDate([chileRawMaterialExportSeries, peruRawMaterialExportSeries])
+      : worldRawMaterialExportSeries;
+  const worldCopperExportUnitSeries = toMonthlyAverage(normalizeSeries(series.trade_world_copper_export_unit_usd_t));
+  const copperExportUnitSeries = worldCopperExportUnitSeries.length
+    ? worldCopperExportUnitSeries
+    : toMonthlyAverage(normalizeSeries(series.trade_copper_export_unit_usd_t));
   const tateneMonthlyAvgSeries = toMonthlyAverage(normalizeSeries(series.japan_tatene_monthly_avg_jpy_t));
   const tateneSeries = tateneMonthlyAvgSeries.length
     ? tateneMonthlyAvgSeries

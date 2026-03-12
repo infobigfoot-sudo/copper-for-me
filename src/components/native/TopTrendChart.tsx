@@ -542,7 +542,7 @@ export default function TopTrendChart({
               </>
             )}
 
-            <line x1={activeX} x2={activeX} y1="8" y2={HEIGHT - 8} stroke="rgba(53,92,125,0.30)" strokeDasharray="4 3" />
+            <line x1={activeX} x2={activeX} y1="8" y2={HEIGHT - 8} stroke="rgba(53,92,125,0.52)" strokeWidth="1.35" strokeDasharray="4 3" />
             {viewTab === 'tatene_ma' ? (
               <>
                 {shape.line.tatenePoints[clampedActiveIndex]?.v !== null ? (
