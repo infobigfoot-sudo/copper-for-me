@@ -903,8 +903,6 @@ export default function IndicatorsNativeBoard({
       })
       .filter((row): row is SeriesPoint => row !== null && Number.isFinite(row.value));
   }, [lmeMonthlySeries, usdJpyMonthlySeries]);
-  const scrapUnit = latestPair(pairedScrapSeries.exportRows);
-  const scrapImportUnit = latestPair(pairedScrapSeries.importRows);
   const validScrapExportRows = useMemo(
     () => pairedScrapSeries.exportRows.filter((row) => Number.isFinite(row.value) && row.value > 0),
     [pairedScrapSeries.exportRows]
@@ -914,16 +912,6 @@ export default function IndicatorsNativeBoard({
     pairedScrapSeries.commonTradeDates.length >= 2
       ? pairedScrapSeries.commonTradeDates[pairedScrapSeries.commonTradeDates.length - 2]
       : null;
-  const scrapPurchasePrice = {
-    latest: latestCommonTradeDate
-      ? { date: latestCommonTradeDate, value: valueAtOrBefore(scrapPurchasePriceSeries, latestCommonTradeDate) }
-      : null,
-    prev: prevCommonTradeDate
-      ? { date: prevCommonTradeDate, value: valueAtOrBefore(scrapPurchasePriceSeries, prevCommonTradeDate) }
-      : null,
-  };
-  const scrapUnitChg = calcChange(scrapUnit.latest?.value ?? null, scrapUnit.prev?.value ?? null);
-  const scrapImportUnitChg = calcChange(scrapImportUnit.latest?.value ?? null, scrapImportUnit.prev?.value ?? null);
   const exportYieldRatioBaseline = useMemo(() => {
     const recentRatios = validScrapExportRows
       .slice()
@@ -940,12 +928,41 @@ export default function IndicatorsNativeBoard({
     }
     return 0.85;
   }, [tateneSeries, validScrapExportRows]);
-  const estimatedScrapExportUnit = useMemo(() => {
-    if (!latestCommonTradeDate || !Number.isFinite(exportYieldRatioBaseline)) return null;
-    const tatene = valueAtOrBefore(tateneSeries, latestCommonTradeDate);
-    if (tatene === null || !Number.isFinite(tatene)) return null;
-    return tatene * exportYieldRatioBaseline;
-  }, [exportYieldRatioBaseline, latestCommonTradeDate, tateneSeries]);
+  const scrapExportDisplay = useMemo(() => {
+    const estimatedDates = new Set<string>();
+    const ratioWindow: number[] = [];
+    const rows = pairedScrapSeries.exportRows.map((row) => {
+      const tatene = valueAtOrBefore(tateneSeries, row.date);
+      if (row.value > 0) {
+        if (tatene !== null && Number.isFinite(tatene) && tatene !== 0) {
+          ratioWindow.push(row.value / tatene);
+          if (ratioWindow.length > 6) ratioWindow.shift();
+        }
+        return row;
+      }
+      if (tatene === null || !Number.isFinite(tatene)) return row;
+      const ratio =
+        ratioWindow.length > 0
+          ? ratioWindow.reduce((sum, value) => sum + value, 0) / ratioWindow.length
+          : exportYieldRatioBaseline;
+      estimatedDates.add(row.date);
+      return { date: row.date, value: tatene * ratio };
+    });
+    return { rows, estimatedDates };
+  }, [exportYieldRatioBaseline, pairedScrapSeries.exportRows, tateneSeries]);
+  const displayScrapExportRows = scrapExportDisplay.rows;
+  const scrapUnit = latestPair(displayScrapExportRows);
+  const scrapImportUnit = latestPair(pairedScrapSeries.importRows);
+  const scrapPurchasePrice = {
+    latest: latestCommonTradeDate
+      ? { date: latestCommonTradeDate, value: valueAtOrBefore(scrapPurchasePriceSeries, latestCommonTradeDate) }
+      : null,
+    prev: prevCommonTradeDate
+      ? { date: prevCommonTradeDate, value: valueAtOrBefore(scrapPurchasePriceSeries, prevCommonTradeDate) }
+      : null,
+  };
+  const scrapUnitChg = calcChange(scrapUnit.latest?.value ?? null, scrapUnit.prev?.value ?? null);
+  const scrapImportUnitChg = calcChange(scrapImportUnit.latest?.value ?? null, scrapImportUnit.prev?.value ?? null);
   const oneYearNetRows = useMemo(
     () =>
       latestCommonTradeDate
@@ -974,8 +991,8 @@ export default function IndicatorsNativeBoard({
     [tateneSeries, spanDays, latestCommonTradeDate]
   );
   const scrapExportSpan = useMemo(
-    () => scopedByCommonLatest(pairedScrapSeries.exportRows, spanDays),
-    [pairedScrapSeries.exportRows, spanDays, latestCommonTradeDate]
+    () => scopedByCommonLatest(displayScrapExportRows, spanDays),
+    [displayScrapExportRows, spanDays, latestCommonTradeDate]
   );
   const scrapImportSpan = useMemo(
     () => scopedByCommonLatest(pairedScrapSeries.importRows, spanDays),
@@ -1058,18 +1075,18 @@ export default function IndicatorsNativeBoard({
   );
   const threeYearExportYieldRows = useMemo(
     () =>
-      filterByPeriodDays(pairedScrapSeries.exportRows, 365 * 3)
+      filterByPeriodDays(displayScrapExportRows, 365 * 3)
         .map((row) => {
           const tatene = valueAtOrBefore(threeYearTateneMonthly, row.date);
           if (tatene === null || !Number.isFinite(tatene) || tatene === 0) return null;
           return { date: row.date.slice(0, 7), value: (row.value / tatene) * 100 };
         })
         .filter((row): row is SeriesPoint => row !== null && Number.isFinite(row.value)),
-    [pairedScrapSeries.exportRows, threeYearTateneMonthly]
+    [displayScrapExportRows, threeYearTateneMonthly]
   );
   const threeYearExportDetailRows = useMemo(() => {
     const tateneByYm = new Map(threeYearTateneMonthly.map((r) => [r.date.slice(0, 7), r.value]));
-    return toMonthlyAverage(scopedByCommonLatest(pairedScrapSeries.exportRows, 365 * 3))
+    return toMonthlyAverage(scopedByCommonLatest(displayScrapExportRows, 365 * 3))
       .map((row) => {
         const ym = row.date.slice(0, 7);
         const tatene = tateneByYm.get(ym);
@@ -1082,7 +1099,7 @@ export default function IndicatorsNativeBoard({
         };
       })
       .filter((row): row is { date: string; tatene: number; exportUnit: number; yieldPct: number } => row !== null);
-  }, [pairedScrapSeries.exportRows, threeYearTateneMonthly, latestCommonTradeDate]);
+  }, [displayScrapExportRows, threeYearTateneMonthly, latestCommonTradeDate]);
   const threeYearExportDetailDesc = useMemo(() => threeYearExportDetailRows.slice().reverse(), [threeYearExportDetailRows]);
   const threeYearImportYieldRows = useMemo(
     () =>
@@ -1139,8 +1156,8 @@ export default function IndicatorsNativeBoard({
   );
   const relTatene = useMemo(() => relativeChangePctFromStartRows(relBase, relBase), [relBase]);
   const relExport = useMemo(
-    () => relativeChangePctFromStartRows(relBase, pairedScrapSeries.exportRows),
-    [relBase, pairedScrapSeries.exportRows]
+    () => relativeChangePctFromStartRows(relBase, displayScrapExportRows),
+    [displayScrapExportRows, relBase]
   );
   const relImport = useMemo(
     () => relativeChangePctFromStartRows(relBase, pairedScrapSeries.importRows),
@@ -1203,16 +1220,17 @@ export default function IndicatorsNativeBoard({
         : '建値+推定単価 歩留率(推定/建値, %)';
   const isExportPending =
     Boolean(latestCommonTradeDate && latestCommonTradeDate.slice(0, 7) >= '2025-01') &&
-    (scrapUnit.latest?.value ?? null) === 0;
-  const isExportEstimated = isExportPending && estimatedScrapExportUnit !== null;
-  const exportCardValue = isExportEstimated
-    ? fmtNum(estimatedScrapExportUnit, 0)
-    : isExportPending
-      ? '待機中'
-      : fmtNum(scrapUnit.latest?.value ?? null, 0);
+    (pairedScrapSeries.exportRows.at(-1)?.value ?? null) === 0;
+  const isExportEstimated = Boolean(
+    latestCommonTradeDate && scrapExportDisplay.estimatedDates.has(latestCommonTradeDate)
+  );
+  const exportCardValue =
+    isExportEstimated || !isExportPending
+      ? fmtNum(scrapUnit.latest?.value ?? null, 0)
+      : '待機中';
   const exportCardUnit = isExportPending && !isExportEstimated ? '' : 'JPY/mt';
   const exportCardChange = isExportEstimated ? null : scrapUnitChg;
-  const exportGaugeRangeValues = validScrapExportRows.slice(-31).map((r) => r.value);
+  const exportGaugeRangeValues = displayScrapExportRows.slice(-31).map((r) => r.value);
 
   return (
     <>
@@ -1226,7 +1244,7 @@ export default function IndicatorsNativeBoard({
           positiveWhenUp={true}
           value={exportCardValue}
           unit={exportCardUnit}
-          polyline={buildPolyline(pairedScrapSeries.exportRows.slice(-7).map((r) => r.value))}
+          polyline={buildPolyline(displayScrapExportRows.slice(-7).map((r) => r.value))}
           gaugeRangeValues={exportGaugeRangeValues}
           gaugeCurrentChange={exportCardChange}
           chartMode="gauge"
