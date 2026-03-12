@@ -614,6 +614,7 @@ export default function TateneNativeBoard({
         />
         <MetricCard
           label="USD / JPY"
+          labelNote="月次平均"
           change={usdChg}
           positiveWhenUp={true}
           value={fmtNum(usdPair.latest?.value ?? null, 2)}
