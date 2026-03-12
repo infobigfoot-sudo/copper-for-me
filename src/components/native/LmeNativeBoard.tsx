@@ -399,7 +399,10 @@ export default function LmeNativeBoard({
     '-';
   const isRawPending = Boolean(referenceLatestMonth && raw.latest?.date && raw.latest.date < referenceLatestMonth);
   const isCopperExportPending = Boolean(
-    referenceLatestMonth && copperExport.latest?.date && copperExport.latest.date < referenceLatestMonth
+    !copperExport.latest ||
+      !Number.isFinite(copperExport.latest.value) ||
+      copperExport.latest.value <= 0 ||
+      (referenceLatestMonth && copperExport.latest?.date && copperExport.latest.date < referenceLatestMonth)
   );
   const pUsdChg = calcChange(pUsd.latest?.value ?? null, pUsd.prev?.value ?? null);
   const fxChg = calcChange(fx.latest?.value ?? null, fx.prev?.value ?? null);
@@ -552,6 +555,7 @@ export default function LmeNativeBoard({
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <MetricCard
           label="LME銅価格"
+          labelNote="月次平均価格"
           change={pUsdChg}
           value={fmtNum(pUsd.latest?.value ?? null, 0)}
           unit="USD/mt"
@@ -565,7 +569,7 @@ export default function LmeNativeBoard({
         />
         <MetricCard
           label="輸出単価"
-          labelNote="※銅輸出単価"
+          labelNote="銅輸出単価"
           change={copperExportChg}
           value={isCopperExportPending ? '待機中' : fmtNum(copperExport.latest?.value ?? null, 0)}
           unit="USD/mt"
@@ -579,6 +583,7 @@ export default function LmeNativeBoard({
         />
         <MetricCard
           label="原材料輸出"
+          labelNote="チリからの輸出"
           change={rawChg}
           value={isRawPending ? '待機中' : fmtNum(raw.latest?.value ?? null, 3)}
           unit="万t"
@@ -592,6 +597,7 @@ export default function LmeNativeBoard({
         />
         <MetricCard
           label="USD/CHY"
+          labelNote="月次平均価格"
           change={fxChg}
           value={fmtNum(fx.latest?.value ?? null, 3)}
           unit="CNY/USD"
