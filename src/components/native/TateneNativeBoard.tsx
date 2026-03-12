@@ -490,7 +490,7 @@ export default function TateneNativeBoard({
     [relTateneSpan, electricCopperInventorySeries]
   );
   const relativeLines = useMemo(() => {
-    const lines: Array<{ values: Array<number | null>; color: string }> = [{ values: relTatene.map((r) => r.value), color: TATENE_PRICE_COLOR }];
+    const lines: Array<{ values: number[]; color: string }> = [{ values: relTatene.map((r) => r.value), color: TATENE_PRICE_COLOR }];
     if (relativeSelection.import_unit) lines.push({ values: relImportUnit, color: TATENE_IMPORT_COLOR });
     if (relativeSelection.usd_jpy) lines.push({ values: relUsd, color: TATENE_USD_COLOR });
     if (relativeSelection.inventory) lines.push({ values: relInventory, color: TATENE_INVENTORY_COLOR });
@@ -599,9 +599,9 @@ export default function TateneNativeBoard({
         />
         <MetricCard
           label="輸入単価"
-          labelNote={isImportPending ? 'HS7403.11 月次平均（MOF） / データ更新待ち' : 'HS7403.11 月次平均（MOF）'}
+          labelNote={isImportPending ? 'HS7403.11 / データ更新待ち' : 'HS7403.11 '}
           change={importUnitChg}
-          value={fmtNum(importUnitValue, 0)}
+          value={fmtNum(importUnitValue, 1)}
           unit="JPY/mt"
           polyline={buildPolyline(importUnitDisplaySeries.slice(-7).map((r) => r.value))}
           gaugeRangeValues={importUnitDisplaySeries.slice(-31).map((r) => r.value)}
@@ -629,7 +629,7 @@ export default function TateneNativeBoard({
         />
         <MetricCard
           label="電気銅在庫量"
-          labelNote={isInventoryPending ? '最新月 / データ更新待ち' : '最新月'}
+          labelNote={isInventoryPending ? 'データ更新待ち' : ''}
           change={electricCopperInventoryChg}
           value={fmtNum(electricCopperInventoryPair.latest?.value ?? null, 0)}
           unit="t"
