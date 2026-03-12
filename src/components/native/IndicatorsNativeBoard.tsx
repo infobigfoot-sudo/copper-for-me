@@ -224,33 +224,36 @@ function computeContributionSummary(
 }
 
 function alignSeriesByDate(baseRows: SeriesPoint[], rows: SeriesPoint[]): Array<number | null> {
-  if (!baseRows.length || !rows.length) return baseRows.map(() => null);
-  let j = 0;
+  const byDate = new Map(rows.map((row) => [row.date, row.value]));
   return baseRows.map((base) => {
-    while (j + 1 < rows.length && rows[j + 1].date <= base.date) j += 1;
-    const curr = rows[j];
-    return curr && curr.date <= base.date && Number.isFinite(curr.value) ? curr.value : null;
+    const value = byDate.get(base.date);
+    return value !== undefined && Number.isFinite(value) ? value : null;
   });
 }
 
-function relativeChangePctFromStartRows(baseRows: SeriesPoint[], rows: SeriesPoint[]): SeriesPoint[] {
+function relativeChangePctFromStartRows(
+  baseRows: SeriesPoint[],
+  rows: SeriesPoint[]
+): Array<{ date: string; value: number | null }> {
   if (!baseRows.length) return [];
-  if (!rows.length) return baseRows.map((base) => ({ date: base.date, value: 0 }));
-  let j = 0;
-  let last: number | null = null;
+  if (!rows.length) return baseRows.map((base) => ({ date: base.date, value: null }));
+  const byDate = new Map(rows.map((row) => [row.date, row.value]));
   let baseline: number | null = null;
   return baseRows.map((base) => {
-    while (j < rows.length && rows[j].date <= base.date) {
-      if (Number.isFinite(rows[j].value)) last = rows[j].value;
-      j += 1;
+    const current = byDate.get(base.date);
+    if (baseline === null && current !== undefined && Number.isFinite(current) && current !== 0) {
+      baseline = current;
     }
-    if (baseline === null && last !== null && Number.isFinite(last)) {
-      baseline = last;
+    if (
+      current === undefined ||
+      !Number.isFinite(current) ||
+      baseline === null ||
+      !Number.isFinite(baseline) ||
+      baseline === 0
+    ) {
+      return { date: base.date, value: null };
     }
-    if (last === null || !Number.isFinite(last) || baseline === null || !Number.isFinite(baseline) || baseline === 0) {
-      return { date: base.date, value: 0 };
-    }
-    return { date: base.date, value: ((last - baseline) / Math.abs(baseline)) * 100 };
+    return { date: base.date, value: ((current - baseline) / Math.abs(baseline)) * 100 };
   });
 }
 
@@ -287,6 +290,21 @@ function buildSmoothPath(points: Array<{ x: number; y: number }>): string {
     d += ` C ${cp1x.toFixed(2)} ${cp1y.toFixed(2)} ${cp2x.toFixed(2)} ${cp2y.toFixed(2)} ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
   }
   return d;
+}
+
+function buildSmoothPathSegments(points: Array<{ x: number; y: number | null }>): string[] {
+  const segments: string[] = [];
+  let current: Array<{ x: number; y: number }> = [];
+  for (const point of points) {
+    if (point.y === null || !Number.isFinite(point.y)) {
+      if (current.length >= 2) segments.push(buildSmoothPath(current));
+      current = [];
+      continue;
+    }
+    current.push({ x: point.x, y: point.y });
+  }
+  if (current.length >= 2) segments.push(buildSmoothPath(current));
+  return segments;
 }
 
 type IndicatorsTrendPlotProps = {
@@ -346,7 +364,7 @@ function IndicatorsTrendPlot({
     const commonScale = scaleOf(visibleValues);
 
     const yAt = (value: number | null) => {
-      if (value === null || !Number.isFinite(value)) return PLOT_BOTTOM;
+      if (value === null || !Number.isFinite(value)) return null;
       return PLOT_BOTTOM - ((value - commonScale.min) / commonScale.range) * (PLOT_BOTTOM - PLOT_TOP);
     };
 
@@ -364,11 +382,11 @@ function IndicatorsTrendPlot({
       usdCnyPoints,
       premiumPoints,
       wtiPoints,
-      lmePath: buildSmoothPath(lmePoints),
-      usdJpyPath: buildSmoothPath(usdJpyPoints),
-      usdCnyPath: buildSmoothPath(usdCnyPoints),
-      premiumPath: buildSmoothPath(premiumPoints),
-      wtiPath: buildSmoothPath(wtiPoints),
+      lmePaths: buildSmoothPathSegments(lmePoints),
+      usdJpyPaths: buildSmoothPathSegments(usdJpyPoints),
+      usdCnyPaths: buildSmoothPathSegments(usdCnyPoints),
+      premiumPaths: buildSmoothPathSegments(premiumPoints),
+      wtiPaths: buildSmoothPathSegments(wtiPoints),
       active: {
         date: rows.at(idx)?.date || '-',
         lme: lmeVals.at(idx) ?? null,
@@ -455,11 +473,55 @@ function IndicatorsTrendPlot({
           <line x1={PLOT_PAD_X} y1={PLOT_BOTTOM} x2={PLOT_W - PLOT_PAD_X} y2={PLOT_BOTTOM} stroke="rgba(100,116,139,0.24)" />
           <line x1={PLOT_PAD_X} y1={(PLOT_TOP + PLOT_BOTTOM) / 2} x2={PLOT_W - PLOT_PAD_X} y2={(PLOT_TOP + PLOT_BOTTOM) / 2} stroke="rgba(100,116,139,0.16)" strokeDasharray="4 4" />
 
-          {visible.lme ? <path d={shape.lmePath} fill="none" stroke={LME_COLOR} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /> : null}
-          {visible.usdJpy ? <path d={shape.usdJpyPath} fill="none" stroke={SCRAP_PAIR_COLOR} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /> : null}
-          {visible.usdCny ? <path d={shape.usdCnyPath} fill="none" stroke={USD_CNY_COLOR} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /> : null}
-          {visible.premium ? <path d={shape.premiumPath} fill="none" stroke={PREMIUM_COLOR} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /> : null}
-          {visible.wti ? <path d={shape.wtiPath} fill="none" stroke={WTI_COLOR} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /> : null}
+          {visible.lme
+            ? shape.lmePaths.map((path, idx) => (
+                <path key={`lme-path-${idx}`} d={path} fill="none" stroke={LME_COLOR} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              ))
+            : null}
+          {visible.usdJpy
+            ? shape.usdJpyPaths.map((path, idx) => (
+                <path
+                  key={`usdjpy-path-${idx}`}
+                  d={path}
+                  fill="none"
+                  stroke={SCRAP_PAIR_COLOR}
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              ))
+            : null}
+          {visible.usdCny
+            ? shape.usdCnyPaths.map((path, idx) => (
+                <path
+                  key={`usdcny-path-${idx}`}
+                  d={path}
+                  fill="none"
+                  stroke={USD_CNY_COLOR}
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              ))
+            : null}
+          {visible.premium
+            ? shape.premiumPaths.map((path, idx) => (
+                <path
+                  key={`premium-path-${idx}`}
+                  d={path}
+                  fill="none"
+                  stroke={PREMIUM_COLOR}
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              ))
+            : null}
+          {visible.wti
+            ? shape.wtiPaths.map((path, idx) => (
+                <path key={`wti-path-${idx}`} d={path} fill="none" stroke={WTI_COLOR} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+              ))
+            : null}
 
           {splitX !== null ? (
             <line
@@ -484,11 +546,21 @@ function IndicatorsTrendPlot({
           ) : null}
           <line x1={activeX.toFixed(2)} y1={PLOT_TOP.toFixed(2)} x2={activeX.toFixed(2)} y2={PLOT_BOTTOM.toFixed(2)} stroke="rgba(53,92,125,0.25)" strokeDasharray="4 3" />
 
-          {visible.lme ? <circle cx={(shape.lmePoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.lmePoints[clampedIndex]?.y || 0).toFixed(2)} r="4.2" fill={LME_COLOR} /> : null}
-          {visible.usdJpy ? <circle cx={(shape.usdJpyPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.usdJpyPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.2" fill={SCRAP_PAIR_COLOR} /> : null}
-          {visible.usdCny ? <circle cx={(shape.usdCnyPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.usdCnyPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={USD_CNY_COLOR} /> : null}
-          {visible.premium ? <circle cx={(shape.premiumPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.premiumPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={PREMIUM_COLOR} /> : null}
-          {visible.wti ? <circle cx={(shape.wtiPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.wtiPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={WTI_COLOR} /> : null}
+          {visible.lme && shape.lmePoints[clampedIndex]?.y !== null ? (
+            <circle cx={(shape.lmePoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.lmePoints[clampedIndex]?.y || 0).toFixed(2)} r="4.2" fill={LME_COLOR} />
+          ) : null}
+          {visible.usdJpy && shape.usdJpyPoints[clampedIndex]?.y !== null ? (
+            <circle cx={(shape.usdJpyPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.usdJpyPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.2" fill={SCRAP_PAIR_COLOR} />
+          ) : null}
+          {visible.usdCny && shape.usdCnyPoints[clampedIndex]?.y !== null ? (
+            <circle cx={(shape.usdCnyPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.usdCnyPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={USD_CNY_COLOR} />
+          ) : null}
+          {visible.premium && shape.premiumPoints[clampedIndex]?.y !== null ? (
+            <circle cx={(shape.premiumPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.premiumPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={PREMIUM_COLOR} />
+          ) : null}
+          {visible.wti && shape.wtiPoints[clampedIndex]?.y !== null ? (
+            <circle cx={(shape.wtiPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.wtiPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={WTI_COLOR} />
+          ) : null}
         </svg>
       </div>
 
