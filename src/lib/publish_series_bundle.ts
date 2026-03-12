@@ -336,7 +336,7 @@ function toCountryTradeValueAndUnitUsdPerTonSeriesByCmdPrefix(
       parseNumber(row.primary_value_usd_num) ??
       parseNumber(row.fob_value_usd_num) ??
       parseNumber(row.cif_value_usd_num);
-    if (valueUsd === null || !Number.isFinite(valueUsd)) continue;
+    if (valueUsd === null || !Number.isFinite(valueUsd) || valueUsd <= 0) continue;
     const partnerCode = String(row.partner_code || '').trim();
     const partnerDesc = String(row.partner_desc || '').trim().toLowerCase();
     const isWorld = partnerCode === '0' || partnerDesc === 'world';
@@ -522,7 +522,15 @@ function toWorldTradeUnitValueUsdPerTonSeries(rows: SupabaseRow[]): PublishPoint
         weightTonDirect ??
         (weightKg !== null ? weightKg / 1000 : null) ??
         (weightWanTon !== null ? weightWanTon * 10000 : null);
-      if (!date || valueUsd === null || weightTon === null || !Number.isFinite(weightTon) || weightTon <= 0) {
+      if (
+        !date ||
+        valueUsd === null ||
+        !Number.isFinite(valueUsd) ||
+        valueUsd <= 0 ||
+        weightTon === null ||
+        !Number.isFinite(weightTon) ||
+        weightTon <= 0
+      ) {
         return null;
       }
       return { date, value: valueUsd / weightTon };
@@ -1534,6 +1542,9 @@ const readMergedPublishSeriesBundleCached = unstable_cache(
 );
 
 export async function readMergedPublishSeriesBundle(): Promise<PublishSeriesBundle | null> {
+  if (process.env.NODE_ENV !== 'production') {
+    return readMergedPublishSeriesBundleUncached();
+  }
   return readMergedPublishSeriesBundleCached();
 }
 

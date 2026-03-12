@@ -6,6 +6,9 @@ import { SectionCard } from '@/components/native/NativeWidgets';
 import { formatDateLabel } from '@/lib/date_label';
 import { getPostsByTagSlug, getTags } from '@/lib/microcms';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 300;
+
 export async function generateMetadata({
   params
 }: {

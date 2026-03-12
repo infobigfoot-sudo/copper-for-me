@@ -5,6 +5,9 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import RichText from '@/components/RichText';
 import { getStaticPageBySlug } from '@/lib/microcms';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 300;
+
 export async function generateMetadata({
   params
 }: {

@@ -362,7 +362,7 @@ export function LinePlot({
   referenceValue = null,
   overlayNote,
 }: {
-  lines: Array<{ values: number[]; color: string; type?: 'line' | 'bar'; opacity?: number }>;
+  lines: Array<{ values: Array<number | null>; color: string; type?: 'line' | 'bar'; opacity?: number }>;
   xLabels: [string, string, string];
   width?: number;
   height?: number;
@@ -371,7 +371,7 @@ export function LinePlot({
   overlayNote?: string;
 }) {
   const series = lines.map((line) => ({ ...line, type: line.type ?? 'line' }));
-  const all = series.flatMap((l) => l.values);
+  const all = series.flatMap((l) => l.values).filter((value): value is number => value !== null && Number.isFinite(value));
   const allWithRef = referenceValue !== null && Number.isFinite(referenceValue) ? [...all, referenceValue] : all;
   const safeAll = allWithRef.length ? allWithRef : [0, 0];
   const sharedMin = Math.min(...safeAll);
@@ -390,13 +390,15 @@ export function LinePlot({
     }
     if (scaleMode === 'centered_reference' && hasReference) {
       const ref = referenceValue as number;
-      const safeVals = line.values.length ? line.values : [ref, ref];
-      const maxDev = Math.max(1, ...safeVals.map((v) => Math.abs(v - ref)));
+      const safeVals = line.values.filter((v): v is number => v !== null && Number.isFinite(v));
+      const centeredVals = safeVals.length ? safeVals : [ref, ref];
+      const maxDev = Math.max(1, ...centeredVals.map((v) => Math.abs(v - ref)));
       return { min: ref - maxDev, range: maxDev * 2 };
     }
-    const safeVals = line.values.length ? line.values : [0, 0];
-    const min = Math.min(...safeVals);
-    const max = Math.max(...safeVals);
+    const safeVals = line.values.filter((v): v is number => v !== null && Number.isFinite(v));
+    const numericVals = safeVals.length ? safeVals : [0, 0];
+    const min = Math.min(...numericVals);
+    const max = Math.max(...numericVals);
     return { min, range: max - min || 1 };
   });
   const xAt = (idx: number, len: number) => {
@@ -405,14 +407,22 @@ export function LinePlot({
   };
   const yAt = (value: number, scale: { min: number; range: number }) =>
     plotBottom - ((value - scale.min) / scale.range) * (plotBottom - plotTop);
-  const mapPts = (vals: number[], scale: { min: number; range: number }) =>
-    vals
-      .map((v, i) => {
-        const x = xAt(i, vals.length);
-        const y = yAt(v, scale);
-        return `${x.toFixed(1)},${y.toFixed(1)}`;
-      })
-      .join(' ');
+  const buildSegments = (vals: Array<number | null>, scale: { min: number; range: number }) => {
+    const segments: string[] = [];
+    let current: string[] = [];
+    vals.forEach((v, i) => {
+      if (v === null || !Number.isFinite(v)) {
+        if (current.length >= 2) segments.push(current.join(' '));
+        current = [];
+        return;
+      }
+      const x = xAt(i, vals.length);
+      const y = yAt(v, scale);
+      current.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+    });
+    if (current.length >= 2) segments.push(current.join(' '));
+    return segments;
+  };
   const barSeries = series.map((line, idx) => ({ line, idx })).filter((row) => row.line.type === 'bar');
   const lineSeries = series.map((line, idx) => ({ line, idx })).filter((row) => row.line.type !== 'bar');
   const maxLen = Math.max(1, ...series.map((line) => line.values.length));
@@ -466,6 +476,7 @@ export function LinePlot({
           ) : null}
           {barSeries.map(({ line, idx }, sIdx) =>
             line.values.map((v, i) => {
+              if (v === null || !Number.isFinite(v)) return null;
               const cx = xAt(i, line.values.length);
               const offset = (sIdx - (barSeries.length - 1) / 2) * (barWidth + 1.5);
               const y = yAt(v, scales[idx]);
@@ -485,16 +496,18 @@ export function LinePlot({
               );
             })
           )}
-          {lineSeries.map(({ line, idx }, i) => (
-            <polyline
-              key={`line-${i}`}
-              fill="none"
-              stroke={line.color}
-              strokeWidth="3"
-              strokeLinecap="round"
-              points={mapPts(line.values, scales[idx])}
-            />
-          ))}
+          {lineSeries.map(({ line, idx }, i) =>
+            buildSegments(line.values, scales[idx]).map((points, segmentIdx) => (
+              <polyline
+                key={`line-${i}-${segmentIdx}`}
+                fill="none"
+                stroke={line.color}
+                strokeWidth="3"
+                strokeLinecap="round"
+                points={points}
+              />
+            ))
+          )}
         </svg>
         {overlayNote ? (
           <span className="pointer-events-none absolute bottom-1.5 right-3 text-[9px] leading-none font-black uppercase tracking-[0.12em] text-cool-grey">

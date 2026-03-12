@@ -8,10 +8,8 @@ import RichText from '@/components/RichText';
 import { formatDateLabel } from '@/lib/date_label';
 import { getPostBySlug, getPosts } from '@/lib/microcms';
 
-export async function generateStaticParams() {
-  const posts = await getPosts(200, 'a').catch(() => ({ contents: [] as any[] }));
-  return (posts.contents || []).map((p: any) => ({ slug: p.slug || p.id }));
-}
+export const dynamic = 'force-dynamic';
+export const revalidate = 300;
 
 export async function generateMetadata({
   params

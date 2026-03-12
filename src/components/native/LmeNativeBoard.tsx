@@ -129,14 +129,27 @@ function scaleOf(values: Array<number | null>): Scale {
   return { min, range: max - min || 1 };
 }
 
-function indexAlignedValues(values: Array<number | null>): number[] {
+function buildPolylineSegments(
+  points: Array<{ x: number; y: number | null }>
+): Array<Array<{ x: number; y: number }>> {
+  const segments: Array<Array<{ x: number; y: number }>> = [];
+  let current: Array<{ x: number; y: number }> = [];
+  for (const point of points) {
+    if (point.y === null || !Number.isFinite(point.y)) {
+      if (current.length >= 2) segments.push(current);
+      current = [];
+      continue;
+    }
+    current.push({ x: point.x, y: point.y });
+  }
+  if (current.length >= 2) segments.push(current);
+  return segments;
+}
+
+function indexAlignedValues(values: Array<number | null>): Array<number | null> {
   const base = values.find((v): v is number => v !== null && Number.isFinite(v) && v !== 0);
-  if (base === undefined) return values.map(() => 100);
-  let carried = base;
-  return values.map((value) => {
-    if (value !== null && Number.isFinite(value)) carried = value;
-    return (carried / base) * 100;
-  });
+  if (base === undefined) return values.map(() => null);
+  return values.map((value) => (value !== null && Number.isFinite(value) ? (value / base) * 100 : null));
 }
 
 function withCarryForward(rows: Array<{ date: string; value: number | null }>): Array<{ date: string; value: number }> {
@@ -252,17 +265,19 @@ function LmeTrendPlot({ lmeRows, exportUnitRows, xLabels }: LmeTrendPlotProps) {
     const combined = [...baseRows.map((r) => r.value), ...exportVals];
     const sharedScale = scaleOf(combined);
     const yAt = (value: number | null) => {
-      if (value === null || !Number.isFinite(value)) return PLOT_BOTTOM;
+      if (value === null || !Number.isFinite(value)) return null;
       return PLOT_BOTTOM - ((value - sharedScale.min) / sharedScale.range) * (PLOT_BOTTOM - PLOT_TOP);
     };
     const pricePoints = baseRows.map((r, i) => ({ x: xAt(i), y: yAt(r.value) }));
     const exportPoints = exportVals.map((v, i) => ({ x: xAt(i), y: yAt(v) }));
     const toPolyline = (pts: Array<{ x: number; y: number }>) => pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+    const priceSegments = buildPolylineSegments(pricePoints);
+    const exportSegments = buildPolylineSegments(exportPoints);
     return {
       pricePoints,
       exportPoints,
-      pricePath: toPolyline(pricePoints),
-      exportPath: toPolyline(exportPoints),
+      pricePaths: priceSegments.map((segment) => toPolyline(segment)),
+      exportPaths: exportSegments.map((segment) => toPolyline(segment)),
       active: {
         date: baseRows.at(Math.max(0, Math.min(activeIndex, baseRows.length - 1)))?.date || '-',
         price: baseRows.at(Math.max(0, Math.min(activeIndex, baseRows.length - 1)))?.value ?? null,
@@ -321,19 +336,31 @@ function LmeTrendPlot({ lmeRows, exportUnitRows, xLabels }: LmeTrendPlotProps) {
           <line x1={PLOT_PAD_X} y1={PLOT_BOTTOM} x2={PLOT_W - PLOT_PAD_X} y2={PLOT_BOTTOM} stroke="rgba(100,116,139,0.24)" />
           <line x1={PLOT_PAD_X} y1={(PLOT_TOP + PLOT_BOTTOM) / 2} x2={PLOT_W - PLOT_PAD_X} y2={(PLOT_TOP + PLOT_BOTTOM) / 2} stroke="rgba(100,116,139,0.16)" strokeDasharray="4 4" />
 
-          <polyline points={shape.pricePath} fill="none" stroke={priceColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-          <polyline points={shape.exportPath} fill="none" stroke={exportColor} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+          {shape.pricePaths.map((path, idx) => (
+            <polyline key={`price-path-${idx}`} points={path} fill="none" stroke={priceColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+          ))}
+          {shape.exportPaths.map((path, idx) => (
+            <polyline key={`export-path-${idx}`} points={path} fill="none" stroke={exportColor} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+          ))}
 
-          {shape.pricePoints.map((p, i) => (
-            <circle key={`price-dot-${i}`} cx={p.x.toFixed(2)} cy={p.y.toFixed(2)} r="1.7" fill={priceColor} fillOpacity="0.55" />
-          ))}
-          {shape.exportPoints.map((p, i) => (
-            <circle key={`export-dot-${i}`} cx={p.x.toFixed(2)} cy={p.y.toFixed(2)} r="1.55" fill={exportColor} fillOpacity="0.52" />
-          ))}
+          {shape.pricePoints.map((p, i) =>
+            p.y === null ? null : (
+              <circle key={`price-dot-${i}`} cx={p.x.toFixed(2)} cy={p.y.toFixed(2)} r="1.7" fill={priceColor} fillOpacity="0.55" />
+            )
+          )}
+          {shape.exportPoints.map((p, i) =>
+            p.y === null ? null : (
+              <circle key={`export-dot-${i}`} cx={p.x.toFixed(2)} cy={p.y.toFixed(2)} r="1.55" fill={exportColor} fillOpacity="0.52" />
+            )
+          )}
 
           <line x1={activeX.toFixed(2)} y1={PLOT_TOP.toFixed(2)} x2={activeX.toFixed(2)} y2={PLOT_BOTTOM.toFixed(2)} stroke="rgba(53,92,125,0.52)" strokeWidth="1.35" strokeDasharray="4 3" />
-          <circle cx={(shape.pricePoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.pricePoints[clampedIndex]?.y || 0).toFixed(2)} r="4.2" fill={priceColor} />
-          <circle cx={(shape.exportPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.exportPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={exportColor} />
+          {shape.pricePoints[clampedIndex]?.y !== null ? (
+            <circle cx={(shape.pricePoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.pricePoints[clampedIndex]?.y || 0).toFixed(2)} r="4.2" fill={priceColor} />
+          ) : null}
+          {shape.exportPoints[clampedIndex]?.y !== null ? (
+            <circle cx={(shape.exportPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.exportPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={exportColor} />
+          ) : null}
         </svg>
       </div>
       <div className="flex justify-between mt-4 text-[9px] sm:text-[14px] text-cool-grey font-black uppercase tracking-[0.2em]">
@@ -383,7 +410,7 @@ export default function LmeNativeBoard({
     [rawMaterialExportSeries]
   );
   const copperExportUnitMonthlySeries = useMemo(
-    () => toMonthlyAverageRows(copperExportUnitSeries),
+    () => toMonthlyAverageRows(copperExportUnitSeries).filter((row) => Number.isFinite(row.value) && row.value > 0),
     [copperExportUnitSeries]
   );
 
@@ -476,7 +503,7 @@ export default function LmeNativeBoard({
   const relAxisMid = relPriceSpan.at(Math.floor(relPriceSpan.length / 2))?.date || '-';
   const relAxisEnd = relPriceSpan.at(-1)?.date || '-';
   const relativeLines = useMemo(() => {
-    const lines: Array<{ values: number[]; color: string }> = [{ values: relLme.map((r) => r.value), color: LME_PRICE_COLOR }];
+    const lines: Array<{ values: Array<number | null>; color: string }> = [{ values: relLme.map((r) => r.value), color: LME_PRICE_COLOR }];
     if (relativeSelection.raw_export) lines.push({ values: relRaw, color: LME_RAW_EXPORT_COLOR });
     if (relativeSelection.export_unit) lines.push({ values: relExportUnit, color: LME_EXPORT_UNIT_COLOR });
     if (relativeSelection.usd_chy) lines.push({ values: relUsdChy, color: LME_USD_CHY_COLOR });
@@ -569,9 +596,9 @@ export default function LmeNativeBoard({
         />
         <MetricCard
           label="輸出単価"
-          labelNote="銅輸出単価"
+          labelNote={isCopperExportPending ? 'HS7403.11 / データ更新待ち' : 'HS7403.11'}
           change={copperExportChg}
-          value={isCopperExportPending ? '待機中' : fmtNum(copperExport.latest?.value ?? null, 0)}
+          value={fmtNum(copperExport.latest?.value ?? null, 0)}
           unit="USD/mt"
           gaugeRangeValues={copperExportUnitMonthlySeries.slice(-31).map((r) => r.value)}
           gaugeCurrentChange={copperExportChg}
@@ -579,13 +606,13 @@ export default function LmeNativeBoard({
           titleUnderBadge
           gaugeSize="large"
           titlePadRight={false}
-          date={isCopperExportPending ? referenceLatestMonth : copperExport.latest?.date || '-'}
+          date={copperExport.latest?.date || '-'}
         />
         <MetricCard
           label="原材料輸出"
-          labelNote="チリからの輸出"
+          labelNote={isRawPending ? 'チリからの輸出 / データ更新待ち' : 'チリからの輸出'}
           change={rawChg}
-          value={isRawPending ? '待機中' : fmtNum(raw.latest?.value ?? null, 3)}
+          value={fmtNum(raw.latest?.value ?? null, 3)}
           unit="万t"
           gaugeRangeValues={rawMaterialExportMonthlySeries.slice(-31).map((r) => r.value)}
           gaugeCurrentChange={rawChg}
@@ -593,7 +620,7 @@ export default function LmeNativeBoard({
           titleUnderBadge
           gaugeSize="large"
           titlePadRight={false}
-          date={isRawPending ? referenceLatestMonth : raw.latest?.date || '-'}
+          date={raw.latest?.date || '-'}
         />
         <MetricCard
           label="USD/CHY"
@@ -632,7 +659,7 @@ export default function LmeNativeBoard({
           >
             <LmeTrendPlot lmeRows={lmeTrendSpan} exportUnitRows={exportUnitTrendSpan} xLabels={[axisStart, axisMid, axisEnd]} />
             <p className="mt-3 text-[10px] font-bold tracking-[0.08em] text-cool-grey">
-              ※ データが未公表の月は、直近の公表値で補填して表示しています。
+            ※ データが未公表の月は、その月の線を描画していません。
             </p>
           </SectionCard>
         </div>
@@ -721,7 +748,7 @@ export default function LmeNativeBoard({
             height={220}
           />
           <p className="mt-3 text-[10px] font-bold tracking-[0.08em] text-cool-grey">
-            ※ データが未公表の月は、直近の公表値で補填しています。LME銅価格を固定表示し、各系列は先頭月=100で指数化しています。
+            ※ データが未公表の月は、その月の線を描画していません。LME銅価格を固定表示し、各系列は先頭月=100で指数化しています。
           </p>
         </SectionCard>
         <SectionCard title="LMEへの寄与率" className="h-full col-span-1">

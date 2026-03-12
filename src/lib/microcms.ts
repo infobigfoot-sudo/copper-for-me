@@ -307,12 +307,16 @@ export const getTags = cache(async (site: string = 'c') => {
 export const getStaticPageBySlug = cache(async (slug: string, site: string = 'c') => {
   const config = getSiteConfig(site);
   if (!hasEnv(site)) return null;
-  const data = await cmsFetch<ListResponse<StaticPage>>(
-    site,
-    config.endpoints.pages,
-    `filters=slug[equals]${encodeURIComponent(slug)}&limit=1`
-  );
-  return data.contents[0] ?? null;
+  try {
+    const data = await cmsFetch<ListResponse<StaticPage>>(
+      site,
+      config.endpoints.pages,
+      `filters=slug[equals]${encodeURIComponent(slug)}&limit=1`
+    );
+    return data.contents[0] ?? null;
+  } catch {
+    return null;
+  }
 });
 
 export const getRelatedPosts = cache(async (post: Post, limit = 4, site: string = 'c') => {
@@ -323,16 +327,20 @@ export const getRelatedPosts = cache(async (post: Post, limit = 4, site: string 
     return { contents: [] as Post[] };
   }
   const firstTag = tags[0];
-  const data = await cmsFetch<ListResponse<any>>(
-    site,
-    config.endpoints.posts,
-    `orders=-publishedAt&limit=100&depth=2`
-  );
-  const contents = data.contents
-    .map(normalizePost)
-    .filter((item) => item.id !== post.id && (item.tags || []).some((tag) => tag.id === firstTag.id))
-    .slice(0, limit);
-  return { contents };
+  try {
+    const data = await cmsFetch<ListResponse<any>>(
+      site,
+      config.endpoints.posts,
+      `orders=-publishedAt&limit=100&depth=2`
+    );
+    const contents = data.contents
+      .map(normalizePost)
+      .filter((item) => item.id !== post.id && (item.tags || []).some((tag) => tag.id === firstTag.id))
+      .slice(0, limit);
+    return { contents };
+  } catch {
+    return { contents: [] as Post[] };
+  }
 });
 
 function normalizeAnnouncement(raw: any): Announcement {

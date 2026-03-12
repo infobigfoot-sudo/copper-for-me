@@ -104,11 +104,10 @@ const RELATIVE_OPTION_TABS: Array<{ key: RelativeOptionalKey; label: string; col
 
 function alignSeriesByDate(baseRows: SeriesPoint[], rows: SeriesPoint[]): Array<number | null> {
   if (!baseRows.length || !rows.length) return baseRows.map(() => null);
-  let j = 0;
+  const byDate = new Map(rows.map((row) => [row.date, row.value] as const));
   return baseRows.map((base) => {
-    while (j + 1 < rows.length && rows[j + 1].date <= base.date) j += 1;
-    const curr = rows[j];
-    return curr && curr.date <= base.date && Number.isFinite(curr.value) ? curr.value : null;
+    const value = byDate.get(base.date);
+    return value !== undefined && Number.isFinite(value) ? value : null;
   });
 }
 
@@ -119,14 +118,10 @@ function toMonthKey(dateText: string): string {
   return '';
 }
 
-function indexAlignedValues(values: Array<number | null>): number[] {
+function indexAlignedValues(values: Array<number | null>): Array<number | null> {
   const base = values.find((v): v is number => v !== null && Number.isFinite(v) && v !== 0);
-  if (base === undefined) return values.map(() => 100);
-  let carried = base;
-  return values.map((value) => {
-    if (value !== null && Number.isFinite(value)) carried = value;
-    return (carried / base) * 100;
-  });
+  if (base === undefined) return values.map(() => null);
+  return values.map((value) => (value !== null && Number.isFinite(value) ? (value / base) * 100 : null));
 }
 
 function withCarryForward(rows: Array<{ date: string; value: number | null }>): Array<{ date: string; value: number }> {
@@ -246,6 +241,23 @@ function buildSmoothPath(points: Array<{ x: number; y: number }>): string {
   return d;
 }
 
+function buildSmoothPathSegments(
+  points: Array<{ x: number; y: number | null }>
+): string[] {
+  const segments: string[] = [];
+  let current: Array<{ x: number; y: number }> = [];
+  for (const point of points) {
+    if (point.y === null || !Number.isFinite(point.y)) {
+      if (current.length >= 2) segments.push(buildSmoothPath(current));
+      current = [];
+      continue;
+    }
+    current.push({ x: point.x, y: point.y });
+  }
+  if (current.length >= 2) segments.push(buildSmoothPath(current));
+  return segments;
+}
+
 function shiftDateTextByMonths(dateText: string, months: number): string {
   const parsedDay = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateText);
   const parsedMonth = /^(\d{4})-(\d{2})$/.exec(dateText);
@@ -279,7 +291,7 @@ function TateneTrendPlot({ tateneRows, importUnitRows, importLagMonths, xLabels 
     const tateneScale = scaleOf(tateneVals);
     const importScale = scaleOf(importVals);
     const yAt = (value: number | null, scale: Scale) => {
-      if (value === null || !Number.isFinite(value)) return PLOT_BOTTOM;
+      if (value === null || !Number.isFinite(value)) return null;
       return PLOT_BOTTOM - ((value - scale.min) / scale.range) * (PLOT_BOTTOM - PLOT_TOP);
     };
     const tatenePoints = tateneVals.map((v, i) => ({ x: xAt(i), y: yAt(v, tateneScale) }));
@@ -287,8 +299,8 @@ function TateneTrendPlot({ tateneRows, importUnitRows, importLagMonths, xLabels 
     return {
       tatenePoints,
       importPoints,
-      tatenePath: buildSmoothPath(tatenePoints),
-      importPath: buildSmoothPath(importPoints),
+      tatenePaths: buildSmoothPathSegments(tatenePoints),
+      importPaths: buildSmoothPathSegments(importPoints),
       active: {
         date: baseRows.at(Math.max(0, Math.min(activeIndex, baseRows.length - 1)))?.date || '-',
         tatene: tateneVals.at(Math.max(0, Math.min(activeIndex, tateneVals.length - 1))) ?? null,
@@ -348,12 +360,20 @@ function TateneTrendPlot({ tateneRows, importUnitRows, importLagMonths, xLabels 
           <line x1={PLOT_PAD_X} y1={PLOT_BOTTOM} x2={PLOT_W - PLOT_PAD_X} y2={PLOT_BOTTOM} stroke="rgba(100,116,139,0.24)" />
           <line x1={PLOT_PAD_X} y1={(PLOT_TOP + PLOT_BOTTOM) / 2} x2={PLOT_W - PLOT_PAD_X} y2={(PLOT_TOP + PLOT_BOTTOM) / 2} stroke="rgba(100,116,139,0.16)" strokeDasharray="4 4" />
 
-          <path d={shape.tatenePath} fill="none" stroke={TATENE_PRICE_COLOR} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-          <path d={shape.importPath} fill="none" stroke={TATENE_IMPORT_COLOR} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+          {shape.tatenePaths.map((path, idx) => (
+            <path key={`tatene-path-${idx}`} d={path} fill="none" stroke={TATENE_PRICE_COLOR} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+          ))}
+          {shape.importPaths.map((path, idx) => (
+            <path key={`import-path-${idx}`} d={path} fill="none" stroke={TATENE_IMPORT_COLOR} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+          ))}
 
           <line x1={activeX.toFixed(2)} y1={PLOT_TOP.toFixed(2)} x2={activeX.toFixed(2)} y2={PLOT_BOTTOM.toFixed(2)} stroke="rgba(53,92,125,0.25)" strokeDasharray="4 3" />
-          <circle cx={(shape.tatenePoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.tatenePoints[clampedIndex]?.y || 0).toFixed(2)} r="4.2" fill={TATENE_PRICE_COLOR} />
-          <circle cx={(shape.importPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.importPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={TATENE_IMPORT_COLOR} />
+          {shape.tatenePoints[clampedIndex]?.y !== null ? (
+            <circle cx={(shape.tatenePoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.tatenePoints[clampedIndex]?.y || 0).toFixed(2)} r="4.2" fill={TATENE_PRICE_COLOR} />
+          ) : null}
+          {shape.importPoints[clampedIndex]?.y !== null ? (
+            <circle cx={(shape.importPoints[clampedIndex]?.x || 0).toFixed(2)} cy={(shape.importPoints[clampedIndex]?.y || 0).toFixed(2)} r="3.6" fill={TATENE_IMPORT_COLOR} />
+          ) : null}
         </svg>
       </div>
       <div className="flex justify-between mt-4 text-[9px] sm:text-[14px] text-cool-grey font-black uppercase tracking-[0.2em]">
@@ -413,6 +433,20 @@ export default function TateneNativeBoard({
     electricCopperInventoryPair.latest?.value ?? null,
     electricCopperInventoryPair.prev?.value ?? null
   );
+  const referenceLatestMonth =
+    tateneJpyMtSeries.at(-1)?.date ||
+    usdJpySeries.at(-1)?.date ||
+    importUnitDisplaySeries.at(-1)?.date ||
+    electricCopperInventorySeries.at(-1)?.date ||
+    '-';
+  const isImportPending = Boolean(
+    referenceLatestMonth && importUnitPair.latest?.date && importUnitPair.latest.date < referenceLatestMonth
+  );
+  const isInventoryPending = Boolean(
+    referenceLatestMonth &&
+      electricCopperInventoryPair.latest?.date &&
+      electricCopperInventoryPair.latest.date < referenceLatestMonth
+  );
 
   const tateneSpan = useMemo(() => filterByPeriodDays(tateneJpyMtSeries, spanDays), [tateneJpyMtSeries, spanDays]);
   const axisStart = tateneSpan.at(0)?.date || '-';
@@ -456,7 +490,7 @@ export default function TateneNativeBoard({
     [relTateneSpan, electricCopperInventorySeries]
   );
   const relativeLines = useMemo(() => {
-    const lines: Array<{ values: number[]; color: string }> = [{ values: relTatene.map((r) => r.value), color: TATENE_PRICE_COLOR }];
+    const lines: Array<{ values: Array<number | null>; color: string }> = [{ values: relTatene.map((r) => r.value), color: TATENE_PRICE_COLOR }];
     if (relativeSelection.import_unit) lines.push({ values: relImportUnit, color: TATENE_IMPORT_COLOR });
     if (relativeSelection.usd_jpy) lines.push({ values: relUsd, color: TATENE_USD_COLOR });
     if (relativeSelection.inventory) lines.push({ values: relInventory, color: TATENE_INVENTORY_COLOR });
@@ -565,9 +599,9 @@ export default function TateneNativeBoard({
         />
         <MetricCard
           label="輸入単価"
-          labelNote="HS7403.11 月次平均（MOF）"
+          labelNote={isImportPending ? 'HS7403.11 月次平均（MOF） / データ更新待ち' : 'HS7403.11 月次平均（MOF）'}
           change={importUnitChg}
-          value={fmtNum(importUnitValue, 1)}
+          value={fmtNum(importUnitValue, 0)}
           unit="JPY/mt"
           polyline={buildPolyline(importUnitDisplaySeries.slice(-7).map((r) => r.value))}
           gaugeRangeValues={importUnitDisplaySeries.slice(-31).map((r) => r.value)}
@@ -595,7 +629,7 @@ export default function TateneNativeBoard({
         />
         <MetricCard
           label="電気銅在庫量"
-          labelNote="最新月"
+          labelNote={isInventoryPending ? '最新月 / データ更新待ち' : '最新月'}
           change={electricCopperInventoryChg}
           value={fmtNum(electricCopperInventoryPair.latest?.value ?? null, 0)}
           unit="t"
@@ -734,7 +768,7 @@ export default function TateneNativeBoard({
             height={220}
           />
           <p className="mt-3 text-[10px] font-bold tracking-[0.08em] text-cool-grey">
-            ※ データが未公表の月は、直近の公表値で補填しています。国内建値を固定表示し、各系列は先頭月=100で指数化しています。
+            ※ データが未公表の月は、その月の線を描画していません。国内建値を固定表示し、各系列は先頭月=100で指数化しています。
           </p>
         </SectionCard>
 
