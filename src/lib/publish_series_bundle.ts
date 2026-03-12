@@ -1,6 +1,7 @@
 import 'server-only';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { unstable_cache } from 'next/cache';
 
 export type RawSeriesPoint = {
   date?: string;
@@ -35,8 +36,15 @@ type SupabaseHeaders = {
 type SupabaseRow = Record<string, unknown>;
 
 function getSupabaseConfig(): { url: string; key: string } | null {
-  const url = String(process.env.SUPABASE_URL || '').trim();
-  const key = String(process.env.SUPABASE_SERVICE_ROLE_KEY || '').trim();
+  const isProd = process.env.NODE_ENV === 'production';
+  const url = String(
+    process.env.SUPABASE_URL || (!isProd ? process.env.NEXT_PUBLIC_SUPABASE_URL : '') || ''
+  ).trim();
+  const key = String(
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+      (!isProd ? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY : '') ||
+      ''
+  ).trim();
   if (!url || !key) return null;
   return { url, key };
 }
@@ -853,7 +861,7 @@ function enforcePreferredAfterYm(
     .filter((row): row is PublishPoint => row !== null && Number.isFinite(row.value));
 }
 
-export async function readMergedPublishSeriesBundle(): Promise<PublishSeriesBundle | null> {
+async function readMergedPublishSeriesBundleUncached(): Promise<PublishSeriesBundle | null> {
   const cfg = getSupabaseConfig();
   if (!cfg) return null;
 
@@ -1517,6 +1525,16 @@ export async function readMergedPublishSeriesBundle(): Promise<PublishSeriesBund
       },
     },
   };
+}
+
+const readMergedPublishSeriesBundleCached = unstable_cache(
+  async () => readMergedPublishSeriesBundleUncached(),
+  ['publish-series-bundle'],
+  { revalidate: 300 }
+);
+
+export async function readMergedPublishSeriesBundle(): Promise<PublishSeriesBundle | null> {
+  return readMergedPublishSeriesBundleCached();
 }
 
 export function normalizeSeries(rows: RawSeriesPoint[] | undefined): PublishPoint[] {

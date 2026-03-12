@@ -246,7 +246,9 @@ export default async function TopNativePage() {
   const [bundle, prediction, latestPosts] = await Promise.all([
     readMergedPublishSeriesBundle(),
     readPredictionSummary(),
-    getPosts(1, 'a').catch(() => ({ contents: [] as Array<{ title?: string; slug?: string; id?: string }> })),
+    getPosts(1, 'a')
+      .then((res) => (res?.contents?.length ? res : getPosts(1).catch(() => ({ contents: [] as Array<{ title?: string; slug?: string; id?: string }> }))))
+      .catch(() => getPosts(1).catch(() => ({ contents: [] as Array<{ title?: string; slug?: string; id?: string }> }))),
   ]);
   const series = bundle?.series || {};
   const latestArticle = latestPosts?.contents?.[0] || null;
@@ -263,7 +265,9 @@ export default async function TopNativePage() {
   }));
   const lmeCashRows = convertUsdMtSeriesToJpyKg(lmeCashUsdRows, usdjpyRows);
   const lme3mRows = convertUsdMtSeriesToJpyKg(lme3mUsdRows, usdjpyRows);
-  const worldRawMaterialExportRows = normalizeSeries(series.trade_world_raw_material_export_wan_t);
+  const worldRawMaterialExportRows = normalizeSeries(
+    series.trade_world_raw_material_export_wan_t || series.trade_raw_material_export_wan_t
+  );
   const japanDomesticDemandRows = normalizeSeries(
     series.trade_japan_hs7403_11_import_wan_t || series.trade_japan_hs7403_import_wan_t
   );
