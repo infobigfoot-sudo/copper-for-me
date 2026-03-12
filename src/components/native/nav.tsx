@@ -5,7 +5,6 @@ export type NavKey =
   | 'lme'
   | 'tatene'
   | 'indicators'
-  | 'supply-chain'
   | 'prediction'
   | 'article'
   | 'tatene-calculator';
@@ -16,7 +15,6 @@ export type NavIconKey =
   | 'tatene'
   | 'indicators'
   | 'other'
-  | 'supply'
   | 'prediction'
   | 'article'
   | 'calculator';
@@ -32,18 +30,17 @@ export const PRIMARY_NAV_LINKS: NativeNavLink[] = [
   { href: '/', key: 'top', label: '概要', icon: 'overview' },
   { href: '/lme', key: 'lme', label: 'LME', icon: 'lme' },
   { href: '/tatene', key: 'tatene', label: '建値', icon: 'tatene' },
-  { href: '/indicators', key: 'indicators', label: '指標', icon: 'indicators' },
+  { href: '/scrap', key: 'indicators', label: 'スクラップ', icon: 'indicators' },
 ];
 
 export const OTHER_NAV_LINKS: NativeNavLink[] = [
-  { href: '/supply-chain', key: 'supply-chain', label: '供給と需要', icon: 'supply' },
   { href: '/prediction', key: 'prediction', label: '予測', icon: 'prediction' },
   { href: '/article', key: 'article', label: '記事', icon: 'article' },
   { href: '/tatene-calculator', key: 'tatene-calculator', label: '建値計算', icon: 'calculator' },
 ];
 
 export function isOtherNavKey(key: NavKey): boolean {
-  return key === 'supply-chain' || key === 'prediction' || key === 'article' || key === 'tatene-calculator';
+  return key === 'prediction' || key === 'article' || key === 'tatene-calculator';
 }
 
 export function isOtherNavPath(pathname: string): boolean {
@@ -96,18 +93,6 @@ export function NativeNavIcon({
         <path d="M8 15v-4" />
         <path d="M12 15V9" />
         <path d="M16 15v-6" />
-      </svg>
-    );
-  }
-  if (icon === 'supply') {
-    return (
-      <svg viewBox="0 0 24 24" className={className} style={style} fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M4 8h16" />
-        <path d="M7 8V5.8h10V8" />
-        <path d="M6.2 18h11.6" />
-        <path d="M8.2 8v10" />
-        <path d="M12 8v10" />
-        <path d="M15.8 8v10" />
       </svg>
     );
   }

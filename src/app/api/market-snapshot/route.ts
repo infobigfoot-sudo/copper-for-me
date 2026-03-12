@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { timingSafeEqual } from 'node:crypto';
 
 import { getEconomyIndicators } from '@/lib/economy';
+import { computeCopperImpactSnapshot } from '@/lib/copper_market_formula';
 import { getWarrantDashboardData } from '@/lib/warrant_dashboard';
 
 type Indicator = {
@@ -47,6 +48,7 @@ export async function GET(req: NextRequest) {
     getEconomyIndicators(),
     getWarrantDashboardData(),
   ]);
+  const formula = await computeCopperImpactSnapshot();
   const all = [...(economy.fred || []), ...(economy.alpha || [])] as Indicator[];
 
   const payload = {
@@ -100,6 +102,7 @@ export async function GET(req: NextRequest) {
       peru: pick(all, 'PERPROINDMISMEI'),
       spy: pick(all, 'sp500'),
     },
+    formula,
   };
 
   return NextResponse.json(payload, { status: 200 });

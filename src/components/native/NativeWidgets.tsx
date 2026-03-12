@@ -100,6 +100,7 @@ export function MetricCard({
   titleUnderBadge = false,
   gaugeSize = 'default',
   titlePadRight = false,
+  gaugeFixedRange,
 }: {
   label: string;
   labelNote?: string;
@@ -116,6 +117,7 @@ export function MetricCard({
   titleUnderBadge?: boolean;
   gaugeSize?: 'default' | 'large';
   titlePadRight?: boolean;
+  gaugeFixedRange?: { min: number; max: number };
 }) {
   const supportive = change === null ? null : positiveWhenUp ? change >= 0 : change < 0;
   const badgeCls =
@@ -129,9 +131,9 @@ export function MetricCard({
   const maxBar = Math.max(...bars.map((x) => Math.abs(x))) || 1;
   const lastBarClass = supportive === null ? 'bg-[#94a3b8]' : supportive ? 'bg-[#0f6d6a]' : 'bg-[#b86d53]';
   const gaugeSource = gaugeRangeValues && gaugeRangeValues.length >= 2 ? gaugeRangeValues : bars;
-  const monthlyRange = calcMonthlyChangeRange(gaugeSource);
-  const gaugeMin = -10;
-  const gaugeMax = 10;
+  const monthlyRange = gaugeFixedRange ?? calcMonthlyChangeRange(gaugeSource);
+  const gaugeMin = gaugeFixedRange?.min ?? -10;
+  const gaugeMax = gaugeFixedRange?.max ?? 10;
   const monthlyMinRaw = monthlyRange.min;
   const monthlyMaxRaw = monthlyRange.max;
   const monthlyMin = Math.max(gaugeMin, Math.min(0, monthlyMinRaw));

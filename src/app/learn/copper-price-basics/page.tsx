@@ -10,8 +10,7 @@ const navItems = [
   { href: '/', label: 'NEW' },
   { href: '/lme', label: 'LME' },
   { href: '/tatene', label: '建値' },
-  { href: '/indicators', label: '指標' },
-  { href: '/supply-chain', label: '供給と需要' },
+  { href: '/scrap', label: 'スクラップ' },
   { href: '/prediction', label: '予測' },
   { href: '/article', label: '記事' },
 ];

@@ -44,12 +44,17 @@ export default async function PredictionPage() {
       : null;
 
   return (
-    <NativePageShell active="prediction" title="予測" description="LME・為替・諸コストを統合し、銅調達向けの予測モデルを表示。">
+    <NativePageShell
+      active="prediction"
+      title="予測"
+      description="LME・為替・諸コストを統合し、銅調達向けの予測モデルを表示。"
+      hideHeaderCards
+    >
       <PredictionNativeBoard
-        rangeLow={rangeLow}
-        rangeHigh={rangeHigh}
-        adopted={adopted}
-        reference={reference}
+        rangeLow={rangeLow / 1000}
+        rangeHigh={rangeHigh / 1000}
+        adopted={adopted / 1000}
+        reference={reference / 1000}
         warningReason={prediction?.warningReason ?? '供給緩和'}
         maeDiffPct={maeDiffPct}
         warrant7dPct={warrantDashboard.warrant.diffPct7d}

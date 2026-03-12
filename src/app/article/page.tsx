@@ -19,7 +19,7 @@ export default async function ArticlePage() {
   const featuredImage = featured?.coverImage?.url || null;
 
   return (
-    <NativePageShell active="article" title="記事" description="相場・指標の最新情報">
+    <NativePageShell active="article" title="記事" description="相場・指標の最新情報" hideHeaderCards>
       <section className="mb-4">
         <p className="text-[11px] font-black uppercase tracking-[0.2em] text-cool-grey">最新コンテンツ</p>
       </section>

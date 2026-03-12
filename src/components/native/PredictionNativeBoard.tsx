@@ -41,7 +41,7 @@ export default function PredictionNativeBoard({
           <div className="glass-card rounded-2xl p-5">
             <p className="text-cool-grey text-xs mb-1">建値 想定レンジ（1ヶ月）</p>
             <p className="text-2xl font-black text-off-white">{fmtNum(rangeLow, 0)} - {fmtNum(rangeHigh, 0)}</p>
-            <p className="text-cool-grey text-xs mt-1">JPY/mt</p>
+            <p className="text-cool-grey text-xs mt-1">JPY/kg</p>
           </div>
           <div className="glass-card rounded-2xl p-5">
             <p className="text-cool-grey text-xs mb-1">採用値（基準）</p>
@@ -130,4 +130,3 @@ export default function PredictionNativeBoard({
     </div>
   );
 }
-

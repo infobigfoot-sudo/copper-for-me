@@ -5,6 +5,45 @@ export type SeriesPoint = {
   value: number;
 };
 
+function normalizeYm(ym: string): string {
+  const [yText, mText] = ym.split('-');
+  const year = Number(yText);
+  const month = Number(mText);
+  if (!Number.isInteger(year) || !Number.isInteger(month) || month < 1 || month > 12) {
+    return ym;
+  }
+  return `${String(year).padStart(4, '0')}-${String(month).padStart(2, '0')}`;
+}
+
+function previousMonthYm(now: Date = new Date()): string {
+  const year = now.getUTCFullYear();
+  const month = now.getUTCMonth() + 1;
+  const prevMonth = month - 1;
+  if (prevMonth >= 1) return `${String(year).padStart(4, '0')}-${String(prevMonth).padStart(2, '0')}`;
+  return `${String(year - 1).padStart(4, '0')}-12`;
+}
+
+function toMonthlyAverage(rows: SeriesPoint[]): SeriesPoint[] {
+  const cutoffYm = previousMonthYm();
+  const buckets = new Map<string, { sum: number; count: number }>();
+  for (const row of rows) {
+    const ym = normalizeYm(row.date.slice(0, 7));
+    if (!/^\d{4}-\d{2}$/.test(ym) || !Number.isFinite(row.value)) continue;
+    if (ym > cutoffYm) continue;
+    const bucket = buckets.get(ym) ?? { sum: 0, count: 0 };
+    bucket.sum += row.value;
+    bucket.count += 1;
+    buckets.set(ym, bucket);
+  }
+  return Array.from(buckets.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([ym, bucket]) => ({
+      date: ym,
+      value: bucket.count > 0 ? bucket.sum / bucket.count : NaN,
+    }))
+    .filter((row) => Number.isFinite(row.value));
+}
+
 type SelectedSeriesBundle = {
   series?: Record<string, Array<{ date?: string; value?: number | string }>>;
 };
@@ -16,16 +55,42 @@ export async function readSelectedSeriesBundle(): Promise<SelectedSeriesBundle |
 export async function getLmeBoardSeries() {
   const bundle = await readSelectedSeriesBundle();
   const series = bundle?.series || {};
-  const priceSeries = normalizeSeries(series.lme_copper_cash_usd_t);
-  const stockSeries = normalizeSeries(series.lme_copper_stock_t);
-  const futures3mSeries = normalizeSeries(series.lme_copper_3month_usd_t).map((row) => ({
-    ...row,
-    value: row.value > 200000 ? row.value / 100 : row.value,
-  }));
-  const offWarrantSeries = normalizeSeries(series.offwarrant_copper_monthly_t);
-  const usdJpySeries = normalizeSeries(series.america_dexjpus);
-  const tateneSeries = normalizeSeries(series.japan_tatene_jpy_t);
-  return { priceSeries, stockSeries, futures3mSeries, offWarrantSeries, usdJpySeries, tateneSeries };
+  const priceSeries = toMonthlyAverage(normalizeSeries(series.cmo_pink_sheet_copper_usd_t));
+  const stockSeries = toMonthlyAverage(normalizeSeries(series.lme_copper_stock_t));
+  const futures3mSeries = toMonthlyAverage(
+    normalizeSeries(series.lme_copper_3month_usd_t).map((row) => ({
+      ...row,
+      value: row.value > 200000 ? row.value / 100 : row.value,
+    }))
+  );
+  const offWarrantSeries = toMonthlyAverage(normalizeSeries(series.offwarrant_copper_monthly_t));
+  const usdJpySeries = toMonthlyAverage(normalizeSeries(series.america_dexjpus));
+  const usdCnySeries = toMonthlyAverage(normalizeSeries(series.america_dexchus));
+  const rawMaterialExportSeries = toMonthlyAverage(normalizeSeries(series.trade_world_raw_material_export_wan_t));
+  const copperExportUnitSeries = toMonthlyAverage(normalizeSeries(series.trade_world_copper_export_unit_usd_t));
+  const tateneMonthlyAvgSeries = toMonthlyAverage(normalizeSeries(series.japan_tatene_monthly_avg_jpy_t));
+  const tateneSeries = tateneMonthlyAvgSeries.length
+    ? tateneMonthlyAvgSeries
+    : toMonthlyAverage(normalizeSeries(series.japan_tatene_jpy_t));
+  const japanHs7403ImportValueSeries = toMonthlyAverage(normalizeSeries(series.trade_japan_hs7403_import_value_jpy));
+  const japanHs7403ImportUnitSeries = toMonthlyAverage(normalizeSeries(series.trade_japan_hs7403_import_unit_jpy_t));
+  const electricCopperInventorySeries = toMonthlyAverage(
+    normalizeSeries(series.supply_chain_refining_jp_electric_copper_inventory_qty)
+  );
+  return {
+    priceSeries,
+    stockSeries,
+    futures3mSeries,
+    offWarrantSeries,
+    usdJpySeries,
+    usdCnySeries,
+    rawMaterialExportSeries,
+    copperExportUnitSeries,
+    tateneSeries,
+    japanHs7403ImportValueSeries,
+    japanHs7403ImportUnitSeries,
+    electricCopperInventorySeries,
+  };
 }
 
 export async function getIndicatorsDashboardSeries() {
@@ -43,6 +108,15 @@ export async function getIndicatorsDashboardSeries() {
     cpiSeries: normalizeSeries(series.america_cpiaucsl),
     ppiSeries: normalizeSeries(series.america_ppiaco),
     lmeSeries: normalizeSeries(series.lme_copper_cash_usd_t),
+    lmeMonthlySeries: normalizeSeries(series.cmo_pink_sheet_copper_usd_t),
     tateneSeries: normalizeSeries(series.japan_tatene_jpy_t),
+    usdJpyMonthlySeries: normalizeSeries(series.japan_usd_jpy_monthly),
+    scrapExportUnitSeries: normalizeSeries(series.trade_japan_hs7404_export_unit_jpy_t),
+    scrapImportUnitSeries: normalizeSeries(series.trade_japan_hs7404_import_unit_jpy_t),
+    scrapExportWanSeries: normalizeSeries(series.trade_japan_hs7404_export_wan_t),
+    scrapImportWanSeries: normalizeSeries(series.trade_japan_hs7404_import_wan_t),
+    scrapNetImportSeries: normalizeSeries(series.trade_japan_hs7404_net_import_wan_t),
+    hs7403ImportWanSeries: normalizeSeries(series.trade_japan_hs7403_import_wan_t),
+    electricCopperProductionSeries: normalizeSeries(series.supply_chain_refining_jp_electric_copper_production_qty),
   };
 }

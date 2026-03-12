@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
+import DataDisclaimerBlock from '@/components/native/DataDisclaimerBlock';
 import MobileBottomNavClient from '@/components/native/MobileBottomNavClient';
 import { isOtherNavKey, OTHER_NAV_LINKS, PRIMARY_NAV_LINKS } from '@/components/native/nav';
 import TopNativeTheme from '@/components/TopNativeTheme';
@@ -12,12 +13,18 @@ export default function NativePageShell({
   title,
   description,
   hideStatusCard = false,
+  hideHeaderCards = false,
+  fullWidth = false,
+  latestArticle,
   children,
 }: {
   active: ActiveKey;
   title: string;
   description: string;
   hideStatusCard?: boolean;
+  hideHeaderCards?: boolean;
+  fullWidth?: boolean;
+  latestArticle?: { title: string; href: string } | null;
   children: ReactNode;
 }) {
   const now = new Date();
@@ -36,11 +43,12 @@ export default function NativePageShell({
   }).format(now);
   const isOtherActive = isOtherNavKey(active);
   const showStatusCard = !hideStatusCard;
+  const widthClass = fullWidth ? 'w-full' : 'max-w-[1440px] mx-auto';
 
   return (
     <TopNativeTheme>
       <nav className="sticky top-0 z-50 border-b border-[#e6dfd3] bg-[#f3f1ed]/95 backdrop-blur-xl">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+        <div className={`${widthClass} px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between`}>
           <div className="flex w-full items-center gap-4">
             <div className="flex flex-col">
               <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-off-white">
@@ -87,41 +95,54 @@ export default function NativePageShell({
         </div>
       </nav>
 
-      <main className="main-unified-14 flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 pb-24 md:pb-4">
+      <main className={`main-unified-14 flex-1 w-full ${widthClass} px-4 sm:px-6 lg:px-8 py-10 sm:py-12 pb-24 md:pb-4`}>
         <header className="mb-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(340px,460px)] lg:items-end">
           <div className="max-w-3xl">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight text-off-white">{title}</h2>
             <p className="text-cool-grey text-base sm:text-lg max-w-xl leading-relaxed">{description}</p>
           </div>
-          <div className={`grid w-full grid-cols-1 gap-4 ${showStatusCard ? 'sm:grid-cols-2' : ''}`}>
-            {showStatusCard ? (
-              <div className="glass-card p-4 rounded-xl min-w-0">
-                <p className="text-[10px] font-bold text-cool-grey uppercase tracking-tighter mb-1">更新ステータス</p>
-                <p className="text-[9px] sm:text-[14px] font-black text-cool-grey uppercase tracking-[0.2em] sm:tracking-[0.3em]">稼働中</p>
-                <p className="text-xs text-cool-grey mt-1">最新データを順次反映</p>
+          {hideHeaderCards ? null : (
+            <div className={`grid w-full grid-cols-1 gap-4 ${showStatusCard ? 'sm:grid-cols-2' : ''}`}>
+              {showStatusCard ? (
+                <div className="glass-card p-4 rounded-xl min-w-0">
+                  <p className="text-[10px] font-bold text-cool-grey uppercase tracking-tighter mb-1">更新ステータス</p>
+                  <p className="text-[9px] sm:text-[14px] font-black text-cool-grey uppercase tracking-[0.2em] sm:tracking-[0.3em]">稼働中</p>
+                  <p className="text-xs text-cool-grey mt-1">最新データを順次反映</p>
+                </div>
+              ) : null}
+              <div className="glass-card p-4 rounded-xl min-w-0 text-left sm:text-right">
+                <p className="text-[10px] font-bold text-cool-grey uppercase tracking-tighter mb-1">基準時刻</p>
+                <p className="text-sm sm:text-xl font-mono font-bold text-off-white tracking-[0.08em] sm:tracking-widest">
+                  {date} <span className="text-positive">{time}</span>
+                </p>
               </div>
-            ) : null}
-            <div className="glass-card p-4 rounded-xl min-w-0 text-left sm:text-right">
-              <p className="text-[10px] font-bold text-cool-grey uppercase tracking-tighter mb-1">基準時刻</p>
-              <p className="text-sm sm:text-xl font-mono font-bold text-off-white tracking-[0.08em] sm:tracking-widest">
-                {date} <span className="text-positive">{time}</span>
-              </p>
             </div>
-          </div>
+          )}
         </header>
+
+        {latestArticle ? (
+          <div className="mb-4 glass-card rounded-xl px-4 py-3 flex items-center justify-between gap-3">
+            <p className="flex-1 text-xs sm:text-sm font-medium text-cool-grey text-left line-clamp-1">
+              最新記事：
+              <Link href={latestArticle.href} className="ml-1 font-bold text-[#1f3a5f] hover:text-positive hover:underline">
+                {latestArticle.title}
+              </Link>
+            </p>
+          </div>
+        ) : null}
 
         {children}
       </main>
 
       <footer className="bg-[#f3f1ed] border-t border-[#e6dfd3] pt-4 pb-24 md:pb-4">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`${widthClass} px-4 sm:px-6 lg:px-8`}>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-16 mb-4">
             <div className="col-span-1 md:col-span-2">
               <div className="flex flex-col mb-8">
-                <h1 className="text-3xl font-black tracking-tight text-off-white">銅分析 COPPER FOR ME</h1>
+                <h1 className="text-3xl font-black tracking-tight text-off-white">COPPER FOR ME</h1>
               </div>
               <p className="text-cool-grey text-sm max-w-md leading-relaxed">
-                非鉄金属業界向けに、高精度の市場データと予測分析を提供します。世界中の取引所と独自のインデックスから集約されています。
+                非鉄金属業界向けに、月次の市場データと予測分析を提供します。世界中の取引所と独自のインデックスから集約されています。
               </p>
             </div>
             <div className="grid grid-cols-3 gap-4 md:col-span-3">
@@ -131,13 +152,12 @@ export default function NativePageShell({
                   <li><Link className="hover:text-positive transition-colors" href="/">概要</Link></li>
                   <li><Link className="hover:text-positive transition-colors" href="/lme">LME</Link></li>
                   <li><Link className="hover:text-positive transition-colors" href="/tatene">建値</Link></li>
-                  <li><Link className="hover:text-positive transition-colors" href="/indicators">指標</Link></li>
+                  <li><Link className="hover:text-positive transition-colors" href="/scrap">スクラップ</Link></li>
                 </ul>
               </div>
               <div>
                 <h6 className="text-[10px] font-black text-off-white uppercase tracking-[0.3em] mb-10">Analytics</h6>
                 <ul className="space-y-5 text-xs font-bold text-cool-grey uppercase tracking-widest">
-                  <li><Link className="hover:text-positive transition-colors" href="/supply-chain">供給と需要</Link></li>
                   <li><Link className="hover:text-positive transition-colors" href="/prediction">予測</Link></li>
                   <li><Link className="hover:text-positive transition-colors" href="/article">記事</Link></li>
                   <li><Link className="hover:text-positive transition-colors" href="/tatene-calculator">建値計算</Link></li>
@@ -153,10 +173,7 @@ export default function NativePageShell({
               </div>
             </div>
           </div>
-          <div className="pt-10 border-t border-[#e6dfd3] text-center">
-            <p className="text-cool-grey text-sm mb-3">本サイトは公開データ/APIをもとに情報を掲載しています。できるだけ最新化していますが、反映に時間差が出る場合があります</p>
-            <p className="text-[10px] text-cool-grey/60 font-black uppercase tracking-[0.2em]">© 2026 Copper for me. All Rights Reserved.</p>
-          </div>
+          <DataDisclaimerBlock />
         </div>
       </footer>
       <MobileBottomNavClient />
