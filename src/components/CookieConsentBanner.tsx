@@ -29,7 +29,7 @@ function loadGaOnce(measurementId: string) {
     window.dataLayer?.push(args);
   };
   window.gtag('js', new Date());
-  window.gtag('config', measurementId, { anonymize_ip: true });
+  window.gtag('config', measurementId, { anonymize_ip: true, debug_mode: true });
 }
 
 export default function CookieConsentBanner() {
