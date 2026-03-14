@@ -28,6 +28,25 @@ function updateGaConsent(measurementId: string, granted: boolean) {
   }
 }
 
+function readSavedConsent(): ConsentValue | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const saved = window.localStorage.getItem(CONSENT_KEY);
+    return saved === 'accepted' || saved === 'rejected' ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveConsent(value: ConsentValue) {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(CONSENT_KEY, value);
+  } catch {
+    // ignore storage failures and keep in-memory consent for this session
+  }
+}
+
 export default function CookieConsentBanner() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
   const hasGa = useMemo(() => Boolean(measurementId), [measurementId]);
@@ -37,8 +56,8 @@ export default function CookieConsentBanner() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const saved = window.localStorage.getItem(CONSENT_KEY);
-    if (saved === 'accepted' || saved === 'rejected') {
+    const saved = readSavedConsent();
+    if (saved) {
       setConsent(saved);
       if (hasGa) {
         updateGaConsent(measurementId, saved === 'accepted');
@@ -48,9 +67,7 @@ export default function CookieConsentBanner() {
   }, [hasGa, measurementId]);
 
   const handleAccept = () => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(CONSENT_KEY, 'accepted');
-    }
+    saveConsent('accepted');
     setConsent('accepted');
     if (hasGa) {
       updateGaConsent(measurementId, true);
@@ -58,9 +75,7 @@ export default function CookieConsentBanner() {
   };
 
   const handleReject = () => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(CONSENT_KEY, 'rejected');
-    }
+    saveConsent('rejected');
     setConsent('rejected');
     if (hasGa) {
       updateGaConsent(measurementId, false);
@@ -77,7 +92,7 @@ export default function CookieConsentBanner() {
       aria-label="Cookie同意設定"
     >
       <p className="m-0 text-xs leading-relaxed text-slate-600">
-        当サイトは、利用状況の分析と改善のためにCookieを使用します。詳細は
+        当サイトは、利用状況の分析と改善のために解析 Cookie を使用します。同意内容はこのブラウザに保存されます。詳細は
         {' '}
         <a href={policyHref} className="text-cyan-700 underline underline-offset-2 hover:text-cyan-600">プライバシーポリシー</a>
         {' '}
