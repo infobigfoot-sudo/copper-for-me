@@ -65,6 +65,7 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const websiteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -92,6 +93,25 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
           rel="stylesheet"
         />
+        {gaMeasurementId ? (
+          <>
+            <Script id="ga-consent-default" strategy="beforeInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = window.gtag || gtag;
+                gtag('consent', 'default', { analytics_storage: 'denied' });
+                gtag('js', new Date());
+                gtag('config', '${gaMeasurementId}', { anonymize_ip: true });
+              `}
+            </Script>
+            <Script
+              id="ga4-script"
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+            />
+          </>
+        ) : null}
       </head>
       <body>
         <Script id="jsonld-website" type="application/ld+json">

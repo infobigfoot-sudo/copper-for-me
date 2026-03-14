@@ -13,27 +13,8 @@ declare global {
   }
 }
 
-function ensureGaBase(measurementId: string) {
-  if (typeof window === 'undefined') return;
-  if (!measurementId) return;
-  if (!document.getElementById('ga4-script')) {
-    const script = document.createElement('script');
-    script.id = 'ga4-script';
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-    document.head.appendChild(script);
-  }
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag(...args: unknown[]) {
-    window.dataLayer?.push(args);
-  };
-  window.gtag('js', new Date());
-}
-
 function updateGaConsent(measurementId: string, granted: boolean) {
-  if (typeof window === 'undefined' || !measurementId) return;
-  ensureGaBase(measurementId);
+  if (typeof window === 'undefined' || !measurementId || !window.gtag) return;
   window.gtag?.('consent', 'update', {
     analytics_storage: granted ? 'granted' : 'denied',
   });
@@ -56,12 +37,6 @@ export default function CookieConsentBanner() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (hasGa) {
-      ensureGaBase(measurementId);
-      window.gtag?.('consent', 'default', {
-        analytics_storage: 'denied',
-      });
-    }
     const saved = window.localStorage.getItem(CONSENT_KEY);
     if (saved === 'accepted' || saved === 'rejected') {
       setConsent(saved);
