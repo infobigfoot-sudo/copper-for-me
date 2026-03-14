@@ -30,6 +30,17 @@ function loadGaOnce(measurementId: string) {
   };
   window.gtag('js', new Date());
   window.gtag('config', measurementId, { anonymize_ip: true, debug_mode: true });
+  window.gtag('event', 'page_view', {
+    debug_mode: true,
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+    page_title: document.title,
+  });
+  window.gtag('event', 'debug_ping', {
+    debug_mode: true,
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+  });
 }
 
 export default function CookieConsentBanner() {
