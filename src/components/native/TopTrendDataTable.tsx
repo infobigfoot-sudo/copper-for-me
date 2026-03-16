@@ -317,7 +317,7 @@ export default function TopTrendDataTable({
               <thead className="sticky top-0 z-10 bg-[#ece7df]/95 backdrop-blur-sm border-b border-[#ddd5ca]">
                 <tr>
                   <th className="text-left px-1.5 sm:px-2.5 py-2 text-[10px] sm:text-[12px] font-black tracking-normal text-cool-grey whitespace-nowrap">日付</th>
-                  <th className="text-right px-1.5 sm:px-2.5 py-2 text-[10px] sm:text-[12px] font-black tracking-normal text-cool-grey whitespace-nowrap">建値</th>
+                  <th className="text-right px-1.5 sm:px-2.5 py-2 text-[10px] sm:text-[12px] font-black tracking-normal text-cool-grey whitespace-nowrap">建値月次平均</th>
                   <th className="text-right px-1.5 sm:px-2.5 py-2 text-[10px] sm:text-[12px] font-black tracking-normal text-cool-grey whitespace-nowrap">乖離率</th>
                 </tr>
               </thead>

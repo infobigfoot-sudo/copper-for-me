@@ -90,11 +90,16 @@ function tateneDirectionBadge(tateneDiffMt: number | null): BadgeDecision {
   return { text: 'DOWN↓', className: BADGE_RED };
 }
 
-function impactContributionBadge(impactMt: number | null): BadgeDecision {
+function impactContributionBadge(impactMt: number | null, tateneDiffMt: number | null): BadgeDecision {
   if (impactMt === null || !Number.isFinite(impactMt)) {
     return { text: '-', className: BADGE_NEUTRAL };
   }
-  if (impactMt >= 0) return { text: '上昇要因↑', className: BADGE_GREEN };
+  if (impactMt >= 0) {
+    if (tateneDiffMt !== null && Number.isFinite(tateneDiffMt) && tateneDiffMt < 0) {
+      return { text: '下支え↑', className: BADGE_GREEN };
+    }
+    return { text: '上昇要因↑', className: BADGE_GREEN };
+  }
   return { text: '下降要因↓', className: BADGE_RED };
 }
 
@@ -328,9 +333,9 @@ export default async function TopNativePage() {
   const fxImpactMt = roundedImpacts.fxImpactMt;
   const costImpactMt = roundedImpacts.costImpactMt;
   const tateneDiffBadge = tateneDirectionBadge(tateneDiffMt);
-  const lmeImpactBadge = impactContributionBadge(lmeMarketImpactMt);
-  const fxImpactBadge = impactContributionBadge(fxImpactMt);
-  const costImpactBadge = impactContributionBadge(costImpactMt);
+  const lmeImpactBadge = impactContributionBadge(lmeMarketImpactMt, tateneDiffMt);
+  const fxImpactBadge = impactContributionBadge(fxImpactMt, tateneDiffMt);
+  const costImpactBadge = impactContributionBadge(costImpactMt, tateneDiffMt);
   const rawExportRows = Array.from(
     new Map(
       topRawMaterialExportRows
@@ -482,7 +487,7 @@ export default async function TopNativePage() {
                 国内建値の増減
               </span>
             </div>
-            <div className="flex items-baseline gap-4 mb-4 sm:mb-6">
+            <div className="flex flex-col items-end gap-1 sm:flex-row sm:items-baseline sm:gap-4 mb-4 sm:mb-6">
               <h4 className="text-xl sm:text-3xl font-bold tracking-tight text-off-white">{fmtNum(tateneDiffMt, 0)}</h4>
               <span className="text-cool-grey text-[10px] sm:text-xs font-medium">JPY/mt</span>
             </div>
@@ -499,7 +504,7 @@ export default async function TopNativePage() {
                 ①LMEの影響
               </span>
             </div>
-            <div className="flex items-baseline gap-4 mb-4 sm:mb-6">
+            <div className="flex flex-col items-end gap-1 sm:flex-row sm:items-baseline sm:gap-4 mb-4 sm:mb-6">
               <h4 className="text-xl sm:text-3xl font-bold tracking-tight text-off-white">{fmtNum(lmeMarketImpactMt, 0)}</h4>
               <span className="text-cool-grey text-[10px] sm:text-xs font-medium">JPY/mt</span>
             </div>
@@ -516,7 +521,7 @@ export default async function TopNativePage() {
                 ②為替の影響
               </span>
             </div>
-            <div className="flex items-baseline gap-4 mb-4 sm:mb-6">
+            <div className="flex flex-col items-end gap-1 sm:flex-row sm:items-baseline sm:gap-4 mb-4 sm:mb-6">
               <h4 className="text-xl sm:text-3xl font-bold tracking-tight text-off-white">{fmtNum(fxImpactMt, 0)}</h4>
               <span className="text-cool-grey text-[10px] sm:text-xs font-medium">JPY/mt</span>
             </div>
@@ -533,7 +538,7 @@ export default async function TopNativePage() {
                 ③諸コストの影響
               </span>
             </div>
-            <div className="flex items-baseline gap-4 mb-4 sm:mb-6">
+            <div className="flex flex-col items-end gap-1 sm:flex-row sm:items-baseline sm:gap-4 mb-4 sm:mb-6">
               <h4 className="text-xl sm:text-3xl font-bold tracking-tight text-off-white">{fmtNum(costImpactMt, 0)}</h4>
               <span className="text-cool-grey text-[10px] sm:text-xs font-medium">JPY/mt</span>
             </div>
