@@ -38,6 +38,13 @@ const TAG_ALLOWED_ATTRS: Record<string, Set<string>> = {
   td: new Set(['colspan', 'rowspan'])
 };
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 function escapeAttr(value: string) {
   return value
     .replace(/&/g, '&amp;')
@@ -67,6 +74,148 @@ function isSafeUrl(value: string, attrName: string, tagName: string): boolean {
     return normalized.startsWith('http://') || normalized.startsWith('https://');
   }
   return true;
+}
+
+function looksLikeHtml(input: string): boolean {
+  return /<\s*[a-zA-Z][^>]*>/.test(input);
+}
+
+function looksLikeMarkdown(input: string): boolean {
+  const text = input.trim();
+  if (!text || looksLikeHtml(text)) return false;
+  const patterns = [
+    /^#{1,6}\s+/m,
+    /^\s*[-*+]\s+/m,
+    /^\s*\d+\.\s+/m,
+    /^\s*>\s+/m,
+    /```/,
+    /\[.+?\]\(.+?\)/,
+    /!\[.*?\]\(.+?\)/,
+    /(^|\s)\*\*[^*]+\*\*(\s|$)/,
+    /(^|\s)_[^_]+_(\s|$)/,
+    /(^|\s)`[^`]+`(\s|$)/,
+  ];
+  return patterns.some((pattern) => pattern.test(text));
+}
+
+function renderInlineMarkdown(input: string): string {
+  let html = escapeHtml(input);
+  html = html.replace(/!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">');
+  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+  html = html.replace(/(^|[\s(])\*([^*\n]+)\*(?=$|[\s).,!?:;])/g, '$1<em>$2</em>');
+  html = html.replace(/(^|[\s(])_([^_\n]+)_(?=$|[\s).,!?:;])/g, '$1<em>$2</em>');
+  return html;
+}
+
+function markdownToHtml(input: string): string {
+  const lines = input.replace(/\r\n?/g, '\n').split('\n');
+  const out: string[] = [];
+  let paragraph: string[] = [];
+  let listType: 'ul' | 'ol' | null = null;
+  let inCode = false;
+  let codeLines: string[] = [];
+
+  const flushParagraph = () => {
+    if (!paragraph.length) return;
+    out.push(`<p>${renderInlineMarkdown(paragraph.join(' '))}</p>`);
+    paragraph = [];
+  };
+
+  const flushList = () => {
+    if (!listType) return;
+    out.push(`</${listType}>`);
+    listType = null;
+  };
+
+  const flushCode = () => {
+    if (!inCode) return;
+    out.push(`<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+    inCode = false;
+    codeLines = [];
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trimEnd();
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith('```')) {
+      flushParagraph();
+      flushList();
+      if (inCode) flushCode();
+      else inCode = true;
+      continue;
+    }
+
+    if (inCode) {
+      codeLines.push(rawLine);
+      continue;
+    }
+
+    if (!trimmed) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+
+    const headingMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (headingMatch) {
+      flushParagraph();
+      flushList();
+      const level = headingMatch[1].length;
+      out.push(`<h${level}>${renderInlineMarkdown(headingMatch[2])}</h${level}>`);
+      continue;
+    }
+
+    if (/^---+$/.test(trimmed) || /^\*\*\*+$/.test(trimmed)) {
+      flushParagraph();
+      flushList();
+      out.push('<hr>');
+      continue;
+    }
+
+    const ulMatch = trimmed.match(/^[-*+]\s+(.+)$/);
+    if (ulMatch) {
+      flushParagraph();
+      if (listType !== 'ul') {
+        flushList();
+        listType = 'ul';
+        out.push('<ul>');
+      }
+      out.push(`<li>${renderInlineMarkdown(ulMatch[1])}</li>`);
+      continue;
+    }
+
+    const olMatch = trimmed.match(/^\d+\.\s+(.+)$/);
+    if (olMatch) {
+      flushParagraph();
+      if (listType !== 'ol') {
+        flushList();
+        listType = 'ol';
+        out.push('<ol>');
+      }
+      out.push(`<li>${renderInlineMarkdown(olMatch[1])}</li>`);
+      continue;
+    }
+
+    const quoteMatch = trimmed.match(/^>\s?(.+)$/);
+    if (quoteMatch) {
+      flushParagraph();
+      flushList();
+      out.push(`<blockquote><p>${renderInlineMarkdown(quoteMatch[1])}</p></blockquote>`);
+      continue;
+    }
+
+    paragraph.push(trimmed);
+  }
+
+  flushParagraph();
+  flushList();
+  flushCode();
+
+  return out.join('\n');
 }
 
 function sanitizeRichHtml(input: string): string {
@@ -121,6 +270,7 @@ function sanitizeRichHtml(input: string): string {
 }
 
 export default function RichText({ html }: { html: string }) {
-  const safeHtml = sanitizeRichHtml(html);
+  const normalizedHtml = looksLikeMarkdown(html) ? markdownToHtml(html) : html;
+  const safeHtml = sanitizeRichHtml(normalizedHtml);
   return <section className="rich-text" dangerouslySetInnerHTML={{ __html: safeHtml }} />;
 }
