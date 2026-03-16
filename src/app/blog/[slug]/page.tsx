@@ -38,7 +38,12 @@ export default async function BlogDetailPage({
   if (!post) notFound();
 
   return (
-    <NativePageShell active="article" title={post.title} description={post.excerpt || '相場・指標記事'}>
+    <NativePageShell
+      active="article"
+      title={post.title}
+      description=""
+      titleClassName="text-2xl sm:text-3xl lg:text-4xl mb-4"
+    >
       <SectionCard>
         <p className="text-cool-grey text-sm mb-4">{formatDateLabel(post.publishedAt)}</p>
         <RichText html={post.body || ''} />

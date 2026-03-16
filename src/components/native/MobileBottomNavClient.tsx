@@ -58,8 +58,6 @@ export default function MobileBottomNavClient() {
   }, [mounted]);
 
   const isOtherActive = useMemo(() => isOtherNavPath(pathname), [pathname]);
-  const navBottom = Math.min(8, Math.max(0, viewportInset));
-
   if (!mounted) return null;
 
   return createPortal(
@@ -70,7 +68,7 @@ export default function MobileBottomNavClient() {
         position: 'fixed',
         left: 0,
         right: 0,
-        bottom: navBottom,
+        bottom: 0,
         zIndex: 2147483647,
         borderTop: '1px solid #d9d2c6',
         borderLeft: '0',
@@ -79,7 +77,7 @@ export default function MobileBottomNavClient() {
         borderRadius: 0,
         background: 'rgba(243, 241, 237, 0.99)',
         boxShadow: '0 -8px 22px rgba(15, 23, 42, 0.12)',
-        paddingBottom: 'calc(env(safe-area-inset-bottom) + 6px)',
+        paddingBottom: `calc(env(safe-area-inset-bottom) + ${Math.max(6, viewportInset)}px)`,
       }}
     >
       <div style={{ display: 'flex', gap: 4, padding: '8px 8px 0', minHeight: 60 }}>

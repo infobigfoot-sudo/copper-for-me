@@ -13,6 +13,7 @@ export default function NativePageShell({
   active,
   title,
   description,
+  titleClassName,
   hideStatusCard = false,
   hideHeaderCards = false,
   fullWidth = false,
@@ -22,6 +23,7 @@ export default function NativePageShell({
   active: ActiveKey;
   title: string;
   description: string;
+  titleClassName?: string;
   hideStatusCard?: boolean;
   hideHeaderCards?: boolean;
   fullWidth?: boolean;
@@ -85,8 +87,8 @@ export default function NativePageShell({
       <main className={`main-unified-14 flex-1 w-full ${widthClass} px-4 sm:px-6 lg:px-8 py-10 sm:py-12 pb-24 md:pb-4`}>
         <header className="mb-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(340px,460px)] lg:items-end">
           <div className="max-w-3xl">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight text-off-white">{title}</h2>
-            <p className="text-cool-grey text-base sm:text-lg max-w-xl leading-relaxed">{description}</p>
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight text-off-white ${titleClassName ?? ''}`}>{title}</h2>
+            {description ? <p className="text-cool-grey text-base sm:text-lg max-w-xl leading-relaxed">{description}</p> : null}
           </div>
           {hideHeaderCards ? null : (
             <div className={`grid w-full grid-cols-1 gap-4 ${showStatusCard ? 'sm:grid-cols-2' : ''}`}>
