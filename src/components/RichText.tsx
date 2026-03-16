@@ -80,6 +80,22 @@ function looksLikeHtml(input: string): boolean {
   return /<\s*[a-zA-Z][^>]*>/.test(input);
 }
 
+function htmlToPlainTextForMarkdown(input: string): string {
+  return input
+    .replace(/\r\n?/g, '\n')
+    .replace(/<\s*br\s*\/?>/gi, '\n')
+    .replace(/<\s*\/p\s*>/gi, '\n\n')
+    .replace(/<\s*\/div\s*>/gi, '\n\n')
+    .replace(/<\s*li\s*>/gi, '- ')
+    .replace(/<\s*\/li\s*>/gi, '\n')
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .trim();
+}
+
 function looksLikeMarkdown(input: string): boolean {
   const text = input.trim();
   if (!text || looksLikeHtml(text)) return false;
@@ -96,6 +112,12 @@ function looksLikeMarkdown(input: string): boolean {
     /(^|\s)`[^`]+`(\s|$)/,
   ];
   return patterns.some((pattern) => pattern.test(text));
+}
+
+function shouldTreatHtmlAsMarkdown(input: string): boolean {
+  if (!looksLikeHtml(input)) return false;
+  const text = htmlToPlainTextForMarkdown(input);
+  return looksLikeMarkdown(text);
 }
 
 function renderInlineMarkdown(input: string): string {
@@ -270,7 +292,11 @@ function sanitizeRichHtml(input: string): string {
 }
 
 export default function RichText({ html }: { html: string }) {
-  const normalizedHtml = looksLikeMarkdown(html) ? markdownToHtml(html) : html;
+  const normalizedHtml = shouldTreatHtmlAsMarkdown(html)
+    ? markdownToHtml(htmlToPlainTextForMarkdown(html))
+    : looksLikeMarkdown(html)
+      ? markdownToHtml(html)
+      : html;
   const safeHtml = sanitizeRichHtml(normalizedHtml);
   return <section className="rich-text" dangerouslySetInnerHTML={{ __html: safeHtml }} />;
 }
