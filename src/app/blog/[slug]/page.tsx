@@ -43,6 +43,7 @@ export default async function BlogDetailPage({
       title={post.title}
       description=""
       titleClassName="text-2xl sm:text-3xl lg:text-4xl mb-4"
+      hideStatusCard
     >
       <SectionCard>
         <p className="text-cool-grey text-sm mb-4">{formatDateLabel(post.publishedAt)}</p>
