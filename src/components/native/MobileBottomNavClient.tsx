@@ -10,7 +10,6 @@ export default function MobileBottomNavClient() {
   const pathname = usePathname() || '/';
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [viewportInset, setViewportInset] = useState(0);
 
   useEffect(() => {
     setOpen(false);
@@ -20,42 +19,6 @@ export default function MobileBottomNavClient() {
     setMounted(true);
     return () => setMounted(false);
   }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-
-    const updateInset = () => {
-      const vv = window.visualViewport;
-      const vvInset = vv
-        ? Math.round(window.innerHeight - (vv.height + vv.offsetTop))
-        : 0;
-      const docInset = Math.round(
-        window.innerHeight - document.documentElement.clientHeight
-      );
-      const bodyInset = document.body
-        ? Math.round(window.innerHeight - document.body.clientHeight)
-        : 0;
-      const inset = Math.max(0, vvInset, docInset, bodyInset);
-      setViewportInset(Math.min(inset, 280));
-    };
-
-    updateInset();
-    window.addEventListener('resize', updateInset);
-    window.addEventListener('orientationchange', updateInset);
-    const vv = window.visualViewport;
-    if (vv) {
-      vv.addEventListener('resize', updateInset);
-      vv.addEventListener('scroll', updateInset);
-    }
-    return () => {
-      window.removeEventListener('resize', updateInset);
-      window.removeEventListener('orientationchange', updateInset);
-      if (vv) {
-        vv.removeEventListener('resize', updateInset);
-        vv.removeEventListener('scroll', updateInset);
-      }
-    };
-  }, [mounted]);
 
   const isOtherActive = useMemo(() => isOtherNavPath(pathname), [pathname]);
   if (!mounted) return null;
@@ -77,7 +40,7 @@ export default function MobileBottomNavClient() {
         borderRadius: 0,
         background: 'rgba(243, 241, 237, 0.99)',
         boxShadow: '0 -8px 22px rgba(15, 23, 42, 0.12)',
-        paddingBottom: `calc(env(safe-area-inset-bottom) + ${Math.max(6, viewportInset)}px)`,
+        paddingBottom: 'calc(env(safe-area-inset-bottom) + 6px)',
       }}
     >
       <div style={{ display: 'flex', gap: 4, padding: '8px 8px 0', minHeight: 60 }}>
