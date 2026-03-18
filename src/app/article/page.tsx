@@ -10,7 +10,7 @@ export default async function ArticlePage() {
   const posts = (postsRes.contents || []).slice(0, 12);
   const featured = posts[0] ?? null;
   const featuredTitle = featured ? String(featured?.title || 'Untitled') : '銅価格を読む指標まとめ（毎日・週次・地合い確認）';
-  const featuredHref = featured ? `/blog/${featured?.slug || featured?.id || ''}` : '/learn/copper-price-basics';
+  const featuredHref = featured ? `/blog/${featured?.slug || featured?.id || ''}` : '/category/about';
   const featuredDate = featured ? formatDateLabel(featured?.publishedAt) : '-';
   const featuredExcerpt = featured
     ? String(featured?.excerpt || '').trim() || '相場を追うときに「何を・どの順で見るか」を整理した短い解説です。'

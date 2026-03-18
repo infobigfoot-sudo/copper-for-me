@@ -5,12 +5,12 @@ import type { ReactNode } from 'react';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
 import './globals.css';
 
-const baseUrl = process.env.SITE_URL || 'http://localhost:3000';
+const baseUrl = process.env.SITE_URL || 'https://copper-for-me.com';
 const metadataBase = (() => {
   try {
     return new URL(baseUrl);
   } catch {
-    return new URL('http://localhost:3000');
+    return new URL('https://copper-for-me.com');
   }
 })();
 const defaultOgImage = '/og-default.png';
